@@ -4,6 +4,17 @@
 
 **抽取与补漏 → 概念化 → 去重 → 排序 → 建树 → 网页查看**
 
+## 代码在哪
+
+| 步骤 | 目录 | 先看哪些文件 |
+|---|---|---|
+| 1. 从论文找实体 | [extraction/](entity_ontology/extraction/) | `native.py` 调用同学的抽取器，`coverage.py` 查漏，`mentions.py` 整理原句和位置。 |
+| 2. 把提及变成概念 | [concepts/](entity_ontology/concepts/) | `normalization.py` 判断词指什么，`retrieve_pairs.py` 找相似候选，`deduplicate.py` 判断同义并合并。 |
+| 3. 给概念找位置 | [hierarchy/](entity_ontology/hierarchy/) | `order_entities.py` 由宽到窄排序，`placement.py` 逐个建树，`go_reference/` 提供 GO 查证。 |
+| 4. 网页查看和复核 | [workbench/](entity_ontology/workbench/) | `server.py` 读取批次结果，`web/` 展示实体、原句和父子关系。 |
+
+想看四步怎么接起来，打开 [pipeline.py](entity_ontology/pipeline.py)。
+
 ## 1. 安装
 
 在仓库根目录运行。支持 macOS 和 Linux，使用 Python 3.12 或 3.13。
