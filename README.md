@@ -57,4 +57,6 @@ python -m entity_ontology serve --open
 
 网页默认打开最近完成的批次。结果保存在 `runs/entity_ontology/first-batch/`，包括原句、概念清单和候选父子关系。同一输入、配置和批次名可以续跑。
 
+在总览里可以从论文原句一路点到去重后的概念和候选父类。已有批次在其他目录时，用 `python -m entity_ontology serve --runs-dir <批次父目录>` 打开。
+
 抽取沿用 [LiverKG 固定版本](https://github.com/Buerchener/FYP-liver-disease/commit/fc9ebd72971318a7738f15fc2b86369a552656c2)。建树允许一个概念有多个父类。抽取及建树结果均保存在本地文件，供人工复核。
