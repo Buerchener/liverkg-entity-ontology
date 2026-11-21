@@ -1,7 +1,7 @@
 """A bounded, evidence-seeking OLS agent shared by all placement questions."""
 
 from ..model import ProviderError
-from .go_reference.ols import OLSError
+from .ols_client import OLSError
 from .ontology_ols import OLS_SOURCES, OntologyOLS
 
 

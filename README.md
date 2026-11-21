@@ -51,6 +51,8 @@ python -m entity_ontology run --articles inputs/articles.jsonl --run-id first-ba
 
 建树复审仍拿不准时，**OLS Reference Agent** 读取实体类型和待验证的父子或同义问题，在 GO、MONDO、PRO、ChEBI、Uberon、CL 和 HGNC 中选择来源。每看一次结果，它都可以换词、换来源、核对任一端的正式记录或结束，每个概念最多五次查询动作。搜索优先用 OLS MCP，正式条目与直接父类通过 OLS REST 核对。只有在同一来源里找到两端及方向一致的直接父子关系，才把这条关系交给模型复审。HGNC 只用于核对人类基因身份。查证记录保留每一步选择及其结果。
 
+GO 和其他来源共用 [OLS 来源列表](entity_ontology/hierarchy/ontology_ols.py)及 [OLS MCP 客户端](entity_ontology/hierarchy/ols_client.py)。旧的独立 GO 工具在 [legacy/go_reference/](entity_ontology/legacy/go_reference/)，可用 `python -m entity_ontology.legacy.go_reference` 运行。
+
 可以用 `--no-entity-reference` 关闭全部外部查证，或用 `--no-go-reference` 只关闭 GO。用新批次名运行才能为已完成的文献批次生成新版结果。
 
 ## 3. 看结果

@@ -7,8 +7,8 @@ from unittest.mock import Mock
 
 from entity_ontology.hierarchy.entity_placement_dag import EntityDAG
 from entity_ontology.hierarchy.entity_reference import EntityReferenceLookup, evidence_for_pair
-from entity_ontology.hierarchy.go_placement import complete_go_details, verified_go_terms
 from entity_ontology.hierarchy.placement import place_one
+from entity_ontology.legacy.go_placement import complete_go_details, verified_go_terms
 
 
 PARENT = {"id": "parent", "name": "Liver cancer", "definition": "A cancer of the liver.",

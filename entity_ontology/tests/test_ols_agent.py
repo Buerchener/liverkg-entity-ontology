@@ -3,12 +3,12 @@
 from tempfile import TemporaryDirectory
 from pathlib import Path
 from unittest import TestCase
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 from entity_ontology.hierarchy.entity_reference import EntityReferenceLookup, evidence_for_pair
 from entity_ontology.hierarchy.ols_reference import MAX_STEPS, OLSReferenceAgent
 from entity_ontology.hierarchy.ontology_ols import OLS_SOURCES, OntologyOLS
-from entity_ontology.hierarchy.go_reference.ols import OLSError
+from entity_ontology.hierarchy.ols_client import OLSClient, OLSError
 from entity_ontology.hierarchy.entity_placement_dag import EntityDAG
 from entity_ontology.hierarchy.placement import place_one, review_item
 from entity_ontology.tests.test_ontology_ols import FakeOLS, concept, term
@@ -100,6 +100,25 @@ class OLSAgentTests(TestCase):
         catalog = OntologyOLS(mcp=mcp, get_json=FakeOLS({"Example cell": [item]}, item))
         self.assertEqual(catalog.search_source("CL", "Example cell"),
                          {"transport": "rest", "hits": [{"term_id": "CL:1", "label": "Example cell"}]})
+
+    def test_go_and_mondo_share_the_same_ols_mcp_search_tool(self):
+        mcp = OLSClient(mode="mcp")
+        catalog = OntologyOLS(mcp=mcp)
+        examples = [
+            ("GO", "go", "GO:0008150", "biological process"),
+            ("MONDO", "mondo", "MONDO:0000001", "disease or disorder"),
+        ]
+        with patch.object(mcp, "discover", return_value={"transport": "mcp"}):
+            for source, ontology, term_id, name in examples:
+                with self.subTest(source=source), patch.object(
+                    mcp, "_tool", return_value={"items": [term(term_id, ontology, name)]},
+                ) as tool:
+                    self.assertEqual(catalog.search_source(source, name),
+                                     {"transport": "mcp", "hits": [{"term_id": term_id, "label": name}]})
+                    tool.assert_called_once_with("searchClasses", {
+                        "ontologyId": ontology, "query": name, "includeObsoleteEntities": False,
+                        "pageNum": 0, "pageSize": mcp.page_size,
+                    })
 
     def test_inspection_requires_an_observed_id_and_does_not_create_a_mapping(self):
         item = term("CL:1", "cl", "Example cell")

@@ -1,7 +1,7 @@
 import unittest
 from urllib.parse import parse_qs, unquote, urlsplit
 
-from entity_ontology.hierarchy.go_reference.ols import EXACT_SYNONYM, IAO_DEFINITION, OBO, OBO_IN_OWL, OLSError
+from entity_ontology.hierarchy.ols_client import EXACT_SYNONYM, IAO_DEFINITION, OBO, OBO_IN_OWL, OLSError
 from entity_ontology.hierarchy.ontology_ols import HGNC_REPORT, OntologyOLS
 
 

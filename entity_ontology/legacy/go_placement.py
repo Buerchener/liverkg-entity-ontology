@@ -167,7 +167,7 @@ class GOReferenceLookup:
     def _lookup(self, request):
         concept_id = request["concept_id"]
         command = [
-            sys.executable, "-m", "entity_ontology.hierarchy.go_reference",
+            sys.executable, "-m", "entity_ontology.legacy.go_reference",
             "--model-config", str(self.config), "--mode", "auto",
             "--max-tool-calls", str(AGENT_TOOL_CALLS), "--model-timeout", "20",
             "--state-dir", str(self.directory / "agent-runs"),
