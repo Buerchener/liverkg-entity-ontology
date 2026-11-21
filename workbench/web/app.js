@@ -13,7 +13,7 @@ const groups = [
   ]],
   ["本体层级", [
     { id: "ordering", label: "排序", detail: "查看各实体类型组内从宽到窄的概念清单。", module: "preparation", method: "renderPreparation" },
-    { id: "tree", label: "构树", detail: "查看逐个放置的结果，回查候选父类和每次判断。", module: "incremental", method: "renderIncremental" },
+    { id: "tree", label: "构树", detail: "查看概念的直接父类和子类，回查判断依据和文献原句。", module: "incremental", method: "renderIncremental" },
   ]],
 ];
 const stages = groups.flatMap(([, children]) => children);

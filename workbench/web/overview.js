@@ -106,6 +106,7 @@ export function renderOverview({ mount, data, stages }) {
     run.extraction_commit && ["抽取器", el("code", {}, run.extraction_commit.slice(0, 12))],
     run.extraction_model && ["抽取模型", el("code", {}, run.extraction_model)],
     placement.model && ["构树模型", el("code", {}, placement.model)],
+    placement.entity_reference_count != null && ["实体查证", placement.entity_reference_count + " 次"],
     ["GO 查询", (placement.go_reference_count ?? 0) + " 次"],
   ].filter(Boolean);
 
