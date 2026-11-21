@@ -4,10 +4,12 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from entity_ontology import model, pipeline
+from entity_ontology.concepts.deduplicate import indexed_equivalence
 from entity_ontology.concepts.embedding import EmbeddingAPI
+from entity_ontology.concepts.normalization import classify_output
 from entity_ontology.hierarchy.entity_placement_dag import EntityDAG
 from entity_ontology.model import endpoint, read_settings
 from entity_ontology.storage import atomic_json, read_json
@@ -86,6 +88,51 @@ class FixtureProvider:
 
 
 class PipelineTest(unittest.TestCase):
+    def test_single_placement_object_keeps_exact_target_id(self):
+        with TemporaryDirectory() as directory:
+            session = model.ModelSession(Path("unused"), Path(directory))
+            row = {"id": "target", "comparisons": [], "new_parent": None}
+            provider = Mock()
+            provider.generate.return_value = {
+                "content": json.dumps(row), "finish_reason": "stop", "model": "fixture", "usage": {},
+            }
+            with (patch.object(session, "request_settings", return_value=({"base_url": "https://fixture"}, {})),
+                  patch.object(model, "live_provider", return_value=provider)):
+                result = session.req(("incremental_propose", "fixture", {"items": [{"id": "target"}]}))
+                self.assertEqual(result, [row])
+                provider.generate.assert_called_once()
+                with self.assertRaises(ValueError):
+                    session.req(("incremental_propose", "fixture", {"items": [{"id": "other"}]}))
+
+    def test_indexed_equivalence_restores_original_pair_ids(self):
+        inputs = [{"id": f"12345678:M{i:02d}|87654321:M01", "left": {"name": str(i)}}
+                  for i in range(23)]
+
+        def answer(task):
+            stage, _, payload = task
+            self.assertEqual(stage, "equivalence_indexed")
+            self.assertEqual([row["id"] for row in payload["items"]],
+                             [f"p{i}" for i in range(1, len(payload["items"]) + 1)])
+            return [{"id": row["id"], "verdict": "distinct", "reason": row["left"]["name"]}
+                    for row in reversed(payload["items"])]
+
+        session = Mock()
+        session.req.side_effect = answer
+        decisions = indexed_equivalence(inputs, session)
+        self.assertEqual({r["id"]: r["reason"] for r in decisions},
+                         {r["id"]: r["left"]["name"] for r in inputs})
+        self.assertEqual(session.req.call_count, 3)
+
+    def test_model_rationale_field_aliases_preserve_text(self):
+        mention = {"id": "1:M01", "kind": "Protein", "name": "A protein",
+                   "definition": "A protein class.", "aliases": []}
+        for field in ("reason", "reason_cn", "reason_chn"):
+            with self.subTest(field=field):
+                decision = classify_output({**mention, field: " 原句明确描述了蛋白质。 "})
+                self.assertEqual(decision["reason"], "原句明确描述了蛋白质。")
+        with self.assertRaises(ValueError):
+            classify_output({**mention, "reason_cn": " "})
+
     def test_grounded_coverage_through_multi_parent_placement_and_resume(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)

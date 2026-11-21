@@ -4,12 +4,15 @@ import json
 import subprocess
 import sys
 
-from ..storage import atomic_json, digest, read_json
+from ..storage import atomic_json, digest, norm, read_json
+from .go_reference.ols import GO_ID, OLSClient, OLSError
+from .go_reference.schema import direct_edges
 
 
 GO_TYPES = {"Pathway", "BiologicalProcess", "MolecularFunction", "CellularComponent"}
 STATUSES = {"MATCHED", "REFERENCE_ONLY", "NO_MATCH", "UNCERTAIN", "LOOKUP_FAILED"}
 MAX_TOOL_CALLS = 5
+AGENT_TOOL_CALLS = 4
 
 
 def reference_evidence(result):
@@ -23,10 +26,91 @@ def reference_evidence(result):
     )}
 
 
+def go_query_terms(queries, *, detailed=False):
+    return {term["go_id"]: term for query in queries
+            if query.get("ok") is True and (not detailed or query["tool"] == "detail")
+            for term in query["result"].get("terms", []) if not detailed or term.get("definition")}
+
+
+def matching_go_ids(concept, official):
+    chosen = concept.get("go_id")
+    if chosen:
+        return [chosen] if GO_ID.fullmatch(chosen) else []
+    labels = {norm(label) for label in [concept["name"], *concept["aliases"]]}
+    return [term_id for term_id, term in official.items()
+            if any(norm(label) in labels for label in [term["name"], *term.get("exact_synonyms", [])])]
+
+
+def verified_go_terms(result, questions):
+    """Map both local endpoints to independently retrieved GO details."""
+    queries = [*result.get("query_records", []), *result.get("placement_queries", [])]
+    official = go_query_terms(queries, detailed=True)
+    endpoints = {item[side]["id"]: item[side] for item in questions for side in ("child", "parent")}
+    terms = [{"concept_id": ident, "term_id": term_id, "name": official[term_id]["name"],
+              "definition": official[term_id]["definition"], "source_url": official[term_id]["source"]}
+             for ident, concept in endpoints.items() for term_id in matching_go_ids(concept, official)
+             if term_id in official]
+    observed = [*result.get("ontology_relations", []), *direct_edges(result["go_id"], queries)]
+    edges = {(row["subject"], row["predicate"], row["object"]): row for row in observed}
+    return {"source": "GO", "terms": terms, "relations": [
+        {"child_id": edge["subject"], "parent_id": edge["object"], "predicate": edge["predicate"],
+         "source_url": edge["source"]} for edge in edges.values()
+    ]}
+
+
+def complete_go_details(result, questions, call):
+    """Use the remaining GO budget to verify known term pairs directly."""
+    if reference_evidence(result) is None:
+        return result
+    queries = result.get("query_records", [])
+    detailed = go_query_terms(queries, detailed=True)
+    known = go_query_terms(queries) | detailed
+    edges = {(edge["subject"], edge["object"]) for edge in direct_edges(result["go_id"], queries)
+             if edge["predicate"] == "is_a"}
+    checked_children = {row["arguments"]["go_id"] for row in queries
+                        if row.get("tool") == "relations" and row.get("ok") is True}
+    remaining = MAX_TOOL_CALLS - result["tool_calls"]
+    placement_queries = []
+
+    def observe(tool, term_id):
+        if len(placement_queries) >= remaining:
+            return None
+        index = result["tool_calls"] + len(placement_queries) + 1
+        record = {"query_id": f"q{index}", "tool": tool, "arguments": {"go_id": term_id}}
+        try:
+            observation = call(tool, record["arguments"])
+        except (OLSError, ValueError):
+            placement_queries.append({**record, "ok": False, "error": "GO evidence lookup unavailable"})
+            return None
+        placement_queries.append({**record, "ok": True, "result": observation})
+        return observation
+
+    for pair in questions:
+        if len(placement_queries) >= remaining:
+            break
+        child = matching_go_ids(pair["child"], known)
+        parent = matching_go_ids(pair["parent"], known)
+        if len(child) != 1 or len(parent) != 1:
+            continue
+        edge = child[0], parent[0]
+        if child != parent and edge not in edges and child[0] not in checked_children:
+            checked_children.add(child[0])
+            observe("relations", child[0])
+            edges.update((row["subject"], row["object"]) for row in direct_edges(result["go_id"], placement_queries)
+                         if row["predicate"] == "is_a")
+        if edge in edges or (child == parent and not pair["strict"]):
+            for term_id in dict.fromkeys([*child, *parent]):
+                if term_id not in detailed:
+                    observe("detail", term_id)
+                    detailed.update(go_query_terms(placement_queries, detailed=True))
+    return {**result, "placement_queries": placement_queries} if placement_queries else result
+
+
 class GOReferenceLookup:
     def __init__(self, config, directory):
         self.config = config.resolve()
         self.directory = directory.resolve()
+        self.ols = OLSClient(mode="rest", timeout=5)
 
     def __call__(self, concept, questions):
         concept_id = concept["id"]
@@ -46,6 +130,7 @@ class GOReferenceLookup:
             ],
             "taxonomy_context": {
                 "entity_type": concept["kind"],
+                "target_go_id": concept.get("go_id"),
                 "evidence_request": (
                     "What direct GO relation, if any, connects the corresponding terms? "
                     "Preserve the observed predicate and direction. Cite the detail query "
@@ -53,6 +138,8 @@ class GOReferenceLookup:
                 ),
                 "unresolved_parent_child_questions": [
                     {"child": item["child"]["name"], "parent": item["parent"]["name"],
+                     "child_definition": item["child"]["definition"],
+                     "parent_definition": item["parent"]["definition"],
                      "child_id": item["child"]["id"], "parent_id": item["parent"]["id"]}
                     for item in questions
                 ],
@@ -69,7 +156,7 @@ class GOReferenceLookup:
 
         entry = {"request_sha256": request_id, "request": request}
         atomic_json(path, entry)
-        result = self._lookup(request)
+        result = complete_go_details(self._lookup(request), questions, self.ols.call)
         atomic_json(path, {**entry, "result": result})
         return result
 
@@ -82,7 +169,7 @@ class GOReferenceLookup:
         command = [
             sys.executable, "-m", "entity_ontology.hierarchy.go_reference",
             "--model-config", str(self.config), "--mode", "auto",
-            "--max-tool-calls", str(MAX_TOOL_CALLS), "--model-timeout", "20",
+            "--max-tool-calls", str(AGENT_TOOL_CALLS), "--model-timeout", "20",
             "--state-dir", str(self.directory / "agent-runs"),
         ]
         try:

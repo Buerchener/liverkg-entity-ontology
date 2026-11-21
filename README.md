@@ -10,7 +10,7 @@
 |---|---|---|
 | 1. 从论文找实体 | [extraction/](entity_ontology/extraction/) | `native.py` 调用同学的抽取器，`coverage.py` 查漏，`mentions.py` 整理原句和位置。 |
 | 2. 把提及变成概念 | [concepts/](entity_ontology/concepts/) | `normalization.py` 判断词指什么，`retrieve_pairs.py` 找相似候选，`deduplicate.py` 判断同义并合并。 |
-| 3. 给概念找位置 | [hierarchy/](entity_ontology/hierarchy/) | `order_entities.py` 由宽到窄排序，`placement.py` 逐个建树，`go_reference/` 提供 GO 查证。 |
+| 3. 给概念找位置 | [hierarchy/](entity_ontology/hierarchy/) | `order_entities.py` 由宽到窄排序，`placement.py` 逐个建树，`entity_reference.py` 按类型调度查证。 |
 | 4. 网页查看和复核 | [workbench/](entity_ontology/workbench/) | `server.py` 读取批次结果，`web/` 展示实体、原句和父子关系。 |
 
 想看四步怎么接起来，打开 [pipeline.py](entity_ontology/pipeline.py)。
@@ -48,6 +48,10 @@ export LIVERKG_API_KEY
 ```bash
 python -m entity_ontology run --articles inputs/articles.jsonl --run-id first-batch
 ```
+
+建树遇到复审仍拿不准的候选时，会按实体类型查证。疾病、蛋白质、代谢物、组织和细胞类型分别在 EMBL-EBI OLS 查 MONDO、PRO、ChEBI、Uberon 和 Cell Ontology。通路继续走 GO Agent，搜索优先用 OLS MCP，必要时走 REST。人类基因用 HGNC 核对名称和 ID。查证记录会显示在工作台，候选父子关系仍由模型复审和图校验决定。
+
+可以用 `--no-entity-reference` 关闭全部外部查证，或用 `--no-go-reference` 只关闭 GO。用新批次名运行才能为已完成的文献批次生成新版结果。
 
 ## 3. 看结果
 
