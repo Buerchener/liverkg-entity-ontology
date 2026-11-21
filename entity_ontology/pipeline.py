@@ -9,7 +9,7 @@ import re
 from . import DEFAULT_RUNS_DIR
 from .model import ModelSession, endpoint, read_settings
 from .storage import atomic_json, digest, read_json, run_lock
-from .concepts.deduplicate import deduplicate
+from .concepts.deduplicate import POLICY as EQUIVALENCE_POLICY, deduplicate
 from .concepts.normalization import resolve
 from .concepts.retrieve_pairs import DEFAULT_KNN_K
 from .extraction.coverage import VERSION as COVERAGE_VERSION, recover as recover_coverage
@@ -83,6 +83,9 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
                 if file_hash(articles) != source_hash or file_hash(placement_path) != previous["placement_sha256"]:
                     raise ValueError("The completed batch files do not match the published manifest.")
                 return previous
+            equivalence_path = output / "equivalence.json"
+            if placement_path.exists() and read_json(equivalence_path).get("policy") != EQUIVALENCE_POLICY:
+                raise ValueError("This unfinished batch used a different deduplication policy. Use a new run ID.")
             manifest["created_at"] = previous["created_at"]
         if articles.exists():
             if file_hash(articles) != source_hash:
@@ -136,6 +139,7 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
 
             start("embedding_and_deduplication")
             concepts = deduplicate(compact, normalized, session=session, knn_k=knn_k)
+            manifest["equivalence_policy"] = EQUIVALENCE_POLICY
             retrieval = read_json(output / "retrieval/retrieved_pairs.json")
             complete()
 

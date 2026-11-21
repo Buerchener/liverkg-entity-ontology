@@ -325,6 +325,7 @@ function conceptInspector(c, index, go, openPair) {
     disclosure('Concept details', small('Concept ID ' + c.id),
       note(c.definition, 'Download original definition'),
       c.aliases.length ? aliasesLine(c.aliases) : null));
+  if (c.type_review_status==='needs_review') section.append(status('Entity type needs review','warn'));
   const sources = c.source_mentions.flatMap(id => {
     const m=index.mentions.get(id);
     return m ? [co('div','ev-source-item', termButton(m, sourceId=>go('extraction',sourceId)),
@@ -346,7 +347,10 @@ function pairInspector(pair, index, go) {
   const box = co('article','ev-record',co('h2','ev-title',pairNames(pair,index).join(' / ')),
     co('div','ev-labeled-value ev-record-meta',badge(pair.applied_verdict)));
   const review = [note(pair.reason)];
-  if (pair.applied_verdict!==pair.verdict) review.push(copy('Initial model judgment: '+decisions[pair.verdict][0]));
+  if (pair.decision_source==='type_gate') review.push(copy('Different entity types. Equivalence review was skipped.'));
+  if (pair.decision_source==='type_review_pending') review.push(copy('Entity type needs review. Both mentions were kept separate.'));
+  if (pair.decision_source==='single_missing_pair') review.push(copy('Follow-up review of the only unjudged pair in the group.'));
+  if (pair.verdict && pair.applied_verdict!==pair.verdict) review.push(copy('Initial model judgment: '+decisions[pair.verdict][0]));
   if (selected) {
     const labels = selected.reasons.map(r=>retrievalReasons[r]||r).join(', ');
     review.push(small('Cosine similarity '+selected.cosine_similarity.toFixed(3)+' · '+labels));
@@ -355,7 +359,11 @@ function pairInspector(pair, index, go) {
   const evidence = pair.id.split('|').flatMap(id => {
     const m = index.mentions.get(id);
     const norm = index.norm.get(id);
+    const check = index.typeRechecks.get(id);
     return m ? [group(m.mention,status(typeLabel(norm?.kind || m.raw_type),'neutral'),
+      check ? copy('Source-based type recheck: '+typeLabel(check.initial_kind)+' → '+typeLabel(check.kind)) : null,
+      check?.source_quote ? co('blockquote','ev-copy',check.source_quote) : null,
+      check ? note(check.reason) : null,
       sourceDetails(m,index,true),action('View mention '+id,()=>go('extraction',id)))] : [];
   });
   if (evidence.length) box.append(disclosure('Source mentions (' + evidence.length + ')', evidence));
@@ -412,6 +420,7 @@ export function renderEvidence({stage,mount,data,go,selected}) {
     articles:new Map(data.articles.map(a=>[String(a.pmid),a])),
     mentions:new Map(data.mentions.map(m=>[m.id,m])),
     norm:new Map(data.normalization.map(r=>[r.id,r])),
+    typeRechecks:new Map((data.equivalence.type_rechecks || []).map(r=>[r.id,r])),
     verifications:new Map(data.verification_candidates.map(r=>[r.id,r])),
     concepts:new Map(concepts.map(c=>[c.id,c])),
     conceptByMention:new Map(concepts.flatMap(c=>c.source_mentions.map(id=>[id,c]))),

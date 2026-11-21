@@ -101,6 +101,10 @@ def _validate_entities(rows):
             raise ValueError(f"Invalid aliases for {ident}.")
 
 
+def normalized_names(row):
+    return {norm(term) for term in [row["name"], *row["aliases"]]}
+
+
 def retrieve_pairs(rows, directory, config_path, *, knn_k=DEFAULT_KNN_K):
     """Select candidates with global cosine neighbors and shared names or aliases."""
     if knn_k < 1:
@@ -134,8 +138,8 @@ def retrieve_pairs(rows, directory, config_path, *, knn_k=DEFAULT_KNN_K):
         reasons = defaultdict(set)
         by_name = defaultdict(set)
         for row in rows:
-            for alias in [row["name"], *row["aliases"]]:
-                by_name[norm(alias)].add(row["id"])
+            for name in normalized_names(row):
+                by_name[name].add(row["id"])
         for group in by_name.values():
             for pair in combinations(sorted(group), 2):
                 reasons[pair].add("shared_name_or_alias")
