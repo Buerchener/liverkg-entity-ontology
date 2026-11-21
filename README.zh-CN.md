@@ -1,8 +1,8 @@
 <div align="center">
 
-# LiverKG 肝病知识图谱
+# LiverTrail 肝病知识图谱
 
-### 一个证据可追溯、面向科研的肝病知识图谱与 PubMed Agent 抽取系统
+### 一个证据可追溯、按疾病阶段组织、能从 PubMed 持续生长的肝病知识图谱
 
 [English](README.md) · [PubMed Agent](pubmed_literature_extraction/README.zh-CN.md) · [人工审阅入口](HUMAN_REVIEW.md)
 
@@ -10,8 +10,19 @@
 
 ## 项目简介
 
-LiverKG 围绕慢性肝病演进过程构建知识图谱，将权威生物医学数据库与
-Verifier 驱动的文献抽取 Agent 结合，把 PubMed 摘要转化为证据可追溯的实体和关系候选。
+LiverTrail 围绕慢性肝病演进过程构建知识图谱，将权威生物医学数据库与
+Verifier 驱动的文献抽取 Agent 结合，把 PubMed 摘要转化为证据可追溯的实体和关系候选，
+再把文献实体整理成跨文献的概念和 `is_a` 层级，并与 v2 骨干图谱对照。
+
+代码、命令和数据库沿用原来的 `liverkg` 名字，例如 `liverkg` 命令、`liverkg_cli` 包和
+`liver-kg-core-v02` 数据库。
+
+| 层 | 作用 | 代码 |
+| --- | --- | --- |
+| A. 骨干图谱 | 五个疾病阶段对齐 UMLS，整合 DisGeNET、STRING、KEGG、Reactome、HPA 和 HMDB | `scripts/`、`data/`、`review/` |
+| B. 抽取 Agent | 从摘要抽取实体和关系，由确定性验证器检查证据、签名、否定、模糊表述和结论范围 | `pubmed_literature_extraction/cognitive_agent/` |
+| C. 实体本体 | 把提及整理成跨文献概念，在七类实体内建多父类 `is_a` 层级，可用 OLS Reference Agent 查外部本体 | `pubmed_literature_extraction/entity_ontology/` |
+| D. 集成层 | 概念对齐 v2、关系投影、概念级门禁、novelty 标注、图谱导出和受保护的 Neo4j 加载 | `entity_ontology/linking/`、`relations/`、`export/` |
 
 项目坚持一个核心原则：**模型可以提出知识，但只有 Schema 合法、原文证据充分、
 并通过确定性验证的结果才能进入写入路径。**
@@ -84,12 +95,29 @@ Central Agent 根据当前文章状态选择工具。Causal 输出被隔离为�
 ├── scripts/                      # 数据抓取、清洗和导入脚本
 ├── review/                       # 当前 Schema、范围和限制
 ├── archive/                      # 历史报告与迁移材料
-├── pubmed_literature_extraction/ # PubMed Agent 文献抽取模块
+├── pubmed_literature_extraction/ # Python 包：抽取 Agent、实体本体、集成层和 liverkg 命令
 ├── HUMAN_REVIEW.md               # 推荐人工审阅入口
 └── MANIFEST.txt                  # 数据包清单
 ```
 
 ## 快速开始
+
+完整流水线（抽取 → 实体本体 → 对齐与关系 → 图谱导出），详见[英文 README](README.md#run-the-pipeline)：
+
+```bash
+cd pubmed_literature_extraction
+python3.12 -m venv .venv && source .venv/bin/activate
+python -m pip install -e '.[ontology]'
+cp entity_ontology/config.example.json entity-ontology.local.json
+export LIVERKG_API_BASE="OpenAI 兼容服务地址，以 /v1 结尾"
+read -rs LIVERKG_API_KEY && export LIVERKG_API_KEY
+
+liverkg ontology run --articles inputs/articles.jsonl --run-id first-batch
+liverkg ontology serve --open
+liverkg ontology load --run-id first-batch --database liverkg-integrated --dry-run
+```
+
+只运行抽取 Agent：
 
 ```bash
 cd pubmed_literature_extraction

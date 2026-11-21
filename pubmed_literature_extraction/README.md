@@ -2,9 +2,9 @@
 
 # PubMed Literature Extraction Agent
 
-### Evidence-grounded biomedical relation extraction for LiverKG
+### Evidence-grounded biomedical relation extraction for LiverTrail
 
-[简体中文](README.zh-CN.md) · [Back to LiverKG](../README.md) · [Agent v3 architecture](ARCHITECTURE_V3.md) · [Method innovations](METHOD_INNOVATION.md)
+[简体中文](README.zh-CN.md) · [Back to LiverTrail](../README.md) · [Agent v3 architecture](ARCHITECTURE_V3.md) · [Method innovations](METHOD_INNOVATION.md)
 
 </div>
 
@@ -173,10 +173,11 @@ python multi_stage_extraction_pipeline.py \
 
 ## Entity ontology and graph build
 
-`entity_ontology/` comes from [liverkg-entity-ontology](https://github.com/Buerchener/liverkg-entity-ontology)
-(`main@adef5bd`, imported with its history). It turns extracted entities into
-deduplicated concepts and a multi-parent `is_a` hierarchy, and now also carries
-the extractor's verified relations:
+`entity_ontology/` turns extracted entities into deduplicated concepts and a
+multi-parent `is_a` hierarchy, and carries the extractor's verified relations
+onto those concepts. It calls the extractor in this package directly, so no
+pinned copy is needed. The [repository README](../README.md#methods) describes
+each stage:
 
 ```text
 PubMed JSONL
@@ -212,6 +213,11 @@ and auxiliary judges then reuse that model unless `SECOND_LLM_API_KEY` or
 candidates come from local character n-gram hashing vectors. These find
 spelling variants but not synonyms without shared characters; the LLM still
 decides every merge.
+
+Placement questions that the reviewer leaves open can be checked against
+external ontologies by the OLS Reference Agent (GO, MONDO, the Protein
+Ontology, ChEBI, Uberon, the Cell Ontology and HGNC). `--no-entity-reference`
+disables these lookups, and `--no-go-reference` excludes GO alone.
 
 The concept-level gate can only keep or lower the extractor's decision.
 `AUTO` needs at least one `IMPORT_READY` evidence item, no negation,

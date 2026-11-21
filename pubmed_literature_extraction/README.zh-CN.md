@@ -2,9 +2,9 @@
 
 # PubMed 文献知识抽取 Agent
 
-### 面向 LiverKG 的证据约束型生物医学关系抽取系统
+### 面向 LiverTrail 的证据约束型生物医学关系抽取系统
 
-[English](README.md) · [返回 LiverKG](../README.zh-CN.md) · [Agent v3 架构](ARCHITECTURE_V3.md) · [方法创新](METHOD_INNOVATION.md)
+[English](README.md) · [返回 LiverTrail](../README.zh-CN.md) · [Agent v3 架构](ARCHITECTURE_V3.md) · [方法创新](METHOD_INNOVATION.md)
 
 </div>
 
@@ -163,7 +163,7 @@ python multi_stage_extraction_pipeline.py \
 
 ## 实体本体与图谱构建
 
-`entity_ontology/` 来自 [liverkg-entity-ontology](https://github.com/Buerchener/liverkg-entity-ontology)（`main@adef5bd`，导入时保留了提交历史）。它把抽取器找到的实体整理成去重后的概念和多父类 `is_a` 层级，现在也接上了抽取器验证过的关系：
+`entity_ontology/` 把抽取器找到的实体整理成去重后的概念和多父类 `is_a` 层级，并把抽取器验证过的关系挂到这些概念上。它直接调用本包里的抽取器，不需要固定版本的副本。各阶段的说明见[仓库 README](../README.md#methods)：
 
 ```text
 PubMed JSONL
@@ -198,13 +198,15 @@ liverkg ontology load --run-id first-batch --database liverkg-integrated --dry-r
 - 抽取器的第二模型和辅助裁判在没有另配 key 时复用同一个模型，运行清单里记为 `auxiliary_models: single_model`。想用独立的第二模型，把 `SECOND_LLM_API_KEY` 或 `DEEPSEEK_API_KEY` 写进 `LIVERKG_EXTRACTOR_AUX_ENV` 指向的文件。
 - 去重候选改用本地字符 n-gram 哈希向量，不需要向量服务。它能找到拼写相近的同义候选，找不到毫无字面重合的同义词；是否合并仍由大模型判断。
 
+复核后仍未解决的层级问题，可以交给 OLS Reference Agent 到外部本体里查证（GO、MONDO、Protein Ontology、ChEBI、Uberon、Cell Ontology 和 HGNC）。`--no-entity-reference` 关闭全部外部查证，`--no-go-reference` 只排除 GO。
+
 概念级关系的门禁只降级、不升级：
 
 | 状态 | 条件 |
 | --- | --- |
 | `AUTO` | 至少一条证据为 `IMPORT_READY`；没有否定、反证或统计未证实；两端概念都已放入层级；端点类型与概念类型一致。 |
 | `REVIEW` | 有可用证据，但上面某一条不满足。原因写在 `gate_reasons`。 |
-| `BLOCKED` | 证据全部被抽取器拦截，或谓词不在 LiverKG 范围内。 |
+| `BLOCKED` | 证据全部被抽取器拦截，或谓词不在 schema 范围内。 |
 
 `novelty` 把概念级关系和 v2 数据包对照：`KNOWN_IN_V2` 表示 v2 两端之间已有同类关系，`NEW` 表示两端都在 v2 中但没有这条关系，`UNLINKED` 表示有端点没对齐到 v2。
 

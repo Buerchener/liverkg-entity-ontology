@@ -91,7 +91,7 @@ function renderLocation(stage) {
     el("span", { "aria-current": "page" }, "Batch Overview"));
   if (stage) crumb.append(el("span", { "aria-hidden": "true" }, "/"), el("span", { "aria-current": "page" }, stage.label));
   title.textContent = stage?.label || "Batch Overview";
-  document.title = (stage?.label || "Entity Ontology Workbench") + " · LiverKG";
+  document.title = (stage?.label || "Entity Ontology Workbench") + " · LiverTrail";
   subtitle.textContent = stage?.detail ?? "";
   subtitle.hidden = !subtitle.textContent;
 }
