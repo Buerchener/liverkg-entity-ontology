@@ -114,13 +114,16 @@ export function renderOverview({ mount, data, stages }) {
   const created = new Date(run.created_at || "");
   const date = Number.isNaN(created.valueOf()) ? null :
     el("time", { datetime: run.created_at }, new Intl.DateTimeFormat("en-GB", { dateStyle: "long" }).format(created));
+  const extractorCommit = run.extractor_git?.commit || run.extraction_commit;
+  const relationCounts = data.conceptRelations?.counts;
   const metadata = [
     ["Batch ID", el("code", {}, run.run_id)],
-    run.extraction_commit && ["Extractor commit", el("code", {}, run.extraction_commit.slice(0, 12))],
+    extractorCommit && ["Extractor commit", el("code", {}, extractorCommit.slice(0, 12) + (run.extractor_git?.dirty ? " · with uncommitted changes" : ""))],
     run.extraction_model && ["Extraction model", el("code", {}, run.extraction_model)],
     placement.model && ["Placement model", el("code", {}, placement.model)],
     placement.entity_reference_count != null && ["Entity reference lookups", placement.entity_reference_count],
     ["GO lookups", placement.go_reference_count ?? 0],
+    relationCounts && ["Concept-level relations", `${relationCounts.concept_relations} (${relationCounts.gate.AUTO} AUTO, ${relationCounts.gate.REVIEW} REVIEW)`],
   ].filter(Boolean);
 
   mount.append(section(...overviewSections[0],

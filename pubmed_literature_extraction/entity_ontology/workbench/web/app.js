@@ -15,6 +15,10 @@ const groups = [
     { id: "ordering", label: "Concept Ordering", detail: "Browse concepts from broad to specific within each type.", module: "preparation", method: "renderPreparation" },
     { id: "tree", label: "Hierarchy Placement", detail: "Select a node to inspect its parent and child classes.", module: "incremental", method: "renderIncremental" },
   ]],
+  ["Literature Graph", [
+    { id: "links", label: "Backbone Linking", detail: "Select a concept to see the v2 backbone node it links to and why.", module: "relations", method: "renderRelations" },
+    { id: "relations", label: "Concept Relations", detail: "Browse verified relations merged onto concepts, with their gate, novelty and source sentences.", module: "relations", method: "renderRelations" },
+  ]],
 ];
 const stages = groups.flatMap(([, children]) => children);
 const title = document.querySelector("#heading");
