@@ -10,7 +10,7 @@
 |---|---|---|
 | 1. 从论文找实体 | [extraction/](entity_ontology/extraction/) | `native.py` 调用同学的抽取器，`coverage.py` 查漏，`mentions.py` 整理原句和位置。 |
 | 2. 把提及变成概念 | [concepts/](entity_ontology/concepts/) | `normalization.py` 判断词指什么，`retrieve_pairs.py` 找相似候选，`deduplicate.py` 判断同义并合并。 |
-| 3. 给概念找位置 | [hierarchy/](entity_ontology/hierarchy/) | `order_entities.py` 由宽到窄排序，`placement.py` 逐个建树，`entity_reference.py` 按类型调度查证。 |
+| 3. 给概念找位置 | [hierarchy/](entity_ontology/hierarchy/) | `order_entities.py` 由宽到窄排序，`placement.py` 逐个建树，`entity_reference.py` 通过 OLS 查证。 |
 | 4. 网页查看和复核 | [workbench/](entity_ontology/workbench/) | `server.py` 读取批次结果，`web/` 展示实体、原句和父子关系。 |
 
 想看四步怎么接起来，打开 [pipeline.py](entity_ontology/pipeline.py)。
@@ -49,7 +49,7 @@ export LIVERKG_API_KEY
 python -m entity_ontology run --articles inputs/articles.jsonl --run-id first-batch
 ```
 
-建树遇到复审仍拿不准的候选时，会按实体类型查证。疾病、蛋白质、代谢物、组织和细胞类型分别在 EMBL-EBI OLS 查 MONDO、PRO、ChEBI、Uberon 和 Cell Ontology。通路继续走 GO Agent，搜索优先用 OLS MCP，必要时走 REST。人类基因用 HGNC 核对名称和 ID。查证记录会显示在工作台，候选父子关系仍由模型复审和图校验决定。
+建树复审仍拿不准时，**OLS Reference Agent** 读取实体类型和待验证的父子或同义问题，在 GO、MONDO、PRO、ChEBI、Uberon、CL 和 HGNC 中选择来源。每看一次结果，它都可以换词、换来源、核对任一端的正式记录或结束，每个概念最多五次查询动作。搜索优先用 OLS MCP，正式条目与直接父类通过 OLS REST 核对。只有在同一来源里找到两端及方向一致的直接父子关系，才把这条关系交给模型复审。HGNC 只用于核对人类基因身份。查证记录保留每一步选择及其结果。
 
 可以用 `--no-entity-reference` 关闭全部外部查证，或用 `--no-go-reference` 只关闭 GO。用新批次名运行才能为已完成的文献批次生成新版结果。
 
@@ -62,5 +62,7 @@ python -m entity_ontology serve --open
 网页默认打开最近完成的批次。结果保存在 `runs/entity_ontology/first-batch/`，包括原句、概念清单和候选父子关系。同一输入、配置和批次名可以续跑。
 
 在总览里可以从论文原句一路点到去重后的概念和候选父类。已有批次在其他目录时，用 `python -m entity_ontology serve --runs-dir <批次父目录>` 打开。
+
+同一批 100 篇论文的构树结果可以在 GitHub Releases 下载。[统一 OLS 版](https://github.com/Buerchener/liverkg-entity-ontology/releases/tag/results-entity-100-ols-agent-v1) 包含候选父子关系和对照报告，[旧版](https://github.com/Buerchener/liverkg-entity-ontology/releases/tag/results-entity-100-reference-v2) 可用于对照。
 
 抽取沿用 [LiverKG 固定版本](https://github.com/Buerchener/FYP-liver-disease/commit/fc9ebd72971318a7738f15fc2b86369a552656c2)。建树允许一个概念有多个父类。抽取及建树结果均保存在本地文件，供人工复核。

@@ -1,29 +1,47 @@
-import { el, status, typeLabel } from './ui.js';
+import { disclosure, el, modelNote, status, typeLabel } from './ui.js';
 import { layoutDag, layoutDagNeighborhood } from './dag-layout.js';
 
 const actions = {
-  new_under_root:['挂到类型根','neutral'], as_child:['挂到已有父类下','good'],
-  as_parent:['成为已有概念的父类','good'], insert_between:['插入中间层','good'],
-  needs_review:['待复核','warn'], equivalent_pending:['可能重复 · 待复核','warn'], rejected:['拒绝放置','bad'],
+  new_under_root:['Under type root','neutral'], as_child:['Placed as child','good'],
+  as_parent:['Placed as parent','good'], insert_between:['Inserted between','good'],
+  needs_review:['Pending review','warn'], equivalent_pending:['Possible duplicate','warn'], rejected:['Placement rejected','bad'],
 };
 const supportLabels = {
-  schema_type:['类型根','neutral'], dual_model_review:['模型复审支持','good'], go_informed_review:['GO 辅助复审','good'],
-  reference_informed_review:['外部证据辅助复审','good'],
+  schema_type:['Type root','neutral'], dual_model_review:['Model review','good'], go_informed_review:['GO-assisted review','good'],
+  reference_informed_review:['Reference-assisted review','good'],
 };
-const relations = {narrower:'更具体',broader:'更宽',equivalent:'等价',unrelated:'未发现类包含',uncertain:'待复核',needs_review:'待复核',rejected:'复审未通过'};
+const relations = {
+  narrower:'Narrower', broader:'Broader', equivalent:'Equivalent', unrelated:'No class inclusion',
+  uncertain:'Pending review', needs_review:'Pending review', rejected:'Rejected in review',
+};
 const referenceStatuses = {
-  MATCHED:['匹配','good'], REFERENCE_ONLY:['参考条目','neutral'], NO_MATCH:['未找到匹配','neutral'],
-  UNCERTAIN:['证据不足','warn'], LOOKUP_FAILED:['查询失败','bad'],
+  MATCHED:['Matched','good'], REFERENCE_ONLY:['Reference only','neutral'], NO_MATCH:['No match','neutral'],
+  UNCERTAIN:['Insufficient evidence','warn'], LOOKUP_FAILED:['Lookup failed','bad'],
 };
 const referenceReviewStatuses = {
-  reviewed:'已复审', no_usable_reference:'暂无可用引用', invalid_review:'回复格式无法校验',
-  review_failed:'复审失败', identity_only:'用于核对身份',
+  reviewed:'Reviewed', no_usable_reference:'No usable reference', invalid_review:'Invalid review response',
+  review_failed:'Review failed', identity_only:'Identity check',
 };
-const reviewLabels = {true:'复审支持',false:'复审未通过',null:'证据不足'};
+const referenceReasons = {
+  term_candidates_for_review:'Source terms identified for review.',
+  no_exact_label_or_synonym:'The lookup found no exact label or synonym.',
+  incomplete_lookup:'The source lookup was incomplete.',
+  no_unique_human_gene_reference:'A unique human gene reference could not be established.',
+  unsupported_entity_type:'The selected source does not cover this entity type.',
+};
+const reviewLabels = {true:'Supported', false:'Rejected', null:'Insufficient evidence'};
 
 const button = (label,onClick,cls='btn') => el('button',{class:cls,type:'button',onClick},label);
 const chip = (labels,key) => status(...(labels[key] || [key,'neutral']));
+const countLabel = (count, singular, plural) => `${count} ${count === 1 ? singular : plural}`;
 const evidenceHosts = new Set(['www.ebi.ac.uk','www.genenames.org','hgnc.genenames.org','rest.genenames.org','purl.obolibrary.org']);
+
+function showReview(review, reference = false) {
+  const outcome = reviewLabels[String(review.supported)];
+  const heading = reference ? ['Reference review', outcome].filter(Boolean).join(' · ') : outcome || 'Model review';
+  return el('p',{},el('strong',{},heading),
+    review.reason && [' ',modelNote(review.reason)]);
+}
 
 function evidenceLink(address, label) {
   if (!address || !label) return null;
@@ -36,6 +54,35 @@ function evidenceLink(address, label) {
     return null;
   }
   return null;
+}
+
+function showReferenceStatistics(placement) {
+  const conceptsBySource = placement.reference_counts_by_source;
+  if (!conceptsBySource) return null;
+
+  const lookupActions = new Set(['search','inspect','verify']);
+  const countedStatuses = new Set(['observed','lookup_failed']);
+  const attemptsBySource = new Map();
+  for (const decision of placement.decisions) {
+    for (const {action,status,source} of decision.entity_reference?.result?.query_records || []) {
+      if (typeof source === 'string' && source && lookupActions.has(action) && countedStatuses.has(status)) {
+        attemptsBySource.set(source,(attemptsBySource.get(source) || 0) + 1);
+      }
+    }
+  }
+  const sources = [...new Set([...Object.keys(conceptsBySource),...attemptsBySource.keys()])].sort();
+  if (!sources.length) return null;
+
+  const rows = sources.map(source => el('tr',{},
+    el('th',{scope:'row'},source),
+    el('td',{},String(conceptsBySource[source] ?? 0)),
+    el('td',{},String(attemptsBySource.get(source) || 0))));
+  return el('section',{class:'hw-ols-stats'},
+    el('h4',{},'OLS source breakdown'),
+    el('table',{class:'data-table','aria-label':'OLS source breakdown'},
+      el('thead',{},el('tr',{},['Source','Concepts checked','Lookup attempts'].map(label=>el('th',{scope:'col'},label)))),
+      el('tbody',{},rows)),
+    el('p',{class:'hw-note'},'A concept can appear under several sources. Lookup attempts count searches, inspections and verifications.'));
 }
 
 export function renderIncremental({mount,placement,data,go,selected}) {
@@ -65,23 +112,29 @@ export function renderIncremental({mount,placement,data,go,selected}) {
   const opened = new Set();
   const dagExpanded = new Set();
   const tabs = new Map();
-  const search = el('input',{type:'search',class:'hw-search','aria-label':'按名称或类型搜索',placeholder:'名称、别名或类型'});
-  const kindControl = el('select',{class:'hw-kind','aria-label':'实体类型'},
-    el('option',{value:''},'全部类型'),
+  const search = el('input',{type:'search',class:'hw-search','aria-label':'Search concepts',placeholder:'Name, alias or type'});
+  const kindControl = el('select',{class:'hw-kind','aria-label':'Entity type'},
+    el('option',{value:''},'All types'),
     Object.keys(roots).map(key=>el('option',{value:key},typeLabel(key))));
-  const main = el('section',{class:'hw-main','aria-label':'层级浏览区'});
-  const detail = el('aside',{class:'hw-detail','aria-label':'逐个放置详情',tabindex:-1});
+  const main = el('section',{class:'hw-main','aria-label':'Hierarchy browser'});
+  const detail = el('aside',{class:'hw-detail','aria-label':'Placement details',tabindex:-1});
   const metrics = [
-    ['入树概念', source.length-unplaced.length],
-    ['具体父子边', specific],
-    ['多父类概念', multiParents],
-    ['未挂接概念', unplaced.length],
+    ['Placed concepts', source.length-unplaced.length],
+    ['Parent–child edges', specific],
+    ['Unplaced concepts', unplaced.length],
   ];
-  if (placement.entity_reference_count != null) metrics.push(['实体查证',placement.entity_reference_count]);
-  else if (placement.go_reference_count) metrics.push(['GO 查询',placement.go_reference_count]);
+  const supplementaryMetrics = [['Concepts with multiple parents', multiParents]];
+  if (placement.entity_reference_count != null) supplementaryMetrics.push(['Concepts sent for reference lookup',placement.entity_reference_count]);
+  else if (placement.go_reference_count != null) supplementaryMetrics.push(['Concepts with GO reference',placement.go_reference_count]);
+  const moreMetrics = el('dl',{class:'hw-metrics hw-metrics-extra'},
+    supplementaryMetrics.map(([label,value])=>el('div',{},el('dt',{},label),el('dd',{},String(value)))));
   const toolbar = el('div',{class:'hw-toolbar'});
   const tabList = el('div',{class:'hw-tabs'});
-  const views = [['dag','DAG 图'],['tree','树状图'],['outline','层级列表'],['steps',`放置记录 · ${decisions.length}`],['unplaced',`未挂接 · ${unplaced.length}`]];
+  const extraTabs = el('div',{class:'hw-extra-views'});
+  const extraLabel = el('span',{},'More views');
+  const moreViews = disclosure(extraLabel,extraTabs);
+  moreViews.classList.add('hw-more-views');
+  const views = [['dag','DAG'],['tree','Tree'],['outline','Outline'],['steps',`Placement Log (${decisions.length})`],['unplaced',`Unplaced (${unplaced.length})`]];
   for (const [id,label] of views) {
     const control = button(label,()=> {
       if (mode===id) return;
@@ -91,9 +144,14 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       revealCurrent();
     },'hw-tab');
     tabs.set(id,control);
-    tabList.append(control);
+    (id==='dag' || id==='tree' ? tabList : extraTabs).append(control);
   }
-  toolbar.append(tabList);
+  function labelMoreViews() {
+    const alternate = mode !== 'dag' && mode !== 'tree';
+    extraLabel.textContent = alternate && !moreViews.open ? tabs.get(mode).textContent : 'More views';
+  }
+  moreViews.addEventListener('toggle',labelMoreViews);
+  toolbar.append(tabList,moreViews);
   search.addEventListener('input',()=> { query=search.value.trim().toLowerCase(); renderMain(); });
   kindControl.addEventListener('change',()=> {
     kind=kindControl.value;
@@ -109,12 +167,14 @@ export function renderIncremental({mount,placement,data,go,selected}) {
   });
   const layout = el('div',{class:'hw-layout'},
       el('section',{class:'hw-browser'},toolbar,el('div',{class:'hw-filters'},
-        el('label',{class:'hw-field'},el('span',{},'搜索概念'),search),
-        el('label',{class:'hw-field'},el('span',{},'实体类型'),kindControl)),
+        el('label',{class:'hw-field'},el('span',{},'Search concepts'),search),
+        el('label',{class:'hw-field'},el('span',{},'Entity type'),kindControl)),
       main),detail);
   mount.replaceChildren(el('div',{class:'hw'},
     el('dl',{class:'hw-metrics'},metrics.map(([label,value])=>el('div',{},el('dt',{},label),el('dd',{},String(value))))),
-    layout));
+    layout,
+    el('div',{class:'hw-batch-stats'},
+      disclosure('Batch statistics',moreMetrics,showReferenceStatistics(placement)))));
 
   function display(id) {
     const row = all.get(id);
@@ -255,14 +315,14 @@ export function renderIncremental({mount,placement,data,go,selected}) {
     if (id===current) action.classList.add('hw-current');
     action.append(...[el('span',{class:'hw-node-name'},display(id)),
       edge && chip(supportLabels,edge.support),
-      parents.get(id).length>1 && status(`${parents.get(id).length} 个父类`),
+      parents.get(id).length>1 && status(`${parents.get(id).length} parents`),
       kids.length>0 && el('span',{class:'hw-count'},String(kids.length))].filter(Boolean));
     let toggle = el('span',{class:'hw-branch-dot','aria-hidden':'true'});
     if (kids.length) {
       toggle = button(open?'▾':'▸',()=>toggleBranch(key),'hw-toggle');
       toggle.dataset.branch=key;
       toggle.setAttribute('aria-expanded',String(open));
-      toggle.setAttribute('aria-label',(open?'折叠':'展开')+display(id));
+      toggle.setAttribute('aria-label',(open?'Collapse ':'Expand ')+display(id));
     }
     const item = el('li',{class:'hw-branch'+(edge?'':' hw-root')},el('div',{class:'hw-branch-row'},toggle,action));
     if (open && kids.length) item.append(el('ul',{class:'hw-children'},kids.filter(row=>!trail.includes(row.child_id)).map(row=>branch(row.child_id,trail,row))));
@@ -281,11 +341,11 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       'aria-pressed':String(selected), onClick:()=>pick(id),
       onDblClick:kids.length ? ()=>toggleBranch(key) : null,
     },el('span',{class:'hw-chart-name'},label),
-    parentCount>1 && el('span',{class:'hw-chart-meta'},`${parentCount} 个父类`));
+    parentCount>1 && el('span',{class:'hw-chart-meta'},`${parentCount} parents`));
     const toggle = kids.length ? el('button',{
       type:'button', class:'hw-chart-toggle', dataset:{branch:key},
-      'aria-label':(open?'折叠':'展开')+label, 'aria-expanded':String(open),
-      title:`${kids.length} 个直接子类`, onClick:()=>toggleBranch(key),
+      'aria-label':(open?'Collapse ':'Expand ')+label, 'aria-expanded':String(open),
+      title:countLabel(kids.length,'direct child','direct children'), onClick:()=>toggleBranch(key),
     },open?'−':'+') : null;
     const nodeClass = ['hw-chart-node',!path.length && 'hw-chart-root',open && 'hw-chart-open',selected && 'hw-current']
       .filter(Boolean).join(' ');
@@ -348,7 +408,7 @@ export function renderIncremental({mount,placement,data,go,selected}) {
         roots:shownRoots,children,parents,expanded:focusView ? new Set() : dagExpanded,
       });
     const world = el('div',{class:'hw-dag-world',style:{width:`${width}px`,height:`${height}px`}});
-    const labels = {parents:'直接父类',focus:'当前概念',children:'直接子类'};
+    const labels = {parents:'Direct parents',focus:'Selected concept',children:'Direct children'};
     for (const {role,x} of columns) world.append(el('div',{
       class:'hw-dag-column-label',dataset:{role},style:{left:`${x}px`,top:'13px',width:`${nodeWidth}px`},
     },labels[role]));
@@ -378,8 +438,8 @@ export function renderIncremental({mount,placement,data,go,selected}) {
         type:'button',class:'hw-chart-label',title:label,dataset:{node:id},'aria-pressed':String(chosen),
         onClick:event=>pickDagLabel(event,id,canExplore),onDblClick:canExplore ? ()=>explore('.hw-chart-label') : null,
       },el('span',{class:'hw-chart-name'},label),
-      parentCount>1 && el('span',{class:'hw-chart-meta'},`${parentCount} 个父类`));
-      const description = focusView ? `查看${label}的直接关系` : (open?'折叠':'展开')+label;
+      parentCount>1 && el('span',{class:'hw-chart-meta'},`${parentCount} parents`));
+      const description = focusView ? `Show direct relations for ${label}` : (open?'Collapse ':'Expand ')+label;
       function explore(control) {
         clearTimeout(dagPickTimer);
         if (focusView) focusDag(id);
@@ -388,49 +448,53 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       const toggle = canExplore ? el('button',{
         type:'button',class:'hw-chart-toggle','aria-label':description,
         'aria-expanded':focusView ? null : String(open),
-        title:focusView ? description : `${kids} 个直接子类`,onClick:()=>explore('.hw-chart-toggle'),
+        title:focusView ? description : countLabel(kids,'direct child','direct children'),onClick:()=>explore('.hw-chart-toggle'),
       },focusView && neighborhood ? '›' : open && !focusView ? '−' : '+') : null;
       world.append(el('div',{class:cls,dataset:{dagNode:id},style:{
         left:`${x}px`,top:`${y}px`,width:`${nodeWidth}px`,height:`${nodeHeight}px`,
       }},name,toggle));
     }
-    const controls = focusView ? [
+    const controls = [];
+    if (focusView && dagFocus) controls.push(
       el('button',{type:'button',class:'hw-dag-reset','data-dag-back':'',disabled:!dagHistory.length,
-        onClick:()=>restoreDagFocus(dagHistory.pop(),dagHistory.length?'[data-dag-back]':'.hw-dag-mode[aria-pressed="true"]')},'返回上一个'),
-      el('button',{type:'button',class:'hw-dag-reset',disabled:!dagFocus,onClick:()=> {
+        onClick:()=>restoreDagFocus(dagHistory.pop(),dagHistory.length?'[data-dag-back]':'.hw-dag-mode[aria-pressed="true"]')},'Back'),
+      el('button',{type:'button',class:'hw-dag-reset',onClick:()=> {
         dagHistory.length=0;
         restoreDagFocus(null,'.hw-dag-mode[aria-pressed="true"]');
-      }},'回到根节点'),
-    ] : [button('收起全部',()=> {
+      }},'Back to roots'),
+    );
+    if (!focusView) controls.push(button('Collapse all',()=> {
       dagExpanded.clear();
       renderMain();
       main.querySelector('.hw-dag-reset').focus({preventScroll:true});
-    },'hw-dag-reset')];
-    const modes = [['focus','关系焦点'],['overview','分支总览']].map(([id,label])=>el('button',{
+    },'hw-dag-reset'));
+    const modes = [['focus','Focus view'],['overview','Branch view']].map(([id,label])=>el('button',{
       type:'button',class:'hw-dag-mode','aria-pressed':String(id===dagMode),onClick:()=>switchDagMode(id),
     },label));
-    const help = focusView ? '双击节点或点右侧按钮查看直接关系。' : '双击节点或点 ＋ 展开子类。';
+    const help = focusView ? 'Use a node’s side button to show its direct relations.' :
+      'Use + to expand a branch.';
     main.replaceChildren(
-      el('div',{class:'hw-dag-nav'},el('div',{role:'group','aria-label':'DAG 浏览方式'},modes),el('div',{},controls)),
+      el('div',{class:'hw-dag-nav'},el('div',{role:'group','aria-label':'DAG view'},modes),el('div',{},controls)),
       el('div',{class:'hw-dag-tools'},el('p',{class:'hw-dag-help'},help),
-        el('span',{class:'hw-dag-count','aria-live':'polite'},`${positions.size} 个节点`)),
-      el('div',{class:'hw-dag'+(neighborhood?' hw-dag-neighborhood':''),role:'region','aria-label':'实体 DAG 图',tabindex:0},world));
+        el('span',{class:'hw-dag-count','aria-live':'polite'},countLabel(positions.size,'node','nodes'))),
+      el('div',{class:'hw-dag'+(neighborhood?' hw-dag-neighborhood':''),role:'region','aria-label':'Entity DAG',tabindex:0},world));
   }
   function renderMain(previous=null) {
     layout.dataset.view=mode;
     for (const [name,control] of tabs) control.setAttribute('aria-pressed',String(name===mode));
+    labelMoreViews();
     if (isHierarchy() && !query) {
       const shownRoots = Object.entries(roots).filter(([key])=>!kind || key===kind).map(([,id])=>id);
       if (!shownRoots.length) {
-        main.replaceChildren(el('p',{class:'hw-note hw-empty'},'这批文献没有已放置的概念。'));
+        main.replaceChildren(el('p',{class:'hw-note hw-empty'},'This batch has no placed concepts.'));
       } else if (mode==='dag') {
         renderDag(shownRoots,previous);
       } else if (mode==='outline') {
         main.replaceChildren(el('ul',{class:'hw-forest'},shownRoots.map(id=>branch(id))));
       } else {
         main.replaceChildren(
-          el('p',{class:'hw-chart-help'},'点 ＋ 或双击名称展开子类，单击名称查看详情。'),
-          el('div',{class:'hw-chart',role:'region','aria-label':'实体分类树',tabindex:0},
+          el('p',{class:'hw-chart-help'},'Select a name for details. Double-click it or select + to expand its children.'),
+          el('div',{class:'hw-chart',role:'region','aria-label':'Entity hierarchy tree',tabindex:0},
             el('ul',{class:'hw-chart-roots'},shownRoots.map(id=>chartBranch(id)))));
       }
       return;
@@ -448,7 +512,7 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       list.append(ctl);
     }
     main.replaceChildren(rows.length ? list : el('p',{class:'hw-note hw-empty'},
-      mode==='unplaced' && !unplaced.length ? '本批次的概念都已挂接。' : '没有符合条件的概念。'));
+      mode==='unplaced' && !unplaced.length ? 'All concepts in this batch have been placed.' : 'No concepts match the current filters.'));
   }
   function links(title, entries, key) {
     if (!entries.length) return null;
@@ -459,11 +523,11 @@ export function renderIncremental({mount,placement,data,go,selected}) {
     if (reference?.placement_evidence) return showReference({...reference,result:reference.placement_evidence});
     const item = reference?.result;
     if (!item) return null;
-    return el('div',{class:'hw-source'},el('h4',{},'GO 参考'),chip(referenceStatuses,item.status),
+    return el('div',{class:'hw-source'},el('h4',{},'GO Reference'),chip(referenceStatuses,item.status),
       item.go_name && el('p',{lang:'en'},item.go_name),item.go_definition && el('p',{lang:'en'},item.go_definition),
-      evidenceLink(item.source,item.go_id || 'OLS 记录'),
+      evidenceLink(item.source,item.go_id || 'OLS record'),
       ...(item.ontology_relations||[]).map(row=>el('p',{},`${row.subject} · ${row.predicate} · ${row.object}`)),
-      ...(reference.reviews||[]).map(row=>el('p',{},row.reason)));
+      ...(reference.reviews||[]).map(row=>showReview(row)));
   }
   function showReference(reference) {
     const item = reference?.result;
@@ -474,61 +538,85 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       term.definition && el('p',{lang:'en'},term.definition)));
     const facts = (item.relations || []).map(row=>el('li',{},
       el('span',{},`${row.child_id} · ${row.predicate} · ${row.parent_id}`),
-      evidenceLink(row.source_url,'关系来源')));
-    return el('div',{class:'hw-source'},el('h4',{},'实体查证'),
+      evidenceLink(row.source_url,'Relation source')));
+    return el('div',{class:'hw-source'},el('h4',{},'Entity Reference'),
       el('div',{class:'hw-relation-link'},chip(referenceStatuses,item.status),
         item.source && el('span',{class:'hw-note'},item.source),
         referenceReviewStatuses[reference.review_status] &&
           el('span',{class:'hw-note'},referenceReviewStatuses[reference.review_status])),
-      item.reason && el('p',{class:'hw-note'},item.reason),
-      terms.length>0 && el('ul',{class:'hw-reference-list','aria-label':'引用术语'},terms),
-      facts.length>0 && el('ul',{class:'hw-reference-list','aria-label':'外部本体关系'},facts),
-      ...(reference.reviews||[]).map(row=>el('p',{},reviewLabels[String(row.supported)]+' · '+row.reason)));
+      item.reason && el('p',{class:'hw-note'},modelNote(referenceReasons[item.reason] || item.reason)),
+      terms.length>0 && el('ul',{class:'hw-reference-list','aria-label':'Source terms'},terms),
+      facts.length>0 && el('ul',{class:'hw-reference-list','aria-label':'External ontology relations'},facts),
+      ...(reference.reviews||[]).map(row=>showReview(row,true)));
   }
   function showComparisons(decision) {
     if (!decision.comparisons?.length) return null;
     const list=el('div',{class:'hw-comparisons'});
-    for (const row of decision.comparisons) {
-      const assisted = row.reference_reviews?.length ? row.reference_reviews : row.go_reviews || [];
-      list.append(el('section',{},
-        el('div',{class:'hw-relation-link'},button(display(row.candidate_id),()=>jumpNode(row.candidate_id),'btn hw-link'),status(relations[row.result] || row.result)),
-        row.proposal?.reason && el('p',{},row.proposal.reason),
-        ...(row.reviews||[]).map(review=>el('p',{},reviewLabels[String(review.supported)]+' · '+review.reason)),
-        ...assisted.map(review=>el('p',{},'查证后'+reviewLabels[String(review.supported)]+' · '+review.reason))));
+    const panel=disclosure(`Comparison reviews (${decision.comparisons.length})`,list);
+    panel.addEventListener('toggle',()=> {
+      if (!panel.open || list.hasChildNodes()) return;
+      for (const row of decision.comparisons) {
+        const assisted = row.reference_reviews?.length ? row.reference_reviews : row.go_reviews || [];
+        list.append(el('section',{},
+          el('div',{class:'hw-relation-link'},button(display(row.candidate_id),()=>jumpNode(row.candidate_id),'btn hw-link'),status(relations[row.result] || row.result)),
+          row.proposal?.reason && el('p',{},modelNote(row.proposal.reason)),
+          ...(row.reviews||[]).map(review=>showReview(review)),
+          ...assisted.map(review=>showReview(review,true))));
+      }
+    });
+    return panel;
+  }
+  function placementRecord(node,record) {
+    const decision=record?.decision;
+    const items = [
+      el('p',{class:'hw-detail-id'},node.id),
+      node.origin!=='schema_root' && el('p',{lang:'en'},modelNote(node.definition,'Download original definition')),
+      record && el('p',{class:'hw-note'},`Step ${record.step}`),
+      ['needs_review','rejected','equivalent_pending'].includes(decision?.action) && decision.reason &&
+        el('p',{class:'hw-rationale'},modelNote(decision.reason)),
+    ];
+    if (decision) {
+      for (const [label,key] of [['Added edges','added_edges'],['Removed redundant edges','removed_edges']]) {
+        if (decision[key]?.length) items.push(el('div',{class:'hw-source'},el('h4',{},label),decision[key].map(row=>
+          el('p',{},display(row.child_id)+' is-a '+display(row.parent_id)))));
+      }
+      if (decision.generated_parent_reviews?.length) items.push(el('div',{class:'hw-source'},
+        el('h4',{},'Proposed Intermediate Parent'),decision.generated_parent_reviews.map(review=>showReview(review))));
+      const reference = showReference(decision.entity_reference) || showLegacyGo(decision.go_reference);
+      if (reference) items.push(reference);
+      items.push(showComparisons(decision));
     }
-    return el('details',{class:'hw-comparison-audit'},el('summary',{},`与 ${decision.comparisons.length} 个已有概念比较`),list);
+    return disclosure('Placement record',items);
   }
   function renderDetail() {
     const node=all.get(current);
     if (!node) {
-      detail.replaceChildren(el('h3',{},'放置理由'),el('p',{},'选择概念查看父类、子类、模型判断和文献原句。'));
+      detail.replaceChildren(el('h3',{},'Inspect a concept'),
+        el('p',{class:'hw-note'},'Select a node or search by name.'));
       return;
     }
     const record=outcomes.get(node.id);
-    const decision=record?.decision;
+    const directParents=parents.get(node.id)||[];
+    const directChildren=children.get(node.id)||[];
+    const relationCount = [
+      countLabel(directParents.length,'direct parent','direct parents'),
+      countLabel(directChildren.length,'direct child','direct children'),
+    ].join(' · ');
+    const sourceCount=node.source_mentions?.length || 0;
+    const isRoot = node.origin === 'schema_root';
     detail.replaceChildren(el('div',{class:'hw-detail-header'},
-      el('p',{class:'hw-detail-id'},node.id),el('h3',{},display(node.id)),
-      node.origin!=='schema_root' && el('p',{class:'hw-note'},typeLabel(node.kind)),
-      node.origin!=='schema_root' && el('p',{lang:'en'},node.definition),
-      record && el('div',{class:'hw-relation-link'},chip(actions,decision.action),el('span',{class:'hw-note'},`第 ${record.step} 次放置`)),
-      ['needs_review','rejected','equivalent_pending'].includes(decision?.action) && decision.reason &&
-        el('p',{class:'hw-rationale'},decision.reason)),
-      ...[links('直接父类',parents.get(node.id)||[],'parent_id'),links('直接子类',children.get(node.id)||[],'child_id')].filter(Boolean));
-    if (node.source_mentions?.length) detail.append(el('div',{class:'hw-source'},el('h4',{},'文献原句'),
+      el('h3',{},display(node.id)),
+      (!isRoot || record) && el('div',{class:'hw-relation-link'},
+        !isRoot && el('span',{class:'hw-note'},typeLabel(node.kind)),
+        record && chip(actions,record.decision.action))),
+    directParents.length || directChildren.length ?
+      disclosure(relationCount,links('Direct parents',directParents,'parent_id'),links('Direct children',directChildren,'child_id')) :
+      el('p',{class:'hw-note'},'No direct parents or children.'),
+    sourceCount ? disclosure(`Source mentions (${sourceCount})`,
       node.source_mentions.map(id=>button(mentions.get(id)?.mention || id,()=>go('extraction',id),'btn hw-link')),
-      el('div',{class:'hw-evidence-path'},button('查看同义归并',()=>go('deduplication',node.id),'btn hw-link'),
-        button('查看排序位置',()=>go('ordering',node.id),'btn hw-link'))));
-    if (decision) {
-      for (const [label,key] of [['新增连线','added_edges'],['移除的冗余连线','removed_edges']]) {
-        if (decision[key]?.length) detail.append(el('div',{class:'hw-source'},el('h4',{},label),decision[key].map(row=>
-          el('p',{},display(row.child_id)+' 属于 '+display(row.parent_id)))));
-      }
-      if (decision.generated_parent_reviews?.length) detail.append(el('div',{class:'hw-source'},
-        el('h4',{},'拟议中间类复审'),decision.generated_parent_reviews.map(review=>
-          el('p',{},reviewLabels[String(review.supported)]+' · '+review.reason))));
-      const reference = showReference(decision.entity_reference) || showLegacyGo(decision.go_reference);
-      detail.append(...[reference,showComparisons(decision)].filter(Boolean));
-    }
+      el('div',{class:'hw-evidence-path'},button('View deduplicated concept',()=>go('deduplication',node.id),'btn hw-link'),
+        button('View order',()=>go('ordering',node.id),'btn hw-link'))) : null,
+    placementRecord(node,record));
   }
   function refresh() { renderMain(); renderDetail(); }
   if (current) {

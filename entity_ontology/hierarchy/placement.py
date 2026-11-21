@@ -7,9 +7,10 @@ from time import monotonic
 
 from .entity_placement_dag import EntityDAG
 from .entity_reference import REFERENCE_VERSION, EntityReferenceLookup, evidence_for_pair
-from ..model import ModelSession, ProviderError, key
+from ..model import ModelSession, ProviderError, endpoint, key
 from ..storage import atomic_json, norm, read_json, run_lock
-from .go_placement import GO_TYPES, GOReferenceLookup, reference_evidence, verified_go_terms
+from .go_placement import GO_TYPES, reference_evidence, verified_go_terms
+from .ols_reference import OLSReferenceAgent
 from .order_entities import apply_entity_order
 
 
@@ -93,6 +94,8 @@ def describe(node):
     data = {key: node[key] for key in ("id", "name", "kind", "definition", "aliases")}
     if node.get("go_id"):
         data["go_id"] = node["go_id"]
+    if node.get("taxon_id") is not None:
+        data["taxon_id"] = node["taxon_id"]
     return data
 
 
@@ -269,7 +272,7 @@ def review_with_go(model_request, target, pending, context, lookup):
 
 
 def review_with_entity_reference(model_request, target, pending, context, lookup):
-    if lookup is None or target["kind"] in GO_TYPES or not pending:
+    if lookup is None or not pending:
         return None, {}
     result = lookup(target, pending)
     audit = {"result": result, "pair_ids": [pair["id"] for pair in pending]}
@@ -290,7 +293,8 @@ def review_sourced_pairs(request, stage, prompt, pending, context, audit, result
         status = "identity_only" if result["source"] == "HGNC" else "no_usable_reference"
         return {**audit, "review_status": status}, {}
     return review_reference_questions(
-        request, stage, prompt, eligible, {**context, "entity_references": evidence}, audit,
+        request, stage, prompt, eligible, {**context, "entity_references": evidence},
+        {**audit, "pair_sources": {item["pair_id"]: item["source"] for item in evidence}},
     )
 
 
@@ -342,8 +346,13 @@ def place_one(dag, concept, *, request, go_lookup=None, entity_lookup=None):
         )
 
     pending = unresolved_questions(review_pairs, reviewed)
-    reference, go_reviews = review_with_go(request, target, pending, context, go_lookup)
-    entity_reference, entity_reviews = review_with_entity_reference(request, target, pending, context, entity_lookup)
+    # Older callers can still supply standalone GO records with their original schema.
+    reference, go_reviews = None, {}
+    entity_reference, entity_reviews = None, {}
+    if entity_lookup is not None:
+        entity_reference, entity_reviews = review_with_entity_reference(request, target, pending, context, entity_lookup)
+    elif go_lookup is not None:
+        reference, go_reviews = review_with_go(request, target, pending, context, go_lookup)
     resolved = reviewed | go_reviews | entity_reviews
     picked = {"narrower": [], "broader": [], "equivalent": []}
     comparisons = []
@@ -502,7 +511,7 @@ def run(source, output, *, config, go_reference=True, entity_reference=True):
     order = read_json(order_path)
     concepts = apply_entity_order(read_json(concepts_path)["concepts"], order)
     session = ModelSession(config, output)
-    _, parameters = session.request_settings()
+    connection, parameters = session.request_settings()
     summary = {
         "method": "incremental_dual_review_dag",
         "reference_policy": REFERENCE_VERSION,
@@ -517,9 +526,11 @@ def run(source, output, *, config, go_reference=True, entity_reference=True):
         if result_path.exists() and read_json(result_path)["input_sha256"] != summary["input_sha256"]:
             raise ValueError("Use another output directory for a different input.")
         kinds = [group["kind"] for group in order["groups"]]
-        go_lookup = (GOReferenceLookup(config, output / f"go-references-{REFERENCE_VERSION}")
-                     if entity_reference and go_reference else None)
-        entity_lookup = EntityReferenceLookup(output / "entity-references") if entity_reference else None
+        entity_lookup = None
+        if entity_reference:
+            agent = OLSReferenceAgent(session.req, allow_go=go_reference)
+            settings = {"sources": agent.sources, "model_settings": key([parameters, endpoint(connection)])}
+            entity_lookup = EntityReferenceLookup(output / "entity-references", ols=agent, settings=settings)
 
         def save_progress(decisions):
             atomic_json(output / "progress.json", {
@@ -528,13 +539,13 @@ def run(source, output, *, config, go_reference=True, entity_reference=True):
 
         if len(kinds) > 1 and len(concepts) >= PARALLEL_KIND_MIN_CONCEPTS:
             dag, decisions = place_by_kind(
-                concepts, kinds, request=session.req, go_lookup=go_lookup, save_progress=save_progress,
+                concepts, kinds, request=session.req, go_lookup=None, save_progress=save_progress,
                 entity_lookup=entity_lookup,
             )
         else:
             dag, decisions = EntityDAG(kinds), []
             for index, concept in enumerate(concepts, 1):
-                decision = place_or_review(dag, concept, request=session.req, go_lookup=go_lookup,
+                decision = place_or_review(dag, concept, request=session.req, go_lookup=None,
                                            entity_lookup=entity_lookup)
                 decisions.append(decision)
                 save_progress(decisions)
@@ -549,12 +560,17 @@ def run(source, output, *, config, go_reference=True, entity_reference=True):
             support = "schema_type" if parent.startswith("type:") else "dual_model_review"
             edges.append({"child_id": child, "parent_id": parent,
                           "relation": "is_a", "support": edge_support.get((child, parent), support)})
+        source_counts = {}
+        for decision in decisions:
+            audit = decision.get("entity_reference") or {}
+            for source_name in audit.get("result", {}).get("sources_checked", []):
+                source_counts[source_name] = source_counts.get(source_name, 0) + 1
         result = {
             **summary, "status": "complete", "edges_are_provisional": True,
             "nodes": nodes, "edges": edges, "roots": dag.roots,
-            "go_reference_enabled": go_lookup is not None,
+            "go_reference_enabled": bool(entity_lookup and go_reference),
             "entity_reference_enabled": entity_lookup is not None,
-            "go_reference_count": sum(d.get("go_reference") is not None for d in decisions),
+            "go_reference_count": source_counts.get("GO", 0), "reference_counts_by_source": source_counts,
             "entity_reference_count": sum(bool(d.get("entity_reference") or d.get("go_reference")) for d in decisions),
             "decisions": decisions, "source_concepts": concepts,
         }

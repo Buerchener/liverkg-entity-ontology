@@ -80,16 +80,26 @@ class ReferencePlacementTest(TestCase):
                 self.assertEqual(decision["comparisons"][0]["result"], "needs_review")
                 self.assertEqual(decision["reference_supported_edges"], [])
 
-    def test_lookup_reuses_a_completed_record_and_routes_gene(self):
+    def test_lookup_reuses_completed_gene_record_from_ols(self):
         with TemporaryDirectory() as directory:
-            lookup = EntityReferenceLookup(Path(directory))
-            lookup.ols = Mock()
-            lookup.hgnc = Mock()
-            lookup.hgnc.lookup.return_value = {"status": "NO_MATCH", "source": "HGNC"}
+            ols = Mock()
+            ols.lookup.return_value = {"status": "NO_MATCH", "source": "HGNC"}
+            lookup = EntityReferenceLookup(Path(directory), ols=ols)
             gene = {**CHILD, "kind": "Gene"}
             self.assertEqual(lookup(gene, []), lookup(gene, []))
-            lookup.hgnc.lookup.assert_called_once_with(gene, [])
-            lookup.ols.lookup.assert_not_called()
+            ols.lookup.assert_called_once_with(gene, [])
+
+    def test_common_lookup_caches_pathways_and_other_types_with_the_same_policy(self):
+        agent = Mock()
+        agent.lookup.side_effect = [{"status": "REFERENCE_ONLY", "sources_checked": [source]}
+                                    for source in ("GO", "MONDO")]
+        with TemporaryDirectory() as directory:
+            lookup = EntityReferenceLookup(Path(directory), ols=agent)
+            for kind, source in (("Pathway", "GO"), ("Disease", "MONDO")):
+                row = {**CHILD, "kind": kind}
+                self.assertEqual(lookup(row, [])["sources_checked"], [source])
+                self.assertEqual(lookup(row, [])["sources_checked"], [source])
+        self.assertEqual(agent.lookup.call_count, 2)
 
     def test_go_reuses_observed_edge_and_checks_the_missing_endpoint(self):
         url = "https://www.ebi.ac.uk/ols4/api/ontologies/go/terms/example"

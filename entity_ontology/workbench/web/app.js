@@ -1,19 +1,19 @@
-import { el } from "./ui.js";
+import { batchTitle, el } from "./ui.js";
 import { overviewSections, renderOverview } from "./overview.js";
 
 const groups = [
-  ["原文与实体", [
-    { id: "extraction", label: "实体抽取", detail: "查看模型找到的实体、补漏结果，以及每条提及在原文中的位置。", module: "evidence", method: "renderEvidence" },
-    { id: "normalization", label: "概念化", detail: "结合原句和缩写释义，核对每条提及的名称、类型与去向。", module: "evidence", method: "renderEvidence" },
+  ["Source Evidence", [
+    { id: "extraction", label: "Entity Extraction", detail: "Select a mention to read its source sentence.", module: "evidence", method: "renderEvidence" },
+    { id: "normalization", label: "Conceptualization", detail: "Select a mention to review its type and scope decision.", module: "evidence", method: "renderEvidence" },
   ]],
-  ["概念准备", [
-    { id: "embedding", label: "向量化", detail: "查看名称、类型、定义和别名生成的语义向量。", module: "preparation", method: "renderPreparation" },
-    { id: "clustering", label: "聚类", detail: "浏览 HDBSCAN 分组及组外实体的向量分布。", module: "preparation", method: "renderPreparation" },
-    { id: "deduplication", label: "同义去重", detail: "查看相似候选和同义判断，回查合并概念的原句。", module: "evidence", method: "renderEvidence" },
+  ["Concept Preparation", [
+    { id: "embedding", label: "Embedding", detail: "Select a point to trace it to the source.", module: "preparation", method: "renderPreparation" },
+    { id: "clustering", label: "Clustering", detail: "", module: "preparation", method: "renderPreparation" },
+    { id: "deduplication", label: "Deduplication", detail: "Select a concept to see which mentions were merged.", module: "evidence", method: "renderEvidence" },
   ]],
-  ["本体层级", [
-    { id: "ordering", label: "排序", detail: "查看各实体类型组内从宽到窄的概念清单。", module: "preparation", method: "renderPreparation" },
-    { id: "tree", label: "构树", detail: "查看概念的直接父类和子类，回查判断依据和文献原句。", module: "incremental", method: "renderIncremental" },
+  ["Entity Hierarchy", [
+    { id: "ordering", label: "Concept Ordering", detail: "Browse concepts from broad to specific within each type.", module: "preparation", method: "renderPreparation" },
+    { id: "tree", label: "Hierarchy Placement", detail: "Select a node to inspect its parent and child classes.", module: "incremental", method: "renderIncremental" },
   ]],
 ];
 const stages = groups.flatMap(([, children]) => children);
@@ -22,11 +22,8 @@ const content = document.querySelector("#content");
 const nav = document.querySelector("#stages");
 const crumb = document.querySelector("#crumb");
 const subtitle = document.querySelector("#subtitle");
-const layout = document.querySelector(".workbench-layout");
-const toc = document.querySelector("#page-toc");
-const tocLinks = document.querySelector("#toc-links");
 const run = new URLSearchParams(location.search).get("run");
-const overviewLink = el("a", { href: "#overview", class: "workbench-nav-link workbench-overview" }, "批次总览");
+const overviewLink = el("a", { href: "#overview", class: "workbench-nav-link workbench-overview" }, "Batch Overview");
 nav.append(overviewLink);
 for (const [label, children] of groups) {
   nav.append(el("section", { class: "nav-group", "aria-label": label },
@@ -35,9 +32,6 @@ for (const [label, children] of groups) {
       el("li", {}, el("a", { class: "workbench-nav-link", href: "#" + stage.id,
         onClick: event => { if (!data?.run) event.preventDefault(); } },
         stage.label))))));
-}
-for (const [id, label] of overviewSections) {
-  tocLinks.append(el("li", {}, el("a", { href: "#overview/" + id }, label)));
 }
 
 let data;
@@ -67,13 +61,7 @@ function stageStyle(module) {
   return loadedStyles.get(module);
 }
 
-function renderLocation(stage, section) {
-  toc.hidden = Boolean(stage) || !data?.run;
-  layout.dataset.toc = String(!toc.hidden);
-  for (const link of tocLinks.querySelectorAll("a")) {
-    if (link.hash === "#overview/" + section) link.setAttribute("aria-current", "location");
-    else link.removeAttribute("aria-current");
-  }
+function renderLocation(stage) {
   for (const link of nav.querySelectorAll("a")) {
     if (link !== overviewLink && !data?.run) {
       link.setAttribute("aria-disabled", "true");
@@ -95,23 +83,24 @@ function renderLocation(stage, section) {
       link.removeAttribute("aria-current");
     }
   }
-  crumb.replaceChildren(stage ? el("a", { href: "#overview" }, "批次总览") : el("span", { "aria-current": "page" }, "批次总览"));
+  crumb.replaceChildren(stage ? el("a", { href: "#overview" }, "Batch Overview") :
+    el("span", { "aria-current": "page" }, "Batch Overview"));
   if (stage) crumb.append(el("span", { "aria-hidden": "true" }, "/"), el("span", { "aria-current": "page" }, stage.label));
-  title.textContent = stage?.label || "实体本体工作台";
-  document.title = (stage?.label || "实体本体工作台") + " · LiverKG";
-  subtitle.textContent = stage?.detail ||
-    "LiverKG 从 PubMed 文献抽取实体，合并同义概念并生成候选层级。工作台保留原文出处与各阶段的判断记录。";
+  title.textContent = stage?.label || "Batch Overview";
+  document.title = (stage?.label || "Entity Ontology Workbench") + " · LiverKG";
+  subtitle.textContent = stage?.detail ?? "";
+  subtitle.hidden = !subtitle.textContent;
 }
 
 function adjacentStages(stage) {
   const index = stages.indexOf(stage);
   const previous = stages[index - 1];
   const next = stages[index + 1];
-  return el("nav", { class: "adjacent-stages", "aria-label": "相邻步骤" },
+  return el("nav", { class: "adjacent-stages", "aria-label": "Adjacent stages" },
     el("a", { href: previous ? "#" + previous.id : "#overview" },
-      el("small", {}, previous ? "上一步" : "返回"), el("strong", {}, previous?.label || "批次总览")),
+      el("small", {}, previous ? "Previous" : "Back"), el("strong", {}, previous?.label || "Batch Overview")),
     next && el("a", { href: "#" + next.id },
-      el("small", {}, "下一步"), el("strong", {}, next.label)));
+      el("small", {}, "Next"), el("strong", {}, next.label)));
 }
 
 async function render() {
@@ -123,7 +112,7 @@ async function render() {
     try { selected = decodeURIComponent(encoded); } catch { selected = null; }
   }
   const overviewSection = !stage && overviewSections.some(([id]) => id === selected) ? selected : null;
-  renderLocation(stage, overviewSection);
+  renderLocation(stage);
   if (!data) return;
   const target = stage?.id || "overview";
   if (renderedStage !== target || (!overviewSection && !stage)) window.scrollTo(0, 0);
@@ -132,16 +121,20 @@ async function render() {
   const mount = el("div", { class: "stage-body", id: "stage-view" });
   if (!data.run) {
     mount.append(el("section", { class: "empty empty-state" },
-      el("h2", {}, "暂无已完成的批次"),
-      el("p", {}, "先运行一次实体本体构建。结果生成后，刷新这里就可以查看。"),
-      el("button", { class: "btn", type: "button", onClick: () => location.reload() }, "刷新批次")));
+      el("h2", {}, "No completed batches"),
+      el("p", {}, "Run the entity ontology workflow, then refresh this page to see its results."),
+      el("button", { class: "btn", type: "button", onClick: () => location.reload() }, "Refresh batches")));
     content.replaceChildren(mount);
     return;
   }
   if (!stage) {
     content.replaceChildren(mount);
     renderOverview({ mount, data, stages });
-    if (overviewSection) document.getElementById(overviewSection)?.scrollIntoView();
+    if (overviewSection) {
+      const section = document.getElementById(overviewSection);
+      if (section instanceof HTMLDetailsElement) section.open = true;
+      section?.scrollIntoView();
+    }
     return;
   }
   try {
@@ -150,26 +143,24 @@ async function render() {
     content.replaceChildren(mount, adjacentStages(stage));
     module[stage.method]({ stage: stage.id, mount, data, placement: data.placement, go, selected });
   } catch (error) {
-    if (turn === renderVersion) fail("这个阶段暂时无法显示。", error);
+    if (turn === renderVersion) fail("This stage could not be displayed.", error);
   }
 }
 
 function fail(message, error) {
   console.error(error);
-  toc.hidden = true;
-  layout.dataset.toc = "false";
   content.replaceChildren(el("section", { class: "empty empty-state", role: "alert" },
-    el("h2", {}, "读取结果遇到问题"), el("p", {}, message),
+    el("h2", {}, "Could not load results"), el("p", {}, message),
     el("div", { class: "controls" },
-      el("button", { class: "btn", type: "button", onClick: () => location.reload() }, "重新读取"),
-      run && el("a", { href: "/", class: "text-link" }, "查看最新批次"))));
+      el("button", { class: "btn", type: "button", onClick: () => location.reload() }, "Retry"),
+      run && el("a", { href: "/", class: "text-link" }, "Open the latest batch"))));
 }
 
 function loadChoices() {
   if (!data.availableRuns?.length) return;
   const select = document.querySelector("#batch-choice");
   for (const row of data.availableRuns) {
-    select.append(el("option", { value: row.run_id }, row.title || row.run_id));
+    select.append(el("option", { value: row.run_id }, batchTitle(row)));
   }
   select.value = data.run.run_id;
   select.addEventListener("change", () => {
@@ -195,5 +186,5 @@ try {
   if (data.run) loadChoices();
   await render();
 } catch (error) {
-  fail(run ? "这个批次暂时无法读取，可以重新读取或查看最新的已完成批次。" : "暂时无法读取批次结果，请确认工作台服务仍在运行。", error);
+  fail(run ? "Try again or open the latest completed batch." : "Check that the workbench server is running.", error);
 }

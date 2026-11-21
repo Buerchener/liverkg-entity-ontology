@@ -166,7 +166,7 @@ def serve(runs_dir, host="127.0.0.1", port=4320, open_browser=False):
             opener = threading.Timer(0.15, webbrowser.open, args=(url,))
             opener.daemon = True
             opener.start()
-        print(f"LiverKG 实体本体工作台  {url}", flush=True)
+        print(f"LiverKG Entity Ontology Workbench  {url}", flush=True)
         try:
             server.serve_forever()
         except KeyboardInterrupt:
