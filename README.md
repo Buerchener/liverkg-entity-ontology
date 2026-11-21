@@ -1,19 +1,21 @@
 # LiverKG 实体本体
 
-从 PubMed 标题和摘要里找出肝病相关实体，合并同义名称，再按「哪一类属于哪一类」组织概念。网页可以查看每个概念的原句和它在层级里的位置。
+从 PubMed 标题和摘要抽取肝病实体，合并同义名称，再按「哪一类属于哪一类」构建实体本体。工作台可以查看候选父子关系、OLS 查证结果和论文原句。
 
 **抽取与补漏 → 概念化 → 去重 → 排序 → 建树 → 网页查看**
 
-## 代码在哪
+## 文件导览
 
-| 步骤 | 目录 | 先看哪些文件 |
+| 步骤 | 主要文件 | 文件职责 |
 |---|---|---|
-| 1. 从论文找实体 | [extraction/](entity_ontology/extraction/) | `native.py` 调用同学的抽取器，`coverage.py` 查漏，`mentions.py` 整理原句和位置。 |
-| 2. 把提及变成概念 | [concepts/](entity_ontology/concepts/) | `normalization.py` 判断词指什么，`retrieve_pairs.py` 找相似候选，`deduplicate.py` 判断同义并合并。 |
-| 3. 给概念找位置 | [hierarchy/](entity_ontology/hierarchy/) | `order_entities.py` 由宽到窄排序，`placement.py` 逐个建树，`entity_reference.py` 通过 OLS 查证。 |
-| 4. 网页查看和复核 | [workbench/](entity_ontology/workbench/) | `server.py` 读取批次结果，`web/` 展示实体、原句和父子关系。 |
+| 运行全流程 | [pipeline.py](entity_ontology/pipeline.py) | 从论文输入依次运行各阶段，保存结果和批次清单。 |
+| 抽取实体 | [native.py](entity_ontology/extraction/native.py)、[coverage.py](entity_ontology/extraction/coverage.py)、[mentions.py](entity_ontology/extraction/mentions.py) | 调用抽取器、补查漏掉的实体，记录每次提及对应的原句和位置。 |
+| 概念化与去重 | [normalization.py](entity_ontology/concepts/normalization.py)、[retrieve_pairs.py](entity_ontology/concepts/retrieve_pairs.py)、[deduplicate.py](entity_ontology/concepts/deduplicate.py) | 整理概念的名称、定义和类型，找出可能同义的概念对，核对后再合并。 |
+| 排序与构树 | [order_entities.py](entity_ontology/hierarchy/order_entities.py)、[placement.py](entity_ontology/hierarchy/placement.py)、[entity_placement_dag.py](entity_ontology/hierarchy/entity_placement_dag.py) | 按类型由宽到窄排序，逐个放入层级，校验父子边。 |
+| OLS 查证 | [ols_reference.py](entity_ontology/hierarchy/ols_reference.py)、[ontology_ols.py](entity_ontology/hierarchy/ontology_ols.py)、[ols_client.py](entity_ontology/hierarchy/ols_client.py)、[entity_reference.py](entity_ontology/hierarchy/entity_reference.py) | 选择查询动作，统一管理 GO、MONDO 等来源，发出 OLS MCP 请求，保存并筛选查证证据。 |
+| 网页复核 | [server.py](entity_ontology/workbench/server.py)、[web/](entity_ontology/workbench/web/) | 读取已完成的批次，展示实体、原句和父子关系。 |
 
-想看四步怎么接起来，打开 [pipeline.py](entity_ontology/pipeline.py)。
+[legacy/](entity_ontology/legacy/) 保留旧的独立 GO Agent 和旧构树调用的兼容代码。单独运行旧工具可用 `python -m entity_ontology.legacy.go_reference`。
 
 ## 1. 安装
 
@@ -49,9 +51,7 @@ export LIVERKG_API_KEY
 python -m entity_ontology run --articles inputs/articles.jsonl --run-id first-batch
 ```
 
-建树复审仍拿不准时，**OLS Reference Agent** 读取实体类型和待验证的父子或同义问题，在 GO、MONDO、PRO、ChEBI、Uberon、CL 和 HGNC 中选择来源。每看一次结果，它都可以换词、换来源、核对任一端的正式记录或结束，每个概念最多五次查询动作。搜索优先用 OLS MCP，正式条目与直接父类通过 OLS REST 核对。只有在同一来源里找到两端及方向一致的直接父子关系，才把这条关系交给模型复审。HGNC 只用于核对人类基因身份。查证记录保留每一步选择及其结果。
-
-GO 和其他来源共用 [OLS 来源列表](entity_ontology/hierarchy/ontology_ols.py)及 [OLS MCP 客户端](entity_ontology/hierarchy/ols_client.py)。旧的独立 GO 工具在 [legacy/go_reference/](entity_ontology/legacy/go_reference/)，可用 `python -m entity_ontology.legacy.go_reference` 运行。
+候选关系经模型复审仍拿不准时，**OLS Reference Agent** 从 GO、MONDO、PRO、ChEBI、Uberon、CL、HGNC 中选择来源，每个概念最多五步。搜索优先用 OLS MCP，正式条目和直接父类通过 OLS REST 核对。程序核对两个概念对应的条目及关系方向，再把符合条件的证据交给模型复审。HGNC 只用于核对人类基因身份。每步查询及结果都会留档。
 
 可以用 `--no-entity-reference` 关闭全部外部查证，或用 `--no-go-reference` 只关闭 GO。用新批次名运行才能为已完成的文献批次生成新版结果。
 
