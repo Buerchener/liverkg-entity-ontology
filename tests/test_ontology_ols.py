@@ -1,8 +1,8 @@
 import unittest
 from urllib.parse import parse_qs, unquote, urlsplit
 
-from entity_ontology.hierarchy.go_reference.ols import EXACT_SYNONYM, IAO_DEFINITION, OBO, OLSError
-from entity_ontology.hierarchy.ontology_ols import OntologyOLS
+from entity_ontology.hierarchy.go_reference.ols import EXACT_SYNONYM, IAO_DEFINITION, OBO, OBO_IN_OWL, OLSError
+from entity_ontology.hierarchy.ontology_ols import HGNC_REPORT, OntologyOLS
 
 
 def concept(ident, name, kind="Disease", aliases=()):
@@ -19,11 +19,25 @@ def term(term_id, ontology, label, **fields):
     }
 
 
+def hgnc_gene(number, symbol, name, **fields):
+    return {
+        "curie": f"hgnc:{number}", "iri": HGNC_REPORT + number, "ontologyId": "hgnc",
+        "type": ["class"], "label": [symbol], "definition": [name],
+        "isObsolete": False, "isDefiningOntology": True, **fields,
+    }
+
+
+def hgnc_alias(text):
+    return {"type": ["reification"], "value": text,
+            "axioms": [{OBO_IN_OWL + "hasSynonymType": OBO + "OMO_0003016"}]}
+
+
 class FakeOLS:
-    def __init__(self, queries, *rows):
+    def __init__(self, queries, *rows, name_queries=None):
         self.queries = queries
         self.rows = {row["iri"]: row for row in rows}
         self.lookups = []
+        self.name_queries = name_queries or {}
 
     def __call__(self, url):
         parts = urlsplit(url)
@@ -36,12 +50,65 @@ class FakeOLS:
                     "iri": row["iri"], "obo_id": row["curie"], "ontology_name": row["ontologyId"],
                     "label": row["label"][0], "type": row["type"][0],
                 })
-            return {"response": {"docs": docs}}
+            return {"response": {"docs": docs, "numFound": len(docs)}}
+        if parts.path.endswith("/classes"):
+            query = parse_qs(parts.query)["search"][0]
+            rows = self.name_queries.get(query, [])
+            return {"elements": rows, "totalElements": len(rows)}
         iri = unquote(unquote(parts.path.rsplit("/", 1)[-1]))
         return self.rows[iri]
 
 
 class OntologyOLSTests(unittest.TestCase):
+    def test_ols_hgnc_is_identity_only_even_when_external_gene_classes_have_edges(self):
+        first = hgnc_gene("11998", "TP53", "tumor protein p53", synonym=[hgnc_alias("p53")])
+        second = hgnc_gene("11999", "TP53BP1", "tumor protein p53 binding protein 1",
+                           directParent=[first["iri"]])
+        remote = FakeOLS({"TP53": [first], "p53": [first], "TP53BP1": [second]}, first, second)
+        target = concept("A", "human TP53 gene", "Gene")
+        same = concept("B", "p53", "Gene")
+        other = concept("C", "TP53BP1", "Gene")
+        result = OntologyOLS(get_json=remote).lookup(target, [
+            {"child": target, "parent": same}, {"child": other, "parent": target},
+        ])
+
+        self.assertEqual(result["source"], "HGNC")
+        self.assertEqual(result["status"], "REFERENCE_ONLY")
+        self.assertEqual(result["relations"], [])
+        self.assertEqual([row["term_id"] for row in result["terms"]],
+                         ["HGNC:11998", "HGNC:11998", "HGNC:11999"])
+        self.assertTrue(all(url.hostname == "www.ebi.ac.uk" for url in remote.lookups))
+
+    def test_gene_coverage_uses_exact_official_name_and_typed_aliases(self):
+        name = "tumor protein p53"
+        related = "Li-Fraumeni syndrome"
+        first = hgnc_gene("11998", "TP53", name, synonym=[related, hgnc_alias("p53")])
+        other = hgnc_gene("11999", "TP53BP1", f"{name} binding protein 1", synonym=[hgnc_alias("p53")])
+        obsolete = hgnc_gene("12000", "TEST", "withdrawn record", isObsolete=True)
+        remote = FakeOLS({related: [first], "p53": [first, other], "TEST": [obsolete]},
+                         first, other, obsolete, name_queries={name: [other, first]})
+        ols = OntologyOLS(get_json=remote)
+
+        self.assertEqual(ols.lookup(concept("A", name, "Gene"), [])["terms"][0]["term_id"], "HGNC:11998")
+        self.assertEqual(ols.lookup(concept("B", "p53", "Gene"), [])["status"], "UNCERTAIN")
+        self.assertEqual(ols.lookup(concept("C", related, "Gene"), [])["status"], "NO_MATCH")
+        self.assertEqual(ols.lookup(concept("D", "TEST", "Gene"), [])["status"], "NO_MATCH")
+
+    def test_gene_skips_known_nonhuman_and_rejects_incomplete_search(self):
+        calls = []
+
+        def partial(url):
+            calls.append(url)
+            return {"response": {"docs": [], "numFound": 7}}
+
+        ols = OntologyOLS(get_json=partial)
+        other_species = [concept("A", "mouse Tp53", "Gene"),
+                         {**concept("B", "Tp53", "Gene"), "taxon_id": 10090}]
+        for target in other_species:
+            self.assertEqual(ols.lookup(target, [])["status"], "UNCERTAIN")
+        self.assertEqual(calls, [])
+        self.assertEqual(ols.lookup(concept("C", "TP53", "Gene"), [])["status"], "LOOKUP_FAILED")
+
     def test_only_active_and_native_ontology_class_details_are_accepted(self):
         native = term("MONDO:0000001", "mondo", "example concept")
         obsolete = term("MONDO:0000002", "mondo", "example concept", isObsolete=True)

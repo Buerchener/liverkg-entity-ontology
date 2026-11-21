@@ -17,9 +17,39 @@ export function el(tag, attrs = {}, ...children) {
 export const status = (label, tone = "neutral") => el("span", {class: "pill tone-" + tone},label);
 export const articleLink = (pmid) => el("a", {class: "article-link",href:"https://pubmed.ncbi.nlm.nih.gov/"+encodeURIComponent(pmid)+"/",target:"_blank",rel:"noreferrer"},"PMID "+pmid);
 
+export function disclosure(label, ...children) {
+  return el("details", {class: "stage-disclosure"},
+    el("summary", {}, label), el("div", {class: "stage-disclosure-body"}, children));
+}
+
 const entityTypes = {
-  Disease: "疾病", CellType: "细胞类型", Tissue: "组织", Metabolite: "代谢物",
-  Protein: "蛋白质", Pathway: "通路", Gene: "基因", MicrobialCommunity: "菌群",
-  Measurement: "测量项", Phenotype: "表型", NonEntity: "非实体", Unclear: "类型不明",
+  Disease: "Disease", CellType: "Cell type", Tissue: "Tissue", Metabolite: "Metabolite",
+  Protein: "Protein", Pathway: "Pathway", Gene: "Gene", MicrobialCommunity: "Microbial community",
+  OrganismTaxon: "Organism or taxon", DrugTherapy: "Drug or therapy", OtherEntity: "Other entity",
+  Measurement: "Measurement", Phenotype: "Phenotype", NonEntity: "Non-entity", Unclear: "Unclear",
 };
-export const typeLabel = kind => entityTypes[kind] || kind;
+export const typeLabel = kind => entityTypes[kind] || kind || "Unclear";
+
+const han = /\p{Script=Han}/u;
+const batchTitles = {
+  "entity-100": "100 PubMed articles on liver disease",
+  "entity-100-reference-v2": "100 PubMed articles with entity reference review",
+  "entity-reference-smoke": "Entity reference pilot (5 articles)",
+};
+
+export function batchTitle(run) {
+  if (run.title && !han.test(run.title)) return run.title;
+  return batchTitles[run.run_id] || run.run_id;
+}
+
+export function modelNote(text, label = "Download original note") {
+  if (typeof text !== "string" || !han.test(text)) return text;
+  return el("button", {type: "button", class: "model-note-link", onClick: () => {
+    const url = URL.createObjectURL(new Blob([text], {type: "text/plain;charset=utf-8"}));
+    const link = el("a", {href: url, download: "liverkg-model-output.txt"});
+    document.body.append(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }}, label);
+}

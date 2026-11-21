@@ -206,6 +206,16 @@ class OLSClient:
             raise OLSError(f"Unexpected MCP {name} content")
         return _json(content[0]["text"])
 
+    def search_classes(self, ontology, query):
+        """Discover classes in a caller-selected ontology through the shared OLS MCP."""
+        if self.discover()["transport"] != "mcp":
+            raise OLSError("OLS MCP search unavailable")
+        page = self._tool("searchClasses", {
+            "ontologyId": ontology, "query": query, "includeObsoleteEntities": False,
+            "pageNum": 0, "pageSize": self.page_size,
+        })
+        return _array(page.get("items"), "items")[:self.page_size]
+
     def call(self, name, args):
         """Run one logical tool and return GO evidence plus its physical requests."""
         if name not in {"search", "detail", "ancestors", "children", "relations"}:
