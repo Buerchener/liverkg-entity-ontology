@@ -19,7 +19,7 @@ STATIC = {
     "/" + name: WEB / name
     for name in (
         "index.html", "app.js", "ui.js", "app.css", "overview.js", "workbench-shell.css",
-        "evidence.js", "evidence.css", "incremental.js", "incremental.css",
+        "evidence.js", "evidence.css", "incremental.js", "incremental.css", "dag-layout.js",
         "preparation.js", "preparation.css",
     )
 }
