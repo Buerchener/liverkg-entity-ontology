@@ -32,7 +32,7 @@ dev = [
   "pytest>=8.0",
 ]
 # Entity ontology workflow (entity_ontology/): concept deduplication,
-# hierarchy construction and the GO reference agent.
+# hierarchy construction and the OLS Reference Agent.
 ontology = [
   "numpy>=1.24,<2.4",
   "scipy>=1.10,<2",

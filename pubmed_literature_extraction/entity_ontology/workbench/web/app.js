@@ -15,9 +15,9 @@ const groups = [
     { id: "ordering", label: "Concept Ordering", detail: "Browse concepts from broad to specific within each type.", module: "preparation", method: "renderPreparation" },
     { id: "tree", label: "Hierarchy Placement", detail: "Select a node to inspect its parent and child classes.", module: "incremental", method: "renderIncremental" },
   ]],
-  ["关系与图谱", [
-    { id: "links", label: "图谱对齐", detail: "查看每个概念对应到 v2 图谱的哪个节点，以及对齐依据。", module: "relations", method: "renderRelations" },
-    { id: "relations", label: "概念关系", detail: "查看抽取器验证过的关系合并到概念之后的结果、门禁状态和每条证据原句。", module: "relations", method: "renderRelations" },
+  ["Literature Graph", [
+    { id: "links", label: "Backbone Linking", detail: "Select a concept to see the v2 backbone node it links to and why.", module: "relations", method: "renderRelations" },
+    { id: "relations", label: "Concept Relations", detail: "Browse verified relations merged onto concepts, with their gate, novelty and source sentences.", module: "relations", method: "renderRelations" },
   ]],
 ];
 const stages = groups.flatMap(([, children]) => children);
