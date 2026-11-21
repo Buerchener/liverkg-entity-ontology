@@ -9,7 +9,6 @@ from .entity_placement_dag import EntityDAG
 from .entity_reference import REFERENCE_VERSION, EntityReferenceLookup, evidence_for_pair
 from ..model import ModelSession, ProviderError, endpoint, key
 from ..storage import atomic_json, norm, read_json, run_lock
-from .go_placement import GO_TYPES, reference_evidence, verified_go_terms
 from .ols_reference import OLSReferenceAgent
 from .order_entities import apply_entity_order
 
@@ -258,7 +257,11 @@ def review_reference_questions(request, stage, prompt, pairs, context, audit):
 
 
 def review_with_go(model_request, target, pending, context, lookup):
-    if lookup is None or target["kind"] not in GO_TYPES or not pending:
+    if lookup is None or not pending:
+        return None, {}
+    from ..legacy.go_placement import GO_TYPES, reference_evidence, verified_go_terms
+
+    if target["kind"] not in GO_TYPES:
         return None, {}
     result = lookup(target, pending)
     evidence = reference_evidence(result)

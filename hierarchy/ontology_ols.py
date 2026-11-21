@@ -6,21 +6,28 @@ from unicodedata import normalize
 from urllib.parse import quote, urlencode
 from urllib.request import Request
 
-from .go_reference.ols import (
-    EXACT_SYNONYM, GO_ID, IAO_DEFINITION, OBO, OBO_IN_OWL, OLSClient, OLSError, REST_URL, _json, _read, _values,
+from .ols_client import (
+    EXACT_SYNONYM, IAO_DEFINITION, OBO, OBO_IN_OWL, OLSClient, OLSError, REST_URL, _json, _read, _values,
 )
 
 
-SOURCES = {
-    "Gene": ("hgnc", "HGNC", "HGNC"),
-    "Disease": ("mondo", "MONDO", "MONDO"),
-    "Protein": ("pr", "PR", "PRO"),
-    "Metabolite": ("chebi", "CHEBI", "ChEBI"),
-    "Tissue": ("uberon", "UBERON", "Uberon"),
-    "CellType": ("cl", "CL", "CL"),
+OLS_SOURCES = {
+    "HGNC": ("hgnc", "HGNC"),
+    "MONDO": ("mondo", "MONDO"),
+    "PRO": ("pr", "PR"),
+    "ChEBI": ("chebi", "CHEBI"),
+    "Uberon": ("uberon", "UBERON"),
+    "CL": ("cl", "CL"),
+    "GO": ("go", "GO"),
 }
-OLS_SOURCES = {label: (ontology, prefix) for ontology, prefix, label in SOURCES.values()}
-OLS_SOURCES["GO"] = ("go", "GO")
+KIND_SOURCES = {
+    "Gene": "HGNC",
+    "Disease": "MONDO",
+    "Protein": "PRO",
+    "Metabolite": "ChEBI",
+    "Tissue": "Uberon",
+    "CellType": "CL",
+}
 MAX_CONCEPTS = 4
 MAX_NAMES = 2
 SEARCH_RESULTS = 6
@@ -28,6 +35,7 @@ MAX_DETAILS = 4
 MAX_DETAILS_PER_NAME = 3
 MAX_TERM_CANDIDATES = 3
 OBO_LOCAL = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]{0,35}\Z")
+GO_ID = re.compile(r"GO:[0-9]{7}\Z")
 HGNC_REPORT = "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/"
 HGNC_LOCAL = re.compile(r"[1-9][0-9]*")
 HGNC_NAME_RESULTS = 16
@@ -322,10 +330,11 @@ class OntologyOLS:
 
     def lookup(self, concept, questions):
         kind = concept["kind"]
-        if kind not in SOURCES:
+        source = KIND_SOURCES.get(kind)
+        if source is None:
             return {"status": "NO_MATCH", "source": None, "terms": [], "relations": [],
                     "reason": "unsupported_entity_type"}
-        ontology, prefix, source = SOURCES[kind]
+        ontology, prefix = OLS_SOURCES[source]
         selected = {concept["id"]: concept}
         pairs = set()
         for question in questions:
