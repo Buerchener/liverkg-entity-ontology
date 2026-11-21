@@ -1,11 +1,27 @@
 """Use reviewed equivalence pairs to merge concepts and preserve their evidence."""
 
+from concurrent.futures import ThreadPoolExecutor
+
 from ..model import JSON_RETRY, endpoint, key
 from ..storage import atomic_json, read_json
 from .retrieve_pairs import DEFAULT_KNN_K, retrieve_pairs
 
 
 EQUIV = """Judge each enumerated pair for strict concept equivalence using the candidate names, types, definitions and observed context. Merge only for the same biomedical referent at the same granularity. Relatedness, anatomical containment, biological role, association, distinct severity, and broader/narrower are separate. An abbreviation needs contextual support. If doubtful use uncertain. Return JSON object with rows array, one per pair id: id, verdict (equivalent/distinct/uncertain), reason (brief Chinese)."""
+INDEXED_EQUIV = EQUIV + ' Copy each pair id as a quoted string exactly as supplied (for example "p1").'
+PAIR_BATCH_SIZE = 10
+
+
+def indexed_equivalence(items, session):
+    def request_batch(batch):
+        indexed = {f"p{i}": item for i, item in enumerate(batch, 1)}
+        payload = {"items": [{**item, "id": alias} for alias, item in indexed.items()]}
+        answers = session.req(("equivalence_indexed", INDEXED_EQUIV, payload))
+        return [{**row, "id": indexed[row["id"]]["id"]} for row in answers]
+
+    batches = [items[start:start + PAIR_BATCH_SIZE] for start in range(0, len(items), PAIR_BATCH_SIZE)]
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        return [row for result in pool.map(request_batch, batches) for row in result]
 
 
 
@@ -40,7 +56,11 @@ def equivalence_votes(items, *, session):
     for ident in disagreements:
         cached.pop(ident)
     pending = [item for item in items if item["id"] not in cached]
-    cached.update({row["id"]: row for row in session.batch("equivalence", EQUIV, pending, 10)})
+    if len(items) > PAIR_BATCH_SIZE:
+        answers = indexed_equivalence(pending, session)
+    else:
+        answers = session.batch("equivalence", EQUIV, pending, PAIR_BATCH_SIZE)
+    cached.update({row["id"]: row for row in answers})
     return [cached[item["id"]] for item in items]
 
 

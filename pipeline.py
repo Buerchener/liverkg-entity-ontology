@@ -41,7 +41,7 @@ def verify_placement(placement, ranked):
 
 
 def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title=None,
-              knn_k=DEFAULT_KNN_K, go_reference=True, entity_coverage=True):
+              knn_k=DEFAULT_KNN_K, go_reference=True, entity_coverage=True, entity_reference=True):
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,79}", run_id):
         raise ValueError("--run-id accepts 1–80 lowercase letters, digits, and hyphens.")
     if knn_k < 1:
@@ -57,7 +57,8 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
     articles = output / "articles.jsonl"
     placement_path = output / "incremental-placement/placement.json"
     identity = {"articles_sha256": source_hash, "knn_k": knn_k,
-                "extraction_commit": EXTRACTOR_COMMIT, "go_reference_enabled": go_reference,
+                "extraction_commit": EXTRACTOR_COMMIT, "go_reference_enabled": go_reference and entity_reference,
+                "entity_reference_enabled": entity_reference,
                 "model_config_sha256": file_hash(config),
                 "normalization_version": "v2",
                 "entity_coverage": COVERAGE_VERSION if entity_coverage else None}
@@ -75,7 +76,8 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
     with run_lock(output):
         previous = read_json(manifest_path) if manifest_path.exists() else None
         if previous is not None:
-            if any(previous.get(key) != value for key, value in identity.items()):
+            previous_identity = {"entity_reference_enabled": True, **previous}
+            if any(previous_identity.get(key) != value for key, value in identity.items()):
                 raise ValueError("This run ID already refers to different inputs or settings.")
             if previous["status"] == "complete":
                 if file_hash(articles) != source_hash or file_hash(placement_path) != previous["placement_sha256"]:
@@ -142,7 +144,8 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
             complete()
 
             start("incremental_placement")
-            placement = place_incrementally(output, placement_path.parent, config=config, go_reference=go_reference)
+            placement = place_incrementally(output, placement_path.parent, config=config,
+                                            go_reference=go_reference, entity_reference=entity_reference)
             verify_placement(placement, ranked)
             complete()
 
@@ -155,6 +158,7 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
                 "candidate_pairs": retrieval["candidate_count"], "concepts": len(concepts),
                 "placement_decisions": len(placement["decisions"]), "nodes": len(placement["nodes"]),
                 "edges": len(placement["edges"]), "go_references": placement["go_reference_count"],
+                "entity_references": placement["entity_reference_count"],
             }
             manifest.update(status="complete", phase="complete", counts=counts,
                             placement_sha256=file_hash(placement_path))

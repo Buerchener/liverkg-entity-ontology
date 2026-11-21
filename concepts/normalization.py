@@ -90,7 +90,8 @@ def audited_kind(row):
 
 def classify_output(row):
     ident, kind = audited_kind(row)
-    name, definition, reason = (row[field] for field in ("name", "definition", "reason"))
+    name, definition = row["name"], row["definition"]
+    reason = row.get("reason", row.get("reason_cn", row.get("reason_chn")))
     aliases = row["aliases"]
     if (not all(isinstance(value, str) for value in (name, definition, reason))
             or not name.strip() or not reason.strip() or not isinstance(aliases, list)

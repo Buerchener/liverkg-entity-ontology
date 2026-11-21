@@ -26,6 +26,7 @@ def main(argv=None):
     run.add_argument("--knn-k", type=int, default=2)
     run.add_argument("--no-coverage", action="store_true", help="Skip the measurement-phrase check")
     run.add_argument("--no-go-reference", action="store_true", help="Skip GO lookup for unresolved eligible pairs")
+    run.add_argument("--no-entity-reference", action="store_true", help="Skip all external ontology and gene lookups")
     serve = commands.add_parser("serve", help="Open the read-only workbench for completed batches")
     serve.add_argument("--runs-dir", type=Path, default=DEFAULT_RUNS_DIR)
     serve.add_argument("--port", type=int, default=PORT)
@@ -50,6 +51,7 @@ def main(argv=None):
         result = run_batch(
             args.articles, args.run_id, config=args.config, runs_dir=args.runs_dir,
             title=args.title, knn_k=args.knn_k, go_reference=not args.no_go_reference,
+            entity_reference=not args.no_entity_reference,
             entity_coverage=not args.no_coverage,
         )
     except (OSError, ValueError, RuntimeError) as error:
