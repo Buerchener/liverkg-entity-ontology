@@ -9,7 +9,7 @@ import re
 from . import DEFAULT_RUNS_DIR
 from .model import ModelSession, endpoint, read_settings
 from .storage import atomic_json, digest, read_json, run_lock
-from .concepts.deduplicate import deduplicate
+from .concepts.deduplicate import POLICY as EQUIVALENCE_POLICY, deduplicate
 from .concepts.normalization import resolve
 from .concepts.retrieve_pairs import DEFAULT_KNN_K
 from .extraction.coverage import VERSION as COVERAGE_VERSION, recover as recover_coverage
@@ -46,7 +46,8 @@ def verify_placement(placement, ranked):
 
 
 def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title=None,
-              knn_k=DEFAULT_KNN_K, go_reference=True, entity_coverage=True, v2_data=None):
+              knn_k=DEFAULT_KNN_K, go_reference=True, entity_coverage=True, entity_reference=True,
+              v2_data=None):
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,79}", run_id):
         raise ValueError("--run-id accepts 1–80 lowercase letters, digits, and hyphens.")
     if knn_k < 1:
@@ -65,7 +66,9 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
     placement_path = output / "incremental-placement/placement.json"
     relations_path = output / "concept_relations.json"
     identity = {"articles_sha256": source_hash, "knn_k": knn_k,
-                "extractor_fingerprint": extractor["fingerprint"], "go_reference_enabled": go_reference,
+                "extractor_fingerprint": extractor["fingerprint"],
+                "go_reference_enabled": go_reference and entity_reference,
+                "entity_reference_enabled": entity_reference,
                 "model_config_sha256": file_hash(config),
                 "normalization_version": "v2",
                 "entity_coverage": COVERAGE_VERSION if entity_coverage else None,
@@ -86,7 +89,8 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
     with run_lock(output):
         previous = read_json(manifest_path) if manifest_path.exists() else None
         if previous is not None:
-            if any(previous.get(key) != value for key, value in identity.items()):
+            previous_identity = {"entity_reference_enabled": True, **previous}
+            if any(previous_identity.get(key) != value for key, value in identity.items()):
                 raise ValueError("This run ID already refers to different inputs or settings.")
             if previous["status"] == "complete":
                 if (file_hash(articles) != source_hash
@@ -94,6 +98,9 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
                         or file_hash(relations_path) != previous["relations_sha256"]):
                     raise ValueError("The completed batch files do not match the published manifest.")
                 return previous
+            equivalence_path = output / "equivalence.json"
+            if placement_path.exists() and read_json(equivalence_path).get("policy") != EQUIVALENCE_POLICY:
+                raise ValueError("This unfinished batch used a different deduplication policy. Use a new run ID.")
             manifest["created_at"] = previous["created_at"]
         if articles.exists():
             if file_hash(articles) != source_hash:
@@ -147,6 +154,7 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
 
             start("embedding_and_deduplication")
             concepts = deduplicate(compact, normalized, session=session, knn_k=knn_k)
+            manifest["equivalence_policy"] = EQUIVALENCE_POLICY
             retrieval = read_json(output / "retrieval/retrieved_pairs.json")
             complete()
 
@@ -155,7 +163,8 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
             complete()
 
             start("incremental_placement")
-            placement = place_incrementally(output, placement_path.parent, config=config, go_reference=go_reference)
+            placement = place_incrementally(output, placement_path.parent, config=config,
+                                            go_reference=go_reference, entity_reference=entity_reference)
             verify_placement(placement, ranked)
             complete()
 
@@ -182,6 +191,7 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
                 "candidate_pairs": retrieval["candidate_count"], "concepts": len(concepts),
                 "placement_decisions": len(placement["decisions"]), "nodes": len(placement["nodes"]),
                 "edges": len(placement["edges"]), "go_references": placement["go_reference_count"],
+                "entity_references": placement["entity_reference_count"],
                 "concept_links": links["counts"],
                 "article_relations": projection["counts"]["article_relations"],
                 "concept_relations": projection["counts"]["concept_relations"],

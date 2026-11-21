@@ -180,6 +180,9 @@ class ModelSession:
                 answer = provider.generate(stage, instruction, payload, params)
                 try:
                     result = json.loads(answer["content"])
+                    if (stage == "incremental_propose" and len(ids) == 1 and isinstance(result, dict)
+                            and "rows" not in result and result.get("id") == ids[0]):
+                        result = {"rows": [result]}
                     valid = answer["finish_reason"] == "stop" and sorted(ids) == sorted(
                         row["id"] for row in result["rows"]
                     )

@@ -1,10 +1,10 @@
-import { el, articleLink } from "./ui.js";
+import { el, articleLink, batchTitle, disclosure } from "./ui.js";
 
 export const overviewSections = [
-  ["summary", "批次结果"],
-  ["evidence", "原文与层级证据"],
-  ["workflow", "构建流程"],
-  ["sources", "文献来源"],
+  ["summary", "Batch Results"],
+  ["evidence", "Evidence Trace"],
+  ["workflow", "Workflow"],
+  ["sources", "Source Articles"],
 ];
 
 const jump = (label, stage, selected, css) => el("a", {
@@ -31,17 +31,24 @@ function section(id, heading, ...content) {
     el("h2", { id: id + "-heading" }, heading), content);
 }
 
+function foldedSection(id, label, ...content) {
+  const details = disclosure(label, ...content);
+  details.id = id;
+  return details;
+}
+
 function renderTrace(concept, evidence, parent, nodes) {
   const [id, heading] = overviewSections[1];
-  if (!concept || !evidence) return section(id, heading, el("p", { class: "muted" }, "本批次暂无可追溯的概念。"));
+  if (!concept || !evidence) return foldedSection(id, heading,
+    el("p", { class: "muted" }, "This batch has no concepts linked to source evidence."));
   const sentence = evidence.context || evidence.evidence_contexts?.[0]?.text;
-  const position = parent?.name || (nodes.has(concept.id) ? "已放置的概念" : "待放置");
+  const position = parent?.name || (nodes.has(concept.id) ? "Placed concept" : "Awaiting placement");
   const trace = [
-    ["原文提及", jump(evidence.mention, "extraction", evidence.id)],
-    ["规范概念", jump(concept.name, "deduplication", concept.id)],
-    [parent ? "候选父类" : "层级位置", jump(position, "tree", concept.id)],
+    ["Source mention", jump(evidence.mention, "extraction", evidence.id)],
+    ["Deduplicated concept", jump(concept.name, "deduplication", concept.id)],
+    [parent ? "Candidate parent" : "Hierarchy position", jump(position, "tree", concept.id)],
   ];
-  return section(id, heading,
+  return foldedSection(id, heading,
     sentence && el("figure", { class: "source-quote" },
       el("blockquote", { lang: "en" }, excerpt(sentence, evidence.source_span || evidence.mention)),
       el("figcaption", {}, articleLink(evidence.pmid))),
@@ -51,14 +58,14 @@ function renderTrace(concept, evidence, parent, nodes) {
 
 function renderPapers(articles, pmidMentions, byMention) {
   const [id, heading] = overviewSections[3];
-  return section(id, heading, el("ol", { class: "research-sources" }, articles.map(article => {
+  return foldedSection(id, `${heading} (${articles.length})`, el("ol", { class: "research-sources" }, articles.map(article => {
     const rows = pmidMentions.get(article.pmid) || [];
     const kept = rows.filter(row => byMention.get(row.id)?.status === "keep").length;
     return el("li", {},
       el("span", { class: "paper-title", lang: "en" },
         rows.length ? jump(article.title, "extraction", rows[0].id) : article.title),
       el("span", { class: "paper-meta" }, articleLink(article.pmid),
-        el("span", {}, rows.length + " 条原始提及，" + kept + " 条保留")));
+        el("span", {}, `${rows.length} ${rows.length === 1 ? "mention" : "mentions"}, ${kept} retained`)));
   })));
 }
 
@@ -77,19 +84,25 @@ export function renderOverview({ mount, data, stages }) {
   const points = retrieval.points || [];
   const clusters = new Set(points.filter(row => row.cluster_id >= 0).map(row => row.cluster_id));
   const totals = {
-    extraction: mentions.length + " 条提及",
-    normalization: kept + " 条保留",
-    embedding: points.length + " 个向量",
-    clustering: clusters.size + " 个分组",
-    deduplication: concepts.size + " 个概念",
-    ordering: conceptOrder.groups.length + " 个实体类型",
-    tree: placement.edges.length + " 条候选边",
+    extraction: countLabel(mentions.length, "mention"),
+    normalization: `${kept} retained`,
+    embedding: countLabel(points.length, "vector"),
+    clustering: countLabel(clusters.size, "cluster"),
+    deduplication: countLabel(concepts.size, "concept"),
+    ordering: countLabel(conceptOrder.groups.length, "entity type"),
+    tree: countLabel(placement.edges.length, "candidate edge"),
   };
   const metrics = [
-    [jump("原始提及", "extraction"), mentions.length, mentions.filter(row => row.offset_status === "exact").length + " 条精确定位"],
-    [jump("保留提及", "normalization"), kept, normalization.filter(row => row.status === "review").length + " 条待复核"],
-    [jump("去重后概念", "deduplication"), concepts.size, retrieval.candidate_count + " 对同义候选"],
-    [jump("候选层级边", "tree"), placement.edges.length, specificEdges.length + " 条具体父子关系"],
+    [jump("Entity mentions", "extraction"), mentions.length, countLabel(mentions.filter(row => row.offset_status === "exact").length, "exact source span")],
+    [jump("Retained mentions", "normalization"), kept, normalization.filter(row => row.status === "review").length + " pending review"],
+    [jump("Deduplicated concepts", "deduplication"), concepts.size, countLabel(retrieval.candidate_count, "candidate pair")],
+    [jump("Candidate hierarchy edges", "tree"), placement.edges.length, countLabel(specificEdges.length, "specific parent–child edge")],
+  ];
+  const highlights = [
+    ["Entity mentions", mentions.length, "extraction"],
+    ["Retained mentions", kept, "normalization"],
+    ["Deduplicated concepts", concepts.size, "deduplication"],
+    ["Parent–child edges", specificEdges.length, "tree"],
   ];
 
   const pmidMentions = new Map();
@@ -100,29 +113,35 @@ export function renderOverview({ mount, data, stages }) {
 
   const created = new Date(run.created_at || "");
   const date = Number.isNaN(created.valueOf()) ? null :
-    el("time", { datetime: run.created_at }, new Intl.DateTimeFormat("zh-CN", { dateStyle: "long" }).format(created));
+    el("time", { datetime: run.created_at }, new Intl.DateTimeFormat("en-GB", { dateStyle: "long" }).format(created));
   const extractorCommit = run.extractor_git?.commit || run.extraction_commit;
   const relationCounts = data.conceptRelations?.counts;
   const metadata = [
-    ["批次", el("code", {}, run.run_id)],
-    extractorCommit && ["抽取器", el("code", {}, extractorCommit.slice(0, 12) + (run.extractor_git?.dirty ? " · 含未提交改动" : ""))],
-    run.extraction_model && ["抽取模型", el("code", {}, run.extraction_model)],
-    placement.model && ["构树模型", el("code", {}, placement.model)],
-    ["GO 查询", (placement.go_reference_count ?? 0) + " 次"],
-    relationCounts && ["概念级关系", `${relationCounts.concept_relations} 条（可自动写入 ${relationCounts.gate.AUTO}，待复核 ${relationCounts.gate.REVIEW}）`],
+    ["Batch ID", el("code", {}, run.run_id)],
+    extractorCommit && ["Extractor commit", el("code", {}, extractorCommit.slice(0, 12) + (run.extractor_git?.dirty ? " · with uncommitted changes" : ""))],
+    run.extraction_model && ["Extraction model", el("code", {}, run.extraction_model)],
+    placement.model && ["Placement model", el("code", {}, placement.model)],
+    placement.entity_reference_count != null && ["Entity reference lookups", placement.entity_reference_count],
+    ["GO lookups", placement.go_reference_count ?? 0],
+    relationCounts && ["Concept-level relations", `${relationCounts.concept_relations} (${relationCounts.gate.AUTO} AUTO, ${relationCounts.gate.REVIEW} REVIEW)`],
   ].filter(Boolean);
 
-  mount.append(
-    section(...overviewSections[0],
-      el("p", { class: "batch-intro" }, el("strong", {}, run.title || run.run_id)),
-      el("p", { class: "batch-meta" }, date && [date, "｜"], articles.length + " 篇 PubMed 文献"),
-      table("批次结果", ["指标", "数量", "说明"], metrics, "metric-table")),
-    renderTrace(concept, evidence, nodes.get(exampleEdge?.parent_id), nodes),
-    section(...overviewSections[2],
-      table("构建流程", ["阶段", "检查内容", "本批次结果"], stages.map(stage =>
-        [jump(stage.label, stage.id), stage.detail, totals[stage.id]]), "workflow-table")),
-    renderPapers(articles, pmidMentions, byMention),
-    el("footer", { class: "origin-line", "aria-label": "批次信息" },
-      el("dl", {}, metadata.map(([label, value]) => el("div", {}, el("dt", {}, label), el("dd", {}, value))))),
-  );
+  mount.append(section(...overviewSections[0],
+      el("p", { class: "batch-intro" }, batchTitle(run)),
+      el("p", { class: "batch-meta" }, date && [date, " · "], countLabel(articles.length, "PubMed article")),
+      el("nav", { class: "overview-metrics", "aria-label": "Key results" },
+        highlights.map(([label, value, stage]) => jump([el("strong", {}, String(value)), label], stage))),
+      disclosure("Detailed counts", table("Batch results", ["Metric", "Count", "Details"], metrics, "metric-table")),
+      renderTrace(concept, evidence, nodes.get(exampleEdge?.parent_id), nodes),
+      foldedSection(...overviewSections[2],
+        table("Workflow", ["Stage", "What to inspect", "Batch result"], stages.map(stage =>
+          [jump(stage.label, stage.id), stage.detail, totals[stage.id]]), "workflow-table")),
+      renderPapers(articles, pmidMentions, byMention),
+      disclosure("Batch details", el("div", { class: "origin-line" },
+        el("dl", {}, metadata.map(([label, value]) => el("div", {}, el("dt", {}, label), el("dd", {}, value)))))),
+  ));
+}
+
+function countLabel(count, singular) {
+  return count + " " + singular + (count === 1 ? "" : "s");
 }
