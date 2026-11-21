@@ -7,7 +7,9 @@ import unittest
 from unittest.mock import Mock, patch
 
 from entity_ontology import model, pipeline
-from entity_ontology.concepts.deduplicate import indexed_equivalence
+from entity_ontology.concepts.deduplicate import (
+    indexed_equivalence, recheck_mention_types, review_and_merge, single_missing_pairs,
+)
 from entity_ontology.concepts.embedding import EmbeddingAPI
 from entity_ontology.concepts.normalization import classify_output
 from entity_ontology.hierarchy.entity_placement_dag import EntityDAG
@@ -123,6 +125,104 @@ class PipelineTest(unittest.TestCase):
                          {r["id"]: r["left"]["name"] for r in inputs})
         self.assertEqual(session.req.call_count, 3)
 
+    def test_type_gate_and_independent_one_gap_review(self):
+        kept = {n: {"name": n, "kind": "Gene" if n == "x" else "Protein", "definition": n, "aliases": []}
+                for n in "abcx"}
+        evidence = {n: {"mention": n, "sentence": "Sentence for " + n} for n in kept}
+        pairs = [{"left": a, "right": b} for a, b in [("a", "b"), ("b", "c"), ("a", "x")]]
+        for verdict in ("equivalent", "distinct", "uncertain"):
+            with self.subTest(verdict=verdict):
+                calls = []
+
+                def review(items):
+                    calls.append([r["id"] for r in items])
+                    self.assertTrue(all(r["left"]["kind"] == r["right"]["kind"] for r in items))
+                    for r in items:
+                        self.assertEqual(r["left"]["sentence"], "Sentence for " + r["left"]["name"])
+                    return [{"id": r["id"], "verdict": verdict if r["id"] == "a|c" else "equivalent"}
+                            for r in items]
+
+                result = review_and_merge(kept, evidence, pairs, review=review, recheck_types=self.fail)
+                self.assertEqual(calls, [["a|b", "b|c"], ["a|c"]])
+                votes = {r["id"]: r for r in result["pair_judgments"]}
+                self.assertIsNone(votes["a|x"]["verdict"])
+                self.assertEqual(votes["a|x"]["decision_source"], "type_gate")
+                self.assertEqual(votes["a|c"]["decision_source"], "single_missing_pair")
+                merged = [list(c["source_mentions"]) for c in result["concepts"]]
+                self.assertEqual(merged, [["a", "b", "c"], ["x"]] if verdict == "equivalent"
+                                 else [["a"], ["b"], ["c"], ["x"]])
+
+    def test_shared_alias_rechecks_each_occurrence_once_before_equivalence(self):
+        kept = {
+            "a": {"name": "ALB", "aliases": [], "kind": "Gene", "definition": "Gene."},
+            "b": {"name": "Albumin", "aliases": [" alb "], "kind": "Protein", "definition": "Protein."},
+            "c": {"name": "Albumin variant", "aliases": ["Alb"], "kind": "Protein", "definition": "Variant."},
+            "d": {"name": "Another gene", "aliases": [], "kind": "Gene", "definition": "Another gene."},
+        }
+        sentences = {"a": "Serum ALB was measured.", "b": "Albumin was purified.",
+                     "c": "The albumin variant was detected.", "d": "Another locus was identified."}
+        evidence = {i: {"mention": r["name"], "sentence": sentences[i]} for i, r in kept.items()}
+        pairs = [{"left": "a", "right": i} for i in "bcd"]
+
+        def recheck(items):
+            self.assertEqual(items, [{"id": i, **evidence[i]} for i in "abc"])
+            return [{**kept[i], "id": i, "kind": "Protein", "status": "keep",
+                     "definition": "Protein from source."} for i in "cba"]
+
+        def review(items):
+            self.assertEqual([r["id"] for r in items], ["a|b", "a|c"])
+            self.assertEqual(items[0]["left"]["definition"], "Protein from source.")
+            self.assertEqual(items[0]["left"]["sentence"], sentences["a"])
+            return [{"id": r["id"], "verdict": "equivalent" if r["id"] == "a|b" else "distinct"}
+                    for r in items]
+
+        out = review_and_merge(kept, evidence, pairs, review=review, recheck_types=recheck)
+        self.assertEqual([(r["source_mentions"], r["kind"]) for r in out["concepts"]],
+                         [(["a", "b"], "Protein"), (["c"], "Protein"), (["d"], "Gene")])
+        self.assertEqual(out["pair_judgments"][-1]["decision_source"], "type_gate")
+        self.assertEqual(out["type_rechecks"][0]["initial_kind"], "Gene")
+        self.assertEqual(kept["a"]["kind"], "Gene")
+
+    def test_matching_names_can_still_be_distinct_or_unresolved(self):
+        kept = {i: {"kind": kind, "name": "Symbol", "aliases": [], "definition": kind}
+                for i, kind in [("a", "Gene"), ("b", "Protein")]}
+        evidence = {i: {"mention": "Symbol", "sentence": "Sentence " + i} for i in kept}
+        for kind, state, verdict in [("Gene", "keep", "distinct"), ("", "review", "uncertain"),
+                                     ("Measurement", "outside_scope", "uncertain")]:
+            with self.subTest(kind=kind):
+                recheck = Mock(return_value=[{"id": "a", **kept["a"], "kind": kind, "status": state},
+                                             {"id": "b", **kept["b"], "status": "keep"}])
+                out = review_and_merge(kept, evidence, [{"left": "a", "right": "b"}],
+                                       review=self.fail, recheck_types=recheck)
+                self.assertEqual([c["source_mentions"] for c in out["concepts"]], [["a"], ["b"]])
+                self.assertEqual(out["pair_judgments"][0]["applied_verdict"], verdict)
+                self.assertEqual(out["concepts"][0].get("type_review_status"),
+                                 None if state == "keep" else "needs_review")
+
+    def test_source_type_recheck_requires_a_quote_from_that_occurrence(self):
+        item = {"id": "a", "mention": "ALB", "sentence": "Serum ALB was measured."}
+        row = {"id": "a", "kind": "Protein", "name": "Albumin", "aliases": [],
+               "definition": "Albumin protein.", "reason": "Serum measurement."}
+        incorrect = {**row, "source_quote": "Some other sentence."}
+        correct = {**row, "source_quote": "Serum ALB"}
+        session = Mock()
+        session.req.side_effect = [[incorrect], [correct]]
+        result, = recheck_mention_types([item], session=session)
+        self.assertEqual(result["source_quote"], "Serum ALB")
+        for call in session.req.call_args_list:
+            self.assertEqual(call.args[0][2]["items"], [item])
+        session.req.side_effect = [[incorrect], [incorrect]]
+        invalid, = recheck_mention_types([item], session=session)
+        self.assertEqual((invalid["status"], invalid["review_error"]), ("review", "invalid_type_evidence"))
+
+    def test_only_unjudged_final_pair_qualifies(self):
+        decisions = {("a", "b"): {"relation": "equivalent"}, ("b", "c"): {"relation": "equivalent"}}
+        for existing in ("distinct", "uncertain"):
+            recorded = {**decisions, ("a", "c"): {"relation": existing}}
+            self.assertEqual(single_missing_pairs([("c", "b", "a")], recorded), [])
+        decisions["c", "d"] = {"relation": "equivalent"}
+        self.assertEqual(single_missing_pairs([("a", "b", "c", "d")], decisions), [])
+
     def test_model_rationale_field_aliases_preserve_text(self):
         mention = {"id": "1:M01", "kind": "Protein", "name": "A protein",
                    "definition": "A protein class.", "aliases": []}
@@ -188,6 +288,12 @@ class PipelineTest(unittest.TestCase):
                 self.assertEqual(language_model.call_count, before)
                 extract.assert_called_once()
 
+                atomic_json(run / "manifest.json", {**result, "status": "failed"})
+                with patch.object(pipeline, "EQUIVALENCE_POLICY", "another-policy"):
+                    with self.assertRaisesRegex(ValueError, "different deduplication policy"):
+                        pipeline.run_batch(articles, "example", **options)
+                self.assertEqual(read_json(placement_path), placement)
+                atomic_json(run / "manifest.json", result)
                 placement_path.write_text("{}")
                 with self.assertRaisesRegex(ValueError, "completed batch files"):
                     pipeline.run_batch(articles, "example", **options)
