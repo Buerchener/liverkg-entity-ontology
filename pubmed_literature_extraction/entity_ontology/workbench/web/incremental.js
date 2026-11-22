@@ -1,5 +1,5 @@
 import { disclosure, el, modelNote, status, typeLabel } from './ui.js';
-import { layoutDag, layoutDagNeighborhood } from './dag-layout.js';
+import { layoutDag, layoutDagNeighborhood, layoutTaxonomyMap } from './dag-layout.js';
 
 const actions = {
   new_under_root:['Under type root','neutral'], as_child:['Placed as child','good'],
@@ -100,23 +100,27 @@ export function renderIncremental({mount,placement,data,go,selected}) {
   const unplaced = source.filter(node => !placed.has(node.id));
   const specific = edges.filter(edge => edge.support !== 'schema_type').length;
   const multiParents = nodes.filter(node => parents.get(node.id).length > 1).length;
-  let mode = 'dag';
+  let mode = 'overview';
   let current = all.has(selected) ? selected : undefined;
   let query = '';
   let kind = '';
   let dagMode = 'focus';
   let dagFocus = null;
+  let showTypeMap = false;
   let dagPickTimer;
   const dagHistory = [];
-  const isHierarchy = () => ['dag','tree','outline'].includes(mode);
+  const isHierarchy = () => ['overview','tree','dag','diagram'].includes(mode);
   const opened = new Set();
+  const typeOnlyOpened = new Set();
   const dagExpanded = new Set();
+  const typeMaps = new Map();
   const tabs = new Map();
   const search = el('input',{type:'search',class:'hw-search','aria-label':'Search concepts',placeholder:'Name, alias or type'});
   const kindControl = el('select',{class:'hw-kind','aria-label':'Entity type'},
     el('option',{value:''},'All types'),
     Object.keys(roots).map(key=>el('option',{value:key},typeLabel(key))));
   const main = el('section',{class:'hw-main','aria-label':'Hierarchy browser'});
+  const context = el('div',{class:'hw-context-region',hidden:true});
   const detail = el('aside',{class:'hw-detail','aria-label':'Placement details',tabindex:-1});
   const metrics = [
     ['Placed concepts', source.length-unplaced.length],
@@ -134,20 +138,25 @@ export function renderIncremental({mount,placement,data,go,selected}) {
   const extraLabel = el('span',{},'More views');
   const moreViews = disclosure(extraLabel,extraTabs);
   moreViews.classList.add('hw-more-views');
-  const views = [['dag','DAG'],['tree','Tree'],['outline','Outline'],['steps',`Placement Log (${decisions.length})`],['unplaced',`Unplaced (${unplaced.length})`]];
+  const primaryViews = ['overview','tree','dag'];
+  const views = [['overview','Overview'],['tree','Tree'],['dag','DAG'],['diagram','Tree diagram'],['steps',`Placement Log (${decisions.length})`],['unplaced',`Unplaced (${unplaced.length})`]];
   for (const [id,label] of views) {
     const control = button(label,()=> {
       if (mode===id) return;
       mode=id;
-      if (isHierarchy() && current) rememberPath(current);
+      if (mode==='overview') {
+        showOverview();
+        return;
+      }
+      if (isHierarchy() && placed.has(current)) rememberPath(current);
       refresh();
       revealCurrent();
     },'hw-tab');
     tabs.set(id,control);
-    (id==='dag' || id==='tree' ? tabList : extraTabs).append(control);
+    (primaryViews.includes(id) ? tabList : extraTabs).append(control);
   }
   function labelMoreViews() {
-    const alternate = mode !== 'dag' && mode !== 'tree';
+    const alternate = !primaryViews.includes(mode);
     extraLabel.textContent = alternate && !moreViews.open ? tabs.get(mode).textContent : 'More views';
   }
   moreViews.addEventListener('toggle',labelMoreViews);
@@ -160,16 +169,17 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       dagHistory.length=0;
     }
     if (kind && all.get(current)?.kind!==kind) {
-      current = isHierarchy() && !query ? roots[kind] :
+      current = isHierarchy() && !query ? (mode==='overview' ? undefined : roots[kind]) :
         (mode==='unplaced' ? unplaced : source).find(matches)?.id;
     }
+    if (mode==='tree' && kind) opened.add(roots[kind]);
     refresh();
   });
   const layout = el('div',{class:'hw-layout'},
       el('section',{class:'hw-browser'},toolbar,el('div',{class:'hw-filters'},
         el('label',{class:'hw-field'},el('span',{},'Search concepts'),search),
         el('label',{class:'hw-field'},el('span',{},'Entity type'),kindControl)),
-      main),detail);
+      context,main),detail);
   mount.replaceChildren(el('div',{class:'hw'},
     el('dl',{class:'hw-metrics'},metrics.map(([label,value])=>el('div',{},el('dt',{},label),el('dd',{},String(value))))),
     layout,
@@ -184,6 +194,18 @@ export function renderIncremental({mount,placement,data,go,selected}) {
   function matches(node) {
     return (!kind || kind===node.kind) &&
       [node.name,node.id,node.kind,typeLabel(node.kind),...(node.aliases||[])].join(' ').toLowerCase().includes(query);
+  }
+  function pathToRoot(id) {
+    const path = [id];
+    let next = parents.get(id)?.[0];
+    while (next && !path.includes(next.parent_id)) {
+      path.unshift(next.parent_id);
+      next=parents.get(next.parent_id)?.[0];
+    }
+    return path;
+  }
+  function typeOnly(edge) {
+    return children.get(edge.child_id).length===0 && parents.get(edge.child_id).length===1;
   }
   function rememberPath(id) {
     if (mode==='dag') {
@@ -204,13 +226,38 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       }
       return;
     }
-    const path = [id];
-    let next = parents.get(id)?.[0];
-    while (next && !path.includes(next.parent_id)) {
-      path.unshift(next.parent_id);
-      next=parents.get(next.parent_id)?.[0];
-    }
+    const path = pathToRoot(id);
     for (let i=1;i<path.length;i+=1) opened.add(path.slice(0,i).join('/'));
+    const parent = parents.get(id)?.[0];
+    if (path.length===2 && parent && typeOnly(parent)) typeOnlyOpened.add(path[0]);
+  }
+  function clearSearch() { query=''; search.value=''; }
+  function showOverview() {
+    mode='overview';
+    kind=''; kindControl.value='';
+    clearSearch();
+    refresh();
+    tabs.get('overview').focus({preventScroll:true});
+  }
+  function openType(root) {
+    mode='tree';
+    kind=placed.get(root).kind; kindControl.value=kind;
+    current=root;
+    opened.add(root);
+    clearSearch();
+    refresh();
+    revealCurrent(true);
+    revealContextOnMobile();
+  }
+  function openFocus(id) {
+    mode='dag';
+    dagMode='focus';
+    clearSearch();
+    focusDag(id);
+    revealContextOnMobile();
+  }
+  function revealContextOnMobile() {
+    if (window.matchMedia('(max-width: 900px)').matches) context.scrollIntoView({block:'start'});
   }
   function rememberFocus(id) {
     if (!placed.has(id) || id===dagFocus) return;
@@ -248,8 +295,8 @@ export function renderIncremental({mount,placement,data,go,selected}) {
   function jumpNode(id) {
     current=id;
     if (!placed.has(id)) mode='unplaced';
-    else if (!isHierarchy()) mode='dag';
-    query=''; search.value='';
+    else if (mode==='overview' || !isHierarchy()) { mode='dag'; dagMode='focus'; }
+    clearSearch();
     if (kind && all.get(id)?.kind!==kind) { kind=''; kindControl.value=''; }
     rememberPath(id);
     refresh();
@@ -278,6 +325,7 @@ export function renderIncremental({mount,placement,data,go,selected}) {
     for (const link of main.querySelectorAll('.hw-dag-link')) {
       link.classList.toggle('hw-dag-active',link.dataset.parent===current || link.dataset.child===current);
     }
+    if (mode!=='dag') renderContext();
     renderDetail();
     focusDetail();
   }
@@ -314,9 +362,9 @@ export function renderIncremental({mount,placement,data,go,selected}) {
     action.setAttribute('aria-pressed',String(id===current));
     if (id===current) action.classList.add('hw-current');
     action.append(...[el('span',{class:'hw-node-name'},display(id)),
-      edge && chip(supportLabels,edge.support),
       parents.get(id).length>1 && status(`${parents.get(id).length} parents`),
-      kids.length>0 && el('span',{class:'hw-count'},String(kids.length))].filter(Boolean));
+      (!edge || kids.length>0) && el('span',{class:'hw-tree-count'},edge ?
+        countLabel(kids.length,'child','children') : countLabel(typeMap(id).positions.size,'concept','concepts'))].filter(Boolean));
     let toggle = el('span',{class:'hw-branch-dot','aria-hidden':'true'});
     if (kids.length) {
       toggle = button(open?'▾':'▸',()=>toggleBranch(key),'hw-toggle');
@@ -325,7 +373,22 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       toggle.setAttribute('aria-label',(open?'Collapse ':'Expand ')+display(id));
     }
     const item = el('li',{class:'hw-branch'+(edge?'':' hw-root')},el('div',{class:'hw-branch-row'},toggle,action));
-    if (open && kids.length) item.append(el('ul',{class:'hw-children'},kids.filter(row=>!trail.includes(row.child_id)).map(row=>branch(row.child_id,trail,row))));
+    if (open && kids.length) {
+      const sorted = kids.filter(row=>!trail.includes(row.child_id)).sort((a,b)=>
+        display(a.child_id).localeCompare(display(b.child_id)));
+      const rows = edge ? sorted : sorted.filter(row=>!typeOnly(row));
+      const typeOnlyRows = edge ? [] : sorted.filter(typeOnly);
+      const group = typeOnlyRows.length>0 && el('details',{
+        class:'hw-type-only',open:typeOnlyOpened.has(id),onToggle:event=> {
+          if (!event.currentTarget.isConnected) return;
+          if (event.currentTarget.open) typeOnlyOpened.add(id);
+          else typeOnlyOpened.delete(id);
+        },
+      },el('summary',{},`Only linked to type root (${typeOnlyRows.length})`),
+      el('ul',{class:'hw-children'},typeOnlyRows.map(row=>branch(row.child_id,trail,row))));
+      item.append(el('ul',{class:'hw-children'},rows.map(row=>branch(row.child_id,trail,row)),
+        group && el('li',{},group)));
+    }
     return item;
   }
   function chartBranch(id, path=[]) {
@@ -479,17 +542,102 @@ export function renderIncremental({mount,placement,data,go,selected}) {
         el('span',{class:'hw-dag-count','aria-live':'polite'},countLabel(positions.size,'node','nodes'))),
       el('div',{class:'hw-dag'+(neighborhood?' hw-dag-neighborhood':''),role:'region','aria-label':'Entity DAG',tabindex:0},world));
   }
+  function typeMap(root) {
+    if (!typeMaps.has(root)) typeMaps.set(root,layoutTaxonomyMap({root,children,parents}));
+    return typeMaps.get(root);
+  }
+  function drawTypeMap({width,height,positions,links}, selectedId) {
+    const ratio = Math.max(2,window.devicePixelRatio || 1);
+    const canvas = el('canvas',{class:'hw-taxonomy-map',width:width*ratio,height:height*ratio,'aria-hidden':'true'});
+    const drawing = canvas.getContext('2d');
+    drawing.scale(canvas.width/width,canvas.height/height);
+    const linked = new Set();
+    drawing.strokeStyle='#7b9ab5';
+    drawing.lineWidth=.8;
+    drawing.beginPath();
+    for (const {parent_id,child_id} of links) {
+      const from = positions.get(parent_id);
+      const to = positions.get(child_id);
+      drawing.moveTo(from.x,from.y);
+      drawing.lineTo(to.x,to.y);
+      linked.add(parent_id);
+      linked.add(child_id);
+    }
+    drawing.stroke();
+    for (const [id,{x,y}] of positions) {
+      drawing.fillStyle = linked.has(id) ? '#275c89' : '#808e9c';
+      drawing.beginPath();
+      drawing.arc(x,y,2.55,0,2*Math.PI);
+      drawing.fill();
+    }
+    const active=positions.get(selectedId);
+    if (active) {
+      drawing.strokeStyle='#1c5a84';
+      drawing.lineWidth=1.5;
+      drawing.beginPath();
+      drawing.arc(active.x,active.y,4.6,0,2*Math.PI);
+      drawing.stroke();
+    }
+    return canvas;
+  }
+  function renderOverview(shownRoots) {
+    const cards = shownRoots.map(root=> {
+      const map=typeMap(root);
+      const label=display(root);
+      const counts=[countLabel(map.positions.size,'concept','concepts'),countLabel(map.links.length,'edge','edges')];
+      return el('button',{type:'button',class:'hw-taxonomy-type',
+        'aria-label':`Explore ${label}, ${counts.join(', ')}`,onClick:()=>openType(root)},
+      el('span',{class:'hw-taxonomy-name'},label),drawTypeMap(map),
+      el('span',{class:'hw-taxonomy-counts'},counts.map(count=>el('span',{},count))));
+    });
+    main.replaceChildren(el('section',{class:'hw-taxonomy-overview','aria-label':'Taxonomy by entity type'},
+      el('div',{class:'hw-taxonomy-heading'},el('h3',{},'Taxonomy by entity type'),
+        el('p',{class:'hw-note'},'Each dot is a concept. Lines show parent–child edges. Select a type to browse its tree.')),
+      el('div',{class:'hw-taxonomy-grid'},cards)));
+  }
+  function renderContext() {
+    const inFocus=mode==='dag' && dagMode==='focus' && dagFocus;
+    const showContext=isHierarchy() && mode!=='overview' && !query;
+    context.hidden=!showContext;
+    context.replaceChildren();
+    if (!showContext) return;
+    const node=placed.get(inFocus || current);
+    const root=roots[node?.kind || kind];
+    const separator=()=>el('span',{'aria-hidden':'true'},'›');
+    const controls=[button('Overview',showOverview,'hw-context-button')];
+    if (root) controls.push(separator(),button(display(root),()=>openType(root),'hw-context-button'));
+    if (inFocus && dagFocus!==root) {
+      for (const id of pathToRoot(dagFocus).slice(1)) {
+        controls.push(separator(),id===dagFocus ?
+          el('span',{class:'hw-context-current','aria-current':'location'},display(id)) :
+          button(display(id),()=>focusDag(id),'hw-context-button'));
+      }
+    }
+    const map=root && typeMap(root);
+    context.append(el('nav',{class:'hw-context','aria-label':inFocus ? 'One path from the entity type root' : 'Ontology location'},controls,
+      map && mode==='dag' && el('span',{class:'hw-context-count'},countLabel(map.positions.size,'concept in type','concepts in type'))));
+    if (inFocus && dagFocus!==root && map) {
+      context.append(el('details',{class:'hw-focus-map',open:showTypeMap,onToggle:event=> {
+        if (event.currentTarget.isConnected) showTypeMap=event.currentTarget.open;
+      }},el('summary',{},`${display(root)} map`),
+      el('div',{class:'hw-focus-map-body'},drawTypeMap(map,dagFocus),
+        el('p',{class:'hw-note'},`The ring marks ${display(dagFocus)} in the full ${display(root).toLowerCase()} view.`))));
+    }
+  }
   function renderMain(previous=null) {
     layout.dataset.view=mode;
     for (const [name,control] of tabs) control.setAttribute('aria-pressed',String(name===mode));
     labelMoreViews();
+    renderContext();
     if (isHierarchy() && !query) {
       const shownRoots = Object.entries(roots).filter(([key])=>!kind || key===kind).map(([,id])=>id);
       if (!shownRoots.length) {
         main.replaceChildren(el('p',{class:'hw-note hw-empty'},'This batch has no placed concepts.'));
+      } else if (mode==='overview') {
+        renderOverview(shownRoots);
       } else if (mode==='dag') {
         renderDag(shownRoots,previous);
-      } else if (mode==='outline') {
+      } else if (mode==='tree') {
         main.replaceChildren(el('ul',{class:'hw-forest'},shownRoots.map(id=>branch(id))));
       } else {
         main.replaceChildren(
@@ -598,17 +746,19 @@ export function renderIncremental({mount,placement,data,go,selected}) {
     const record=outcomes.get(node.id);
     const directParents=parents.get(node.id)||[];
     const directChildren=children.get(node.id)||[];
-    const relationCount = [
-      countLabel(directParents.length,'direct parent','direct parents'),
-      countLabel(directChildren.length,'direct child','direct children'),
-    ].join(' · ');
     const sourceCount=node.source_mentions?.length || 0;
     const isRoot = node.origin === 'schema_root';
-    detail.replaceChildren(el('div',{class:'hw-detail-header'},
+    const relationCount = [
+      !isRoot && countLabel(directParents.length,'direct parent','direct parents'),
+      countLabel(directChildren.length,'direct child','direct children'),
+    ].filter(Boolean).join(' · ');
+    detail.replaceChildren(...[el('div',{class:'hw-detail-header'},
       el('h3',{},display(node.id)),
       (!isRoot || record) && el('div',{class:'hw-relation-link'},
         !isRoot && el('span',{class:'hw-note'},typeLabel(node.kind)),
-        record && chip(actions,record.decision.action))),
+        record && chip(actions,record.decision.action)),
+      placed.has(node.id) && !isRoot && (mode!=='dag' || dagMode!=='focus' || dagFocus!==node.id) &&
+        button('Focus in DAG',()=>openFocus(node.id),'btn hw-link')),
     directParents.length || directChildren.length ?
       disclosure(relationCount,links('Direct parents',directParents,'parent_id'),links('Direct children',directChildren,'child_id')) :
       el('p',{class:'hw-note'},'No direct parents or children.'),
@@ -616,7 +766,7 @@ export function renderIncremental({mount,placement,data,go,selected}) {
       node.source_mentions.map(id=>button(mentions.get(id)?.mention || id,()=>go('extraction',id),'btn hw-link')),
       el('div',{class:'hw-evidence-path'},button('View deduplicated concept',()=>go('deduplication',node.id),'btn hw-link'),
         button('View order',()=>go('ordering',node.id),'btn hw-link'))) : null,
-    placementRecord(node,record));
+    !isRoot && placementRecord(node,record)].filter(Boolean));
   }
   function refresh() { renderMain(); renderDetail(); }
   if (current) {

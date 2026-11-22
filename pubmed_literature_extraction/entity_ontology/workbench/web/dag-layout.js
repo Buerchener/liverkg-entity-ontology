@@ -102,3 +102,44 @@ export function layoutDag({roots, children, parents, expanded}) {
   const height = bandTop + padding - (visible.size ? rowGap : 0);
   return {positions, links, width, height, nodeWidth, nodeHeight};
 }
+
+export function layoutTaxonomyMap({root, children, parents}) {
+  const width = 360;
+  const height = 104;
+  const positions = new Map();
+  if (!root || !children.get(root)?.length) return {width, height, positions, links: []};
+
+  const full = layoutDag({roots: [root], children, parents, expanded: new Set(children.keys())});
+  const layers = new Map();
+  for (const [id, {x, y}] of full.positions) {
+    if (id === root) continue;
+    if (!layers.has(x)) layers.set(x, []);
+    layers.get(x).push({id, y});
+  }
+  const bands = [...layers.entries()].sort(([a], [b]) => a - b).map(([, members]) => {
+    members.sort((a, b) => a.y - b.y);
+    return {members, columns: Math.ceil(members.length / 10)};
+  });
+
+  // Pack large layers into several columns while reserving a separate band for each depth.
+  const inset = 8;
+  const innerWidth = width - 2 * inset;
+  const gap = Math.min(8, innerWidth / (3 * bands.length));
+  const columns = bands.reduce((count, band) => count + band.columns, 0);
+  const pitch = (innerWidth - gap * (bands.length - 1)) / columns;
+  let left = inset;
+  for (const band of bands) {
+    const rows = Math.ceil(band.members.length / band.columns);
+    const rowPitch = Math.min(12, (height - 2 * inset) / Math.max(1, rows - 1));
+    const top = (height - rowPitch * (rows - 1)) / 2;
+    band.members.forEach(({id}, index) => {
+      positions.set(id, {
+        x: left + (index % band.columns + 0.5) * pitch,
+        y: top + Math.floor(index / band.columns) * rowPitch,
+      });
+    });
+    left += band.columns * pitch + gap;
+  }
+
+  return {width, height, positions, links: full.links.filter(edge => edge.parent_id !== root)};
+}

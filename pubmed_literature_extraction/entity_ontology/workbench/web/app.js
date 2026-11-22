@@ -13,7 +13,7 @@ const groups = [
   ]],
   ["Entity Hierarchy", [
     { id: "ordering", label: "Concept Ordering", detail: "Browse concepts from broad to specific within each type.", module: "preparation", method: "renderPreparation" },
-    { id: "tree", label: "Hierarchy Placement", detail: "Select a node to inspect its parent and child classes.", module: "incremental", method: "renderIncremental" },
+    { id: "tree", label: "Hierarchy Placement", detail: "Browse the ontology by entity type or focus on an individual concept.", module: "incremental", method: "renderIncremental" },
   ]],
   ["Literature Graph", [
     { id: "links", label: "Backbone Linking", detail: "Select a concept to see the v2 backbone node it links to and why.", module: "relations", method: "renderRelations" },
