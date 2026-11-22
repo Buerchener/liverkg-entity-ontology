@@ -1,0 +1,303 @@
+{
+  "counts": {
+    "specific_edges": 7,
+    "specific_edges_formally_verified": 7,
+    "schema_edges_separate": 9,
+    "maps_checked": 8,
+    "acyclic_and_mapping_endpoints_checked": true
+  },
+  "edges": [
+    {
+      "child_id": "KG-df01498eaf86fe86d631",
+      "parent_id": "REF-cb171343d7e694394b23",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "HGNC:9232"
+      ],
+      "parent_ids": [
+        "SO:0001217"
+      ],
+      "asserted_external_endpoints": [
+        "HGNC:9232",
+        "SO:0001217"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "HGNC:9232",
+          "parent": "SO:0001217",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "2d75cd532804fed1c7e45ee43abed54fa5f724a0b058503d5871079900f7c9e6",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F9232"
+        }
+      ]
+    },
+    {
+      "child_id": "REF-cb171343d7e694394b23",
+      "parent_id": "type:Gene",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-2c0df2d7e7cdb03af995",
+      "parent_id": "type:Pathway",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-93842554b8fd2e26d322",
+      "parent_id": "REF-ac99d1a46366e2d0d78d",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "PR:Q9UQ84"
+      ],
+      "parent_ids": [
+        "PR:000007245"
+      ],
+      "asserted_external_endpoints": [
+        "PR:Q9UQ84",
+        "PR:000007245"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "PR:Q9UQ84",
+          "parent": "PR:000007245",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "a4812b7962d76f5661bb1eba7d126ca28a1bb3c1a03934c9f816d578847a5982",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9UQ84"
+        }
+      ]
+    },
+    {
+      "child_id": "REF-ac99d1a46366e2d0d78d",
+      "parent_id": "type:Protein",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-8d63cf96a5c49a353b3c",
+      "parent_id": "REF-9fbcfbc5bf6c1011890f",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "CL:0002097"
+      ],
+      "parent_ids": [
+        "CL:0000174"
+      ],
+      "asserted_external_endpoints": [
+        "CL:0002097",
+        "CL:0000174"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "CL:0002097",
+          "parent": "CL:0000174",
+          "named_obo_subclass": true,
+          "obo_line": 18537,
+          "obo": {
+            "release": "releases/2026-11-13",
+            "source_url": "https://purl.obolibrary.org/obo/cl.obo",
+            "sha256": "f6c5911182da822693ac55e5cc3ca240301ac93e9a0b2494e87909705c852941"
+          }
+        }
+      ]
+    },
+    {
+      "child_id": "KG-8d63cf96a5c49a353b3c",
+      "parent_id": "REF-65cfe0d4fbec21e12641",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "CL:0002097"
+      ],
+      "parent_ids": [
+        "CL:0002078"
+      ],
+      "asserted_external_endpoints": [
+        "CL:0002097",
+        "CL:0002078"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "CL:0002097",
+          "parent": "CL:0002078",
+          "named_obo_subclass": false,
+          "obo_line": 18538,
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "b05b45a22dda95f09129f4bae834f1e4ebd4af702d168ba947c6bd06783e13ef",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/cl/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCL_0002097",
+          "obo": {
+            "release": "releases/2026-11-13",
+            "source_url": "https://purl.obolibrary.org/obo/cl.obo",
+            "sha256": "f6c5911182da822693ac55e5cc3ca240301ac93e9a0b2494e87909705c852941"
+          }
+        }
+      ]
+    },
+    {
+      "child_id": "KG-8d63cf96a5c49a353b3c",
+      "parent_id": "REF-38a705c2abe54dd0b82e",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "CL:0002097"
+      ],
+      "parent_ids": [
+        "CL:1001601"
+      ],
+      "asserted_external_endpoints": [
+        "CL:0002097",
+        "CL:1001601"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "CL:0002097",
+          "parent": "CL:1001601",
+          "named_obo_subclass": true,
+          "obo_line": 18539,
+          "obo": {
+            "release": "releases/2026-11-13",
+            "source_url": "https://purl.obolibrary.org/obo/cl.obo",
+            "sha256": "f6c5911182da822693ac55e5cc3ca240301ac93e9a0b2494e87909705c852941"
+          }
+        }
+      ]
+    },
+    {
+      "child_id": "REF-9fbcfbc5bf6c1011890f",
+      "parent_id": "type:CellType",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "REF-65cfe0d4fbec21e12641",
+      "parent_id": "type:CellType",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "REF-38a705c2abe54dd0b82e",
+      "parent_id": "type:CellType",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-95935320ac453f432535",
+      "parent_id": "REF-cb171343d7e694394b23",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "HGNC:10618"
+      ],
+      "parent_ids": [
+        "SO:0001217"
+      ],
+      "asserted_external_endpoints": [
+        "HGNC:10618",
+        "SO:0001217"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "HGNC:10618",
+          "parent": "SO:0001217",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "baa1c752715f47b5387dc8edf6d55b4cd704391fad386d185af457798fb1627f",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F10618"
+        }
+      ]
+    },
+    {
+      "child_id": "KG-97a4d29f7de2dc6b6f61",
+      "parent_id": "type:Metabolite",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [
+        "CHEBI:17153"
+      ],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-0d1d6ef1b18ed99f8a9b",
+      "parent_id": "type:Pathway",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-080f5a7c88d549c0bb4d",
+      "parent_id": "REF-5173acf5b224041072db",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "PR:Q14765"
+      ],
+      "parent_ids": [
+        "PR:000002090"
+      ],
+      "asserted_external_endpoints": [
+        "PR:Q14765",
+        "PR:000002090"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "PR:Q14765",
+          "parent": "PR:000002090",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "17a938199cb9c9e88a4912cf16c398acc21e15a2298a6ab8ce4977ca05ef9373",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q14765"
+        }
+      ]
+    },
+    {
+      "child_id": "REF-5173acf5b224041072db",
+      "parent_id": "type:Protein",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    }
+  ]
+}

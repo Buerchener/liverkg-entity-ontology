@@ -1,0 +1,46 @@
+[
+  {
+    "case_id": "case-2d690640384b4f3a",
+    "kg_name": "megakaryocyte progenitors",
+    "entity_type": "CellType",
+    "ontology_node_id": "KG-8eac89b1c8cf31b901de",
+    "ontology_name": "megakaryocyte progenitors",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CL:0000553"
+      ],
+      "definition_source": "Cell Ontology",
+      "source_field": "def",
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0000553"
+      ]
+    }
+  },
+  {
+    "case_id": "case-6d7b29f077b666c6",
+    "kg_name": "SOAT2",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-654e31e5f4c76eec3bb3",
+    "ontology_name": "SOAT2",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000167780",
+        "NCBIGene:8435",
+        "HGNC:11178"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=8435&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11178",
+        "https://www.ensembl.org/id/ENSG00000167780",
+        "https://www.ncbi.nlm.nih.gov/gene/8435",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:11178"
+      ]
+    }
+  }
+]

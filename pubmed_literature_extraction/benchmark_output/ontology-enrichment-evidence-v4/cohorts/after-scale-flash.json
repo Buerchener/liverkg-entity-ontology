@@ -1,0 +1,3146 @@
+[
+  {
+    "case_id": "case-1d4343ac7b5774bf",
+    "name": "extravillous trophoblasts",
+    "kind": "CellType",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-716bf97111fe8c17eb0c",
+        "name": "trophoblast cell",
+        "standard_ids": [
+          "CL:0000351"
+        ]
+      }
+    ],
+    "identifiers": [
+      "CL:0008036"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0008036"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "0e203d0fef8b5b9600a9590ebb2fdf69b453e031884f8a1975ca19cd668b77e0",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-c233d22009b97af4",
+    "name": "hepatomegaly",
+    "kind": "Disease",
+    "status": "rejected",
+    "decision_stage": "source_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "NCIT:C3100"
+    ],
+    "definition_source": "NCIt",
+    "source_field": "definitions[NCI]",
+    "links": [
+      "https://api-evsrest.nci.nih.gov/api/v1/concept/ncit/C3100?include=summary",
+      "https://pubmed.ncbi.nlm.nih.gov/41902413/",
+      "https://evsexplore.semantics.cancer.gov/evsexplore/concept/ncit/C3100"
+    ],
+    "primary_reason": "prior_source_review_identified_input_issue",
+    "original_record_sha256": "8af42082250e2405e720ca2c56410a92f97dbd39bc7632779589d85314a9085a",
+    "reviewed_status": "rejected",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-871ac9fecccac9ec",
+    "name": "SOCS2",
+    "kind": "Gene",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-cb171343d7e694394b23",
+        "name": "protein_coding_gene",
+        "standard_ids": [
+          "SO:0001217"
+        ]
+      }
+    ],
+    "identifiers": [
+      "ENSEMBL:ENSG00000120833",
+      "NCBIGene:8835",
+      "HGNC:19382"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=8835&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F19382",
+      "https://www.ensembl.org/id/ENSG00000120833",
+      "https://www.ncbi.nlm.nih.gov/gene/8835",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:19382"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "036f8def3484a787a1c8c27ac36a4ee24a19ee3d88e51ddbacc7775c8c6c071f",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-c39217e66a30c719",
+    "name": "Guanidine",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "HMDB:HMDB0001842"
+    ],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://hmdb.ca/metabolites/HMDB0001842"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "99c72b5347319590fb0cfb08e441d05e21a7f77a43afafe15345f8fd200e3f20",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-c8c017238ac7ed61",
+    "name": "Toll Like Receptor TLR6:TLR2 Cascade",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-168188"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-168188",
+      "https://reactome.org/content/detail/R-HSA-168188"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "cdcbb02b26d1290d2c744003166b6f32e72ec05468f70b92b680151602dcf707",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-70f0107e2265c221",
+    "name": "IL12A",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-7ab507e7fef4f1be6d78",
+        "name": "interleukin-12 subunit alpha",
+        "standard_ids": [
+          "PR:000001368"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000303231",
+      "PR:P29459"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P29459",
+      "https://string-db.org/network/9606.ENSP00000303231",
+      "https://purl.obolibrary.org/obo/PR_P29459"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "5852488cdfe4b278a06e2352c9f8868b1567c2b43a391ee5a0dfccb801f0ada2",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-1b1498c44a7e2568",
+    "name": "colon",
+    "kind": "Tissue",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-25009150f0ba73e030f2",
+        "name": "subdivision of digestive tract",
+        "standard_ids": [
+          "UBERON:0004921"
+        ]
+      }
+    ],
+    "identifiers": [
+      "UBERON:0001155"
+    ],
+    "definition_source": "Uberon",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/uberon/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FUBERON_0001155",
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/",
+      "https://purl.obolibrary.org/obo/UBERON_0001155"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "0a077bd183d5073c9d5050f6e9f7c9cd7a8eaeca77f80a1c435563ac320d5d8e",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-2d690640384b4f3a",
+    "name": "megakaryocyte progenitors",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CL:0000553"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0000553"
+    ],
+    "primary_reason": "hierarchy_or_schema_membership_unverified",
+    "original_record_sha256": "ecbde7db024b77f40c0c9f856b2cdcc86651f14da2782cf45a0f799b7a882512",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-ebdd0e87873a76e1",
+    "name": "PAMR1",
+    "kind": "Gene",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-cb171343d7e694394b23",
+        "name": "protein_coding_gene",
+        "standard_ids": [
+          "SO:0001217"
+        ]
+      }
+    ],
+    "identifiers": [
+      "ENSEMBL:ENSG00000149090",
+      "NCBIGene:25891",
+      "HGNC:24554"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=25891&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F24554",
+      "https://www.ensembl.org/id/ENSG00000149090",
+      "https://www.ncbi.nlm.nih.gov/gene/25891",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:24554"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "f3afffaa70fd7103026f6a109faef2c6cd66f9433da46725239859e4b3dafe61",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-eb1059bef297cd14",
+    "name": "Isobutanol",
+    "kind": "Metabolite",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Metabolite",
+        "name": "Metabolite",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "CHEBI:46645",
+      "HMDB:HMDB0006006"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/46645/",
+      "https://purl.obolibrary.org/obo/CHEBI_46645",
+      "https://hmdb.ca/metabolites/HMDB0006006"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "a4d98b65a5a0f3d480dd09e44dde284e91fab937ab3f8b52e2cf707f654002fb",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-e22636927261bef7",
+    "name": "EGR2 and SOX10-mediated initiation of Schwann cell myelination",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-9619665"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-9619665",
+      "https://reactome.org/content/detail/R-HSA-9619665"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "42d5f702983fc3be69b4b910d01070e8ab976ae83df6c68f692cf73551f97c68",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-1eb29902c36a40ed",
+    "name": "KCNN2",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-2a3f724093246b5cba9c",
+        "name": "small conductance calcium-activated potassium channel protein 2",
+        "standard_ids": [
+          "PR:000000713"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000264773",
+      "PR:Q9H2S1"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9H2S1",
+      "https://string-db.org/network/9606.ENSP00000264773",
+      "https://purl.obolibrary.org/obo/PR_Q9H2S1"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "0e2e9cd58ff13541676252ffd7821d2325844d390603a546e1f9b8426a1c60e5",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-c8a44678d263e6ab",
+    "name": "bergmann glia",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "198c100b40c60d9d0e481735ef01bdffeafc9660b788d2f869333dea4be0cbca",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-1b05230e8707931b",
+    "name": "MIR455",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000207726",
+      "NCBIGene:619556",
+      "HGNC:32344"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=619556&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F32344",
+      "https://www.ensembl.org/id/ENSG00000207726",
+      "https://www.ncbi.nlm.nih.gov/gene/619556",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:32344"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "30d175503ae543a9cc87746dbda6e82b6653a88aec110e6362be748d80f46ab6",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-5da19130539085ab",
+    "name": "total glyceride",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "d17c336c4cab89c3e0dce2912191374541363bb90ed3ae1551955ae54c407879",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-41d0f250e92717cb",
+    "name": "Th1 and Th2 cell differentiation",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "KEGG_PATHWAY:hsa04658"
+    ],
+    "definition_source": "KEGG",
+    "source_field": "DESCRIPTION",
+    "links": [
+      "https://rest.kegg.jp/get/hsa04658",
+      "https://www.kegg.jp/entry/hsa04658"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "474aa8b6fb5938dbd22a8f8a52b80c924571416f5919433b4dd3d9c2c1902895",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-95a4e40dd259bd8e",
+    "name": "ZC3H12D",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-dfc4ef42d04188b02360",
+        "name": "probable ribonuclease ZC3H12D",
+        "standard_ids": [
+          "PR:000030420"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000386616",
+      "PR:A2A288"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_A2A288",
+      "https://string-db.org/network/9606.ENSP00000386616",
+      "https://purl.obolibrary.org/obo/PR_A2A288"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "07068b9da9a8a13bf3dc328c5d18b9b32bfe976a3f4ac031752a115a79d6c282",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-73801dfce81b354b",
+    "name": "endometrial ciliated cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "db881d197717d60b87580c0458d73a0ac3d51651ec25e74d5ba58adf93014ad3",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-0a8e31c0c72b70a3",
+    "name": "TGFA",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000163235",
+      "NCBIGene:7039",
+      "HGNC:11765"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=7039&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11765",
+      "https://www.ensembl.org/id/ENSG00000163235",
+      "https://www.ncbi.nlm.nih.gov/gene/7039",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:11765"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "3e63ec91a1cb2b6c10efc41254e7923e62777c41c98d16e5cc2b1b4c5274f1e5",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-7f4c28f0a5e3241d",
+    "name": "PAE",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "591d4c71815d7fff72da8e46e07a43f342e7a411632b15a64ba6b305d615c8e0",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-6bcbdd06c8345b6b",
+    "name": "Attachment of bacteria to epithelial cells",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-9638630"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-9638630",
+      "https://reactome.org/content/detail/R-HSA-9638630"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "8382859cd73e176e3cbca7331c16b2e67b7ff36f480c49099fb7702c7ab623df",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-65b22f1f5a9b2119",
+    "name": "LOX",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-4d58538bf52e1e247731",
+        "name": "protein-lysine 6-oxidase",
+        "standard_ids": [
+          "PR:000009883"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000231004",
+      "PR:P28300"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P28300",
+      "https://string-db.org/network/9606.ENSP00000231004",
+      "https://purl.obolibrary.org/obo/PR_P28300"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "a087f117847a23c5568cc3911f82a2c2fbc8898649512e6a18264d7182f9935c",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false,
+    "scope_review_reason": "source_proteoform_scope_requires_review"
+  },
+  {
+    "case_id": "case-268bbd5d150e4311",
+    "name": "FBs",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41799192/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "9a07d47ca90440fdc90193449564eb9ac15449323dc467af28c65e15786c3b6a",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-0da9b407560f6bb4",
+    "name": "GPM6A",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000150625",
+      "NCBIGene:2823",
+      "HGNC:4460"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=2823&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F4460",
+      "https://www.ensembl.org/id/ENSG00000150625",
+      "https://www.ncbi.nlm.nih.gov/gene/2823",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:4460"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "263f5500a52109dade03cce879b25c13a28c1920fe17e63e5741b8449dfded96",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-837a1c2423fcb08d",
+    "name": "3-Methyl-2-butenal",
+    "kind": "Metabolite",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Metabolite",
+        "name": "Metabolite",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "CHEBI:15825",
+      "HMDB:HMDB0012157"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/15825/",
+      "https://purl.obolibrary.org/obo/CHEBI_15825",
+      "https://hmdb.ca/metabolites/HMDB0012157"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "5f6d1274dc38cf0c06a055e67e2a33ea8f0ff224ad9c4bfaf8176bd96d7b3833",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-64e89c9b19e05c68",
+    "name": "The canonical retinoid cycle in rods (twilight vision)",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-2453902"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-2453902",
+      "https://reactome.org/content/detail/R-HSA-2453902"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "79cf64da53ab43ee6353ec811f7f08875a1ce9ad2d31b2f6e8fdb3f968625350",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-89553ca5e39c13bb",
+    "name": "CCL3",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-0bbe210593502dcccab2",
+        "name": "C-C motif chemokine 3",
+        "standard_ids": [
+          "PR:000002123"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000477908",
+      "PR:P10147"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P10147",
+      "https://string-db.org/network/9606.ENSP00000477908",
+      "https://purl.obolibrary.org/obo/PR_P10147"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "66beae8cf021219198766565438eee5a7183347b88b7b01b79c3d64a3f69182b",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-1c96b556d52b4c68",
+    "name": "peritubular myoid cells",
+    "kind": "CellType",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-58ca80d1583fd39510b3",
+        "name": "myoepithelial cell",
+        "standard_ids": [
+          "CL:0000185"
+        ]
+      },
+      {
+        "id": "REF-c08885b34fd12eff278f",
+        "name": "seminiferous tubule epithelial cell",
+        "standard_ids": [
+          "CL:0002625"
+        ]
+      }
+    ],
+    "identifiers": [
+      "CL:0002481"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0002481"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "d96fdb8f5051910c9261acc358ed090221b9b7623b48a585f3b04db2b4999f5f",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-be4896220ab6786b",
+    "name": "MTUS1",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000129422",
+      "NCBIGene:57509",
+      "HGNC:29789"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=57509&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F29789",
+      "https://www.ensembl.org/id/ENSG00000129422",
+      "https://www.ncbi.nlm.nih.gov/gene/57509",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:29789"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "b5f9cbcb7871e88c2c106c70e8a829b10b945685a71672381a662f7f87c3ab39",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-121b648bed9c6a55",
+    "name": "1-Methylnicotinamide",
+    "kind": "Metabolite",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Metabolite",
+        "name": "Metabolite",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "CHEBI:16797",
+      "HMDB:HMDB0000699"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/16797/",
+      "https://purl.obolibrary.org/obo/CHEBI_16797",
+      "https://hmdb.ca/metabolites/HMDB0000699"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "bdd176e79556d3967d40bed2118e76d4e60d033246af45f7222853295469b7d7",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-4d58b7d3d1a1eba4",
+    "name": "Proline catabolism",
+    "kind": "Pathway",
+    "status": "rejected",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "Reactome:R-HSA-70688"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-70688",
+      "https://reactome.org/content/detail/R-HSA-70688"
+    ],
+    "primary_reason": "hierarchy_or_schema_membership_unverified",
+    "original_record_sha256": "946d2b6bacf8990472dbc5598fe7c234543842f7d17287ede0065597f4486abb",
+    "reviewed_status": "rejected",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-a3ba80d82429a69f",
+    "name": "HNRNPL",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-a9dc59615136873615dd",
+        "name": "heterogeneous nuclear ribonucleoprotein L",
+        "standard_ids": [
+          "PR:000008670"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000221419",
+      "PR:P14866"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P14866",
+      "https://string-db.org/network/9606.ENSP00000221419",
+      "https://purl.obolibrary.org/obo/PR_P14866"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "c51432a678d772d31108766a03929a80daef74becc00eb036026add86f557117",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-886e8721a142d848",
+    "name": "brain excitatory neurons",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "95f0d92bd21fe41cf8e3c79a10496c8c73ac12d973449f51334936dfe11118b4",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-6d7b29f077b666c6",
+    "name": "SOAT2",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000167780",
+      "NCBIGene:8435",
+      "HGNC:11178"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=8435&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11178",
+      "https://www.ensembl.org/id/ENSG00000167780",
+      "https://www.ncbi.nlm.nih.gov/gene/8435",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:11178"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "56b6144768aabe7d0ccb5cb14629971767ceafdc9724e306e20bd184a52777ce",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-aaa06cfa65b1df42",
+    "name": "Nutriacholic acid",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CHEBI:82679",
+      "HMDB:HMDB0000467"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/82679/",
+      "https://purl.obolibrary.org/obo/CHEBI_82679",
+      "https://hmdb.ca/metabolites/HMDB0000467"
+    ],
+    "primary_reason": "hierarchy_or_schema_membership_unverified",
+    "original_record_sha256": "209152b4d00cb57ea0e610ff98072baff09fdb877c47d0f2d2f6d7cef829888a",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-c0e3926b0e43a945",
+    "name": "Regulation of actin cytoskeleton",
+    "kind": "Pathway",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "KEGG_PATHWAY:hsa04810"
+    ],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://www.kegg.jp/entry/hsa04810"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "56d38b455ced2c887d557d43c0cfe18973225b69dd0f7655c7b5bbb03f51432d",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-ded71c94b36746cd",
+    "name": "MLXIPL",
+    "kind": "Protein",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "STRING:9606.ENSP00000320886",
+      "PR:Q9NP71"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9NP71",
+      "https://string-db.org/network/9606.ENSP00000320886",
+      "https://purl.obolibrary.org/obo/PR_Q9NP71"
+    ],
+    "primary_reason": "ambiguous_or_insufficient_evidence",
+    "original_record_sha256": "78a038e4e0aaaff3da94905bf7e627bf0594cdf6b9df9230239ef58d08392886",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-dfe572917f85e22e",
+    "name": "renal connecting tubule cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "6edd6c3471e05de4b7a9aa9e160807af3a439d5f7745bcfd96a0b9da55633a6c",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-ce6dacc58a9a8a84",
+    "name": "PHLDA1",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000139289",
+      "NCBIGene:22822",
+      "HGNC:8933"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=22822&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F8933",
+      "https://www.ensembl.org/id/ENSG00000139289",
+      "https://www.ncbi.nlm.nih.gov/gene/22822",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:8933"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "fae4f1c5db3a88ba5988c5a7211d550440c046a4ea1f8b3c947c596072096ee0",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-b0093586dbaea977",
+    "name": "L-Aspartic acid",
+    "kind": "Metabolite",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Metabolite",
+        "name": "Metabolite",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "CHEBI:17053",
+      "HMDB:HMDB0000191"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/17053/",
+      "https://purl.obolibrary.org/obo/CHEBI_17053",
+      "https://hmdb.ca/metabolites/HMDB0000191"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "169ecea3aee2a959e9566812feb104b99b972cb753205f3b0e9152659b522943",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-51c3e0bd2daebf59",
+    "name": "Antagonism of Activin by Follistatin",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-2473224"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-2473224",
+      "https://reactome.org/content/detail/R-HSA-2473224"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "040521adf8dfb852236ca8d0e17c3b4b01e0a545184b193bd5e6b5f7c4db9ebe",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-c9e2febde90abc11",
+    "name": "BCL2L1",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-991485a587dc02a48e5f",
+        "name": "Bcl-2-like protein 1",
+        "standard_ids": [
+          "PR:000002308"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000365230",
+      "PR:Q07817"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q07817",
+      "https://string-db.org/network/9606.ENSP00000365230",
+      "https://purl.obolibrary.org/obo/PR_Q07817"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "b89bf4684eb3d04fa24ef604af3cca9575e5386354108129196fb82c78042cd9",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-b7a6cb54403b1e82",
+    "name": "other brain neurons",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "d7cd953a0726ce0d62cc53a9bc06fb7df0918a8ce04b6931ddf5ee99185ff213",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-40b06c8c529c8ddf",
+    "name": "HPSE",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000173083",
+      "NCBIGene:10855",
+      "HGNC:5164"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=10855&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F5164",
+      "https://www.ensembl.org/id/ENSG00000173083",
+      "https://www.ncbi.nlm.nih.gov/gene/10855",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:5164"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "88c69f2ff3d4ca1395c81007b4b4cfc0288da32f2a89b7362be42b9049b31924",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-e86886115b082e6d",
+    "name": "Isopropyl alcohol",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CHEBI:17824",
+      "HMDB:HMDB0000863"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/17824/",
+      "https://purl.obolibrary.org/obo/CHEBI_17824",
+      "https://hmdb.ca/metabolites/HMDB0000863"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "fa6210c3628bcf579c0b79ba6ee4b054dae11cd83180daa9525846476156e5c3",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-f7c37fe22f8dee09",
+    "name": "FLT3 signaling by CBL mutants",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-9706377"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-9706377",
+      "https://reactome.org/content/detail/R-HSA-9706377"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "38d543e015e33d0ddc13855bf0f569e5485db1a2828c1016babba027fe74de76",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-87d4b22bd7a92520",
+    "name": "EAF2",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-52f5854cf0a8ba9ab1f1",
+        "name": "ELL-associated factor 2",
+        "standard_ids": [
+          "PR:000006862"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000273668",
+      "PR:Q96CJ1"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q96CJ1",
+      "https://string-db.org/network/9606.ENSP00000273668",
+      "https://purl.obolibrary.org/obo/PR_Q96CJ1"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "2cedd91f578110d4d621daf288557e94933c516e061eaad698a7e96922feae6c",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-d194585b4bf0dfa3",
+    "name": "ovarian stromal cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CL:0002132"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0002132"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "7e40f50ab3153ad1cfc9470c33364d7f9a25662663e9652ea84ccde7c63b8030",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-f1c3edb679811f5a",
+    "name": "CYP2B6",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000197408",
+      "NCBIGene:1555",
+      "HGNC:2615"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=1555&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F2615",
+      "https://www.ensembl.org/id/ENSG00000197408",
+      "https://www.ncbi.nlm.nih.gov/gene/1555",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:2615"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "09df8d2cde353419b250806391350d66e4b1b7d6ef8655b2ccd1ba53d4536fb8",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-8099f3f29773c23f",
+    "name": "Propylene glycol",
+    "kind": "Metabolite",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Metabolite",
+        "name": "Metabolite",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "CHEBI:16997",
+      "HMDB:HMDB0001881"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/16997/",
+      "https://purl.obolibrary.org/obo/CHEBI_16997",
+      "https://hmdb.ca/metabolites/HMDB0001881"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "c540b208a9d7327d2b3fe75d6153e4b12431fac98e99ec343b56b14d3d63b4eb",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-beb59bfd533153d7",
+    "name": "TGFBR3 regulates TGF-beta signaling",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-9839389"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-9839389",
+      "https://reactome.org/content/detail/R-HSA-9839389"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "066d978615028c45f97f0d37b122a952fb6d33e6f8bea2ac2a3279540c4e7782",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-c858b0d340e34fbf",
+    "name": "CEP131",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-d4b0eff8664aa4f133cc",
+        "name": "centrosomal protein of 131 kDa",
+        "standard_ids": [
+          "PR:000004531"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000269392",
+      "PR:Q9UPN4"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9UPN4",
+      "https://string-db.org/network/9606.ENSP00000269392",
+      "https://purl.obolibrary.org/obo/PR_Q9UPN4"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "9c101f9d6b63195dbdd3e221d839e2cc54243775950063b9903859f59cfae864",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-3186085ba987a7b9",
+    "name": "erythrocytes",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CL:0000232"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0000232"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "8eed049d37fd5c1f58fd1a1613ce94f056ef8eb97bf9884d0a37af132a185f25",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-60de0b1f3b8499bf",
+    "name": "PHB1",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000167085",
+      "NCBIGene:5245",
+      "HGNC:8912"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=5245&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F8912",
+      "https://www.ensembl.org/id/ENSG00000167085",
+      "https://www.ncbi.nlm.nih.gov/gene/5245",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:8912"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "dc553ec2fb54b20f48307abd0bc160ea41b603e107c13762593f849ce5fbd241",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-aa10df70bfd54b08",
+    "name": "total cholesterol",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/"
+    ],
+    "primary_reason": "unresolved_exact_identity_or_type_collision",
+    "original_record_sha256": "d61054e7aa49c9bb225f26edfe776b47656f3a9bcb0cdf0c1241d3ac549d8792",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-25e354fef1553922",
+    "name": "RUNX3 regulates RUNX1-mediated transcription",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-8951911"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-8951911",
+      "https://reactome.org/content/detail/R-HSA-8951911"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "73497fcb39e9c9f6fdb1ac7818ce2bd90eec65fb3f45df68f1bd0f86a7af2c82",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-861924579cdd07fc",
+    "name": "NR1H2",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-16d6278af0672232da26",
+        "name": "oxysterols receptor LXR-beta",
+        "standard_ids": [
+          "PR:000011394"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000499121",
+      "PR:P55055"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P55055",
+      "https://string-db.org/network/9606.ENSP00000499121",
+      "https://purl.obolibrary.org/obo/PR_P55055"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "c5f8ac3c603c9f456a48090f1a6ca9faa1b6f582a1fc88365ea99f0ce95d0572",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-c105cf8343c6602d",
+    "name": "mucous neck cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CL:0002181"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0002181"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "5d2c1bdb5287337638c56a6a4a29a10138344bea55cc74d66b7020ad6b55453a",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-e97473f641e28020",
+    "name": "HOXA10",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000253293",
+      "NCBIGene:3206",
+      "HGNC:5100"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=3206&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F5100",
+      "https://www.ensembl.org/id/ENSG00000253293",
+      "https://www.ncbi.nlm.nih.gov/gene/3206",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:5100"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "6cf6eae3299db80ca397adbae1daa62327ba11b188d39b71693a101327460205",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-3158df2b489ea8a0",
+    "name": "TG",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/"
+    ],
+    "primary_reason": "unresolved_exact_identity_or_type_collision",
+    "original_record_sha256": "3f3ec79bbd5c89a1289251c0df992118a10738c5e011a9f35aa068b8813e8329",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-1aaf60c2d9543ef4",
+    "name": "Pentose and glucuronate interconversions",
+    "kind": "Pathway",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "KEGG_PATHWAY:hsa00040"
+    ],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://www.kegg.jp/entry/hsa00040"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "c4ae9bcd3ea32ab8ef2e0fd745cb02ee5700f12d0151769b928545c565ca0958",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-b290864320bbf881",
+    "name": "TICRR",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-28f11cd3b6960764edd5",
+        "name": "treslin",
+        "standard_ids": [
+          "PR:000032696"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000268138",
+      "PR:Q7Z2Z1"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q7Z2Z1",
+      "https://string-db.org/network/9606.ENSP00000268138",
+      "https://purl.obolibrary.org/obo/PR_Q7Z2Z1"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "801b69c6877c05e4a89f38cd7b0128ed3e8f5ca4b546f0a6917612d4363cca95",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-cece56610d51a07b",
+    "name": "pancreatic islet cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "5d63ed1493c95060c0fa20a6e8b2d95f33553a2f902d2560b342f28298b42b98",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-758c215297f6f53e",
+    "name": "ZC3H12D",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000178199",
+      "NCBIGene:340152",
+      "HGNC:21175"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=340152&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F21175",
+      "https://www.ensembl.org/id/ENSG00000178199",
+      "https://www.ncbi.nlm.nih.gov/gene/340152",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:21175"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "20661d3fa8477ba181190485310e794a47d7532cadc1b5e0a3ed1cf381e11068",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-4bcb40b3b7bb10ec",
+    "name": "anthocyanins",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CHEBI:35218"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_35218",
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/",
+      "https://purl.obolibrary.org/obo/CHEBI_35218"
+    ],
+    "primary_reason": "hierarchy_or_schema_membership_unverified",
+    "original_record_sha256": "adbc1f0a598e07e2213ab20ef47e54b3b587749a0115b77a4ed3b58b489e378b",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-fe3b25872d524fe6",
+    "name": "Developmental Lineage of Mammary Stem Cells",
+    "kind": "Pathway",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "Reactome:R-HSA-9938206"
+    ],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://reactome.org/content/detail/R-HSA-9938206"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "88ff64e5732b8496c1cebdb98a662316fee21243ea7120cd58b2be8128441232",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-4fb76763caa08c70",
+    "name": "ZWINT",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-b1e1b1e481091b93b696",
+        "name": "outer kinetochore KNL1 complex subunit ZWINT",
+        "standard_ids": [
+          "PR:000018237"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000363055",
+      "PR:O95229"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_O95229",
+      "https://string-db.org/network/9606.ENSP00000363055",
+      "https://purl.obolibrary.org/obo/PR_O95229"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "cdde5d14181abc0a85e9be4a9ecbc7249b2b94e9e34351a4a023240b76e0f307",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-da6f9f3145475389",
+    "name": "hepatocytes",
+    "kind": "CellType",
+    "status": "mapped_existing",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [],
+    "identifiers": [
+      "CL:0000182"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0000182"
+    ],
+    "primary_reason": "mapped_existing",
+    "original_record_sha256": "573afb48da445b6e1f43e86dd2acb9bea06b1107bf08d8013c24c2c577651b95",
+    "reviewed_status": "mapped_existing",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-2c400b6151ffa12e",
+    "name": "SHH",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000164690",
+      "NCBIGene:6469",
+      "HGNC:10848"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=6469&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F10848",
+      "https://www.ensembl.org/id/ENSG00000164690",
+      "https://www.ncbi.nlm.nih.gov/gene/6469",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:10848"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "86c4520258449de5aa507e6a9d529dc06e9564ff15ca0059f7804291164b9de2",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-3f96cb947c798e20",
+    "name": "adjuvants",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41810002/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "49500448da87f596197faaf1494d117b555ef8c42fceb940b8b5bcb8351d7aa5",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-e42f179f900926bf",
+    "name": "Defective B4GALT7 causes EDS, progeroid type",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-3560783"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-3560783",
+      "https://reactome.org/content/detail/R-HSA-3560783"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "de15da834077fd462cd963fab59654563f031a1ff62ad5d91ec1b7ac5b082e8d",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-8ebf68c4004a0713",
+    "name": "CDT1",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-5d0ab605878b8252c8e7",
+        "name": "DNA replication factor Cdt1",
+        "standard_ids": [
+          "PR:000005293"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000301019",
+      "PR:Q9H211"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9H211",
+      "https://string-db.org/network/9606.ENSP00000301019",
+      "https://purl.obolibrary.org/obo/PR_Q9H211"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "4feb67c3205e7df0c663e79e151f1bd9ca386e5dae274ab249a219995ec5a49b",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-85e9e78e6a9c22d5",
+    "name": "oocytes",
+    "kind": "CellType",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-ff118c68fe6f687498d7",
+        "name": "female germ cell",
+        "standard_ids": [
+          "CL:0000021"
+        ]
+      }
+    ],
+    "identifiers": [
+      "CL:0000023"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0000023"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "a1395d70c90bfba205b6e7950a053822fd15cfc510b825139ce353b0630c17e9",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-28752334d8fe12d6",
+    "name": "SPARC",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000113140",
+      "NCBIGene:6678",
+      "HGNC:11219"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=6678&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11219",
+      "https://www.ensembl.org/id/ENSG00000113140",
+      "https://www.ncbi.nlm.nih.gov/gene/6678",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:11219"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "efac3fa08d0f72d08eac61d18bec7e96939ed56e05514adbedaf0f4cb14d3112",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-2bb363738ac9ee1c",
+    "name": "triglycerides",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CHEBI:17855"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_17855",
+      "https://pubmed.ncbi.nlm.nih.gov/41573193/",
+      "https://purl.obolibrary.org/obo/CHEBI_17855"
+    ],
+    "primary_reason": "unresolved_exact_identity_or_type_collision",
+    "original_record_sha256": "a3530d3c6c8ab3721bedc1653b334bdb81a252faf3530ba4c0a27d135cc9fec4",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-44311f3332ecd463",
+    "name": "Synthesis of PI",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-1483226"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-1483226",
+      "https://reactome.org/content/detail/R-HSA-1483226"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "430b9c74ef72d631558bed66685869d941689ecefd7cd1342573f0c7b03b380a",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-bbf6d800d4af105b",
+    "name": "MED1",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-706b199df17554e93849",
+        "name": "mediator of RNA polymerase II transcription subunit 1",
+        "standard_ids": [
+          "PR:000010279"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000300651",
+      "PR:Q15648"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q15648",
+      "https://string-db.org/network/9606.ENSP00000300651",
+      "https://purl.obolibrary.org/obo/PR_Q15648"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "a77509708fe1b09a9f1a510c4ebc692bbfff84fc980ad9e73f0160b7cb643fa2",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-82cb10661c3d6f1a",
+    "name": "PBMCs",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41650163/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "05e195352e29833c6de09c495128e79dfa3ca839c15d1348e54def0594978e8e",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-511f6e9997a743cf",
+    "name": "HIF1A",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000100644",
+      "NCBIGene:3091",
+      "HGNC:4910"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=3091&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F4910",
+      "https://www.ensembl.org/id/ENSG00000100644",
+      "https://www.ncbi.nlm.nih.gov/gene/3091",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:4910"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "ad94496ab92e261d6ab1ead93672248e9fea85914b3f163808c158c8947ef8ec",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-c9f1c645e9130ed8",
+    "name": "Glycochenodeoxycholate-3-sulfate",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CHEBI:72733",
+      "HMDB:HMDB0002497"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/72733/",
+      "https://purl.obolibrary.org/obo/CHEBI_72733",
+      "https://hmdb.ca/metabolites/HMDB0002497"
+    ],
+    "primary_reason": "hierarchy_or_schema_membership_unverified",
+    "original_record_sha256": "2085af028dd1c748a159ddfaeb2906140ffd93702de6241b407f4034b79d09ab",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-28b6bb85c36bbf12",
+    "name": "Signaling by VEGF",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-194138"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-194138",
+      "https://reactome.org/content/detail/R-HSA-194138"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "59ae27c6eda1cd84b77cd5782ea4063907f54280beca17ef7d6678df52d28983",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-1fd295eaece0feb0",
+    "name": "MT-ND5",
+    "kind": "Protein",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "STRING:9606.ENSP00000354813",
+      "PR:P03915"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P03915",
+      "https://string-db.org/network/9606.ENSP00000354813",
+      "https://purl.obolibrary.org/obo/PR_P03915"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "b9955681cf6c61be3d41755d0583cdc9428024e6f318cf196a1e3752e3c80ba0",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-e7560347ddb0dde0",
+    "name": "endometrial stromal cells",
+    "kind": "CellType",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-778b37da1226581e944f",
+        "name": "stromal cell",
+        "standard_ids": [
+          "CL:0000499"
+        ]
+      }
+    ],
+    "identifiers": [
+      "CL:0002255"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0002255"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "018a6f7c1647158e89cd974a0272d7fbd05387f6a462af342fc6dd60aadddcd8",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-c9ec8172561884c2",
+    "name": "MVK",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000110921",
+      "NCBIGene:4598",
+      "HGNC:7530"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=4598&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F7530",
+      "https://www.ensembl.org/id/ENSG00000110921",
+      "https://www.ncbi.nlm.nih.gov/gene/4598",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:7530"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "cb5d2dbe75f96c0944ca8dff1aafb2565fb52e5ac346a1ec9d70c7cb5d5ec571",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-bc8335e21283fac6",
+    "name": "resistant starch",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "95d17ef9903aa80c4358e3f7c0d98bab15f443ca994efa975890524663384a68",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-13bdb48e45cc616f",
+    "name": "Transcription of the HIV genome",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-167172"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-167172",
+      "https://reactome.org/content/detail/R-HSA-167172"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "33103e59cee648f902d4b1271e8d02bd461712716811471d7dafa1c6ae66a200",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-ca917377ca8bff04",
+    "name": "TP53",
+    "kind": "Protein",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "STRING:9606.ENSP00000269305",
+      "PR:P04637"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P04637",
+      "https://string-db.org/network/9606.ENSP00000269305",
+      "https://purl.obolibrary.org/obo/PR_P04637"
+    ],
+    "primary_reason": "unresolved_exact_identity_or_type_collision",
+    "original_record_sha256": "06a9026c2e38c6192b0a8f146a447de66ef8a7fb2330477f20cd825b9f1814f3",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-9e96062686ed11f4",
+    "name": "transitional alveolar cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "dfa7e9b07e3904b542c37deef6982b54c8d63a32126a75d420ac06fb06784624",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-b28e5df10d736fc3",
+    "name": "TLR3",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000164342",
+      "NCBIGene:7098",
+      "HGNC:11849"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=7098&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11849",
+      "https://www.ensembl.org/id/ENSG00000164342",
+      "https://www.ncbi.nlm.nih.gov/gene/7098",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:11849"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "42e12ee18b024fbc4adec528e822078c60d68f1665e0f33285dc507ee6ebc851",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-92c7ff63fcd773d0",
+    "name": "Pentanal",
+    "kind": "Metabolite",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Metabolite",
+        "name": "Metabolite",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "CHEBI:84069",
+      "HMDB:HMDB0031206"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/84069/",
+      "https://purl.obolibrary.org/obo/CHEBI_84069",
+      "https://hmdb.ca/metabolites/HMDB0031206"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "5f83eb58b9e5139864bfeee0b043d8affe2a4b8ef2657f261b8a96e12c442bc3",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-8beb121b0a81e71d",
+    "name": "Hepatitis B",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "KEGG_PATHWAY:hsa05161"
+    ],
+    "definition_source": "KEGG",
+    "source_field": "DESCRIPTION",
+    "links": [
+      "https://rest.kegg.jp/get/hsa05161",
+      "https://www.kegg.jp/entry/hsa05161"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "d36d2f32ec769b8d7b562ec2b0ab9347768d191f4785f0bf3a050a3999669477",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-1977b50ebc3f7d6e",
+    "name": "TRIP13",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-d2dd56a355fe44aa4204",
+        "name": "thyroid receptor-interacting protein 13",
+        "standard_ids": [
+          "PR:000016672"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000166345",
+      "PR:Q15645"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q15645",
+      "https://string-db.org/network/9606.ENSP00000166345",
+      "https://purl.obolibrary.org/obo/PR_Q15645"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "4e5f6facf34d70a64607094a037e03e1be4a3c7e8b2825b33209ab08a5809698",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-d53f51190cd85829",
+    "name": "adrenal medulla cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "9dd51169a9b0eb09dd1a9f44c2801286958668785ddefac632a05fd34a5ff779",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-4e8c11523b78246b",
+    "name": "ATM",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000149311",
+      "NCBIGene:472",
+      "HGNC:795"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=472&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F795",
+      "https://www.ensembl.org/id/ENSG00000149311",
+      "https://www.ncbi.nlm.nih.gov/gene/472",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:795"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "4571b1c2770c378ab8a85f4f45edc83e3a73bd2bd979a2d3eb3e0061bff7d195",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-f227cf937d244f25",
+    "name": "digitolutein",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41620901/"
+    ],
+    "primary_reason": "unresolved_exact_identity_or_type_collision",
+    "original_record_sha256": "04d1ab8213454c43adea757c99c0b61f184fbedc8bc301e296726c0dbf1709f6",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-86851a128e9cf2df",
+    "name": "Pre-NOTCH Processing in the Endoplasmic Reticulum",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-1912399"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-1912399",
+      "https://reactome.org/content/detail/R-HSA-1912399"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "51026bfae416a4e480df475a9c96cd51fd5f01250a38afd45ba66e833b83546f",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-06db0535fb1e2f25",
+    "name": "SAMM50",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-6896fb644db9750e37e8",
+        "name": "sorting and assembly machinery component 50",
+        "standard_ids": [
+          "PR:000014444"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000345445",
+      "PR:Q9Y512"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9Y512",
+      "https://string-db.org/network/9606.ENSP00000345445",
+      "https://purl.obolibrary.org/obo/PR_Q9Y512"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "1110c2d104550700ef37d082c69f2cfe8c018dcd5cbbb6cce7a6d94ed1eb4afe",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-f1c6149c5e849471",
+    "name": "urothelial cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CL:0000731"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0000731"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "86ce64a66e112562552f443322bddd7664f7874c9b636435eeb1e2b5e2042064",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-ed5af9eeee32ffa3",
+    "name": "A2M",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000175899",
+      "NCBIGene:2",
+      "HGNC:7"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=2&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F7",
+      "https://www.ensembl.org/id/ENSG00000175899",
+      "https://www.ncbi.nlm.nih.gov/gene/2",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:7"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "8d7123278d9b0ec2bfa8e2cc751a70769fe611747ac82073599bad98e2508c77",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-ffb24df57191d9d8",
+    "name": "TC",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/"
+    ],
+    "primary_reason": "unresolved_exact_identity_or_type_collision",
+    "original_record_sha256": "1d275669fb1eb2df445a738dab4cc937411478cf1323b03283f41b1d763b3993",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-7b02ed560a27a0a7",
+    "name": "coagulation pathways",
+    "kind": "Pathway",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41902413/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "39212ffd811942cafd26131020eff1220080effbe0a54652a26c9c39de46a70a",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-3a5c2b0c0bb16011",
+    "name": "AHCY",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-7a5e0f704d60284ff7d8",
+        "name": "adenosylhomocysteinase",
+        "standard_ids": [
+          "PR:000003854"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000217426",
+      "PR:P23526"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P23526",
+      "https://string-db.org/network/9606.ENSP00000217426",
+      "https://purl.obolibrary.org/obo/PR_P23526"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "84bb475d6be3e142cda06ba9ddd13da44fd2f218fe5f898db50fe12d351695c9",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-cf6babe2b0c8aa06",
+    "name": "schwann cells",
+    "kind": "CellType",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-1d1cde7b749fec85af88",
+        "name": "glial cell",
+        "standard_ids": [
+          "CL:0000125"
+        ]
+      }
+    ],
+    "identifiers": [
+      "CL:0002573"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0002573"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "65ca083e8b7a646959292867aab34bc0332f648e5ec1a2230e7f260a4db086c2",
+    "reviewed_status": "inserted",
+    "reviewed_maps_to": true
+  },
+  {
+    "case_id": "case-f658f8505f631a6c",
+    "name": "CSMD1",
+    "kind": "Gene",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "ENSEMBL:ENSG00000183117",
+      "NCBIGene:64478",
+      "HGNC:14026"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=64478&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F14026",
+      "https://www.ensembl.org/id/ENSG00000183117",
+      "https://www.ncbi.nlm.nih.gov/gene/64478",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:14026"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "f72f97544d29bb3503e2028b89d0399a04add42df04a25300f9b46921b6fd75e",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  },
+  {
+    "case_id": "case-f5e3f57f8e26f828",
+    "name": "coumarin",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CHEBI:28794"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_28794",
+      "https://pubmed.ncbi.nlm.nih.gov/41620901/",
+      "https://purl.obolibrary.org/obo/CHEBI_28794"
+    ],
+    "primary_reason": "unresolved_exact_identity_or_type_collision",
+    "original_record_sha256": "d8943636add4b0f79e0ecda33be7a1384d42a203634299d2e61fca4d0583bee0",
+    "reviewed_status": "needs_review",
+    "reviewed_maps_to": false
+  }
+]

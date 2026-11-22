@@ -13,6 +13,7 @@ from .ols_client import (
 
 OLS_SOURCES = {
     "HGNC": ("hgnc", "HGNC"),
+    "SO": ("so", "SO"),
     "MONDO": ("mondo", "MONDO"),
     "PRO": ("pr", "PR"),
     "ChEBI": ("chebi", "CHEBI"),
@@ -45,6 +46,12 @@ NONHUMAN_PREFIX = re.compile(
     r"zebrafish|danio rerio|drosophila)\s+", re.I
 )
 HGNC_ALIAS_TYPES = tuple(OBO + code for code in ("OMO_0003015", "OMO_0003016", "OMO_0003008"))
+SUBCLASS_OF = "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+
+
+def term_source(ident):
+    return next((name for name, (_, prefix) in OLS_SOURCES.items()
+                 if isinstance(ident, str) and ident.startswith(prefix + ":")), None)
 
 
 def _oboid(iri, prefix):
@@ -65,6 +72,13 @@ def _consistent_id(value, term_id, prefix):
 
 def _key(text):
     return " ".join(normalize("NFKC", text).casefold().split())
+
+
+def observed_label_key(source, label):
+    """Compare separators for Sequence Ontology labels while preserving other names."""
+    if source == "SO":
+        label = re.sub(r"[_-]+", " ", normalize("NFKC", label))
+    return _key(label)
 
 
 def _concept_queries(concept, *, human_gene=False):
@@ -145,34 +159,79 @@ class OntologyOLS:
         if not detail:
             return {"record": None}
         term, _, synonyms, parents = detail
-        return {"record": {**term, "synonyms": synonyms[:12],
-                           "direct_parent_ids": self._parent_ids(parents, prefix)}}
+        return {"record": self._record(source, {**term, "synonyms": synonyms}, parents)}
 
     @staticmethod
-    def _parent_ids(parents, prefix):
-        return sorted({ident for iri in parents if (ident := _oboid(iri, prefix))})
+    def _record(source, term, parents):
+        # HGNC locus classes can have named SO superclasses. Never infer
+        # subclass relations between individual HGNC loci.
+        prefix = "SO" if source == "HGNC" else OLS_SOURCES[source][1]
+        parent_ids = sorted({ident for iri in parents if (ident := _oboid(iri, prefix))})
+        return {**term, "source": source, "direct_parent_ids": parent_ids,
+                "parent_relations": [{"child_id": term["term_id"], "parent_id": parent,
+                                      "predicate": "is_a", "source": source, "parent_source": term_source(parent),
+                                      "field": term.get("subclass_field", "directParent"),
+                                      "source_url": term["source_url"]} for parent in parent_ids]}
+
+    def verify_observed_id(self, source, concept, term_id):
+        """Bind a search lead only after its official identity agrees with the endpoint."""
+        if not self._eligible(source, concept):
+            return {"terms": [], "reason": "incompatible_entity_type_or_species"}
+        supplied = {ident for ident in concept.get("standard_ids", []) if term_source(ident) == source}
+        if concept.get("go_id") and source == "GO":
+            supplied.add(concept["go_id"])
+        if supplied and supplied != {term_id}:
+            return {"terms": [], "reason": "observed_id_conflicts_with_supplied_id"}
+        if supplied:
+            return self.verify_endpoint(source, concept)
+        record = self.inspect_term(source, term_id)["record"]
+        queries = _concept_queries(concept, human_gene=source == "HGNC")
+        if record is not None:
+            labels = [s for s in (record["name"], record.get("symbol")) if s]
+            synonyms = record["synonyms"]
+            match = _match({_key(name) for name in queries}, labels, synonyms)
+            if not match and source == "SO":
+                forms = {observed_label_key(source, name) for name in queries}
+                if any(observed_label_key(source, label) in forms for label in labels):
+                    match = "normalized_so_label"
+                elif any(observed_label_key(source, label) in forms for label in synonyms):
+                    match = "normalized_so_synonym"
+            if match and (source != "GO" or record.get("definition")):
+                return {"terms": [{**record, "concept_id": concept["id"], "match": match}],
+                        "reason": None}
+        return {"terms": [], "reason": "observed_id_scope_unconfirmed"}
+
+    @staticmethod
+    def _eligible(source, concept):
+        if concept["kind"] != "Gene":
+            return source not in {"HGNC", "SO"}
+        if source == "SO":
+            return True
+        taxon = str(concept.get("taxon_id") or "9606").removeprefix("NCBITaxon:")
+        return source == "HGNC" and taxon == "9606" and not NONHUMAN_PREFIX.match(concept["name"].strip())
 
     def verify_endpoint(self, source, concept, *, name=None):
         """Verify an endpoint against official records and return its direct superclass IDs."""
         ontology, prefix = OLS_SOURCES[source]
-        if (source == "HGNC") != (concept["kind"] == "Gene"):
-            return {"terms": [], "reason": "gene_identity_requires_hgnc"}
+        if not self._eligible(source, concept):
+            return {"terms": [], "reason": "UNCERTAIN" if source == "HGNC" and concept["kind"] == "Gene"
+                    else "incompatible_entity_type_or_species"}
+        ids = {ident for ident in concept.get("standard_ids", []) if term_source(ident) == source}
         if source == "GO" and concept.get("go_id") and GO_ID.fullmatch(concept["go_id"]):
-            detail = self._detail(ontology, prefix, OBO + concept["go_id"].replace(":", "_"))
-            records = [] if detail is None else [({**detail[0], "concept_id": concept["id"],
-                                                    "match": "supplied_id"}, detail[3])]
-            issue = None
-        else:
-            aliases = [concept["name"], *concept.get("aliases", [])]
-            if name:
-                if name not in aliases:
-                    raise ValueError("Verification requires a name or alias supplied for this endpoint")
-                # Retain the original name for the HGNC species check.
-                if NONHUMAN_PREFIX.match(concept["name"].strip()) and source == "HGNC":
-                    return {"terms": [], "reason": "UNCERTAIN"}
-                concept = {**concept, "name": name, "aliases": [label for label in aliases if label != name]}
-            records, issue = self._terms(concept, ontology, prefix)
-        terms = [{**term, "source": source, "direct_parent_ids": self._parent_ids(parents, prefix)}
+            ids.add(concept["go_id"])
+        if len(ids) > 1:
+            return {"terms": [], "reason": "ambiguous_source_ids"}
+        if ids:
+            record = self.inspect_term(source, ids.pop())["record"]
+            return {"terms": [{**record, "concept_id": concept["id"], "match": "supplied_id"}]
+                    if record and (source != "GO" or record.get("definition")) else [], "reason": None}
+        aliases = [concept["name"], *concept.get("aliases", [])]
+        if name:
+            if name not in aliases:
+                raise ValueError("Verification requires a name or alias supplied for this endpoint")
+            concept = {**concept, "name": name, "aliases": [label for label in aliases if label != name]}
+        records, issue = self._terms(concept, ontology, prefix)
+        terms = [self._record(source, term, parents)
                  for term, parents in records if source != "GO" or term.get("definition")]
         return {"terms": terms if not issue else [], "reason": issue}
 
@@ -237,20 +296,39 @@ class OntologyOLS:
             definition for definition in _values(row.get("definition"))
             if not definition.startswith("Category=")
         ]
+        # EBI's DirectParentsAnnotator populates this field on named classes
+        # from URI-valued rdfs:subClassOf only. hierarchicalParent also
+        # contains e.g. part_of fillers and must never be used here.
+        parents = set(_values(row.get("directParent")))
+        field = "directParent"
+        if SUBCLASS_OF in row:
+            # Only the named class itself is a superclass. Fillers of OWL
+            # restrictions (e.g. part_of some cell) are not superclasses.
+            parents.intersection_update(_values(row[SUBCLASS_OF]))
+            field = SUBCLASS_OF
         if prefix == "HGNC":
             # The HGNC index puts the official gene name in its definition field.
             name = definitions[0] if definitions else labels[0]
             return (
                 {"term_id": term_id, "name": name, "symbol": labels[0], "definition": None,
-                 "organism": "Homo sapiens", "iri": iri, "source_url": url},
-                [*labels, name], _gene_aliases(row), set(),
+                 "organism": "Homo sapiens", "iri": iri, "source_url": url, "subclass_field": field},
+                [*labels, name], _gene_aliases(row), {iri for iri in parents if _oboid(iri, "SO")},
             )
+        attributes = {}
+        if prefix == "PR":
+            attributes["database_xrefs"] = _values(row.get(OBO_IN_OWL + "hasDbXref"))
+            attributes["taxon_ids"] = sorted({
+                restriction["http://www.w3.org/2002/07/owl#someValuesFrom"].split("_")[-1]
+                for restriction in row.get(SUBCLASS_OF, []) if isinstance(restriction, dict)
+                and restriction.get("http://www.w3.org/2002/07/owl#onProperty") == OBO + "RO_0002162"
+                and str(restriction.get("http://www.w3.org/2002/07/owl#someValuesFrom")).startswith(OBO + "NCBITaxon_")
+            })
         return (
             {"term_id": term_id, "name": labels[0], "definition": definitions[0] if definitions else None,
-             "iri": iri, "source_url": url},
+             "iri": iri, "source_url": url, "subclass_field": field, **attributes},
             labels,
             _values(row.get(EXACT_SYNONYM)),
-            set(_values(row.get("directParent"))),
+            parents,
         )
 
     def _gene_name_details(self, ontology, prefix, query):
@@ -290,7 +368,8 @@ class OntologyOLS:
                 term, labels, synonyms, parents = detail
                 match = _match({_key(query)}, labels, synonyms)
                 if match is not None:
-                    matches[term["term_id"]] = ({**term, "concept_id": concept["id"], "match": match}, parents)
+                    matches[term["term_id"]] = ({**term, "synonyms": synonyms,
+                                                "concept_id": concept["id"], "match": match}, parents)
             if len(matches) > 1:
                 return [], "UNCERTAIN"
             if matches:
@@ -321,7 +400,8 @@ class OntologyOLS:
                     term, labels, synonyms, parent_iris = detail
                     match = _match(names, labels, synonyms)
                     if match is not None:
-                        found.append(({**term, "concept_id": concept["id"], "match": match}, parent_iris))
+                        found.append(({**term, "synonyms": synonyms,
+                                       "concept_id": concept["id"], "match": match}, parent_iris))
                 if len(visited) >= MAX_DETAILS or len(found) >= MAX_TERM_CANDIDATES:
                     return found, "LOOKUP_FAILED" if failed else None
             if found:
@@ -334,7 +414,6 @@ class OntologyOLS:
         if source is None:
             return {"status": "NO_MATCH", "source": None, "terms": [], "relations": [],
                     "reason": "unsupported_entity_type"}
-        ontology, prefix = OLS_SOURCES[source]
         selected = {concept["id"]: concept}
         pairs = set()
         for question in questions:
@@ -351,21 +430,22 @@ class OntologyOLS:
 
         rows, issues = {}, set()
         for ident, row in selected.items():
-            rows[ident], issue = self._terms(row, ontology, prefix)
-            if issue:
-                issues.add(issue)
+            try:
+                endpoint = self.verify_endpoint(source, row)
+            except OLSError:
+                endpoint = {"terms": [], "reason": "LOOKUP_FAILED"}
+            rows[ident] = endpoint["terms"]
+            if endpoint["reason"]:
+                issues.add(endpoint["reason"])
 
-        terms = [term for matched in rows.values() for term, _ in matched]
+        terms = [term for matched in rows.values() for term in matched]
         relations = {}
         for child, parent in sorted(pairs):
-            for current, parent_iris in rows.get(child, []):
-                for candidate, _ in rows.get(parent, []):
-                    edge = (current["term_id"], candidate["term_id"])
-                    if edge[0] != edge[1] and candidate["iri"] in parent_iris:
-                        relations[edge] = {
-                            "child_id": edge[0], "parent_id": edge[1],
-                            "predicate": "is_a", "source_url": current["source_url"],
-                        }
+            candidates = {candidate["term_id"] for candidate in rows.get(parent, [])}
+            for current in rows.get(child, []):
+                for edge in current["parent_relations"]:
+                    if edge["parent_id"] in candidates and edge["child_id"] != edge["parent_id"]:
+                        relations[edge["child_id"], edge["parent_id"]] = edge
         if terms:
             status, reason = "REFERENCE_ONLY", "term_candidates_for_review"
         elif "LOOKUP_FAILED" in issues:

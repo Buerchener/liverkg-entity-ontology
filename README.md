@@ -31,6 +31,8 @@ Code, commands and databases keep their original `liverkg` names, for example th
 
 The extraction agent, the ontology workflow and the integration layer form one Python package in [`pubmed_literature_extraction/`](pubmed_literature_extraction) with a single command, `liverkg`.
 
+**KG-guided enrichment (Evidence-v4).** A separate workflow places unmatched LiverKG nodes in a copy of the literature ontology. In a 105-node experiment, 63 mappings and 47 specific hierarchy edges passed the release review. [Run the enrichment pipeline](pubmed_literature_extraction/entity_ontology/enrichment/README.md) · [Experiment report and reviewed results (Chinese)](pubmed_literature_extraction/benchmark_output/ontology-enrichment-evidence-v4/report.zh.md)
+
 ## Explore the published graph
 
 One abstract reports a change in the expression of **collagen I**. LiverTrail records that occurrence as `41692141:M05` and links it to the protein concept `C-ad58a8434684`. The abstract supplies evidence for the mention. The hierarchy builder separately proposes *extracellular matrix proteins* as its parent. [Source abstract](https://pubmed.ncbi.nlm.nih.gov/41692141/) · [Versioned graph release](https://github.com/Buerchener/liverkg-entity-ontology/releases/tag/results-entity-100-ols-agent-v1)

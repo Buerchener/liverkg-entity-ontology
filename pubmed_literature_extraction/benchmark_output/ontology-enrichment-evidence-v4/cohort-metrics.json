@@ -1,0 +1,1289 @@
+{
+  "confirmed-blind-flash": {
+    "model": "qwen3.7-flash",
+    "counts": {
+      "nodes": 14,
+      "retrieved_parent_candidate": 6,
+      "source_direct_parents": 6,
+      "verified_specific_parent": 5,
+      "published_specific_parent": 5,
+      "published_root_only": 1,
+      "existing_identity_reused": 0,
+      "maps_to": 6,
+      "inserted": 6,
+      "sourced_definitions": 8,
+      "outcomes": {
+        "needs_review": 8,
+        "inserted": 6
+      }
+    },
+    "by_type": {
+      "CellType": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 0,
+        "outcomes": {
+          "needs_review": 2
+        }
+      },
+      "Disease": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "needs_review": 2
+        }
+      },
+      "Gene": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Metabolite": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 0,
+        "outcomes": {
+          "needs_review": 2
+        }
+      },
+      "Pathway": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 1,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "needs_review": 1,
+          "inserted": 1
+        }
+      },
+      "Protein": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Tissue": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "inserted": 1,
+          "needs_review": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 104,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.028454172366621067,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 40,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.01094391244870041,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.42857142857142855,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 6,
+    "new_edges": 14,
+    "source_of_new_edges": {
+      "external_parent_fallback": 7,
+      "schema_type_assignment": 7
+    },
+    "workflow_digest": "332e16797de050b27bf13b541527e91e47640747c3fca6af94f33aee9e1b994b",
+    "primary_reason_counts": {
+      "source_definition_missing": 6,
+      "ambiguous_or_insufficient_evidence": 1,
+      "proposal_format_after_bounded_retry": 1
+    },
+    "cases_file": "cohorts/confirmed-blind-flash.json"
+  },
+  "refined-regression-flash": {
+    "model": "qwen3.7-flash",
+    "counts": {
+      "nodes": 14,
+      "retrieved_parent_candidate": 10,
+      "source_direct_parents": 9,
+      "verified_specific_parent": 8,
+      "published_specific_parent": 8,
+      "published_root_only": 2,
+      "existing_identity_reused": 0,
+      "maps_to": 10,
+      "inserted": 10,
+      "sourced_definitions": 12,
+      "outcomes": {
+        "inserted": 10,
+        "needs_review": 4
+      }
+    },
+    "by_type": {
+      "CellType": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Disease": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "inserted": 1,
+          "needs_review": 1
+        }
+      },
+      "Gene": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Metabolite": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 1,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "needs_review": 1,
+          "inserted": 1
+        }
+      },
+      "Pathway": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 1,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "needs_review": 1,
+          "inserted": 1
+        }
+      },
+      "Protein": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Tissue": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 1,
+          "needs_review": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 108,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.029548563611491108,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 44,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.012038303693570451,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.7142857142857143,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 9,
+    "new_edges": 21,
+    "source_of_new_edges": {
+      "external_parent_fallback": 10,
+      "schema_type_assignment": 11
+    },
+    "workflow_digest": "f681e0d707cdb4fe86b5e8da5bc3026abb1b43e16547d633f2cc810c411c7088",
+    "primary_reason_counts": {
+      "source_definition_missing": 2,
+      "hierarchy_or_schema_membership_unverified": 1,
+      "definition_scope_requires_review": 1
+    },
+    "cases_file": "cohorts/refined-regression-flash.json"
+  },
+  "before-independent-flash": {
+    "model": "qwen3.7-flash",
+    "counts": {
+      "nodes": 14,
+      "retrieved_parent_candidate": 5,
+      "source_direct_parents": 5,
+      "verified_specific_parent": 4,
+      "published_specific_parent": 4,
+      "published_root_only": 1,
+      "existing_identity_reused": 0,
+      "maps_to": 5,
+      "inserted": 5,
+      "sourced_definitions": 7,
+      "outcomes": {
+        "needs_review": 6,
+        "rejected": 3,
+        "inserted": 5
+      }
+    },
+    "by_type": {
+      "CellType": {
+        "nodes": 3,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 0,
+        "outcomes": {
+          "needs_review": 3
+        }
+      },
+      "Disease": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 0,
+        "outcomes": {
+          "rejected": 2
+        }
+      },
+      "Gene": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Metabolite": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "needs_review": 1,
+          "rejected": 1
+        }
+      },
+      "Pathway": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 1,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "needs_review": 1,
+          "inserted": 1
+        }
+      },
+      "Protein": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Tissue": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 0,
+        "outcomes": {
+          "needs_review": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 103,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.028180574555403556,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 39,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.0106703146374829,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.35714285714285715,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 3,
+    "new_edges": 8,
+    "source_of_new_edges": {
+      "external_parent_fallback": 4,
+      "schema_type_assignment": 4
+    },
+    "workflow_digest": "332e16797de050b27bf13b541527e91e47640747c3fca6af94f33aee9e1b994b",
+    "primary_reason_counts": {
+      "source_definition_missing": 5,
+      "prior_source_review_identified_input_issue": 2,
+      "proposal_format_after_bounded_retry": 1,
+      "hierarchy_or_schema_membership_unverified": 1
+    },
+    "cases_file": "cohorts/before-independent-flash.json"
+  },
+  "refined-independent-flash": {
+    "model": "qwen3.7-flash",
+    "counts": {
+      "nodes": 14,
+      "retrieved_parent_candidate": 6,
+      "source_direct_parents": 5,
+      "verified_specific_parent": 5,
+      "published_specific_parent": 5,
+      "published_root_only": 1,
+      "existing_identity_reused": 0,
+      "maps_to": 6,
+      "inserted": 6,
+      "sourced_definitions": 9,
+      "outcomes": {
+        "needs_review": 6,
+        "rejected": 2,
+        "inserted": 6
+      }
+    },
+    "by_type": {
+      "CellType": {
+        "nodes": 3,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 0,
+        "outcomes": {
+          "needs_review": 3
+        }
+      },
+      "Disease": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "rejected": 2
+        }
+      },
+      "Gene": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Metabolite": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "needs_review": 1,
+          "inserted": 1
+        }
+      },
+      "Pathway": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 1,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "needs_review": 1,
+          "inserted": 1
+        }
+      },
+      "Protein": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Tissue": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "needs_review": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 104,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.028454172366621067,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 40,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.01094391244870041,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.42857142857142855,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 3,
+    "new_edges": 9,
+    "source_of_new_edges": {
+      "external_parent_fallback": 4,
+      "schema_type_assignment": 4,
+      "independent_definition_review": 1
+    },
+    "workflow_digest": "f681e0d707cdb4fe86b5e8da5bc3026abb1b43e16547d633f2cc810c411c7088",
+    "primary_reason_counts": {
+      "source_definition_missing": 4,
+      "prior_source_review_identified_input_issue": 2,
+      "hierarchy_or_schema_membership_unverified": 1,
+      "definition_scope_requires_review": 1
+    },
+    "cases_file": "cohorts/refined-independent-flash.json"
+  },
+  "refined-confirmatory-flash": {
+    "model": "qwen3.7-flash",
+    "counts": {
+      "nodes": 10,
+      "retrieved_parent_candidate": 7,
+      "source_direct_parents": 7,
+      "verified_specific_parent": 5,
+      "published_specific_parent": 5,
+      "published_root_only": 3,
+      "existing_identity_reused": 0,
+      "maps_to": 8,
+      "inserted": 8,
+      "sourced_definitions": 9,
+      "outcomes": {
+        "needs_review": 2,
+        "inserted": 8
+      }
+    },
+    "by_type": {
+      "CellType": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "needs_review": 1,
+          "inserted": 1
+        }
+      },
+      "Gene": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Metabolite": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 1,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "needs_review": 1,
+          "inserted": 1
+        }
+      },
+      "Pathway": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 2,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      },
+      "Protein": {
+        "nodes": 2,
+        "retrieved_parent_candidate": 2,
+        "source_direct_parents": 2,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 2,
+        "outcomes": {
+          "inserted": 2
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 106,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.029001367989056087,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 42,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.01149110807113543,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.8,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 6,
+    "new_edges": 16,
+    "source_of_new_edges": {
+      "external_parent_fallback": 7,
+      "schema_type_assignment": 9
+    },
+    "workflow_digest": "f681e0d707cdb4fe86b5e8da5bc3026abb1b43e16547d633f2cc810c411c7088",
+    "primary_reason_counts": {
+      "source_definition_missing": 1,
+      "hierarchy_or_schema_membership_unverified": 1
+    },
+    "cases_file": "cohorts/refined-confirmatory-flash.json"
+  },
+  "after-difficult-plus": {
+    "model": "qwen3.7-plus",
+    "counts": {
+      "nodes": 1,
+      "retrieved_parent_candidate": 1,
+      "source_direct_parents": 0,
+      "verified_specific_parent": 0,
+      "published_specific_parent": 0,
+      "published_root_only": 0,
+      "existing_identity_reused": 0,
+      "maps_to": 0,
+      "inserted": 0,
+      "sourced_definitions": 1,
+      "outcomes": {
+        "needs_review": 1
+      }
+    },
+    "by_type": {
+      "Pathway": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "needs_review": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 98,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.026812585499316005,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 34,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.009302325581395349,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.0,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 0,
+    "new_edges": 0,
+    "source_of_new_edges": {},
+    "workflow_digest": "3d6701aea25707956f1923c81dbd882999cff6a1cb5e2269a0b9d10ce4c6a598",
+    "primary_reason_counts": {
+      "hierarchy_or_schema_membership_unverified": 1
+    },
+    "cases_file": "cohorts/after-difficult-plus.json"
+  },
+  "after-tyramine-flash": {
+    "model": "qwen3.7-flash",
+    "counts": {
+      "nodes": 1,
+      "retrieved_parent_candidate": 1,
+      "source_direct_parents": 1,
+      "verified_specific_parent": 0,
+      "published_specific_parent": 0,
+      "published_root_only": 1,
+      "existing_identity_reused": 0,
+      "maps_to": 1,
+      "inserted": 1,
+      "sourced_definitions": 1,
+      "outcomes": {
+        "inserted": 1
+      }
+    },
+    "by_type": {
+      "Metabolite": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 1,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "inserted": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 99,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.027086183310533515,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 35,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.009575923392612859,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 1.0,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 0,
+    "new_edges": 1,
+    "source_of_new_edges": {
+      "schema_type_assignment": 1
+    },
+    "workflow_digest": "3d6701aea25707956f1923c81dbd882999cff6a1cb5e2269a0b9d10ce4c6a598",
+    "primary_reason_counts": {},
+    "cases_file": "cohorts/after-tyramine-flash.json"
+  },
+  "after-scale-flash": {
+    "model": "qwen3.7-flash",
+    "counts": {
+      "nodes": 105,
+      "retrieved_parent_candidate": 66,
+      "source_direct_parents": 65,
+      "verified_specific_parent": 25,
+      "published_specific_parent": 25,
+      "published_root_only": 21,
+      "existing_identity_reused": 1,
+      "maps_to": 47,
+      "inserted": 46,
+      "sourced_definitions": 82,
+      "outcomes": {
+        "inserted": 46,
+        "rejected": 2,
+        "needs_review": 56,
+        "mapped_existing": 1
+      }
+    },
+    "by_type": {
+      "CellType": {
+        "nodes": 21,
+        "retrieved_parent_candidate": 11,
+        "source_direct_parents": 11,
+        "verified_specific_parent": 5,
+        "published_specific_parent": 5,
+        "published_root_only": 0,
+        "existing_identity_reused": 1,
+        "maps_to": 6,
+        "inserted": 5,
+        "sourced_definitions": 11,
+        "outcomes": {
+          "inserted": 5,
+          "needs_review": 15,
+          "mapped_existing": 1
+        }
+      },
+      "Disease": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "rejected": 1
+        }
+      },
+      "Gene": {
+        "nodes": 21,
+        "retrieved_parent_candidate": 21,
+        "source_direct_parents": 21,
+        "verified_specific_parent": 2,
+        "published_specific_parent": 2,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 2,
+        "inserted": 2,
+        "sourced_definitions": 21,
+        "outcomes": {
+          "inserted": 2,
+          "needs_review": 19
+        }
+      },
+      "Metabolite": {
+        "nodes": 21,
+        "retrieved_parent_candidate": 12,
+        "source_direct_parents": 12,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 6,
+        "existing_identity_reused": 0,
+        "maps_to": 6,
+        "inserted": 6,
+        "sourced_definitions": 12,
+        "outcomes": {
+          "needs_review": 15,
+          "inserted": 6
+        }
+      },
+      "Pathway": {
+        "nodes": 20,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 15,
+        "existing_identity_reused": 0,
+        "maps_to": 15,
+        "inserted": 15,
+        "sourced_definitions": 16,
+        "outcomes": {
+          "inserted": 15,
+          "rejected": 1,
+          "needs_review": 4
+        }
+      },
+      "Protein": {
+        "nodes": 20,
+        "retrieved_parent_candidate": 20,
+        "source_direct_parents": 20,
+        "verified_specific_parent": 17,
+        "published_specific_parent": 17,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 17,
+        "inserted": 17,
+        "sourced_definitions": 20,
+        "outcomes": {
+          "inserted": 17,
+          "needs_review": 3
+        }
+      },
+      "Tissue": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "inserted": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 145,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.03967168262653899,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 81,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.02216142270861833,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.44761904761904764,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 25,
+    "new_edges": 72,
+    "source_of_new_edges": {
+      "external_parent_fallback": 26,
+      "schema_type_assignment": 46
+    },
+    "workflow_digest": "3d6701aea25707956f1923c81dbd882999cff6a1cb5e2269a0b9d10ce4c6a598",
+    "primary_reason_counts": {
+      "prior_source_review_identified_input_issue": 1,
+      "source_definition_missing": 19,
+      "hierarchy_or_schema_membership_unverified": 5,
+      "proposal_format_after_bounded_retry": 25,
+      "ambiguous_or_insufficient_evidence": 1,
+      "unresolved_exact_identity_or_type_collision": 7
+    },
+    "cases_file": "cohorts/after-scale-flash.json"
+  },
+  "refined-scale-flash": {
+    "model": "qwen3.7-flash",
+    "counts": {
+      "nodes": 105,
+      "retrieved_parent_candidate": 66,
+      "source_direct_parents": 65,
+      "verified_specific_parent": 42,
+      "published_specific_parent": 42,
+      "published_root_only": 21,
+      "existing_identity_reused": 1,
+      "maps_to": 64,
+      "inserted": 63,
+      "sourced_definitions": 82,
+      "outcomes": {
+        "inserted": 63,
+        "rejected": 2,
+        "needs_review": 39,
+        "mapped_existing": 1
+      }
+    },
+    "by_type": {
+      "CellType": {
+        "nodes": 21,
+        "retrieved_parent_candidate": 11,
+        "source_direct_parents": 11,
+        "verified_specific_parent": 6,
+        "published_specific_parent": 6,
+        "published_root_only": 0,
+        "existing_identity_reused": 1,
+        "maps_to": 7,
+        "inserted": 6,
+        "sourced_definitions": 11,
+        "outcomes": {
+          "inserted": 6,
+          "needs_review": 14,
+          "mapped_existing": 1
+        }
+      },
+      "Disease": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 0,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "rejected": 1
+        }
+      },
+      "Gene": {
+        "nodes": 21,
+        "retrieved_parent_candidate": 21,
+        "source_direct_parents": 21,
+        "verified_specific_parent": 18,
+        "published_specific_parent": 18,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 18,
+        "inserted": 18,
+        "sourced_definitions": 21,
+        "outcomes": {
+          "inserted": 18,
+          "needs_review": 3
+        }
+      },
+      "Metabolite": {
+        "nodes": 21,
+        "retrieved_parent_candidate": 12,
+        "source_direct_parents": 12,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 6,
+        "existing_identity_reused": 0,
+        "maps_to": 6,
+        "inserted": 6,
+        "sourced_definitions": 12,
+        "outcomes": {
+          "needs_review": 15,
+          "inserted": 6
+        }
+      },
+      "Pathway": {
+        "nodes": 20,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 15,
+        "existing_identity_reused": 0,
+        "maps_to": 15,
+        "inserted": 15,
+        "sourced_definitions": 16,
+        "outcomes": {
+          "inserted": 15,
+          "rejected": 1,
+          "needs_review": 4
+        }
+      },
+      "Protein": {
+        "nodes": 20,
+        "retrieved_parent_candidate": 20,
+        "source_direct_parents": 20,
+        "verified_specific_parent": 17,
+        "published_specific_parent": 17,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 17,
+        "inserted": 17,
+        "sourced_definitions": 20,
+        "outcomes": {
+          "inserted": 17,
+          "needs_review": 3
+        }
+      },
+      "Tissue": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "inserted": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 162,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.04432284541723666,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 98,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.026812585499316005,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.6095238095238096,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 32,
+    "new_edges": 101,
+    "source_of_new_edges": {
+      "external_parent_fallback": 48,
+      "schema_type_assignment": 53
+    },
+    "workflow_digest": "f681e0d707cdb4fe86b5e8da5bc3026abb1b43e16547d633f2cc810c411c7088",
+    "primary_reason_counts": {
+      "prior_source_review_identified_input_issue": 1,
+      "source_definition_missing": 19,
+      "hierarchy_or_schema_membership_unverified": 5,
+      "ambiguous_or_insufficient_evidence": 3,
+      "proposal_format_after_bounded_retry": 6,
+      "unresolved_exact_identity_or_type_collision": 7
+    },
+    "cases_file": "cohorts/refined-scale-flash.json"
+  },
+  "refined-scale-difficult-plus": {
+    "model": "qwen3.7-plus",
+    "counts": {
+      "nodes": 3,
+      "retrieved_parent_candidate": 3,
+      "source_direct_parents": 2,
+      "verified_specific_parent": 2,
+      "published_specific_parent": 2,
+      "published_root_only": 0,
+      "existing_identity_reused": 0,
+      "maps_to": 2,
+      "inserted": 2,
+      "sourced_definitions": 3,
+      "outcomes": {
+        "inserted": 2,
+        "needs_review": 1
+      }
+    },
+    "by_type": {
+      "CellType": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "inserted": 1
+        }
+      },
+      "Gene": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 1,
+        "verified_specific_parent": 1,
+        "published_specific_parent": 1,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 1,
+        "inserted": 1,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "inserted": 1
+        }
+      },
+      "Pathway": {
+        "nodes": 1,
+        "retrieved_parent_candidate": 1,
+        "source_direct_parents": 0,
+        "verified_specific_parent": 0,
+        "published_specific_parent": 0,
+        "published_root_only": 0,
+        "existing_identity_reused": 0,
+        "maps_to": 0,
+        "inserted": 0,
+        "sourced_definitions": 1,
+        "outcomes": {
+          "needs_review": 1
+        }
+      }
+    },
+    "coverage": {
+      "kg_population": 3655,
+      "baseline_supported_kg_nodes": 98,
+      "expanded_supported_kg_nodes": 100,
+      "supported_before": 0.026812585499316005,
+      "supported_after": 0.027359781121751026,
+      "baseline_maps_to_kg_nodes": 34,
+      "expanded_maps_to_kg_nodes": 36,
+      "maps_to_before": 0.009302325581395349,
+      "maps_to_after": 0.00984952120383037,
+      "sample_maps_to_before": 0,
+      "sample_maps_to_after": 0.6666666666666666,
+      "method": "Carry forward frozen baseline edges and add verified pilot MAPS_TO; no full-KG re-alignment."
+    },
+    "new_intermediate_parents": 3,
+    "new_edges": 7,
+    "source_of_new_edges": {
+      "independent_definition_review": 1,
+      "external_parent_fallback": 3,
+      "schema_type_assignment": 3
+    },
+    "workflow_digest": "f681e0d707cdb4fe86b5e8da5bc3026abb1b43e16547d633f2cc810c411c7088",
+    "primary_reason_counts": {
+      "hierarchy_or_schema_membership_unverified": 1
+    },
+    "cases_file": "cohorts/refined-scale-difficult-plus.json"
+  }
+}

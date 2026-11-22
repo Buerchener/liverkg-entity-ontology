@@ -1,0 +1,159 @@
+[
+  {
+    "child_id": "KG-8eac89b1c8cf31b901de",
+    "parent_id": "REF-6e3b7d22a7d4acc0705e",
+    "schema_root": false,
+    "support": "external_parent_fallback",
+    "child_reference_ids": [
+      "CL:0000553"
+    ],
+    "parent_ids": [
+      "CL:0000763"
+    ],
+    "asserted_external_endpoints": [
+      "CL:0000553",
+      "CL:0000763"
+    ],
+    "source_and_local_ids_agree": true,
+    "independent_path_pass": true,
+    "authority_path": [
+      {
+        "child": "CL:0000553",
+        "parent": "CL:0000763",
+        "named_obo_subclass": true,
+        "obo_line": 7141,
+        "obo": {
+          "release": "releases/2026-11-13",
+          "source_url": "https://purl.obolibrary.org/obo/cl.obo",
+          "sha256": "f6c5911182da822693ac55e5cc3ca240301ac93e9a0b2494e87909705c852941"
+        }
+      }
+    ],
+    "case_id": "case-2d690640384b4f3a"
+  },
+  {
+    "child_id": "KG-8eac89b1c8cf31b901de",
+    "parent_id": "REF-24af297fb16dba3aba07",
+    "schema_root": false,
+    "support": "external_parent_fallback",
+    "child_reference_ids": [
+      "CL:0000553"
+    ],
+    "parent_ids": [
+      "CL:0000839"
+    ],
+    "asserted_external_endpoints": [
+      "CL:0000553",
+      "CL:0000839"
+    ],
+    "source_and_local_ids_agree": true,
+    "independent_path_pass": true,
+    "authority_path": [
+      {
+        "child": "CL:0000553",
+        "parent": "CL:0000839",
+        "named_obo_subclass": false,
+        "obo_line": 7142,
+        "named_owl_subclass": true,
+        "ols_direct_class_parent": true,
+        "response_sha256": "7993e2bc8c740cf497b9db1ad7b5a21920a59467ec30ec29a37d46441443c5ed",
+        "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/cl/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCL_0000553",
+        "obo": {
+          "release": "releases/2026-11-13",
+          "source_url": "https://purl.obolibrary.org/obo/cl.obo",
+          "sha256": "f6c5911182da822693ac55e5cc3ca240301ac93e9a0b2494e87909705c852941"
+        }
+      }
+    ],
+    "case_id": "case-2d690640384b4f3a"
+  },
+  {
+    "child_id": "REF-6e3b7d22a7d4acc0705e",
+    "parent_id": "type:CellType",
+    "schema_root": true,
+    "support": "schema_type_assignment",
+    "child_reference_ids": [],
+    "parent_ids": [],
+    "authority_path": [],
+    "case_id": "case-2d690640384b4f3a",
+    "source": {
+      "identifiers": [
+        "CL:0000763"
+      ],
+      "definition_source": null,
+      "source_field": null,
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0000763"
+      ]
+    }
+  },
+  {
+    "child_id": "REF-24af297fb16dba3aba07",
+    "parent_id": "type:CellType",
+    "schema_root": true,
+    "support": "schema_type_assignment",
+    "child_reference_ids": [],
+    "parent_ids": [],
+    "authority_path": [],
+    "case_id": "case-2d690640384b4f3a",
+    "source": {
+      "identifiers": [
+        "CL:0000839"
+      ],
+      "definition_source": null,
+      "source_field": null,
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0000839"
+      ]
+    }
+  },
+  {
+    "child_id": "KG-654e31e5f4c76eec3bb3",
+    "parent_id": "REF-cb171343d7e694394b23",
+    "schema_root": false,
+    "support": "external_parent_fallback",
+    "child_reference_ids": [
+      "HGNC:11178"
+    ],
+    "parent_ids": [
+      "SO:0001217"
+    ],
+    "asserted_external_endpoints": [
+      "HGNC:11178",
+      "SO:0001217"
+    ],
+    "source_and_local_ids_agree": true,
+    "independent_path_pass": true,
+    "authority_path": [
+      {
+        "child": "HGNC:11178",
+        "parent": "SO:0001217",
+        "named_owl_subclass": true,
+        "ols_direct_class_parent": true,
+        "response_sha256": "a96590452b06d99bcaaccba089baba424f6f5eec66b19c569646db1a8684015d",
+        "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11178"
+      }
+    ],
+    "case_id": "case-6d7b29f077b666c6"
+  },
+  {
+    "child_id": "REF-cb171343d7e694394b23",
+    "parent_id": "type:Gene",
+    "schema_root": true,
+    "support": "schema_type_assignment",
+    "child_reference_ids": [],
+    "parent_ids": [],
+    "authority_path": [],
+    "case_id": "case-6d7b29f077b666c6",
+    "source": {
+      "identifiers": [
+        "SO:0001217"
+      ],
+      "definition_source": null,
+      "source_field": null,
+      "links": [
+        "https://purl.obolibrary.org/obo/SO_0001217"
+      ]
+    }
+  }
+]

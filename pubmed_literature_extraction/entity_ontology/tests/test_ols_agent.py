@@ -7,7 +7,7 @@ from unittest.mock import Mock, patch
 
 from entity_ontology.hierarchy.entity_reference import EntityReferenceLookup, evidence_for_pair
 from entity_ontology.hierarchy.ols_reference import MAX_STEPS, OLSReferenceAgent
-from entity_ontology.hierarchy.ontology_ols import OLS_SOURCES, OntologyOLS
+from entity_ontology.hierarchy.ontology_ols import OLS_SOURCES, OntologyOLS, SUBCLASS_OF
 from entity_ontology.hierarchy.ols_client import OLSClient, OLSError
 from entity_ontology.hierarchy.entity_placement_dag import EntityDAG
 from entity_ontology.hierarchy.placement import place_one, review_item
@@ -100,6 +100,54 @@ class OLSAgentTests(TestCase):
         catalog = OntologyOLS(mcp=mcp, get_json=FakeOLS({"Example cell": [item]}, item))
         self.assertEqual(catalog.search_source("CL", "Example cell"),
                          {"transport": "rest", "hits": [{"term_id": "CL:1", "label": "Example cell"}]})
+
+    def test_discovered_id_is_inspected_without_repeating_search_and_scope_is_checked(self):
+        child = {**CHILD, "name": "Example cell", "kind": "CellType"}
+        parent = {**PARENT, "kind": "CellType"}
+        for official_name, should_bind in [("Example cell", True), ("Other cell", False)]:
+            with self.subTest(official_name=official_name):
+                item = term("CL:1", "cl", official_name)
+                remote = FakeOLS({}, item)
+                mcp = Mock()
+                mcp.search_classes.return_value = [item]
+                plan = Mock(side_effect=[
+                    [{"id": "next", "action": "search", "source": "CL", "query": child["name"]}],
+                    [{"id": "next", "action": "verify", "source": "CL", "endpoint_id": child["id"]}],
+                    [{"id": "next", "action": "stop"}],
+                ])
+                result = OLSReferenceAgent(plan, catalog=OntologyOLS(get_json=remote, mcp=mcp)).lookup(
+                    child, [review_item("q", child, parent)])
+                self.assertEqual([u.path.endswith("/search") for u in remote.lookups], [False])
+                self.assertEqual(result["query_records"][1]["arguments"]["term_id"], "CL:1")
+                self.assertEqual(bool(result["terms"]), should_bind)
+
+    def test_cross_namespace_proof_records_both_sources_without_following_owl_restrictions(self):
+        child = {**CHILD, "name": "HGNC locus", "kind": "Gene"}
+        parent = {**PARENT, "name": "SO gene class", "kind": "Gene"}
+        edge = {"source": "HGNC", "parent_source": "SO", "child_id": "HGNC:123", "parent_id": "SO:456",
+                "field": SUBCLASS_OF, "predicate": "is_a", "source_url": "https://example.test/hgnc/123"}
+        for node, src, ident, parents in ((child, "HGNC", "HGNC:123", [edge]), (parent, "SO", "SO:456", [])):
+            node["reference_terms"] = [{"source": src, "term_id": ident, "name": node["name"],
+                                        "definition": node["definition"], "identity_evidence": {"record_id": ident},
+                                        "source_url": "https://example.test/" + ident,
+                                        "parent_relations": parents, "direct_parent_ids": [e["parent_id"] for e in parents]}]
+        planner = Mock(side_effect=AssertionError("No model action needed for a complete proof"))
+        q = review_item("q", child, parent)
+        r = OLSReferenceAgent(planner).lookup(child, [q])
+        self.assertEqual(r["tool_calls"], 0)
+        self.assertEqual(evidence_for_pair(q, r)["is_a_evidence"], [edge])
+        self.assertIsNone(evidence_for_pair(review_item("reverse", parent, child), r))
+
+    def test_even_an_explicitly_selected_search_lead_cannot_override_a_supplied_id(self):
+        remote = FakeOLS({})
+        catalog = OntologyOLS(get_json=remote)
+        for source, node, wrong in (
+            ("MONDO", {**CHILD, "standard_ids": ["MONDO:11"]}, "MONDO:12"),
+            ("GO", {**CHILD, "kind": "Pathway", "go_id": "GO:0000001"}, "GO:0000002"),
+        ):
+            result = catalog.verify_observed_id(source, node, wrong)
+            self.assertEqual(result, {"terms": [], "reason": "observed_id_conflicts_with_supplied_id"})
+        self.assertEqual(remote.lookups, [])
 
     def test_go_and_mondo_share_the_same_ols_mcp_search_tool(self):
         mcp = OLSClient(mode="mcp")

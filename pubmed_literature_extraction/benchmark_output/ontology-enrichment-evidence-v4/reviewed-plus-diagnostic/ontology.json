@@ -1,0 +1,5212 @@
+{
+  "view": "Reviewed ontology, projected to public labels and identifiers. Every original and added edge is retained. child_id -> parent_id.",
+  "roots": {
+    "Disease": "type:Disease",
+    "Protein": "type:Protein",
+    "Tissue": "type:Tissue",
+    "Metabolite": "type:Metabolite",
+    "CellType": "type:CellType",
+    "Pathway": "type:Pathway",
+    "Gene": "type:Gene"
+  },
+  "nodes": [
+    {
+      "id": "type:Disease",
+      "name": "Disease",
+      "kind": "Disease",
+      "origin": "schema_root",
+      "added": false
+    },
+    {
+      "id": "type:Protein",
+      "name": "Protein",
+      "kind": "Protein",
+      "origin": "schema_root",
+      "added": false
+    },
+    {
+      "id": "type:Tissue",
+      "name": "Tissue",
+      "kind": "Tissue",
+      "origin": "schema_root",
+      "added": false
+    },
+    {
+      "id": "type:Metabolite",
+      "name": "Metabolite",
+      "kind": "Metabolite",
+      "origin": "schema_root",
+      "added": false
+    },
+    {
+      "id": "type:CellType",
+      "name": "CellType",
+      "kind": "CellType",
+      "origin": "schema_root",
+      "added": false
+    },
+    {
+      "id": "type:Pathway",
+      "name": "Pathway",
+      "kind": "Pathway",
+      "origin": "schema_root",
+      "added": false
+    },
+    {
+      "id": "type:Gene",
+      "name": "Gene",
+      "kind": "Gene",
+      "origin": "schema_root",
+      "added": false
+    },
+    {
+      "id": "C-914a2b24e1fd",
+      "name": "noncirrhotic MASH",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8d0ad093fb58",
+      "name": "HCC",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-182427a299cb",
+      "name": "MASLD with steatohepatitis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8f50729754f6",
+      "name": "Rabbit VX2 tumor",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6cd2a96fe2ea",
+      "name": "postoperative intra-abdominal adhesion formation",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6f100afd4948",
+      "name": "chronic hepatitis B",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f30b6278448c",
+      "name": "steatohepatitis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-eb8ab49a9896",
+      "name": "NAFLD",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b1f254bef6c0",
+      "name": "persistent HBV infection",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8022c76f01d2",
+      "name": "chronic kidney disease",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-96b3bd2c1441",
+      "name": "renal insufficiency",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-0060e2139a24",
+      "name": "Metabolic dysfunction-associated steatotic liver disease",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-31133374cad0",
+      "name": "acute-on-chronic liver failure",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a8db63a3c0ed",
+      "name": "non-alcoholic fatty liver disease",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-40688c28a747",
+      "name": "diabetes mellitus",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d7169bc69d37",
+      "name": "decompensated cirrhosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e2c72fbb27a4",
+      "name": "Hepatic decompensation",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-7228c54e5ad2",
+      "name": "ferroptosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-14468eb40684",
+      "name": "acute viral hepatitis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6e8a46a59650",
+      "name": "acute hepatitis A",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3495bfe62446",
+      "name": "acute hepatitis C",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-0340d6b3079e",
+      "name": "acute hepatitis E",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8ee411fe23df",
+      "name": "bloodborne viruses",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a67cba71cc52",
+      "name": "intermediate-stage hepatocellular carcinoma",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-09858f0acf68",
+      "name": "hepatic encephalopathy",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-555155c28530",
+      "name": "cirrhosis-associated immune dysfunction",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-322fef11f149",
+      "name": "liver diseases",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-826f891096a2",
+      "name": "Severe fibrosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3ae2f2e1244c",
+      "name": "advanced liver fibrosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-282e9c8ba551",
+      "name": "Severe steatosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c343449e2942",
+      "name": "colorectal liver metastases",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-29895138f6a2",
+      "name": "Small cell lung cancer",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-289e0e589fec",
+      "name": "liver metastases",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d17a23ab3ec4",
+      "name": "Chronic hepatitis C virus infection",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cf5b81ad4f40",
+      "name": "Early-onset colorectal cancer",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d8aad3b47283",
+      "name": "hepatic injury",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bb4798724bd6",
+      "name": "cirrhosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a6bc3948eaf5",
+      "name": "compensated cirrhosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-67e179eda269",
+      "name": "liver cirrhosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1d7dae61ebc9",
+      "name": "non-viral cirrhosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-85b2d58c2e86",
+      "name": "Cardiovascular disease",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f306a05863d0",
+      "name": "nonalcoholic steatohepatitis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e1b0e16a818d",
+      "name": "chronic liver disease",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-414c00feb847",
+      "name": "Pulmonary fibrosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-51a472817fcf",
+      "name": "hepatoblastoma",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2a62fbb15162",
+      "name": "alcohol-induced liver steatosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a8d957bfebb5",
+      "name": "alcohol-associated liver disease",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5403dbf9d833",
+      "name": "isolated diastolic hypertension",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-42f3a9fabe0b",
+      "name": "hepatitis B virus-related intrahepatic cholangiocarcinoma",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-435e9937b17a",
+      "name": "gastric cancer",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e6013fd5cfb2",
+      "name": "liver metastasis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a0a66ed665fa",
+      "name": "Alcohol-associated hepatitis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-7542bf029b4b",
+      "name": "acute kidney injury",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-0976c72178e0",
+      "name": "infections",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-58d440be1f94",
+      "name": "dyslipidaemia",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-7d91866d795e",
+      "name": "HIV/AIDS",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5b68485e31df",
+      "name": "high blood pressure",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-329940d6cd2a",
+      "name": "Obesity",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3c4de5b5a75d",
+      "name": "Type II diabetes",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-18e2d275e63c",
+      "name": "Metabolic syndrome",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-dc03b435b0f2",
+      "name": "Hepatitis C",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ee93b190ae61",
+      "name": "cardiometabolic dysfunction",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-069f97c3c137",
+      "name": "Hepatitis B virus infection",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-001217a5a593",
+      "name": "acute hepatitis B",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-08ecf51c2643",
+      "name": "Hepatic steatosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c712e26c4eea",
+      "name": "insulin resistance",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c90ecf256f9d",
+      "name": "metabolic dysfunction",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-fc6f2d19724e",
+      "name": "HCC progression",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d1373f274002",
+      "name": "Hepatitis B",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-0ff69e6e8a97",
+      "name": "endoplasmic reticulum stress",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9de24ec9ea89",
+      "name": "MASH-associated liver fibrosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f67f7a39ee2e",
+      "name": "immune-mediated liver diseases",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-150e57b403db",
+      "name": "autoimmune hepatitis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-edf017f83a38",
+      "name": "Transient liver dysfunction",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-39be66c17296",
+      "name": "primary biliary cholangitis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a0a3f2772535",
+      "name": "heart failure",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b2591e8a263e",
+      "name": "hepatic fibrosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1efd6c2bce44",
+      "name": "unresectable hepatocellular carcinoma",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cfa63622b2ba",
+      "name": "Hepatorenal syndrome-associated acute kidney injury",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-7bef3f51fbec",
+      "name": "hepatic sarcomatoid carcinoma",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-aba42b2fc637",
+      "name": "Bullous pemphigoid",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c01e36556f95",
+      "name": "fibrosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-41cb105e593a",
+      "name": "oligometastatic pancreatic ductal adenocarcinoma",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-411ddbd70b79",
+      "name": "hepatitis B virus-related cirrhosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2f51c57cdd2f",
+      "name": "portal vein tumor thrombosis",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ec8a35e1182d",
+      "name": "congestive hepatopathy",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-215f103da1d8",
+      "name": "hemolytic anemia",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f62ee1c1ac32",
+      "name": "Esophageal variceal bleeding",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cb8110421efd",
+      "name": "upper gastrointestinal hemorrhage",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1646015114cd",
+      "name": "Liver cancer",
+      "kind": "Disease",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-de7a2ab3ff4f",
+      "name": "Hepatitis B surface antigen",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c5c0e5c909c3",
+      "name": "albumin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-88f93bff36b7",
+      "name": "albumin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-47f6f80dadbb",
+      "name": "Albumin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b3a178657c6e",
+      "name": "C-reactive protein",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c96490e78d27",
+      "name": "antioxidant enzyme",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1e457a06ca04",
+      "name": "Phospholipid hydroperoxide glutathione peroxidase",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-711ba15df87e",
+      "name": "Sirtuin 3",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-dfb4715f4737",
+      "name": "HO-1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d990ebf0c78f",
+      "name": "NQO1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b876d891a1c0",
+      "name": "NRF2",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-592df8fbbb3b",
+      "name": "Mitochondrial SOD2",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ee371bedf2a0",
+      "name": "TLR7",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e515502e5576",
+      "name": "Interleukin-6",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b19988d6fb06",
+      "name": "EGFR",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6fc59adc4c0c",
+      "name": "MAPK",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-0682ef89fcc6",
+      "name": "AKT1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a656f7d9f5d5",
+      "name": "NF-κB system",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ccebc93019c0",
+      "name": "Anti-HCV antibodies",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a3f67afc9799",
+      "name": "alanine aminotransferase",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e7249f2227f7",
+      "name": "aspartate aminotransferase",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ca0cc24f4b7f",
+      "name": "fibrinogen",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b9fdbb2f0e2b",
+      "name": "autotaxin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-fb7bc601a726",
+      "name": "Serum- and glucocorticoid-induced protein kinase 1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-afd99f16c307",
+      "name": "TGF-β",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-92ce6f74f69b",
+      "name": "CEA",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-25f2c266ca89",
+      "name": "F4/80",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ced0c2fcb387",
+      "name": "STAT3",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-17a670492a02",
+      "name": "HIF-1α",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-11d9f167e049",
+      "name": "SIRT-1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-26705b1308d3",
+      "name": "AMPK",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3969c586947f",
+      "name": "Cartilage intermediate layer protein 2",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-888aa13f57ca",
+      "name": "Sterol regulatory element-binding transcription factor 1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-581dc6e674bb",
+      "name": "Fatty acid synthase",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f2040297144c",
+      "name": "Acyl-CoA carboxylase",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6bc148935d06",
+      "name": "Stearoyl-CoA desaturase 1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e36422777e68",
+      "name": "Cluster of differentiation 36",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-82829026e0e8",
+      "name": "Tumor necrosis factor",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5b74237716bc",
+      "name": "Interleukin 1 beta",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2cbae2519144",
+      "name": "Proinflammatory cytokines",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5fdeb87b765d",
+      "name": "ChREBP",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bc0c7e86afe6",
+      "name": "TLR4",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-93c63e15e914",
+      "name": "NF-κB p65",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5c88b2b6b298",
+      "name": "Claudin-1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-55d932470934",
+      "name": "ZO-1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-90254e8812ce",
+      "name": "NLRP3",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-84df472ab27b",
+      "name": "farnesoid X receptor",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f452827706c5",
+      "name": "Angio-3",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9146448f2b45",
+      "name": "protease-activated receptor-1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3587923f80b3",
+      "name": "coagulation factor Xa",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d0b1083aee17",
+      "name": "α-smooth muscle actin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f0358710251f",
+      "name": "carnitine palmitoyltransferase 1A",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-7f12533e7ba5",
+      "name": "extracellular matrix proteins",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ba1082055ed9",
+      "name": "fibronectin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ad58a8434684",
+      "name": "collagen I",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8ad53ea39bfd",
+      "name": "ATPase Na+/K+ transporting subunit alpha-1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9360c8dd5621",
+      "name": "Mechanistic target of rapamycin 1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-4758f0287b3b",
+      "name": "Mechanistic target of rapamycin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-91ebbaa64df0",
+      "name": "Tumor protein p53",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-71c2efb5048f",
+      "name": "GRB2 adaptor protein",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-98b1d8ccd00d",
+      "name": "Survivin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-85105ae5a0d9",
+      "name": "SMAC/Diablo",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e0cf0a3e8bf2",
+      "name": "ATP1A1, Survivin, and SMAC",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f365f097ab1d",
+      "name": "alpha-fetoprotein",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1a39baff8209",
+      "name": "CA19-9",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-539c24e06eea",
+      "name": "CD155",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9d296b551dc5",
+      "name": "TIGIT",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-457d304d19fe",
+      "name": "Circulating Vascular Cell Adhesion Molecule-1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c93d932e8a14",
+      "name": "tumor necrosis factor receptor superfamily member 1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-973939d589b5",
+      "name": "Intercellular Adhesion Molecule 1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-eee6498948b1",
+      "name": "CD20",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-fdc6f520f5db",
+      "name": "CD2",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-091fc8f18e52",
+      "name": "CD40",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-4c2098b892e2",
+      "name": "CD146",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-db07d40df591",
+      "name": "CD14",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cf24e230962f",
+      "name": "CD25",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ddb5ba62bddd",
+      "name": "CD105",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f7f1d10b8fe0",
+      "name": "sCD62p",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3b619c13398c",
+      "name": "CD49e",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-03e02ebfd61d",
+      "name": "CD31",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1bf559365e53",
+      "name": "LC3-II",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a474d29ac59b",
+      "name": "Beclin 1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-08483c23b799",
+      "name": "Niemann-Pick type C1 protein",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ee10f4783c90",
+      "name": "ubiquitin-specific protease 7",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-997a44d69821",
+      "name": "ERS-related proteins",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ff8131aa4e81",
+      "name": "LD lipolysis-associated proteins",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a679eeaece07",
+      "name": "Insulin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6b470ef4da3d",
+      "name": "adenomatous polyposis coli (APC)",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3e21b9a0b46d",
+      "name": "β-catenin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-122bd8e45478",
+      "name": "bile salt export pump",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a304c31c9c4a",
+      "name": "cortactin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f57af680cbc4",
+      "name": "YY1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-4d5ee5e6a81c",
+      "name": "PRMT1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b1d5b16a975b",
+      "name": "G protein-coupled receptors",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ed10c905f61a",
+      "name": "PD-(L)1",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cf8c7ebb9fd2",
+      "name": "interferon-α",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f6de2c30bb25",
+      "name": "pegylated interferon-α",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5443629efd35",
+      "name": "HBeAg",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-703598909224",
+      "name": "PGC-1α",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c172e890edde",
+      "name": "PPARα",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ce54e7764712",
+      "name": "CK",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8caef658633e",
+      "name": "CK19",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d0a7e1846ca9",
+      "name": "vimentin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cf75c3bd40c1",
+      "name": "E-cadherin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9772294a22dc",
+      "name": "N-cadherin",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-43f960a8f48e",
+      "name": "lactate dehydrogenase",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b99d7ec43694",
+      "name": "collagen-Ⅲ",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f518ace24943",
+      "name": "GRP78",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3b558ee682d0",
+      "name": "ATF4",
+      "kind": "Protein",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9429c65627d9",
+      "name": "liver",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-75c15a8cc4b5",
+      "name": "liver",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-dc4d513e8696",
+      "name": "liver",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-93f25195d68a",
+      "name": "liver",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c672ede19f87",
+      "name": "liver",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3f6e89010f3a",
+      "name": "liver",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-89628abf8911",
+      "name": "liver",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5853bdee1f24",
+      "name": "Liver",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a68de35e10cb",
+      "name": "liver tissues",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cd99bf0c2870",
+      "name": "Steatotic liver tissue",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c0a4ef1144f8",
+      "name": "hepatic",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8beea92a8343",
+      "name": "mitochondrial",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-458d5d1bf0cf",
+      "name": "small bowel",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-54144ab02256",
+      "name": "peritoneum",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9ce8e8db87db",
+      "name": "kidney",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-7125a0b6d95e",
+      "name": "brown adipose tissue",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b1b84373d8c9",
+      "name": "lung",
+      "kind": "Tissue",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-17e7658a1493",
+      "name": "lipid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-fe026cd12973",
+      "name": "lipid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-13753b71cfad",
+      "name": "lipid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-47200fae4a55",
+      "name": "Lipid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-009252f63426",
+      "name": "lipid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-95f9dcb267fb",
+      "name": "triglycerides",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-50d72f4b4a08",
+      "name": "Hepatic TG",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a26ba52fec01",
+      "name": "serum TG",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a2de51ed068b",
+      "name": "hepatic TG",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bd5100ea6107",
+      "name": "glycerophospholipid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ad854ff3d501",
+      "name": "cholesterol",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9a99a4b2a111",
+      "name": "high-density lipoprotein cholesterol",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-607130a658ad",
+      "name": "total cholesterol",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cf76d694f7fa",
+      "name": "linoleic acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bda1f1e45a84",
+      "name": "Butyric acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-665778a7d356",
+      "name": "short-chain fatty acids",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e078da40e8ff",
+      "name": "secondary bile acids",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bbda487b4a7d",
+      "name": "Deoxycholic acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-31113a404a55",
+      "name": "primary conjugated bile acids",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d1566b8b69c5",
+      "name": "glycocholic acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e125f540fa7d",
+      "name": "lipid reactive oxygen species",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-00458b3fff84",
+      "name": "ROS",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ad59c4899783",
+      "name": "malondialdehyde",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6684cc15b808",
+      "name": "Glutathione",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a06b9ad0ae06",
+      "name": "Reduced glutathione",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1845562b4085",
+      "name": "Oxidized glutathione",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-86c726f7f941",
+      "name": "Ophthalmate",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-571ada76fbca",
+      "name": "Oleic acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-96121e68f6ba",
+      "name": "Phosphatidic acid 18:0/18:1",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d62ec983a359",
+      "name": "phosphatidylinositol 18:2/18:0",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d6dc9b93dd9d",
+      "name": "Phosphatidylcholine 34:1",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6820094ce026",
+      "name": "Phosphatidylcholine 36:2",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1315f5d44d9f",
+      "name": "Plasmalogen PC 36:2",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-aa6304a90b23",
+      "name": "lactate",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a7a7fdd5668d",
+      "name": "ammonia",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-060e32e411ab",
+      "name": "ferulic acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-10f07530c2e5",
+      "name": "coumarin",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d32dbf16933e",
+      "name": "digitolutein",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-55876e88f6d2",
+      "name": "lipopolysaccharide",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1d373d0b5223",
+      "name": "nitric oxide",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f934c3c6255f",
+      "name": "hydroxyproline",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-39bc57b4ca54",
+      "name": "Indole-3-acetic acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5121de4440a5",
+      "name": "palmitic acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cb164cbd0066",
+      "name": "Pyridoxal 5'-phosphate",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-050656e6e5c6",
+      "name": "4-pyridoxic acid",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-515ab5334a0a",
+      "name": "iron",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-93d9c31dcc36",
+      "name": "Fe2+",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-aee21ebe1b40",
+      "name": "barium",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d6907a7c0553",
+      "name": "cobalt",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b909f939a053",
+      "name": "cesium",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-35978777d7ec",
+      "name": "molybdenum",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-eb000b4504f7",
+      "name": "thallium",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-62b2d369718c",
+      "name": "tungsten",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bc1fb725241c",
+      "name": "serum creatinine",
+      "kind": "Metabolite",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-102900ec1251",
+      "name": "white blood cell",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8ce6a9bf40af",
+      "name": "myeloid cells",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8e3a9a90802a",
+      "name": "monocyte",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-48094d21eeaa",
+      "name": "macrophages",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f0983193c877",
+      "name": "hepatic macrophages",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a860ad479f69",
+      "name": "M2 macrophages",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d7cc46a59c2e",
+      "name": "T cell",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-9994a4c6cfdc",
+      "name": "Regulatory T cells",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ec886100b0b3",
+      "name": "naive B cells",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a19fcb86e5b8",
+      "name": "B lymphocyte",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1328bbd46a17",
+      "name": "immune cell subsets",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ed6926678119",
+      "name": "platelet",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c4e9f38bdd1c",
+      "name": "Endothelial cells",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b7431c5bcf57",
+      "name": "hepatocytes",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ce6b771ccde7",
+      "name": "hepatocyte",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ae5bf9c5be28",
+      "name": "normal cells",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-7c2125b3b58d",
+      "name": "fibroblasts",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-02b62a9b1a39",
+      "name": "HSC",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-08a331f96a9a",
+      "name": "Activated hepatic stellate cells",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-790baa3196b2",
+      "name": "LX-2 cell",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-569c13fc4292",
+      "name": "stem cells",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-022c5a5b0e92",
+      "name": "HepG2 cells",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c6075d84d57c",
+      "name": "HuH7",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2d7a1eb587ad",
+      "name": "PUMC-LICA3",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e43ab6ed1050",
+      "name": "JHH-6",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bf6cc94abc99",
+      "name": "SNU-387",
+      "kind": "CellType",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d4935ff6abe0",
+      "name": "Nrf2-HO-1 pathway",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-71b84fd394bb",
+      "name": "mitochondrial metabolism",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-fcfa1ad43340",
+      "name": "antioxidant defenses",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-31f2b8e561b4",
+      "name": "gut-liver-brain axis",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3d5d7dac8031",
+      "name": "neuroinflammatory pathways",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a021194f1e2e",
+      "name": "ErbB signalling",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a487118ce920",
+      "name": "NF-κB signaling pathway",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e435f0326448",
+      "name": "glycolysis",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-46d95ed20637",
+      "name": "drug metabolism (cytochrome P450)",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e9212534396a",
+      "name": "epithelial-mesenchymal transition",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-13f710977411",
+      "name": "gut-liver axis",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8ec36bd362a0",
+      "name": "ferroptosis",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ac4d2a235664",
+      "name": "SIRT-1/AMPK signalling pathway",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-7a827851de24",
+      "name": "IRE1α/XBP1 pathway",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-91724b5a4693",
+      "name": "SREBP-1c/ChREBP signaling",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-6d9a1ef48fb4",
+      "name": "TLR4/NF-κB p65 signaling",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-76be1e0161dc",
+      "name": "NF-κB p65/NLRP3-mediated inflammatory cascades",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-37a5b54c02d0",
+      "name": "coagulation factor Xa-Protease-Activated Receptor-1 Signaling Axis",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e4e345a1e004",
+      "name": "mitochondrial apoptotic pathway",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-93c468bb9a1b",
+      "name": "Apoptosis",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2b1e0e964635",
+      "name": "autophagy",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-968b76a21d7a",
+      "name": "AMPK-mTOR-Sirt1 axis",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-cf86f9de7032",
+      "name": "mitochondrial function",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5627b10284d1",
+      "name": "lipid oxidation",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d9f4d8968865",
+      "name": "inflammation modulation",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-ebb74bbd7382",
+      "name": "insulin signaling",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5641f5087d9f",
+      "name": "p53-SREBP2 axis",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-fb261022c34d",
+      "name": "cholesterol metabolism",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-807f0e34e9d3",
+      "name": "β-catenin/Wnt pathway",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-266fcdea190c",
+      "name": "EGFR signaling",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f08d22c183c1",
+      "name": "chaperone-mediated autophagy",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-46fa354c5801",
+      "name": "pro-inflammatory cytokine cascade",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-323fb0bcc395",
+      "name": "AMPK-ACC signaling pathway",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-4b1c943e8fdf",
+      "name": "hepatitis B virus life cycle",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bf8c67f66563",
+      "name": "immunopathogenesis of persistent HBV infection",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-8aca34d1c1ad",
+      "name": "endoplasmic reticulum stress",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a6b15d70983b",
+      "name": "Vitamin B6 metabolism",
+      "kind": "Pathway",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2c471675e6d2",
+      "name": "biomarker gene",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3ee7396b3689",
+      "name": "SLC7A11 gene",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5fd99cb4beca",
+      "name": "Col1α1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2d575b3bf5e7",
+      "name": "Col3α1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-f04c902e0f19",
+      "name": "α-SMA",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3c058fde1848",
+      "name": "AKT1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a657a9d160b6",
+      "name": "ALB",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-a511197338f9",
+      "name": "GAPDH",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-c5884637bd8f",
+      "name": "HCV RNA",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2c0abe8925ae",
+      "name": "PFKFB4",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-dbc38b1008c1",
+      "name": "ADH4",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-77f0a2fa288e",
+      "name": "ADH1C",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3c3db0eae892",
+      "name": "ME1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-77e6af53a45a",
+      "name": "FOXK1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bc449028a27c",
+      "name": "PFKP",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-b3e12711bd53",
+      "name": "ARL2",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-4ccb716c4549",
+      "name": "TKTL1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5562e2237007",
+      "name": "MYC",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-bc2152210954",
+      "name": "RAD21",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-2fcaa6fcc027",
+      "name": "GNAS",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-501b8cbafa46",
+      "name": "PIK3CA",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-43676121229d",
+      "name": "TP53",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d484f88a69cf",
+      "name": "CASP3",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-470c913d23b8",
+      "name": "BAX",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-e1e7a534d13d",
+      "name": "BAK1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-17e5f0e276c3",
+      "name": "BID",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-786c5b6a3b53",
+      "name": "BIM",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-5ffb7bb33a17",
+      "name": "SIRT1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-1047cc65668f",
+      "name": "ATG5",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-dd827931d8d8",
+      "name": "ATG9",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-aa7e5d0f05a4",
+      "name": "ABCB11",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-d2fb6a00320a",
+      "name": "PNPLA3",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-270eb8c661fd",
+      "name": "miR-34a",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-be04d584c2b7",
+      "name": "Bile salt export pump",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3e43645bec45",
+      "name": "Cytochrome P450 family 7 subfamily A member 1",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-3ace15a04a72",
+      "name": "Glucose-6-phosphatase catalytic subunit",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "C-84ea1c6be8fe",
+      "name": "NENF",
+      "kind": "Gene",
+      "origin": "literature_mention",
+      "added": false
+    },
+    {
+      "id": "REF-6e3b7d22a7d4acc0705e",
+      "name": "myeloid cell",
+      "kind": "CellType",
+      "origin": "kg_enrichment_reference_parent",
+      "standard_ids": [
+        "CL:0000763"
+      ],
+      "added": true
+    },
+    {
+      "id": "REF-24af297fb16dba3aba07",
+      "name": "myeloid lineage restricted progenitor cell",
+      "kind": "CellType",
+      "origin": "kg_enrichment_reference_parent",
+      "standard_ids": [
+        "CL:0000839"
+      ],
+      "added": true
+    },
+    {
+      "id": "KG-8eac89b1c8cf31b901de",
+      "name": "megakaryocyte progenitors",
+      "kind": "CellType",
+      "origin": "kg_enrichment",
+      "standard_ids": [],
+      "added": true
+    },
+    {
+      "id": "REF-cb171343d7e694394b23",
+      "name": "protein_coding_gene",
+      "kind": "Gene",
+      "origin": "kg_enrichment_reference_parent",
+      "standard_ids": [
+        "SO:0001217"
+      ],
+      "added": true
+    },
+    {
+      "id": "KG-654e31e5f4c76eec3bb3",
+      "name": "SOAT2",
+      "kind": "Gene",
+      "origin": "kg_enrichment",
+      "standard_ids": [
+        "ENSEMBL:ENSG00000167780",
+        "NCBIGene:8435"
+      ],
+      "added": true
+    }
+  ],
+  "edges": [
+    {
+      "child_id": "C-001217a5a593",
+      "parent_id": "C-14468eb40684",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-00458b3fff84",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-0060e2139a24",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-009252f63426",
+      "parent_id": "C-13753b71cfad",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-022c5a5b0e92",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-02b62a9b1a39",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-0340d6b3079e",
+      "parent_id": "C-14468eb40684",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-03e02ebfd61d",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-050656e6e5c6",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-060e32e411ab",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-0682ef89fcc6",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-069f97c3c137",
+      "parent_id": "C-0976c72178e0",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-069f97c3c137",
+      "parent_id": "C-8ee411fe23df",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-069f97c3c137",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-08483c23b799",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-08a331f96a9a",
+      "parent_id": "C-02b62a9b1a39",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-08ecf51c2643",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-091fc8f18e52",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-0976c72178e0",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-09858f0acf68",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-0ff69e6e8a97",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-102900ec1251",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1047cc65668f",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-10f07530c2e5",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-11d9f167e049",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-122bd8e45478",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1315f5d44d9f",
+      "parent_id": "C-bd5100ea6107",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1328bbd46a17",
+      "parent_id": "C-102900ec1251",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-13753b71cfad",
+      "parent_id": "C-17e7658a1493",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-13f710977411",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-14468eb40684",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-150e57b403db",
+      "parent_id": "C-f67f7a39ee2e",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1646015114cd",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-17a670492a02",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-17e5f0e276c3",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-17e7658a1493",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-182427a299cb",
+      "parent_id": "C-0060e2139a24",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-182427a299cb",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1845562b4085",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-18e2d275e63c",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1a39baff8209",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1bf559365e53",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1d373d0b5223",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1d7dae61ebc9",
+      "parent_id": "C-67e179eda269",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1e457a06ca04",
+      "parent_id": "C-c96490e78d27",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-1efd6c2bce44",
+      "parent_id": "C-8d0ad093fb58",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-215f103da1d8",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-25f2c266ca89",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-266fcdea190c",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-26705b1308d3",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-270eb8c661fd",
+      "parent_id": "C-2c471675e6d2",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-282e9c8ba551",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-289e0e589fec",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-29895138f6a2",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2a62fbb15162",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2b1e0e964635",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2c0abe8925ae",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2c471675e6d2",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2cbae2519144",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2d575b3bf5e7",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2d7a1eb587ad",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2f51c57cdd2f",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-2fcaa6fcc027",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-31113a404a55",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-31113a404a55",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-31113a404a55",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-31133374cad0",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-31f2b8e561b4",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-322fef11f149",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-323fb0bcc395",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-329940d6cd2a",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3495bfe62446",
+      "parent_id": "C-14468eb40684",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3587923f80b3",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-35978777d7ec",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-37a5b54c02d0",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3969c586947f",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-39bc57b4ca54",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-39be66c17296",
+      "parent_id": "C-e1b0e16a818d",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-39be66c17296",
+      "parent_id": "C-f67f7a39ee2e",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3ace15a04a72",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3ae2f2e1244c",
+      "parent_id": "C-826f891096a2",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3b558ee682d0",
+      "parent_id": "C-997a44d69821",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3b619c13398c",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3c058fde1848",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3c3db0eae892",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3c4de5b5a75d",
+      "parent_id": "C-40688c28a747",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3d5d7dac8031",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3e21b9a0b46d",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3e43645bec45",
+      "parent_id": "C-2c471675e6d2",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3ee7396b3689",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-3f6e89010f3a",
+      "parent_id": "C-c672ede19f87",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-40688c28a747",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-411ddbd70b79",
+      "parent_id": "C-67e179eda269",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-414c00feb847",
+      "parent_id": "C-c01e36556f95",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-41cb105e593a",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-42f3a9fabe0b",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-435e9937b17a",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-43676121229d",
+      "parent_id": "C-2c471675e6d2",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-43f960a8f48e",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-457d304d19fe",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-458d5d1bf0cf",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-46d95ed20637",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-46fa354c5801",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-470c913d23b8",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-47200fae4a55",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-4758f0287b3b",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-47f6f80dadbb",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-48094d21eeaa",
+      "parent_id": "C-8ce6a9bf40af",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-4b1c943e8fdf",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-4c2098b892e2",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-4ccb716c4549",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-4d5ee5e6a81c",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-501b8cbafa46",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-50d72f4b4a08",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-50d72f4b4a08",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5121de4440a5",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5121de4440a5",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5121de4440a5",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-515ab5334a0a",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-51a472817fcf",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-539c24e06eea",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5403dbf9d833",
+      "parent_id": "C-5b68485e31df",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-54144ab02256",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5443629efd35",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-555155c28530",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5562e2237007",
+      "parent_id": "C-2c471675e6d2",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-55876e88f6d2",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-55d932470934",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5627b10284d1",
+      "parent_id": "C-71b84fd394bb",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5627b10284d1",
+      "parent_id": "C-cf86f9de7032",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5641f5087d9f",
+      "parent_id": "C-fb261022c34d",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-569c13fc4292",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-571ada76fbca",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-571ada76fbca",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-571ada76fbca",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-581dc6e674bb",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5853bdee1f24",
+      "parent_id": "C-89628abf8911",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-58d440be1f94",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-592df8fbbb3b",
+      "parent_id": "C-c96490e78d27",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5b68485e31df",
+      "parent_id": "C-85b2d58c2e86",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5b74237716bc",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5c88b2b6b298",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5fd99cb4beca",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5fdeb87b765d",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-5ffb7bb33a17",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-607130a658ad",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-607130a658ad",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-607130a658ad",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-62b2d369718c",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-665778a7d356",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6684cc15b808",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-67e179eda269",
+      "parent_id": "C-bb4798724bd6",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6820094ce026",
+      "parent_id": "C-bd5100ea6107",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6b470ef4da3d",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6bc148935d06",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6cd2a96fe2ea",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6d9a1ef48fb4",
+      "parent_id": "C-46fa354c5801",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6d9a1ef48fb4",
+      "parent_id": "C-a487118ce920",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6e8a46a59650",
+      "parent_id": "C-14468eb40684",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6f100afd4948",
+      "parent_id": "C-d1373f274002",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-6fc59adc4c0c",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-703598909224",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-711ba15df87e",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7125a0b6d95e",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-71b84fd394bb",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-71c2efb5048f",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7228c54e5ad2",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7542bf029b4b",
+      "parent_id": "C-96b3bd2c1441",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-75c15a8cc4b5",
+      "parent_id": "C-9429c65627d9",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-76be1e0161dc",
+      "parent_id": "C-a487118ce920",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-77e6af53a45a",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-77f0a2fa288e",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-786c5b6a3b53",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-790baa3196b2",
+      "parent_id": "C-08a331f96a9a",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7a827851de24",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7bef3f51fbec",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7c2125b3b58d",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7d91866d795e",
+      "parent_id": "C-0976c72178e0",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7d91866d795e",
+      "parent_id": "C-8ee411fe23df",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-7f12533e7ba5",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8022c76f01d2",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-807f0e34e9d3",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-826f891096a2",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-82829026e0e8",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-84df472ab27b",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-84ea1c6be8fe",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-85105ae5a0d9",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-85b2d58c2e86",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-86c726f7f941",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-888aa13f57ca",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-88f93bff36b7",
+      "parent_id": "C-c5c0e5c909c3",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-89628abf8911",
+      "parent_id": "C-3f6e89010f3a",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8aca34d1c1ad",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8ad53ea39bfd",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8beea92a8343",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8caef658633e",
+      "parent_id": "C-ce54e7764712",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8ce6a9bf40af",
+      "parent_id": "C-102900ec1251",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8d0ad093fb58",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8e3a9a90802a",
+      "parent_id": "C-8ce6a9bf40af",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8ec36bd362a0",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8ee411fe23df",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-8f50729754f6",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-90254e8812ce",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9146448f2b45",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-914a2b24e1fd",
+      "parent_id": "C-182427a299cb",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-914a2b24e1fd",
+      "parent_id": "C-e1b0e16a818d",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-914a2b24e1fd",
+      "parent_id": "C-f30b6278448c",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-91724b5a4693",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-91ebbaa64df0",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-92ce6f74f69b",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9360c8dd5621",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-93c468bb9a1b",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-93c63e15e914",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-93d9c31dcc36",
+      "parent_id": "C-515ab5334a0a",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-93f25195d68a",
+      "parent_id": "C-75c15a8cc4b5",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9429c65627d9",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-95f9dcb267fb",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-95f9dcb267fb",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-95f9dcb267fb",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-96121e68f6ba",
+      "parent_id": "C-bd5100ea6107",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-968b76a21d7a",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-96b3bd2c1441",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-973939d589b5",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9772294a22dc",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-98b1d8ccd00d",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-997a44d69821",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9994a4c6cfdc",
+      "parent_id": "C-d7cc46a59c2e",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9a99a4b2a111",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9a99a4b2a111",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9a99a4b2a111",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9ce8e8db87db",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9d296b551dc5",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-9de24ec9ea89",
+      "parent_id": "C-b2591e8a263e",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a021194f1e2e",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a06b9ad0ae06",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a0a3f2772535",
+      "parent_id": "C-85b2d58c2e86",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a0a66ed665fa",
+      "parent_id": "C-a8d957bfebb5",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a19fcb86e5b8",
+      "parent_id": "C-102900ec1251",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a26ba52fec01",
+      "parent_id": "C-95f9dcb267fb",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a2de51ed068b",
+      "parent_id": "C-95f9dcb267fb",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a304c31c9c4a",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a3f67afc9799",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a474d29ac59b",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a487118ce920",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a511197338f9",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a656f7d9f5d5",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a657a9d160b6",
+      "parent_id": "C-2c471675e6d2",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a679eeaece07",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a67cba71cc52",
+      "parent_id": "C-8d0ad093fb58",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a68de35e10cb",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a6b15d70983b",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a6bc3948eaf5",
+      "parent_id": "C-bb4798724bd6",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a7a7fdd5668d",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a860ad479f69",
+      "parent_id": "C-48094d21eeaa",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a8d957bfebb5",
+      "parent_id": "C-e1b0e16a818d",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-a8db63a3c0ed",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-aa6304a90b23",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-aa7e5d0f05a4",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-aba42b2fc637",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ac4d2a235664",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ad58a8434684",
+      "parent_id": "C-7f12533e7ba5",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ad59c4899783",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ad854ff3d501",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ad854ff3d501",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ad854ff3d501",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ae5bf9c5be28",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-aee21ebe1b40",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-afd99f16c307",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b19988d6fb06",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b1b84373d8c9",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b1d5b16a975b",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b1f254bef6c0",
+      "parent_id": "C-d1373f274002",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b2591e8a263e",
+      "parent_id": "C-e1b0e16a818d",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b3a178657c6e",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b3e12711bd53",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b7431c5bcf57",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b876d891a1c0",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b909f939a053",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b99d7ec43694",
+      "parent_id": "C-7f12533e7ba5",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-b9fdbb2f0e2b",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ba1082055ed9",
+      "parent_id": "C-7f12533e7ba5",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bb4798724bd6",
+      "parent_id": "C-3ae2f2e1244c",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bb4798724bd6",
+      "parent_id": "C-b2591e8a263e",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bb4798724bd6",
+      "parent_id": "C-c01e36556f95",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bbda487b4a7d",
+      "parent_id": "C-e078da40e8ff",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bc0c7e86afe6",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bc1fb725241c",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bc2152210954",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bc449028a27c",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bd5100ea6107",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bd5100ea6107",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bd5100ea6107",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bda1f1e45a84",
+      "parent_id": "C-665778a7d356",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-be04d584c2b7",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bf6cc94abc99",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-bf8c67f66563",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c01e36556f95",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c0a4ef1144f8",
+      "parent_id": "type:Tissue",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c172e890edde",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c343449e2942",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c4e9f38bdd1c",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c5884637bd8f",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c5c0e5c909c3",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c6075d84d57c",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c672ede19f87",
+      "parent_id": "C-93f25195d68a",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c672ede19f87",
+      "parent_id": "C-dc4d513e8696",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c712e26c4eea",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c90ecf256f9d",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c93d932e8a14",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-c96490e78d27",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ca0cc24f4b7f",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cb164cbd0066",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cb8110421efd",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ccebc93019c0",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cd99bf0c2870",
+      "parent_id": "C-5853bdee1f24",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cd99bf0c2870",
+      "parent_id": "C-a68de35e10cb",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ce54e7764712",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ce6b771ccde7",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ced0c2fcb387",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cf24e230962f",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cf5b81ad4f40",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cf75c3bd40c1",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cf76d694f7fa",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cf76d694f7fa",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cf76d694f7fa",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cf86f9de7032",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cf8c7ebb9fd2",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-cfa63622b2ba",
+      "parent_id": "C-7542bf029b4b",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d0a7e1846ca9",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d0b1083aee17",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d1373f274002",
+      "parent_id": "C-8ee411fe23df",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d1373f274002",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d1566b8b69c5",
+      "parent_id": "C-31113a404a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d17a23ab3ec4",
+      "parent_id": "C-e1b0e16a818d",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d2fb6a00320a",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d32dbf16933e",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d484f88a69cf",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d4935ff6abe0",
+      "parent_id": "C-fcfa1ad43340",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d62ec983a359",
+      "parent_id": "C-bd5100ea6107",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d6907a7c0553",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d6dc9b93dd9d",
+      "parent_id": "C-bd5100ea6107",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d7169bc69d37",
+      "parent_id": "C-3ae2f2e1244c",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d7169bc69d37",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d7cc46a59c2e",
+      "parent_id": "C-102900ec1251",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d8aad3b47283",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d990ebf0c78f",
+      "parent_id": "C-c96490e78d27",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-d9f4d8968865",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-db07d40df591",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-dbc38b1008c1",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-dc03b435b0f2",
+      "parent_id": "C-0976c72178e0",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-dc03b435b0f2",
+      "parent_id": "C-8ee411fe23df",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-dc03b435b0f2",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-dc4d513e8696",
+      "parent_id": "C-75c15a8cc4b5",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-dd827931d8d8",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ddb5ba62bddd",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-de7a2ab3ff4f",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-dfb4715f4737",
+      "parent_id": "C-c96490e78d27",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e078da40e8ff",
+      "parent_id": "C-009252f63426",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e078da40e8ff",
+      "parent_id": "C-47200fae4a55",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e078da40e8ff",
+      "parent_id": "C-fe026cd12973",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e0cf0a3e8bf2",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e125f540fa7d",
+      "parent_id": "C-00458b3fff84",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e1b0e16a818d",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e1e7a534d13d",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e2c72fbb27a4",
+      "parent_id": "C-3ae2f2e1244c",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e2c72fbb27a4",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e36422777e68",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e435f0326448",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e43ab6ed1050",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e4e345a1e004",
+      "parent_id": "C-93c468bb9a1b",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e515502e5576",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e6013fd5cfb2",
+      "parent_id": "C-322fef11f149",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e7249f2227f7",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-e9212534396a",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-eb000b4504f7",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-eb8ab49a9896",
+      "parent_id": "C-a8db63a3c0ed",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ebb74bbd7382",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ec886100b0b3",
+      "parent_id": "C-a19fcb86e5b8",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ec8a35e1182d",
+      "parent_id": "C-e1b0e16a818d",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ed10c905f61a",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ed6926678119",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-edf017f83a38",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ee10f4783c90",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ee371bedf2a0",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ee93b190ae61",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-eee6498948b1",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f0358710251f",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f04c902e0f19",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f08d22c183c1",
+      "parent_id": "C-2b1e0e964635",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f0983193c877",
+      "parent_id": "C-48094d21eeaa",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f2040297144c",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f306a05863d0",
+      "parent_id": "C-182427a299cb",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f306a05863d0",
+      "parent_id": "C-e1b0e16a818d",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f306a05863d0",
+      "parent_id": "C-f30b6278448c",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f30b6278448c",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f365f097ab1d",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f452827706c5",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f518ace24943",
+      "parent_id": "C-997a44d69821",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f57af680cbc4",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f62ee1c1ac32",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f67f7a39ee2e",
+      "parent_id": "C-d8aad3b47283",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f6de2c30bb25",
+      "parent_id": "C-cf8c7ebb9fd2",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f7f1d10b8fe0",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-f934c3c6255f",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-fb261022c34d",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-fb7bc601a726",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-fc6f2d19724e",
+      "parent_id": "type:Disease",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-fcfa1ad43340",
+      "parent_id": "type:Pathway",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-fdc6f520f5db",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-fe026cd12973",
+      "parent_id": "type:Metabolite",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "C-ff8131aa4e81",
+      "parent_id": "type:Protein",
+      "relation": "is_a",
+      "added": false
+    },
+    {
+      "child_id": "KG-8eac89b1c8cf31b901de",
+      "parent_id": "REF-6e3b7d22a7d4acc0705e",
+      "relation": "is_a",
+      "added": true,
+      "case_id": "case-2d690640384b4f3a"
+    },
+    {
+      "child_id": "KG-8eac89b1c8cf31b901de",
+      "parent_id": "REF-24af297fb16dba3aba07",
+      "relation": "is_a",
+      "added": true,
+      "case_id": "case-2d690640384b4f3a"
+    },
+    {
+      "child_id": "REF-6e3b7d22a7d4acc0705e",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": true,
+      "case_id": "case-2d690640384b4f3a"
+    },
+    {
+      "child_id": "REF-24af297fb16dba3aba07",
+      "parent_id": "type:CellType",
+      "relation": "is_a",
+      "added": true,
+      "case_id": "case-2d690640384b4f3a"
+    },
+    {
+      "child_id": "KG-654e31e5f4c76eec3bb3",
+      "parent_id": "REF-cb171343d7e694394b23",
+      "relation": "is_a",
+      "added": true,
+      "case_id": "case-6d7b29f077b666c6"
+    },
+    {
+      "child_id": "REF-cb171343d7e694394b23",
+      "parent_id": "type:Gene",
+      "relation": "is_a",
+      "added": true,
+      "case_id": "case-6d7b29f077b666c6"
+    }
+  ]
+}

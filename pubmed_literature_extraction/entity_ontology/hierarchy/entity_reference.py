@@ -3,7 +3,7 @@
 from ..storage import atomic_json, digest, read_json
 
 
-REFERENCE_VERSION = "ols-agent-v1"
+REFERENCE_VERSION = "ols-agent-grounded-v3"
 
 
 class EntityReferenceLookup:
@@ -30,6 +30,19 @@ def evidence_for_pair(pair, result):
         terms = [term for term in result.get("terms", []) if term.get("source", source) == source]
         relations = [edge for edge in result.get("relations", []) if edge.get("source", source) == source]
         proof = _source_evidence(pair, source, terms, relations)
+        if proof is not None:
+            return proof
+    # HGNC represents a human gene locus as a named class with a named SO
+    # superclass. Keep both issuing sources and the explicit child assertion.
+    cross_edges = [edge for edge in result.get("relations", [])
+                   if edge.get("source") == "HGNC" and edge.get("parent_source") == "SO"
+                   and edge.get("source_url") and edge.get("predicate") == "is_a"]
+    if cross_edges and pair["child"]["kind"] == pair["parent"]["kind"] == "Gene":
+        terms = [term for term in result["terms"] if
+                 (term.get("source"), term["concept_id"]) in {
+                     ("HGNC", pair["child"]["id"]), ("SO", pair["parent"]["id"])}]
+        terms = [term for term in terms if term["term_id"].startswith(term["source"] + ":")]
+        proof = _source_evidence(pair, "HGNC → SO", terms, cross_edges)
         if proof is not None:
             return proof
     return None

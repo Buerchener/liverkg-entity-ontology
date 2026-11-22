@@ -1,0 +1,20 @@
+{
+  "outcomes": {
+    "inserted": 2,
+    "needs_review": 1
+  },
+  "maps_to": 2,
+  "sample_size": 3,
+  "initial_qa_flags": 0,
+  "dependent_quarantines": 0,
+  "inserted_specific": 2,
+  "inserted_root_only": 0,
+  "new_intermediate_parents": 3,
+  "new_edges": 6,
+  "specific_edges": 3,
+  "kg_population": 3655,
+  "supported_before": 98,
+  "supported_after": 100,
+  "identity_before": 34,
+  "identity_after": 36
+}

@@ -54,3 +54,6 @@ include = ["cognitive_agent*", "liverkg_cli*", "entity_ontology*"]
 
 [tool.setuptools.package-data]
 entity_ontology = ["config.example.json", "config.single-model.example.json", "workbench/web/*"]
+
+"entity_ontology.alignment" = ["config.example.json", "prompts/*.txt"]
+"entity_ontology.enrichment" = ["config.flash.example.json"]

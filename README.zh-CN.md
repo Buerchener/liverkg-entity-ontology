@@ -31,6 +31,8 @@ Verifier 驱动的文献抽取 Agent 结合，把 PubMed 摘要转化为证据�
 NAFLD → NASH → Fibrosis → Cirrhosis → HCC
 ```
 
+**KG 引导的本体扩充（Evidence-v4）。** 独立流程将尚未对齐的 LiverKG 节点放入文献本体的副本。105 个节点的实验经复核保留了 63 条映射和 47 条具体父类边。[运行说明](pubmed_literature_extraction/entity_ontology/enrichment/README.md) · [实验报告与复核结果](pubmed_literature_extraction/benchmark_output/ontology-enrichment-evidence-v4/report.zh.md)
+
 ## 核心特点
 
 - 以五阶段肝病进展链为主干，保留统一标识符与来源信息；

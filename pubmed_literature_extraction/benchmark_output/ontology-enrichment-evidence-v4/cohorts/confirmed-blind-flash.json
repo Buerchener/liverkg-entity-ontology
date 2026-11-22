@@ -1,0 +1,394 @@
+[
+  {
+    "case_id": "case-13aaf4012625e25f",
+    "name": "early spermatids",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "443f20365108c10c6a3abad89f4e696bd447effee7dda8ec6dabefcbc6cf3dd1"
+  },
+  {
+    "case_id": "case-c0e037c2f543edbe",
+    "name": "cholestasis",
+    "kind": "Disease",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "MONDO:0001751"
+    ],
+    "definition_source": "MONDO",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/mondo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FMONDO_0001751",
+      "https://pubmed.ncbi.nlm.nih.gov/41650163/",
+      "https://purl.obolibrary.org/obo/MONDO_0001751"
+    ],
+    "primary_reason": "ambiguous_or_insufficient_evidence",
+    "original_record_sha256": "8b617f3b1767bf86fd3f1ced43a96dabe110d28597c4836652526728fdb3df4d"
+  },
+  {
+    "case_id": "case-7b45de24a146a910",
+    "name": "PGD",
+    "kind": "Gene",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-cb171343d7e694394b23",
+        "name": "protein_coding_gene",
+        "standard_ids": [
+          "SO:0001217"
+        ]
+      }
+    ],
+    "identifiers": [
+      "ENSEMBL:ENSG00000142657",
+      "NCBIGene:5226",
+      "HGNC:8891"
+    ],
+    "definition_source": "HGNC",
+    "source_field": "name + locus_type",
+    "links": [
+      "https://rest.genenames.org/fetch/entrez_id/5226",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F8891",
+      "https://www.ensembl.org/id/ENSG00000142657",
+      "https://www.ncbi.nlm.nih.gov/gene/5226",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:8891"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "29c2a8709ca2bf456b1d6a5aa474311c77690b54e42202c59abc427f4f9d627c"
+  },
+  {
+    "case_id": "case-7d9344ff7eb483cc",
+    "name": "metabolites",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "22134874eb4b331903de2752c0a9bdde6344bf144ad737bc3d8fc3e8c2e86000"
+  },
+  {
+    "case_id": "case-9f27ee39749e26f4",
+    "name": "Cortisol synthesis and secretion",
+    "kind": "Pathway",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "KEGG_PATHWAY:hsa04927"
+    ],
+    "definition_source": "KEGG",
+    "source_field": "DESCRIPTION",
+    "links": [
+      "https://rest.kegg.jp/get/hsa04927",
+      "https://www.kegg.jp/entry/hsa04927"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "9e238d8cd4583acd6717a90e8393846cdc123fe75c2af8107bd17694b76fbcab"
+  },
+  {
+    "case_id": "case-182f51c57b92e2d5",
+    "name": "ARHGEF39",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-103808252134f1746ede",
+        "name": "Rho guanine nucleotide exchange factor 39",
+        "standard_ids": [
+          "PR:000060182"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000367638",
+      "PR:Q8N4T4"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q8N4T4",
+      "https://string-db.org/network/9606.ENSP00000367638",
+      "https://purl.obolibrary.org/obo/PR_Q8N4T4"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "e193205ce7f18a11195044e381aa2509f283aaade4be487f3240aff9a7e07f79"
+  },
+  {
+    "case_id": "case-bcf347f88631115a",
+    "name": "aorta",
+    "kind": "Tissue",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-29b0ddc1c8763c883ed1",
+        "name": "great vessel of heart",
+        "standard_ids": [
+          "UBERON:0013768"
+        ]
+      },
+      {
+        "id": "REF-9e3cc320e17303178df0",
+        "name": "thoracic cavity blood vessel",
+        "standard_ids": [
+          "UBERON:0003519"
+        ]
+      },
+      {
+        "id": "REF-a34ef4a3ac0911b4807b",
+        "name": "arterial blood vessel",
+        "standard_ids": [
+          "UBERON:0003509"
+        ]
+      }
+    ],
+    "identifiers": [
+      "UBERON:0000947"
+    ],
+    "definition_source": "Uberon",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/uberon/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FUBERON_0000947",
+      "https://pubmed.ncbi.nlm.nih.gov/41799192/",
+      "https://purl.obolibrary.org/obo/UBERON_0000947"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "3d83a1a05dbd02b6e3be1dbef4e88ffad9139e907e0da2ea6e4ae346843f5270"
+  },
+  {
+    "case_id": "case-e2d11607a67dc23f",
+    "name": "colonocytes",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "d3af79ab59d102c4945f7030b55d787fe69b4df3546087fdcfbe97f8469300ca"
+  },
+  {
+    "case_id": "case-329249440dc9562b",
+    "name": "gut dysbacteriosis",
+    "kind": "Disease",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41794448/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "77591990c67e2164b37de73b005fb72f39dd202e28f247b40cc4dd56290ea933"
+  },
+  {
+    "case_id": "case-4e048cfab4bfca18",
+    "name": "CALR",
+    "kind": "Gene",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-cb171343d7e694394b23",
+        "name": "protein_coding_gene",
+        "standard_ids": [
+          "SO:0001217"
+        ]
+      }
+    ],
+    "identifiers": [
+      "ENSEMBL:ENSG00000179218",
+      "NCBIGene:811",
+      "HGNC:1455"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=811&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F1455",
+      "https://www.ensembl.org/id/ENSG00000179218",
+      "https://www.ncbi.nlm.nih.gov/gene/811",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:1455"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "25d35306d6930e3c0b2c885961a7af05b4db60d42322429fa53ce51a3a50a719"
+  },
+  {
+    "case_id": "case-0adf1370c916eaa1",
+    "name": "1-Pentanol",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "HMDB:HMDB0013036"
+    ],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://hmdb.ca/metabolites/HMDB0013036"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "44f5f5cca74d3094da0b85e3c5b15d313f226ed0b1aab0f9e00c0c5baf601b6e"
+  },
+  {
+    "case_id": "case-d4fc21bca028d7d0",
+    "name": "Graft-versus-host disease",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "KEGG_PATHWAY:hsa05332"
+    ],
+    "definition_source": "KEGG",
+    "source_field": "DESCRIPTION",
+    "links": [
+      "https://rest.kegg.jp/get/hsa05332",
+      "https://www.kegg.jp/entry/hsa05332"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "87ad65c8810b61c9391ab835239d3cddf3834c911ef248aafbf69981b753a44b"
+  },
+  {
+    "case_id": "case-b23a8f007601bfbf",
+    "name": "REN",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-e669f651d92f336ba4f3",
+        "name": "renin",
+        "standard_ids": [
+          "PR:000013883"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000272190",
+      "PR:P00797"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P00797",
+      "https://string-db.org/network/9606.ENSP00000272190",
+      "https://purl.obolibrary.org/obo/PR_P00797"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "bf8b00a04f531501dfa6135aba5d4a4e408b48a478d5f74eb81bbedf5371cc2c"
+  },
+  {
+    "case_id": "case-c8d924417fb1216b",
+    "name": "whole blood",
+    "kind": "Tissue",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41650163/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "c6f726826edc55c0e15458931e71b0716e002376b38d23757054f88a8cda3f80"
+  }
+]

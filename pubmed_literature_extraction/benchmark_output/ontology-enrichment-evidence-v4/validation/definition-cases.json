@@ -1,0 +1,85 @@
+{
+  "counts": {
+    "raw_records": 6,
+    "recovered_definitions": 4,
+    "definition_and_compatible_scope": 3,
+    "definition_recovered_but_type_review": 1,
+    "no_bound_definition": 2
+  },
+  "cases": [
+    {
+      "case_id": "case-13aaf4012625e25f",
+      "name": "early spermatids",
+      "type": "CellType",
+      "root_cause": "RETRIEVAL_FAILED",
+      "v3_diagnosis": "HPA 本地 ID HPA_CELL_TYPE:early_spermatids 不等于 CL 标准 ID。V3 只处理了 cells 等少数复数，未将 spermatids 与同一成熟阶段的 spermatid 匹配。",
+      "v4_check": "固定 CL 版本中查到唯一活跃同范围词条；其定义引自 HPA，并保留早期阶段，父类为 spermatid。",
+      "definition_source": {
+        "database": "Cell Ontology",
+        "record_id": "CL:4030036",
+        "url": "https://purl.obolibrary.org/obo/CL_4030036",
+        "field": "def"
+      }
+    },
+    {
+      "case_id": "case-7d9344ff7eb483cc",
+      "name": "metabolites",
+      "type": "Metabolite",
+      "root_cause": "GENERIC_GROUP_UNRESOLVED",
+      "v3_diagnosis": "仅有项目内部 ID；原文讨论差异代谢物集合，未把 KG 节点定义为一种可识别物质。",
+      "v4_check": "原始 PubMed 摘要的提及已经留存。外部确有通用 metabolite 定义，ChEBI:25212 是生化角色；不能代替样本中的化合物集合或单个代谢物，保留待审。",
+      "definition_source": {}
+    },
+    {
+      "case_id": "case-e2d11607a67dc23f",
+      "name": "colonocytes",
+      "type": "CellType",
+      "root_cause": "EVIDENCE_NOT_PROPAGATED",
+      "v3_diagnosis": "前序筛查已有 CL:0019036 及原始 JSON 指针，V3 定义查找忽略 prior_grounding，复数名称也未命中。",
+      "v4_check": "以该 ID 直取固定 CL 版本，同时核对名称、同义词和限定词。复数规范化匹配，已有证据指针及定义行与原始 KG 分别保存。",
+      "definition_source": {
+        "database": "Cell Ontology",
+        "record_id": "CL:0019036",
+        "url": "https://purl.obolibrary.org/obo/CL_0019036",
+        "field": "def"
+      }
+    },
+    {
+      "case_id": "case-329249440dc9562b",
+      "name": "gut dysbacteriosis",
+      "type": "Disease",
+      "root_cause": "SCOPED_IDENTITY_AND_DEFINITION_UNRESOLVED",
+      "v3_diagnosis": "项目内部 ID；原研究提及饮食干预改善实验小鼠肠菌失调，没有给出独立定义或等价疾病编号。",
+      "v4_check": "按原词复查 MONDO、NCIt、MeSH 及限定的 Europe PMC 查询。邻近的临床、其他动物或不限解剖范围的 dysbiosis 描述无法独立证明与该研究表型同一。保留原文证据并待审；结论只针对本次检索范围。",
+      "definition_source": {}
+    },
+    {
+      "case_id": "case-0adf1370c916eaa1",
+      "name": "1-Pentanol",
+      "type": "Metabolite",
+      "root_cause": "ID_ROUTE_MISSING",
+      "v3_diagnosis": "KG 自带 HMDB:HMDB0013036 和分子式，V3 没有 HMDB 取定义或跨查 ChEBI 路线，名称检索空。",
+      "v4_check": "原生 HMDB 公共 XML 在此环境返回 HTTP 403。ChEBI ID 查询仅作为线索；正式活跃记录的手工 HMDB 交叉引用、确切化合物名称及 C5H12O 均吻合。ChEBI 明列 has role 植物及人类代谢物，与具体结构子类谓词分开存证。",
+      "definition_source": {
+        "database": "ChEBI",
+        "record_id": "CHEBI:44884",
+        "url": "https://www.ebi.ac.uk/chebi/backend/api/public/compound/44884/",
+        "field": "definition"
+      }
+    },
+    {
+      "case_id": "case-c8d924417fb1216b",
+      "name": "whole blood",
+      "type": "Tissue",
+      "root_cause": "EXTERNAL_DEFINITION_LOCAL_SCOPE_REVIEW",
+      "v3_diagnosis": "原始医学研究中确为患者全血样本，V3 只查 Uberon。",
+      "v4_check": "NCIt 精确首选名 Whole Blood C41067，定义与采样语境相符。官方语义类型 Body Substance，不能凭此主张全部类属于本地 Tissue；保存外部定义、可核查标准 ID 和来源，保持待审。",
+      "definition_source": {
+        "database": "NCIt",
+        "record_id": "NCIT:C41067",
+        "url": "https://api-evsrest.nci.nih.gov/api/v1/concept/ncit/C41067?include=summary",
+        "field": "definitions[NCI]"
+      }
+    }
+  ]
+}

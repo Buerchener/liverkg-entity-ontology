@@ -1,0 +1,2 @@
+# Existing shared LLM/embedding dependencies are in ../requirements.txt.
+neo4j>=5.26,<7

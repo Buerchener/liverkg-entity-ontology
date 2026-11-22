@@ -1,0 +1,26 @@
+[
+  {
+    "case_id": "case-9f27ee39749e26f4",
+    "name": "Cortisol synthesis and secretion",
+    "kind": "Pathway",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "KEGG_PATHWAY:hsa04927"
+    ],
+    "definition_source": "KEGG",
+    "source_field": "DESCRIPTION",
+    "links": [
+      "https://rest.kegg.jp/get/hsa04927",
+      "https://www.kegg.jp/entry/hsa04927"
+    ],
+    "primary_reason": "hierarchy_or_schema_membership_unverified",
+    "original_record_sha256": "dfee2ea7ef302c925117f395fc3ec936247442f74c32ab0a636f5838a3dd8a3b"
+  }
+]

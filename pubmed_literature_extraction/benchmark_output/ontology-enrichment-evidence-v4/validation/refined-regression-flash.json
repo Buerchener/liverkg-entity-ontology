@@ -1,0 +1,401 @@
+{
+  "counts": {
+    "specific_edges": 10,
+    "specific_edges_formally_verified": 10,
+    "schema_edges_separate": 11,
+    "maps_checked": 10,
+    "acyclic_and_mapping_endpoints_checked": true
+  },
+  "edges": [
+    {
+      "child_id": "KG-e4c72c32f4b424e98728",
+      "parent_id": "REF-bccb2709695b6d5e742d",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "CL:4030036"
+      ],
+      "parent_ids": [
+        "CL:0000018"
+      ],
+      "asserted_external_endpoints": [
+        "CL:4030036",
+        "CL:0000018"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "CL:4030036",
+          "parent": "CL:0000018",
+          "named_obo_subclass": true,
+          "obo_line": 44717,
+          "obo": {
+            "release": "releases/2026-11-13",
+            "source_url": "https://purl.obolibrary.org/obo/cl.obo",
+            "sha256": "f6c5911182da822693ac55e5cc3ca240301ac93e9a0b2494e87909705c852941"
+          }
+        }
+      ]
+    },
+    {
+      "child_id": "REF-bccb2709695b6d5e742d",
+      "parent_id": "type:CellType",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-a471b4de5c862effd79a",
+      "parent_id": "REF-5bf024eb8b865b73aef0",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "MONDO:0001751"
+      ],
+      "parent_ids": [
+        "MONDO:0002887"
+      ],
+      "asserted_external_endpoints": [
+        "MONDO:0001751",
+        "MONDO:0002887"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "MONDO:0001751",
+          "parent": "MONDO:0002887",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "8a571a17065bdb608d7cbcdc4052fe953700b5544b232bc662b43571113dc5f5",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/mondo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FMONDO_0001751"
+        }
+      ]
+    },
+    {
+      "child_id": "REF-5bf024eb8b865b73aef0",
+      "parent_id": "type:Disease",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-acf26648c21c52c7617d",
+      "parent_id": "REF-cb171343d7e694394b23",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "HGNC:8891"
+      ],
+      "parent_ids": [
+        "SO:0001217"
+      ],
+      "asserted_external_endpoints": [
+        "HGNC:8891",
+        "SO:0001217"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "HGNC:8891",
+          "parent": "SO:0001217",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "f887320534ad69ac02392ad44fe3a4900f76e35739cf5f93e63d3e3cf37c9ee0",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F8891"
+        }
+      ]
+    },
+    {
+      "child_id": "REF-cb171343d7e694394b23",
+      "parent_id": "type:Gene",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-8aef3c610bbfe0ef875a",
+      "parent_id": "REF-103808252134f1746ede",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "PR:Q8N4T4"
+      ],
+      "parent_ids": [
+        "PR:000060182"
+      ],
+      "asserted_external_endpoints": [
+        "PR:Q8N4T4",
+        "PR:000060182"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "PR:Q8N4T4",
+          "parent": "PR:000060182",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "0af1d5b31c4f42f7062fe2cde61217818ea37d04e4d176e33b5c1cfc03ba7197",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q8N4T4"
+        }
+      ]
+    },
+    {
+      "child_id": "REF-103808252134f1746ede",
+      "parent_id": "type:Protein",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-d3481ac917d579ea7120",
+      "parent_id": "REF-a34ef4a3ac0911b4807b",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "UBERON:0000947"
+      ],
+      "parent_ids": [
+        "UBERON:0003509"
+      ],
+      "asserted_external_endpoints": [
+        "UBERON:0000947",
+        "UBERON:0003509"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "UBERON:0000947",
+          "parent": "UBERON:0003509",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "d3bb94c7d1c8c4b5a6b9a817dedd5b1694528d5221418cf6a0adc47247865307",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/uberon/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FUBERON_0000947"
+        }
+      ]
+    },
+    {
+      "child_id": "KG-d3481ac917d579ea7120",
+      "parent_id": "REF-9e3cc320e17303178df0",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "UBERON:0000947"
+      ],
+      "parent_ids": [
+        "UBERON:0003519"
+      ],
+      "asserted_external_endpoints": [
+        "UBERON:0000947",
+        "UBERON:0003519"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "UBERON:0000947",
+          "parent": "UBERON:0003519",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "d3bb94c7d1c8c4b5a6b9a817dedd5b1694528d5221418cf6a0adc47247865307",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/uberon/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FUBERON_0000947"
+        }
+      ]
+    },
+    {
+      "child_id": "REF-a34ef4a3ac0911b4807b",
+      "parent_id": "type:Tissue",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "REF-9e3cc320e17303178df0",
+      "parent_id": "type:Tissue",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-f4f94d0b99222f553052",
+      "parent_id": "REF-6e71f1cd53d4e7d12614",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "CL:0019036"
+      ],
+      "parent_ids": [
+        "CL:0002071"
+      ],
+      "asserted_external_endpoints": [
+        "CL:0019036",
+        "CL:0002071"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "CL:0019036",
+          "parent": "CL:0002071",
+          "named_obo_subclass": true,
+          "obo_line": 33240,
+          "obo": {
+            "release": "releases/2026-11-13",
+            "source_url": "https://purl.obolibrary.org/obo/cl.obo",
+            "sha256": "f6c5911182da822693ac55e5cc3ca240301ac93e9a0b2494e87909705c852941"
+          }
+        }
+      ]
+    },
+    {
+      "child_id": "KG-f4f94d0b99222f553052",
+      "parent_id": "REF-05c81fc336a3999316ee",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "CL:0019036"
+      ],
+      "parent_ids": [
+        "CL:0011108"
+      ],
+      "asserted_external_endpoints": [
+        "CL:0019036",
+        "CL:0011108"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "CL:0019036",
+          "parent": "CL:0011108",
+          "named_obo_subclass": true,
+          "obo_line": 33241,
+          "obo": {
+            "release": "releases/2026-11-13",
+            "source_url": "https://purl.obolibrary.org/obo/cl.obo",
+            "sha256": "f6c5911182da822693ac55e5cc3ca240301ac93e9a0b2494e87909705c852941"
+          }
+        }
+      ]
+    },
+    {
+      "child_id": "REF-6e71f1cd53d4e7d12614",
+      "parent_id": "type:CellType",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "REF-05c81fc336a3999316ee",
+      "parent_id": "type:CellType",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-db5761297652cd1d7367",
+      "parent_id": "REF-cb171343d7e694394b23",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "HGNC:1455"
+      ],
+      "parent_ids": [
+        "SO:0001217"
+      ],
+      "asserted_external_endpoints": [
+        "HGNC:1455",
+        "SO:0001217"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "HGNC:1455",
+          "parent": "SO:0001217",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "a1891129a3bb95ae4192840edea2ac8d963c60ca0501e0415667e3eaa5c9b7a4",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F1455"
+        }
+      ]
+    },
+    {
+      "child_id": "KG-5b76c3c051959a71ca61",
+      "parent_id": "type:Metabolite",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [
+        "CHEBI:44884"
+      ],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-3a389f117f66f7199929",
+      "parent_id": "type:Pathway",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    },
+    {
+      "child_id": "KG-f8afd534fe7733bf217c",
+      "parent_id": "REF-e669f651d92f336ba4f3",
+      "schema_root": false,
+      "support": "external_parent_fallback",
+      "child_reference_ids": [
+        "PR:P00797"
+      ],
+      "parent_ids": [
+        "PR:000013883"
+      ],
+      "asserted_external_endpoints": [
+        "PR:P00797",
+        "PR:000013883"
+      ],
+      "source_and_local_ids_agree": true,
+      "independent_path_pass": true,
+      "authority_path": [
+        {
+          "child": "PR:P00797",
+          "parent": "PR:000013883",
+          "named_owl_subclass": true,
+          "ols_direct_class_parent": true,
+          "response_sha256": "89cb323d952675cfd0c523ea840a6714575ccd74d7c08eec0beec4802d50a09d",
+          "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P00797"
+        }
+      ]
+    },
+    {
+      "child_id": "REF-e669f651d92f336ba4f3",
+      "parent_id": "type:Protein",
+      "schema_root": true,
+      "support": "schema_type_assignment",
+      "child_reference_ids": [],
+      "parent_ids": [],
+      "authority_path": []
+    }
+  ]
+}

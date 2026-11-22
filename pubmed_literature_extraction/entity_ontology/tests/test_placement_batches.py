@@ -52,6 +52,116 @@ def reviews(items, verdict):
 
 
 class PlacementBatchTest(unittest.TestCase):
+    def test_sourced_proposal_retries_only_omitted_candidates(self):
+        dag, candidates = seeded_dag(4)
+        target = {**concept("target"), "origin": "kg_enrichment",
+                  "definition_evidence": {"database": "Fixture"}}
+        calls = []
+        omitted = candidates[1]["id"]
+
+        def request(task):
+            stage, _, payload = task
+            if stage == "incremental_edge_review":
+                return reviews(payload["items"], True)
+            calls.append(payload)
+            response = proposal(payload["items"][0], narrower=len(calls) == 2)
+            if len(calls) == 1:
+                response[0]["comparisons"].pop(1)
+            return response
+
+        result = place_one(dag, target, request=request)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual([row["id"] for row in calls[1]["items"][0]["candidates"]], [omitted])
+        self.assertEqual(calls[0]["current_edges"], calls[1]["current_edges"])
+        self.assertEqual(calls[0]["type_root"], calls[1]["type_root"])
+        self.assertEqual(result["parent_ids"], [omitted])
+        self.assertEqual([row["candidate_id"] for row in result["comparisons"]],
+                         [row["id"] for row in candidates])
+
+    def test_invalid_partial_proposals_retry_every_unverified_id(self):
+        candidates = {node["id"]: describe(node) for node in [concept(i) for i in range(3)]}
+        target = describe(concept("target"))
+        cases = {
+            "duplicate": {"id": "concept-1"},
+            "unknown_id": {"id": "unknown"},
+            "invalid_response_value": {"a_in_b": "false"},
+        }
+        for name, corruption in cases.items():
+            with self.subTest(name=name):
+                calls = []
+
+                def request(task):
+                    item = task[2]["items"][0]
+                    calls.append([row["id"] for row in item["candidates"]])
+                    response = proposal(item)
+                    if len(calls) == 1:
+                        response[0]["comparisons"].pop()
+                        response[0]["comparisons"][0].update(corruption)
+                    return response
+
+                result, _ = placement.propose_placement(request, target, candidates, {}, repair_missing=True)
+                missing = list(candidates) if name == "duplicate" else ["concept-0", "concept-2"]
+                self.assertEqual(calls, [list(candidates), missing])
+                self.assertEqual(set(result), candidates.keys())
+
+    def test_foreign_id_substitution_preserves_valid_rows_and_never_guesses_a_verdict(self):
+        target = describe(concept("target"))
+        candidates = {row["id"]: row for row in (describe(concept(i)) for i in range(8))}
+        calls = []
+
+        def request(task):
+            payload = task[2]
+            item = payload["items"][0]
+            calls.append([row["id"] for row in item["candidates"]])
+            rows = proposal(item)
+            if len(calls) == 1:
+                rows[0]["comparisons"][3].update(id="unrequested", a_in_b=True)
+            else:
+                self.assertEqual(payload["required_candidate_ids"], ["concept-3"])
+            return rows
+
+        complete, _ = placement.propose_placement(request, target, candidates, {}, repair_missing=True)
+        self.assertEqual(calls, [list(candidates), ["concept-3"]])
+        self.assertEqual(set(complete), set(candidates))
+        self.assertFalse(complete["concept-3"]["a_in_b"])
+
+    def test_omitted_repair_must_return_exact_ids_without_a_new_parent(self):
+        targets = {node["id"]: describe(node) for node in [concept(0), concept(1)]}
+        target = describe(concept("source"))
+        for mutation in ({"comparisons": []}, {"new_parent": {"name": "new", "definition": "new", "reason": "new"}}):
+            with self.subTest(mutation=mutation):
+                calls = []
+
+                def request(task):
+                    item = task[2]["items"][0]
+                    calls.append(item)
+                    rows = proposal(item)
+                    if len(calls) == 1:
+                        rows[0]["comparisons"].pop()
+                    else:
+                        rows[0].update(mutation)
+                    return rows
+
+                with self.assertRaises(placement.InvalidJudgment):
+                    placement.propose_placement(request, target, targets, {}, repair_missing=True)
+                self.assertEqual(len(calls), 2)
+
+    def test_literature_target_continues_to_retry_the_whole_proposal(self):
+        dag, _ = seeded_dag(3)
+        target = {**concept("literature"), "definition_evidence": {"database": "Fixture"}}
+        counts = []
+
+        def request(task):
+            item = task[2]["items"][0]
+            counts.append(len(item["candidates"]))
+            rows = proposal(item)
+            if len(counts) == 1:
+                rows[0]["comparisons"].pop()
+            return rows
+
+        place_one(dag, target, request=request)
+        self.assertEqual(counts, [3, 3])
+
     def test_boundary_keeps_original_prompts_and_payloads(self):
         count = PLACEMENT_BATCH_SIZE
         dag, candidates = seeded_dag(count)

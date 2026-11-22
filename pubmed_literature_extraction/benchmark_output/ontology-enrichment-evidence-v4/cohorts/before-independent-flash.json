@@ -1,0 +1,367 @@
+[
+  {
+    "case_id": "case-2e3628326c37e9bf",
+    "name": "late primary spermatocytes",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "9796410747fb758905598fe1b6c405d7c9b45a5fd37c8a618889cd16a9959ff3"
+  },
+  {
+    "case_id": "case-e2304b6ac52f2c0e",
+    "name": "liver stiffness",
+    "kind": "Disease",
+    "status": "rejected",
+    "decision_stage": "source_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41573193/"
+    ],
+    "primary_reason": "prior_source_review_identified_input_issue",
+    "original_record_sha256": "04928f71a6ad48eae502a0269f9ed177e3baa8bc5a9def8a3b0766b745963501"
+  },
+  {
+    "case_id": "case-d6864f93367e964d",
+    "name": "PLOD2",
+    "kind": "Gene",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-cb171343d7e694394b23",
+        "name": "protein_coding_gene",
+        "standard_ids": [
+          "SO:0001217"
+        ]
+      }
+    ],
+    "identifiers": [
+      "ENSEMBL:ENSG00000152952",
+      "NCBIGene:5352",
+      "HGNC:9082"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=5352&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F9082",
+      "https://www.ensembl.org/id/ENSG00000152952",
+      "https://www.ncbi.nlm.nih.gov/gene/5352",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:9082"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "a83bd852d670e7a05b0eb4dd553e479844768d8e7a8407922c78d0c62eadf086"
+  },
+  {
+    "case_id": "case-68c419fb569157e0",
+    "name": "(+)-Limonene",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "HMDB:HMDB0003375"
+    ],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://hmdb.ca/metabolites/HMDB0003375"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "a687a72c23b91eeb0472dfc2130aa1c5f37a047680ebc5eeb3b1c3e755aa726a"
+  },
+  {
+    "case_id": "case-920dc99d0a409b1d",
+    "name": "Modulation of host responses by IFN-stimulated genes",
+    "kind": "Pathway",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "Reactome:R-HSA-9909505"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-9909505",
+      "https://reactome.org/content/detail/R-HSA-9909505"
+    ],
+    "primary_reason": "proposal_format_after_bounded_retry",
+    "original_record_sha256": "8eeb36b3109f11aa2efe519806f35164382672075ca62bb8a516ca6076e0c149"
+  },
+  {
+    "case_id": "case-b9e0301a7625eb80",
+    "name": "EIF3H",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-811e394591ad1f9fb0c8",
+        "name": "eukaryotic translation initiation factor 3 subunit H",
+        "standard_ids": [
+          "PR:000006980"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000429931",
+      "PR:O15372"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_O15372",
+      "https://string-db.org/network/9606.ENSP00000429931",
+      "https://purl.obolibrary.org/obo/PR_O15372"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "4d5194daf1fcb9fa1931cf63c3199ae0b041fb82da19a7039ba7e607c6a3c2f9"
+  },
+  {
+    "case_id": "case-d02b2f6030ab8b65",
+    "name": "peripheral blood",
+    "kind": "Tissue",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41650163/"
+    ],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "20bcd35b96affdb7e93518b78176fa96ab5f5c769b6f47d5647e2749f981ca60"
+  },
+  {
+    "case_id": "case-a3d2d590f6a10486",
+    "name": "migrating cytotrophoblasts",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "8edc244f39a0464820428adc32d9a56270797c113f92d6f5ef4446f1492a500e"
+  },
+  {
+    "case_id": "case-8b20117631a25958",
+    "name": "CAV progression",
+    "kind": "Disease",
+    "status": "rejected",
+    "decision_stage": "source_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [
+      "https://pubmed.ncbi.nlm.nih.gov/41799192/"
+    ],
+    "primary_reason": "prior_source_review_identified_input_issue",
+    "original_record_sha256": "640845f6856636267e151363eac51354ddf7f63e1f337837c8bead4552a65e59"
+  },
+  {
+    "case_id": "case-8fbe2fffd3b83171",
+    "name": "KIF18A",
+    "kind": "Gene",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-cb171343d7e694394b23",
+        "name": "protein_coding_gene",
+        "standard_ids": [
+          "SO:0001217"
+        ]
+      }
+    ],
+    "identifiers": [
+      "ENSEMBL:ENSG00000121621",
+      "NCBIGene:81930",
+      "HGNC:29441"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=81930&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F29441",
+      "https://www.ensembl.org/id/ENSG00000121621",
+      "https://www.ncbi.nlm.nih.gov/gene/81930",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:29441"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "fa4e90a39aace98ea41f36cebd619fb14749ea04b50ba416af8216ca1ad7004a"
+  },
+  {
+    "case_id": "case-c8436e098fbca59d",
+    "name": "Cholic acid",
+    "kind": "Metabolite",
+    "status": "rejected",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CHEBI:16359",
+      "HMDB:HMDB0000619"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_16359",
+      "https://purl.obolibrary.org/obo/CHEBI_16359",
+      "https://hmdb.ca/metabolites/HMDB0000619"
+    ],
+    "primary_reason": "hierarchy_or_schema_membership_unverified",
+    "original_record_sha256": "1fb819344c66ab03208be41b9bc87ff645b56ab0559739a4125aa7f334c56e15"
+  },
+  {
+    "case_id": "case-13948cedc40a3480",
+    "name": "RHO GTPases activate CIT",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-5625900"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-5625900",
+      "https://reactome.org/content/detail/R-HSA-5625900"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "86e9716144b5b23ee31864a125142acbef81e7d0c0f8a688bf356898045dacbd"
+  },
+  {
+    "case_id": "case-8c84380c7de3bb16",
+    "name": "SLC5A5",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-82242ea5dfbfb189af8a",
+        "name": "sodium/iodide cotransporter",
+        "standard_ids": [
+          "PR:000015171"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000222248",
+      "PR:Q92911"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q92911",
+      "https://string-db.org/network/9606.ENSP00000222248",
+      "https://purl.obolibrary.org/obo/PR_Q92911"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "be07620552493854051de6041c04e33e5dfd2798b769689f816ef98fd59e2ff1"
+  },
+  {
+    "case_id": "case-896572447b0d9883",
+    "name": "prostatic hillock cells",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "9aa2f9ae549508444d062a7e192a12afe76dedc82c125cf88c43625aa78f6eee"
+  }
+]

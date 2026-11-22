@@ -1,0 +1,1516 @@
+[
+  {
+    "case_id": "case-1d4343ac7b5774bf",
+    "kg_name": "extravillous trophoblasts",
+    "entity_type": "CellType",
+    "ontology_node_id": "KG-ac7b7471cb52ad3d4fbc",
+    "ontology_name": "extravillous trophoblasts",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CL:0008036"
+      ],
+      "definition_source": "Cell Ontology",
+      "source_field": "def",
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0008036"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-871ac9fecccac9ec",
+    "kg_name": "SOCS2",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-b5ca957a81b1e9f55725",
+    "ontology_name": "SOCS2",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000120833",
+        "NCBIGene:8835",
+        "HGNC:19382"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=8835&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F19382",
+        "https://www.ensembl.org/id/ENSG00000120833",
+        "https://www.ncbi.nlm.nih.gov/gene/8835",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:19382"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-c8c017238ac7ed61",
+    "kg_name": "Toll Like Receptor TLR6:TLR2 Cascade",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-693c8a585bf0e8ef279c",
+    "ontology_name": "Toll Like Receptor TLR6:TLR2 Cascade",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-168188"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-168188",
+        "https://reactome.org/content/detail/R-HSA-168188"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-70f0107e2265c221",
+    "kg_name": "IL12A",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-67d1ebce7610be55c0ba",
+    "ontology_name": "IL12A",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000303231",
+        "PR:P29459"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P29459",
+        "https://string-db.org/network/9606.ENSP00000303231",
+        "https://purl.obolibrary.org/obo/PR_P29459"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-1b1498c44a7e2568",
+    "kg_name": "colon",
+    "entity_type": "Tissue",
+    "ontology_node_id": "KG-7c79476f1784bdc4a4c7",
+    "ontology_name": "colon",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "UBERON:0001155"
+      ],
+      "definition_source": "Uberon",
+      "source_field": "definition",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/uberon/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FUBERON_0001155",
+        "https://pubmed.ncbi.nlm.nih.gov/41794448/",
+        "https://purl.obolibrary.org/obo/UBERON_0001155"
+      ]
+    },
+    "identity_method": "two_sided_contextual_evidence",
+    "scope_review": "supported_local_anatomical_scope"
+  },
+  {
+    "case_id": "case-ebdd0e87873a76e1",
+    "kg_name": "PAMR1",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-3f2ba85a29832bc9fc60",
+    "ontology_name": "PAMR1",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000149090",
+        "NCBIGene:25891",
+        "HGNC:24554"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=25891&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F24554",
+        "https://www.ensembl.org/id/ENSG00000149090",
+        "https://www.ncbi.nlm.nih.gov/gene/25891",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:24554"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-eb1059bef297cd14",
+    "kg_name": "Isobutanol",
+    "entity_type": "Metabolite",
+    "ontology_node_id": "KG-310a2699f0cec39656f8",
+    "ontology_name": "Isobutanol",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CHEBI:46645",
+        "HMDB:HMDB0006006"
+      ],
+      "definition_source": "ChEBI",
+      "source_field": "definition",
+      "links": [
+        "https://www.ebi.ac.uk/chebi/backend/api/public/compound/46645/",
+        "https://purl.obolibrary.org/obo/CHEBI_46645",
+        "https://hmdb.ca/metabolites/HMDB0006006"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-e22636927261bef7",
+    "kg_name": "EGR2 and SOX10-mediated initiation of Schwann cell myelination",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-c0d7f1f5b88726d0f4a7",
+    "ontology_name": "EGR2 and SOX10-mediated initiation of Schwann cell myelination",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-9619665"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-9619665",
+        "https://reactome.org/content/detail/R-HSA-9619665"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-1eb29902c36a40ed",
+    "kg_name": "KCNN2",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-bfdc4db7387064e4e3ee",
+    "ontology_name": "KCNN2",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000264773",
+        "PR:Q9H2S1"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9H2S1",
+        "https://string-db.org/network/9606.ENSP00000264773",
+        "https://purl.obolibrary.org/obo/PR_Q9H2S1"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-1b05230e8707931b",
+    "kg_name": "MIR455",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-649f297751364763d24b",
+    "ontology_name": "MIR455",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000207726",
+        "NCBIGene:619556",
+        "HGNC:32344"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=619556&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F32344",
+        "https://www.ensembl.org/id/ENSG00000207726",
+        "https://www.ncbi.nlm.nih.gov/gene/619556",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:32344"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-41d0f250e92717cb",
+    "kg_name": "Th1 and Th2 cell differentiation",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-ebf5d065af6fd35ac9e5",
+    "ontology_name": "Th1 and Th2 cell differentiation",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "KEGG_PATHWAY:hsa04658"
+      ],
+      "definition_source": "KEGG",
+      "source_field": "DESCRIPTION",
+      "links": [
+        "https://rest.kegg.jp/get/hsa04658",
+        "https://www.kegg.jp/entry/hsa04658"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-95a4e40dd259bd8e",
+    "kg_name": "ZC3H12D",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-ec3abcc256f554ea7245",
+    "ontology_name": "ZC3H12D",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000386616",
+        "PR:A2A288"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_A2A288",
+        "https://string-db.org/network/9606.ENSP00000386616",
+        "https://purl.obolibrary.org/obo/PR_A2A288"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-0a8e31c0c72b70a3",
+    "kg_name": "TGFA",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-b230effe7b604f58139d",
+    "ontology_name": "TGFA",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000163235",
+        "NCBIGene:7039",
+        "HGNC:11765"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=7039&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11765",
+        "https://www.ensembl.org/id/ENSG00000163235",
+        "https://www.ncbi.nlm.nih.gov/gene/7039",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:11765"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-6bcbdd06c8345b6b",
+    "kg_name": "Attachment of bacteria to epithelial cells",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-dac3ce966309c0747564",
+    "ontology_name": "Attachment of bacteria to epithelial cells",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-9638630"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-9638630",
+        "https://reactome.org/content/detail/R-HSA-9638630"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-0da9b407560f6bb4",
+    "kg_name": "GPM6A",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-a1cf9852fa43db96f20d",
+    "ontology_name": "GPM6A",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000150625",
+        "NCBIGene:2823",
+        "HGNC:4460"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=2823&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F4460",
+        "https://www.ensembl.org/id/ENSG00000150625",
+        "https://www.ncbi.nlm.nih.gov/gene/2823",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:4460"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-837a1c2423fcb08d",
+    "kg_name": "3-Methyl-2-butenal",
+    "entity_type": "Metabolite",
+    "ontology_node_id": "KG-0888da1a9313dac7400c",
+    "ontology_name": "3-Methyl-2-butenal",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CHEBI:15825",
+        "HMDB:HMDB0012157"
+      ],
+      "definition_source": "ChEBI",
+      "source_field": "definition",
+      "links": [
+        "https://www.ebi.ac.uk/chebi/backend/api/public/compound/15825/",
+        "https://purl.obolibrary.org/obo/CHEBI_15825",
+        "https://hmdb.ca/metabolites/HMDB0012157"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-64e89c9b19e05c68",
+    "kg_name": "The canonical retinoid cycle in rods (twilight vision)",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-660379e460cd1a4c434e",
+    "ontology_name": "The canonical retinoid cycle in rods (twilight vision)",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-2453902"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-2453902",
+        "https://reactome.org/content/detail/R-HSA-2453902"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-89553ca5e39c13bb",
+    "kg_name": "CCL3",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-923b42406de05f6b2af6",
+    "ontology_name": "CCL3",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000477908",
+        "PR:P10147"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P10147",
+        "https://string-db.org/network/9606.ENSP00000477908",
+        "https://purl.obolibrary.org/obo/PR_P10147"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-1c96b556d52b4c68",
+    "kg_name": "peritubular myoid cells",
+    "entity_type": "CellType",
+    "ontology_node_id": "KG-41980932511499e99369",
+    "ontology_name": "peritubular myoid cells",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CL:0002481"
+      ],
+      "definition_source": "Cell Ontology",
+      "source_field": "def",
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0002481"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-be4896220ab6786b",
+    "kg_name": "MTUS1",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-6dde6b8bff16c4eacd38",
+    "ontology_name": "MTUS1",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000129422",
+        "NCBIGene:57509",
+        "HGNC:29789"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=57509&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F29789",
+        "https://www.ensembl.org/id/ENSG00000129422",
+        "https://www.ncbi.nlm.nih.gov/gene/57509",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:29789"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-121b648bed9c6a55",
+    "kg_name": "1-Methylnicotinamide",
+    "entity_type": "Metabolite",
+    "ontology_node_id": "KG-a8042ae06e4294d81ef7",
+    "ontology_name": "1-Methylnicotinamide",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CHEBI:16797",
+        "HMDB:HMDB0000699"
+      ],
+      "definition_source": "ChEBI",
+      "source_field": "definition",
+      "links": [
+        "https://www.ebi.ac.uk/chebi/backend/api/public/compound/16797/",
+        "https://purl.obolibrary.org/obo/CHEBI_16797",
+        "https://hmdb.ca/metabolites/HMDB0000699"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-a3ba80d82429a69f",
+    "kg_name": "HNRNPL",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-bfbd89bae971ddb5b0f9",
+    "ontology_name": "HNRNPL",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000221419",
+        "PR:P14866"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P14866",
+        "https://string-db.org/network/9606.ENSP00000221419",
+        "https://purl.obolibrary.org/obo/PR_P14866"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-ce6dacc58a9a8a84",
+    "kg_name": "PHLDA1",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-786fa37db25836bc851e",
+    "ontology_name": "PHLDA1",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000139289",
+        "NCBIGene:22822",
+        "HGNC:8933"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=22822&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F8933",
+        "https://www.ensembl.org/id/ENSG00000139289",
+        "https://www.ncbi.nlm.nih.gov/gene/22822",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:8933"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-b0093586dbaea977",
+    "kg_name": "L-Aspartic acid",
+    "entity_type": "Metabolite",
+    "ontology_node_id": "KG-c839c54191a4b20152c2",
+    "ontology_name": "L-Aspartic acid",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CHEBI:17053",
+        "HMDB:HMDB0000191"
+      ],
+      "definition_source": "ChEBI",
+      "source_field": "definition",
+      "links": [
+        "https://www.ebi.ac.uk/chebi/backend/api/public/compound/17053/",
+        "https://purl.obolibrary.org/obo/CHEBI_17053",
+        "https://hmdb.ca/metabolites/HMDB0000191"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-51c3e0bd2daebf59",
+    "kg_name": "Antagonism of Activin by Follistatin",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-9bd548893bb9f360785d",
+    "ontology_name": "Antagonism of Activin by Follistatin",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-2473224"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-2473224",
+        "https://reactome.org/content/detail/R-HSA-2473224"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-c9e2febde90abc11",
+    "kg_name": "BCL2L1",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-d6ebffaa35842960e693",
+    "ontology_name": "BCL2L1",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000365230",
+        "PR:Q07817"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q07817",
+        "https://string-db.org/network/9606.ENSP00000365230",
+        "https://purl.obolibrary.org/obo/PR_Q07817"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-40b06c8c529c8ddf",
+    "kg_name": "HPSE",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-e09fb1f5c032159d6fe6",
+    "ontology_name": "HPSE",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000173083",
+        "NCBIGene:10855",
+        "HGNC:5164"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=10855&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F5164",
+        "https://www.ensembl.org/id/ENSG00000173083",
+        "https://www.ncbi.nlm.nih.gov/gene/10855",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:5164"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-f7c37fe22f8dee09",
+    "kg_name": "FLT3 signaling by CBL mutants",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-9df55d6e6169707c6aec",
+    "ontology_name": "FLT3 signaling by CBL mutants",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-9706377"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-9706377",
+        "https://reactome.org/content/detail/R-HSA-9706377"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-87d4b22bd7a92520",
+    "kg_name": "EAF2",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-380c66a0ba62b2e037b2",
+    "ontology_name": "EAF2",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000273668",
+        "PR:Q96CJ1"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q96CJ1",
+        "https://string-db.org/network/9606.ENSP00000273668",
+        "https://purl.obolibrary.org/obo/PR_Q96CJ1"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-d194585b4bf0dfa3",
+    "kg_name": "ovarian stromal cells",
+    "entity_type": "CellType",
+    "ontology_node_id": "KG-3b0c78aa6d92cc235799",
+    "ontology_name": "ovarian stromal cells",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CL:0002132"
+      ],
+      "definition_source": "Cell Ontology",
+      "source_field": "def",
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0002132"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-8099f3f29773c23f",
+    "kg_name": "Propylene glycol",
+    "entity_type": "Metabolite",
+    "ontology_node_id": "KG-723b555a476c71d4c4d0",
+    "ontology_name": "Propylene glycol",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CHEBI:16997",
+        "HMDB:HMDB0001881"
+      ],
+      "definition_source": "ChEBI",
+      "source_field": "definition",
+      "links": [
+        "https://www.ebi.ac.uk/chebi/backend/api/public/compound/16997/",
+        "https://purl.obolibrary.org/obo/CHEBI_16997",
+        "https://hmdb.ca/metabolites/HMDB0001881"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-beb59bfd533153d7",
+    "kg_name": "TGFBR3 regulates TGF-beta signaling",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-806a3329f915130f430b",
+    "ontology_name": "TGFBR3 regulates TGF-beta signaling",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-9839389"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-9839389",
+        "https://reactome.org/content/detail/R-HSA-9839389"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-c858b0d340e34fbf",
+    "kg_name": "CEP131",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-ef240de796673a8cebee",
+    "ontology_name": "CEP131",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000269392",
+        "PR:Q9UPN4"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9UPN4",
+        "https://string-db.org/network/9606.ENSP00000269392",
+        "https://purl.obolibrary.org/obo/PR_Q9UPN4"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-3186085ba987a7b9",
+    "kg_name": "erythrocytes",
+    "entity_type": "CellType",
+    "ontology_node_id": "KG-a721bd231a7bd53a1d58",
+    "ontology_name": "erythrocytes",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CL:0000232"
+      ],
+      "definition_source": "Cell Ontology",
+      "source_field": "def",
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0000232"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-60de0b1f3b8499bf",
+    "kg_name": "PHB1",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-98cf7c9790e4855cde48",
+    "ontology_name": "PHB1",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000167085",
+        "NCBIGene:5245",
+        "HGNC:8912"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=5245&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F8912",
+        "https://www.ensembl.org/id/ENSG00000167085",
+        "https://www.ncbi.nlm.nih.gov/gene/5245",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:8912"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-25e354fef1553922",
+    "kg_name": "RUNX3 regulates RUNX1-mediated transcription",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-9c01bf5380bf1f3201d5",
+    "ontology_name": "RUNX3 regulates RUNX1-mediated transcription",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-8951911"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-8951911",
+        "https://reactome.org/content/detail/R-HSA-8951911"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-861924579cdd07fc",
+    "kg_name": "NR1H2",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-f26fbf73dd26a1137873",
+    "ontology_name": "NR1H2",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000499121",
+        "PR:P55055"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P55055",
+        "https://string-db.org/network/9606.ENSP00000499121",
+        "https://purl.obolibrary.org/obo/PR_P55055"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-c105cf8343c6602d",
+    "kg_name": "mucous neck cells",
+    "entity_type": "CellType",
+    "ontology_node_id": "KG-40bd597470563eae51c7",
+    "ontology_name": "mucous neck cells",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CL:0002181"
+      ],
+      "definition_source": "Cell Ontology",
+      "source_field": "def",
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0002181"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-e97473f641e28020",
+    "kg_name": "HOXA10",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-86fd41b3b33fdf98a5c4",
+    "ontology_name": "HOXA10",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000253293",
+        "NCBIGene:3206",
+        "HGNC:5100"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=3206&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F5100",
+        "https://www.ensembl.org/id/ENSG00000253293",
+        "https://www.ncbi.nlm.nih.gov/gene/3206",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:5100"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-b290864320bbf881",
+    "kg_name": "TICRR",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-74441fb811af3dd06cbb",
+    "ontology_name": "TICRR",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000268138",
+        "PR:Q7Z2Z1"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q7Z2Z1",
+        "https://string-db.org/network/9606.ENSP00000268138",
+        "https://purl.obolibrary.org/obo/PR_Q7Z2Z1"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-4fb76763caa08c70",
+    "kg_name": "ZWINT",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-3e87ef7bf1dd3ea6e8b6",
+    "ontology_name": "ZWINT",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000363055",
+        "PR:O95229"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_O95229",
+        "https://string-db.org/network/9606.ENSP00000363055",
+        "https://purl.obolibrary.org/obo/PR_O95229"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-da6f9f3145475389",
+    "kg_name": "hepatocytes",
+    "entity_type": "CellType",
+    "ontology_node_id": "C-b7431c5bcf57",
+    "ontology_name": "hepatocytes",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CL:0000182"
+      ],
+      "definition_source": "Cell Ontology",
+      "source_field": "def",
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0000182"
+      ]
+    },
+    "identity_method": "two_sided_contextual_evidence",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-2c400b6151ffa12e",
+    "kg_name": "SHH",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-d408f67cc1c703b39114",
+    "ontology_name": "SHH",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000164690",
+        "NCBIGene:6469",
+        "HGNC:10848"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=6469&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F10848",
+        "https://www.ensembl.org/id/ENSG00000164690",
+        "https://www.ncbi.nlm.nih.gov/gene/6469",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:10848"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-e42f179f900926bf",
+    "kg_name": "Defective B4GALT7 causes EDS, progeroid type",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-a58f1ed49aa417f6a5f8",
+    "ontology_name": "Defective B4GALT7 causes EDS, progeroid type",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-3560783"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-3560783",
+        "https://reactome.org/content/detail/R-HSA-3560783"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-8ebf68c4004a0713",
+    "kg_name": "CDT1",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-a539d8ca715af8afee54",
+    "ontology_name": "CDT1",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000301019",
+        "PR:Q9H211"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9H211",
+        "https://string-db.org/network/9606.ENSP00000301019",
+        "https://purl.obolibrary.org/obo/PR_Q9H211"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-85e9e78e6a9c22d5",
+    "kg_name": "oocytes",
+    "entity_type": "CellType",
+    "ontology_node_id": "KG-4732991c85a9de9ce58e",
+    "ontology_name": "oocytes",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CL:0000023"
+      ],
+      "definition_source": "Cell Ontology",
+      "source_field": "def",
+      "links": [
+        "https://purl.obolibrary.org/obo/CL_0000023"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-28752334d8fe12d6",
+    "kg_name": "SPARC",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-2e956643619b2293201e",
+    "ontology_name": "SPARC",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000113140",
+        "NCBIGene:6678",
+        "HGNC:11219"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=6678&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11219",
+        "https://www.ensembl.org/id/ENSG00000113140",
+        "https://www.ncbi.nlm.nih.gov/gene/6678",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:11219"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-44311f3332ecd463",
+    "kg_name": "Synthesis of PI",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-865af988e49b6634a977",
+    "ontology_name": "Synthesis of PI",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-1483226"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-1483226",
+        "https://reactome.org/content/detail/R-HSA-1483226"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-bbf6d800d4af105b",
+    "kg_name": "MED1",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-793ab8cbba8e1f8d33bd",
+    "ontology_name": "MED1",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000300651",
+        "PR:Q15648"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q15648",
+        "https://string-db.org/network/9606.ENSP00000300651",
+        "https://purl.obolibrary.org/obo/PR_Q15648"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-511f6e9997a743cf",
+    "kg_name": "HIF1A",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-ecbf1a008b622bf12d87",
+    "ontology_name": "HIF1A",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000100644",
+        "NCBIGene:3091",
+        "HGNC:4910"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=3091&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F4910",
+        "https://www.ensembl.org/id/ENSG00000100644",
+        "https://www.ncbi.nlm.nih.gov/gene/3091",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:4910"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-28b6bb85c36bbf12",
+    "kg_name": "Signaling by VEGF",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-83b057cb48228b822c5c",
+    "ontology_name": "Signaling by VEGF",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-194138"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-194138",
+        "https://reactome.org/content/detail/R-HSA-194138"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-c9ec8172561884c2",
+    "kg_name": "MVK",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-d321dec6e8c1f2da5e26",
+    "ontology_name": "MVK",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000110921",
+        "NCBIGene:4598",
+        "HGNC:7530"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=4598&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F7530",
+        "https://www.ensembl.org/id/ENSG00000110921",
+        "https://www.ncbi.nlm.nih.gov/gene/4598",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:7530"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-13bdb48e45cc616f",
+    "kg_name": "Transcription of the HIV genome",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-4e20695b4764fa215c1c",
+    "ontology_name": "Transcription of the HIV genome",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-167172"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-167172",
+        "https://reactome.org/content/detail/R-HSA-167172"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-b28e5df10d736fc3",
+    "kg_name": "TLR3",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-6f73601e96734654f6d4",
+    "ontology_name": "TLR3",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000164342",
+        "NCBIGene:7098",
+        "HGNC:11849"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=7098&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F11849",
+        "https://www.ensembl.org/id/ENSG00000164342",
+        "https://www.ncbi.nlm.nih.gov/gene/7098",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:11849"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-92c7ff63fcd773d0",
+    "kg_name": "Pentanal",
+    "entity_type": "Metabolite",
+    "ontology_node_id": "KG-e2ea45894cc8c34453d8",
+    "ontology_name": "Pentanal",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "CHEBI:84069",
+        "HMDB:HMDB0031206"
+      ],
+      "definition_source": "ChEBI",
+      "source_field": "definition",
+      "links": [
+        "https://www.ebi.ac.uk/chebi/backend/api/public/compound/84069/",
+        "https://purl.obolibrary.org/obo/CHEBI_84069",
+        "https://hmdb.ca/metabolites/HMDB0031206"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-8beb121b0a81e71d",
+    "kg_name": "Hepatitis B",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-fdfdd69f079c6428ed37",
+    "ontology_name": "Hepatitis B",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "KEGG_PATHWAY:hsa05161"
+      ],
+      "definition_source": "KEGG",
+      "source_field": "DESCRIPTION",
+      "links": [
+        "https://rest.kegg.jp/get/hsa05161",
+        "https://www.kegg.jp/entry/hsa05161"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-1977b50ebc3f7d6e",
+    "kg_name": "TRIP13",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-8fb8266c5b309ee6c17e",
+    "ontology_name": "TRIP13",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000166345",
+        "PR:Q15645"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q15645",
+        "https://string-db.org/network/9606.ENSP00000166345",
+        "https://purl.obolibrary.org/obo/PR_Q15645"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-4e8c11523b78246b",
+    "kg_name": "ATM",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-0e7c76f72483b989c0b1",
+    "ontology_name": "ATM",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000149311",
+        "NCBIGene:472",
+        "HGNC:795"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=472&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F795",
+        "https://www.ensembl.org/id/ENSG00000149311",
+        "https://www.ncbi.nlm.nih.gov/gene/472",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:795"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-86851a128e9cf2df",
+    "kg_name": "Pre-NOTCH Processing in the Endoplasmic Reticulum",
+    "entity_type": "Pathway",
+    "ontology_node_id": "KG-21bb941fbcb5e76b4d62",
+    "ontology_name": "Pre-NOTCH Processing in the Endoplasmic Reticulum",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "Reactome:R-HSA-1912399"
+      ],
+      "definition_source": "Reactome",
+      "source_field": "summation.text",
+      "links": [
+        "https://release.reactome.org/ContentService/data/query/R-HSA-1912399",
+        "https://reactome.org/content/detail/R-HSA-1912399"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-06db0535fb1e2f25",
+    "kg_name": "SAMM50",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-47afcd15c7c5f5c515ff",
+    "ontology_name": "SAMM50",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000345445",
+        "PR:Q9Y512"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9Y512",
+        "https://string-db.org/network/9606.ENSP00000345445",
+        "https://purl.obolibrary.org/obo/PR_Q9Y512"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-ed5af9eeee32ffa3",
+    "kg_name": "A2M",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-6d91145e3fa5d826deca",
+    "ontology_name": "A2M",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000175899",
+        "NCBIGene:2",
+        "HGNC:7"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=2&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F7",
+        "https://www.ensembl.org/id/ENSG00000175899",
+        "https://www.ncbi.nlm.nih.gov/gene/2",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:7"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-3a5c2b0c0bb16011",
+    "kg_name": "AHCY",
+    "entity_type": "Protein",
+    "ontology_node_id": "KG-4c363200c63a8cfa50fe",
+    "ontology_name": "AHCY",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "STRING:9606.ENSP00000217426",
+        "PR:P23526"
+      ],
+      "definition_source": "STRING",
+      "source_field": "LiverKG description or annotation",
+      "links": [
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_P23526",
+        "https://string-db.org/network/9606.ENSP00000217426",
+        "https://purl.obolibrary.org/obo/PR_P23526"
+      ]
+    },
+    "identity_method": "preserved_kg_record_identity",
+    "scope_review": "supported"
+  },
+  {
+    "case_id": "case-f658f8505f631a6c",
+    "kg_name": "CSMD1",
+    "entity_type": "Gene",
+    "ontology_node_id": "KG-8815e5d7b786c0b47c04",
+    "ontology_name": "CSMD1",
+    "relation_type": "MAPS_TO",
+    "decision_status": "ALIGNED",
+    "authority": {
+      "identifiers": [
+        "ENSEMBL:ENSG00000183117",
+        "NCBIGene:64478",
+        "HGNC:14026"
+      ],
+      "definition_source": "NCBI Gene",
+      "source_field": "name + nomenclaturename / description + optional summary",
+      "links": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=64478&retmode=json",
+        "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F14026",
+        "https://www.ensembl.org/id/ENSG00000183117",
+        "https://www.ncbi.nlm.nih.gov/gene/64478",
+        "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:14026"
+      ]
+    },
+    "identity_method": "shared_standard_id",
+    "scope_review": "supported"
+  }
+]

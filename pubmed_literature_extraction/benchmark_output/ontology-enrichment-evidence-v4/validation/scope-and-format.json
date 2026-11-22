@@ -1,0 +1,203 @@
+{
+  "definition_packets": {
+    "cohort_size": 105,
+    "source_packet_bytes_equivalent_per_field": {
+      "definition": 105,
+      "definition_evidence": 105,
+      "standard_ids": 105,
+      "reference_terms": 105,
+      "auxiliary_evidence": 105,
+      "taxon_id": 105,
+      "species": 105,
+      "entity_level": 105,
+      "source_context": 105,
+      "kg_record": 105,
+      "prior_grounding": 105,
+      "source": 105
+    },
+    "source_packet_canonical_sha256": {
+      "before": "a3f9323bbef816f195f88eeda50545fa5a88339e116dda3d8aaad0044b7f7400",
+      "after": "a3f9323bbef816f195f88eeda50545fa5a88339e116dda3d8aaad0044b7f7400"
+    },
+    "all_selected_source_fields_equal_records": 105
+  },
+  "envelope_replay": {
+    "target_only_candidate_repair_still_required": 43,
+    "incomplete_response": 6
+  },
+  "truncation": [
+    {
+      "name": "schwann cells",
+      "case_id": "case-cf6babe2b0c8aa06",
+      "responses": [
+        {
+          "requested_candidates": 32,
+          "finish_reason": "length",
+          "completion_tokens": 6000
+        },
+        {
+          "requested_candidates": 12,
+          "finish_reason": "stop",
+          "completion_tokens": 990,
+          "missing": 12,
+          "duplicates": 0,
+          "foreign": 0
+        },
+        {
+          "requested_candidates": 12,
+          "finish_reason": "stop",
+          "completion_tokens": 958,
+          "missing": 12,
+          "duplicates": 0,
+          "foreign": 0
+        },
+        {
+          "requested_candidates": 32,
+          "finish_reason": "length",
+          "completion_tokens": 6000
+        }
+      ]
+    },
+    {
+      "name": "endometrial stromal cells",
+      "case_id": "case-e7560347ddb0dde0",
+      "responses": [
+        {
+          "requested_candidates": 32,
+          "finish_reason": "length",
+          "completion_tokens": 6000
+        },
+        {
+          "requested_candidates": 12,
+          "finish_reason": "stop",
+          "completion_tokens": 958,
+          "missing": 0,
+          "duplicates": 0,
+          "foreign": 0
+        },
+        {
+          "requested_candidates": 32,
+          "finish_reason": "length",
+          "completion_tokens": 6000
+        }
+      ]
+    }
+  ],
+  "tyramine": {
+    "verified": true,
+    "basis": "compound_with_attested_metabolite_role",
+    "evidence": {
+      "subject_id": "CHEBI:15760",
+      "object_id": "CHEBI:77746",
+      "object_label": "human metabolite",
+      "predicate": "has role",
+      "relation": "HAS_ROLE",
+      "source_url": "https://www.ebi.ac.uk/chebi/backend/api/public/compound/15760/",
+      "source_field": "ontology_relations.outgoing_relations",
+      "role_ancestry": {
+        "role": "CHEBI:77746",
+        "class": "CHEBI:25212",
+        "field": "directAncestor",
+        "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_77746"
+      }
+    }
+  },
+  "cholic_acid": {
+    "source": "CHEBI:16359",
+    "ontology_parent": "CHEBI:18059",
+    "local_node_id": "C-47200fae4a55",
+    "local_name": "Lipid",
+    "end_label": [
+      "lipid"
+    ],
+    "authority_path": [
+      {
+        "child": "CHEBI:16359",
+        "parent": "CHEBI:131620",
+        "predicate": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+        "response": "a041ccc798850f6bbc07ddf26b034589962aa60e3d942cfa83c78af74a997a6e",
+        "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_16359"
+      },
+      {
+        "child": "CHEBI:131620",
+        "parent": "CHEBI:131657",
+        "predicate": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+        "response": "50d29ca8b95b12f492a59fc6dad334821374390108afa42a881735e3d16c165e",
+        "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_131620"
+      },
+      {
+        "child": "CHEBI:131657",
+        "parent": "CHEBI:35341",
+        "predicate": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+        "response": "b8baa00c38a16573884b2ee9fab761670321047754fbfa1503540919e1b5c561",
+        "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_131657"
+      },
+      {
+        "child": "CHEBI:35341",
+        "parent": "CHEBI:18059",
+        "predicate": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+        "response": "855aee36c21da471143f4e8e0c099a839da29de0bf0ac4191cd33dea1dc8e1f4",
+        "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_35341"
+      }
+    ],
+    "parent_url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_18059",
+    "local_identity_direct_id_match": false
+  },
+  "withheld_LOX": {
+    "name": "LOX",
+    "source_standard_ids": [
+      "STRING:9606.ENSP00000231004"
+    ],
+    "retrieved_seed": [
+      "PR:P28300"
+    ],
+    "scope_verdict": "REVIEW_REQUIRED",
+    "why": "STRING 表示人源 LOX 蛋白，原注释又限定为短成熟链。被用作严格层级证据的人蛋白 PR:P28300 对应 UniProt P28300，含长、短两种成熟链。当前管线未确定本地端点代表整个蛋白还是短链，也未记录短链的特异关系。",
+    "source_url": "https://rest.uniprot.org/uniprotkb/P28300.json",
+    "signed_chain_features": [
+      {
+        "feature_id": "PRO_0000018521",
+        "name": "Protein-lysine 6-oxidase, long form",
+        "positions": {
+          "start": {
+            "value": 169,
+            "modifier": "EXACT"
+          },
+          "end": {
+            "value": 417,
+            "modifier": "EXACT"
+          }
+        }
+      },
+      {
+        "feature_id": "PRO_0000447885",
+        "name": "Protein-lysine 6-oxidase, short form",
+        "positions": {
+          "start": {
+            "value": 219,
+            "modifier": "EXACT"
+          },
+          "end": {
+            "value": 417,
+            "modifier": "EXACT"
+          }
+        }
+      }
+    ],
+    "case_id": "case-65b22f1f5a9b2119"
+  },
+  "excluded_plus_edge": {
+    "child_id": "KG-8eac89b1c8cf31b901de",
+    "parent_id": "C-8ce6a9bf40af",
+    "decision": "withhold_scope_unverified",
+    "reason": "本地 myeloid cells 的定义限定白细胞。它的标准 ID 未绑定，现有证据无法将血小板谱系祖细胞置于这个范围内。Cell Ontology 对另外两个端点各有可核对的命名子类断言。",
+    "child_authority": "CL:0000553",
+    "retained_authoritative_parents": [
+      "CL:0000763",
+      "CL:0000839"
+    ],
+    "checks": {
+      "machine_checked_result": "Two named direct CL parents of the precursor are verified. The extra edge to the WBC-scoped local class is unsupported. No experimental output graph was altered."
+    }
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "current_runs": [
+    {
+      "model": "qwen3.7-flash",
+      "run": "before-independent-flash",
+      "fresh": {
+        "journal_requests": 47,
+        "total_tokens": 279249,
+        "prompt_tokens": 233853,
+        "completion_tokens": 45396,
+        "provider_cached_input_tokens": 8832,
+        "list_cny_min": 0.08167428,
+        "list_cny_max": 0.08167428,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 47,
+        "total_tokens": 279249,
+        "prompt_tokens": 233853,
+        "completion_tokens": 45396,
+        "provider_cached_input_tokens": 8832,
+        "list_cny_min": 0.08167428,
+        "list_cny_max": 0.08167428,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 47
+    },
+    {
+      "model": "qwen3.7-flash",
+      "run": "after-regression-flash",
+      "fresh": {
+        "journal_requests": 80,
+        "total_tokens": 352586,
+        "prompt_tokens": 295821,
+        "completion_tokens": 56765,
+        "provider_cached_input_tokens": 4352,
+        "list_cny_min": 0.10387988000000001,
+        "list_cny_max": 0.10387988000000001,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 80,
+        "total_tokens": 352586,
+        "prompt_tokens": 295821,
+        "completion_tokens": 56765,
+        "provider_cached_input_tokens": 4352,
+        "list_cny_min": 0.10387988000000001,
+        "list_cny_max": 0.10387988000000001,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 80
+    },
+    {
+      "model": "qwen3.7-plus",
+      "run": "after-difficult-plus",
+      "fresh": {
+        "journal_requests": 10,
+        "total_tokens": 24403,
+        "prompt_tokens": 20668,
+        "completion_tokens": 3735,
+        "provider_cached_input_tokens": 5120,
+        "list_cny_min": 0.063024,
+        "list_cny_max": 0.063024,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 10,
+        "total_tokens": 24403,
+        "prompt_tokens": 20668,
+        "completion_tokens": 3735,
+        "provider_cached_input_tokens": 5120,
+        "list_cny_min": 0.063024,
+        "list_cny_max": 0.063024,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 10
+    },
+    {
+      "model": "qwen3.7-flash",
+      "run": "after-tyramine-flash",
+      "fresh": {
+        "journal_requests": 5,
+        "total_tokens": 25861,
+        "prompt_tokens": 20415,
+        "completion_tokens": 5446,
+        "provider_cached_input_tokens": 0,
+        "list_cny_min": 0.0084398,
+        "list_cny_max": 0.0084398,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 5,
+        "total_tokens": 25861,
+        "prompt_tokens": 20415,
+        "completion_tokens": 5446,
+        "provider_cached_input_tokens": 0,
+        "list_cny_min": 0.0084398,
+        "list_cny_max": 0.0084398,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 5
+    },
+    {
+      "model": "qwen3.7-flash",
+      "run": "after-independent-flash",
+      "fresh": {
+        "journal_requests": 50,
+        "total_tokens": 253646,
+        "prompt_tokens": 211463,
+        "completion_tokens": 42183,
+        "provider_cached_input_tokens": 131072,
+        "list_cny_min": 0.05506748,
+        "list_cny_max": 0.05506748,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 50,
+        "total_tokens": 253646,
+        "prompt_tokens": 211463,
+        "completion_tokens": 42183,
+        "provider_cached_input_tokens": 131072,
+        "list_cny_min": 0.05506748,
+        "list_cny_max": 0.05506748,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 50
+    },
+    {
+      "model": "qwen3.7-flash",
+      "run": "after-scale-flash",
+      "fresh": {
+        "journal_requests": 450,
+        "total_tokens": 3271519,
+        "prompt_tokens": 2766109,
+        "completion_tokens": 505410,
+        "provider_cached_input_tokens": 163584,
+        "list_cny_min": 1.0792248400000002,
+        "list_cny_max": 1.0792248400000002,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 450,
+        "total_tokens": 3271519,
+        "prompt_tokens": 2766109,
+        "completion_tokens": 505410,
+        "provider_cached_input_tokens": 163584,
+        "list_cny_min": 1.0792248400000002,
+        "list_cny_max": 1.0792248400000002,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 450
+    },
+    {
+      "model": "qwen3.7-flash",
+      "run": "refined-confirmatory-flash",
+      "fresh": {
+        "journal_requests": 56,
+        "total_tokens": 289279,
+        "prompt_tokens": 241146,
+        "completion_tokens": 48133,
+        "provider_cached_input_tokens": 0,
+        "list_cny_min": 0.08673560000000004,
+        "list_cny_max": 0.08673560000000004,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 56,
+        "total_tokens": 289279,
+        "prompt_tokens": 241146,
+        "completion_tokens": 48133,
+        "provider_cached_input_tokens": 0,
+        "list_cny_min": 0.08673560000000004,
+        "list_cny_max": 0.08673560000000004,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 56
+    },
+    {
+      "model": "qwen3.7-flash",
+      "run": "refined-regression-flash",
+      "fresh": {
+        "journal_requests": 0,
+        "total_tokens": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "provider_cached_input_tokens": 0,
+        "list_cny_min": 0,
+        "list_cny_max": 0,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 80,
+        "total_tokens": 352586,
+        "prompt_tokens": 295821,
+        "completion_tokens": 56765,
+        "provider_cached_input_tokens": 4352,
+        "list_cny_min": 0.10387988000000001,
+        "list_cny_max": 0.10387988000000001,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 0
+    },
+    {
+      "model": "qwen3.7-flash",
+      "run": "refined-independent-flash",
+      "fresh": {
+        "journal_requests": 0,
+        "total_tokens": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "provider_cached_input_tokens": 0,
+        "list_cny_min": 0,
+        "list_cny_max": 0,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 50,
+        "total_tokens": 253646,
+        "prompt_tokens": 211463,
+        "completion_tokens": 42183,
+        "provider_cached_input_tokens": 131072,
+        "list_cny_min": 0.05506748,
+        "list_cny_max": 0.05506748,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 0
+    },
+    {
+      "model": "qwen3.7-flash",
+      "run": "refined-scale-flash",
+      "fresh": {
+        "journal_requests": 174,
+        "total_tokens": 1218044,
+        "prompt_tokens": 1058276,
+        "completion_tokens": 159768,
+        "provider_cached_input_tokens": 45696,
+        "list_cny_min": 0.33215824000000016,
+        "list_cny_max": 0.33215824000000016,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 524,
+        "total_tokens": 3805665,
+        "prompt_tokens": 3273053,
+        "completion_tokens": 532612,
+        "provider_cached_input_tokens": 99584,
+        "list_cny_min": 1.2126152400000008,
+        "list_cny_max": 1.2126152400000008,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 174
+    },
+    {
+      "model": "qwen3.7-plus",
+      "run": "refined-scale-difficult-plus",
+      "fresh": {
+        "journal_requests": 31,
+        "total_tokens": 105831,
+        "prompt_tokens": 93965,
+        "completion_tokens": 11866,
+        "provider_cached_input_tokens": 9728,
+        "list_cny_min": 0.26729320000000006,
+        "list_cny_max": 0.26729320000000006,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 31,
+        "total_tokens": 105831,
+        "prompt_tokens": 93965,
+        "completion_tokens": 11866,
+        "provider_cached_input_tokens": 9728,
+        "list_cny_min": 0.26729320000000006,
+        "list_cny_max": 0.26729320000000006,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 31
+    }
+  ],
+  "historical_v3_regression_excluded_from_current_totals": [
+    {
+      "model": "qwen3.7-flash",
+      "run": "confirmed-blind-flash",
+      "fresh": {
+        "journal_requests": 48,
+        "total_tokens": 219350,
+        "prompt_tokens": 178793,
+        "completion_tokens": 40557,
+        "provider_cached_input_tokens": 45824,
+        "list_cny_min": 0.06087236,
+        "list_cny_max": 0.06087236,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 48,
+        "total_tokens": 219350,
+        "prompt_tokens": 178793,
+        "completion_tokens": 40557,
+        "provider_cached_input_tokens": 45824,
+        "list_cny_min": 0.06087236,
+        "list_cny_max": 0.06087236,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 48
+    },
+    {
+      "model": "qwen3.7-plus",
+      "run": "confirmed-blind-plus",
+      "fresh": {
+        "journal_requests": 71,
+        "total_tokens": 292138,
+        "prompt_tokens": 251140,
+        "completion_tokens": 40998,
+        "provider_cached_input_tokens": 27520,
+        "list_cny_min": 0.786232,
+        "list_cny_max": 0.786232,
+        "usage_unavailable": 0
+      },
+      "logical": {
+        "journal_requests": 71,
+        "total_tokens": 292138,
+        "prompt_tokens": 251140,
+        "completion_tokens": 40998,
+        "provider_cached_input_tokens": 27520,
+        "list_cny_min": 0.786232,
+        "list_cny_max": 0.786232,
+        "usage_unavailable": 0
+      },
+      "distinct_provider_receipts": 71
+    }
+  ],
+  "actual_new_work_by_model": {
+    "qwen3.7-flash": {
+      "journal_requests": 862,
+      "total_tokens": 5690184,
+      "prompt_tokens": 4827083,
+      "completion_tokens": 863101,
+      "provider_cached_input_tokens": 353536,
+      "list_cny_min": 1.7471801200000003,
+      "list_cny_max": 1.7471801200000003,
+      "usage_unavailable": 0
+    },
+    "qwen3.7-plus": {
+      "journal_requests": 41,
+      "total_tokens": 130234,
+      "prompt_tokens": 114633,
+      "completion_tokens": 15601,
+      "provider_cached_input_tokens": 14848,
+      "list_cny_min": 0.3303172000000001,
+      "list_cny_max": 0.3303172000000001,
+      "usage_unavailable": 0
+    }
+  },
+  "actual_new_work_total": {
+    "journal_requests": 903,
+    "total_tokens": 5820418,
+    "prompt_tokens": 4941716,
+    "completion_tokens": 878702,
+    "provider_cached_input_tokens": 368384,
+    "list_cny_min": 2.0774973200000004,
+    "list_cny_max": 2.0774973200000004,
+    "usage_unavailable": 0
+  },
+  "scale_105_both_design_iterations_actual_new_work": {
+    "journal_requests": 624,
+    "total_tokens": 4489563,
+    "prompt_tokens": 3824385,
+    "completion_tokens": 665178,
+    "provider_cached_input_tokens": 209280,
+    "list_cny_min": 1.4113830800000002,
+    "list_cny_max": 1.4113830800000002,
+    "usage_unavailable": 0
+  },
+  "currency": "CNY",
+  "price_source": "https://help.aliyun.com/zh/model-studio/model-pricing",
+  "region": "Beijing, standard synchronous API",
+  "is_account_invoice": false
+}

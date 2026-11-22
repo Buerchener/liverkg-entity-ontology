@@ -1,0 +1,325 @@
+[
+  {
+    "case_id": "case-03cd7f762729b0dd",
+    "name": "salivary ionocytes",
+    "kind": "CellType",
+    "status": "needs_review",
+    "decision_stage": "identity_verification",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [],
+    "definition_source": null,
+    "source_field": null,
+    "links": [],
+    "primary_reason": "source_definition_missing",
+    "original_record_sha256": "424d1c46134d1a6b3aa493128ba63e3c7daf6fed19c51efc531fed28a74dc344"
+  },
+  {
+    "case_id": "case-426286402bce6c62",
+    "name": "PPARA",
+    "kind": "Gene",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-cb171343d7e694394b23",
+        "name": "protein_coding_gene",
+        "standard_ids": [
+          "SO:0001217"
+        ]
+      }
+    ],
+    "identifiers": [
+      "ENSEMBL:ENSG00000186951",
+      "NCBIGene:5465",
+      "HGNC:9232"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=5465&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F9232",
+      "https://www.ensembl.org/id/ENSG00000186951",
+      "https://www.ncbi.nlm.nih.gov/gene/5465",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:9232"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "32632d0c8a6251d728456a41e6ce26a85105e243ee4b45dd893f5eebda4e0097"
+  },
+  {
+    "case_id": "case-edd94f5199d179a1",
+    "name": "estrogen",
+    "kind": "Metabolite",
+    "status": "needs_review",
+    "decision_stage": "hierarchy_placement",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": false,
+    "maps_to": false,
+    "published_parents": [],
+    "identifiers": [
+      "CHEBI:50114"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/chebi/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FCHEBI_50114",
+      "https://pubmed.ncbi.nlm.nih.gov/41620901/",
+      "https://purl.obolibrary.org/obo/CHEBI_50114"
+    ],
+    "primary_reason": "hierarchy_or_schema_membership_unverified",
+    "original_record_sha256": "ab84115ff4e631f96e73fb4f8d9468767c9f42e2da2430d817a964d3c0f8343c"
+  },
+  {
+    "case_id": "case-ff7740347027fbc7",
+    "name": "Noncanonical activation of NOTCH3",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-9017802"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-9017802",
+      "https://reactome.org/content/detail/R-HSA-9017802"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "586184e276a29b7298de8cbfb535b4a83da7e6c7c39339907ad0d43fd3cbc723"
+  },
+  {
+    "case_id": "case-b786d38f77cd5d28",
+    "name": "EXO1",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-ac99d1a46366e2d0d78d",
+        "name": "exonuclease 1",
+        "standard_ids": [
+          "PR:000007245"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000355506",
+      "PR:Q9UQ84"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q9UQ84",
+      "https://string-db.org/network/9606.ENSP00000355506",
+      "https://purl.obolibrary.org/obo/PR_Q9UQ84"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "cd5e50075c9827aa48069f575ea0cf04b75ac28e8b01f23bf1c539514e157b92"
+  },
+  {
+    "case_id": "case-6a154496e7b2f313",
+    "name": "adrenal cortex cells",
+    "kind": "CellType",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-38a705c2abe54dd0b82e",
+        "name": "adrenal gland glandular cell",
+        "standard_ids": [
+          "CL:1001601"
+        ]
+      },
+      {
+        "id": "REF-65cfe0d4fbec21e12641",
+        "name": "meso-epithelial cell",
+        "standard_ids": [
+          "CL:0002078"
+        ]
+      },
+      {
+        "id": "REF-9fbcfbc5bf6c1011890f",
+        "name": "steroid hormone secreting cell",
+        "standard_ids": [
+          "CL:0000174"
+        ]
+      }
+    ],
+    "identifiers": [
+      "CL:0002097"
+    ],
+    "definition_source": "Cell Ontology",
+    "source_field": "def",
+    "links": [
+      "https://purl.obolibrary.org/obo/CL_0002097"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "c846d1b66d541936eb8e17a82dba05fb971ffcefa2b022c52993c3ecbdc72fc9"
+  },
+  {
+    "case_id": "case-1061e9f06daeb0b3",
+    "name": "CCL2",
+    "kind": "Gene",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-cb171343d7e694394b23",
+        "name": "protein_coding_gene",
+        "standard_ids": [
+          "SO:0001217"
+        ]
+      }
+    ],
+    "identifiers": [
+      "ENSEMBL:ENSG00000108691",
+      "NCBIGene:6347",
+      "HGNC:10618"
+    ],
+    "definition_source": "NCBI Gene",
+    "source_field": "name + nomenclaturename / description + optional summary",
+    "links": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=gene&id=6347&retmode=json",
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/hgnc/classes/https%253A%252F%252Fwww.genenames.org%252Fdata%252Fgene-symbol-report%252F%2523%2521%252Fhgnc_id%252F10618",
+      "https://www.ensembl.org/id/ENSG00000108691",
+      "https://www.ncbi.nlm.nih.gov/gene/6347",
+      "https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:10618"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "4458d117535085ea13423035164b7834a6e2a3569cb79292ff7411f30ae9d81b"
+  },
+  {
+    "case_id": "case-13087f9b39cda0d0",
+    "name": "Propanal",
+    "kind": "Metabolite",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Metabolite",
+        "name": "Metabolite",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "CHEBI:17153",
+      "HMDB:HMDB0003366"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/17153/",
+      "https://purl.obolibrary.org/obo/CHEBI_17153",
+      "https://hmdb.ca/metabolites/HMDB0003366"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "5606fa1f9bdf1d99e520337f94503bcaea12fd31461d1d3e54c96614cc963d9c"
+  },
+  {
+    "case_id": "case-6d7c3de2194048d3",
+    "name": "Cell surface interactions at the vascular wall",
+    "kind": "Pathway",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": false,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Pathway",
+        "name": "Pathway",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "Reactome:R-HSA-202733"
+    ],
+    "definition_source": "Reactome",
+    "source_field": "summation.text",
+    "links": [
+      "https://release.reactome.org/ContentService/data/query/R-HSA-202733",
+      "https://reactome.org/content/detail/R-HSA-202733"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "54326a3dfbe9eefa76f1959158d1cf51f0e2291b4dbd1e304a1c22809573d7ce"
+  },
+  {
+    "case_id": "case-5274b831aea8fca6",
+    "name": "STAT4",
+    "kind": "Protein",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": true,
+    "published_specific_parent": true,
+    "published_root_only": false,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "REF-5173acf5b224041072db",
+        "name": "signal transducer and activator of transcription 4",
+        "standard_ids": [
+          "PR:000002090"
+        ]
+      }
+    ],
+    "identifiers": [
+      "STRING:9606.ENSP00000351255",
+      "PR:Q14765"
+    ],
+    "definition_source": "STRING",
+    "source_field": "LiverKG description or annotation",
+    "links": [
+      "https://www.ebi.ac.uk/ols4/api/v2/ontologies/pr/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FPR_Q14765",
+      "https://string-db.org/network/9606.ENSP00000351255",
+      "https://purl.obolibrary.org/obo/PR_Q14765"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "2e8ff594357a9e2a82ee771752a059079bb6c91ed25a258b4a46a46c44773db2"
+  }
+]

@@ -1,5 +1,6 @@
 """Run the ranked entity pilot one concept at a time in a separate DAG."""
 
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
 from threading import BoundedSemaphore, Event, Lock
@@ -89,12 +90,19 @@ class InvalidJudgment(ValueError):
     pass
 
 
+class _OmittedComparisons(ValueError):
+    def __init__(self, proposal, missing_ids):
+        super().__init__("Proposal omitted comparison IDs.")
+        self.proposal = proposal
+        self.missing_ids = missing_ids
+
+
 def describe(node):
     data = {key: node[key] for key in ("id", "name", "kind", "definition", "aliases")}
-    if node.get("go_id"):
-        data["go_id"] = node["go_id"]
-    if node.get("taxon_id") is not None:
-        data["taxon_id"] = node["taxon_id"]
+    for field in ("go_id", "taxon_id", "standard_ids", "definition_evidence", "reference_terms",
+                  "auxiliary_evidence", "entity_level", "entity_level_evidence"):
+        if node.get(field):
+            data[field] = node[field]
     return data
 
 
@@ -116,8 +124,8 @@ def inclusion_relation(forward, backward):
     return "unrelated"
 
 
-def checked_relations(rows, expected):
-    if not isinstance(rows, list) or len(rows) != len(expected):
+def checked_relations(rows, expected, *, allow_missing=False):
+    if not isinstance(rows, list) or (not allow_missing and len(rows) != len(expected)):
         raise ValueError("Comparison count does not match the input.")
     found = {}
     for row in rows:
@@ -129,9 +137,9 @@ def checked_relations(rows, expected):
     return found
 
 
-def checked_proposal(rows, candidates):
+def checked_proposal(rows, candidates, *, allow_missing=False):
     result = rows[0]
-    comparisons = checked_relations(result["comparisons"], candidates)
+    comparisons = checked_relations(result["comparisons"], candidates, allow_missing=allow_missing)
     parent = result["new_parent"]
     if parent is not None and (
         not isinstance(parent, dict)
@@ -142,17 +150,20 @@ def checked_proposal(rows, candidates):
     return comparisons, parent
 
 
-def request_checked(model_request, stage, prompt, payload, check):
+def request_checked(model_request, stage, prompt, payload, check, *, repair=None):
+    request = payload
     for attempt in range(2):
-        request = payload if attempt == 0 else {
-            **payload, "format_retry": "Use the exact JSON keys in the instructions and include every ID once.",
-        }
         try:
             rows = model_request((stage, prompt, request))
             return check(rows)
         except (KeyError, ValueError, TypeError, IndexError) as error:
             if attempt:
                 raise InvalidJudgment(f"{stage}: invalid result after repair") from error
+            request = {
+                **payload, "format_retry": "Use the exact JSON keys in the instructions and include every ID once.",
+            }
+            if repair is not None:
+                request, check = repair(error, request, check)
 
 
 def candidate_parent(proposal, concept, candidates):
@@ -183,15 +194,86 @@ def placement_batches(items, evaluate):
         return list(pool.map(evaluate, batches))
 
 
-def propose_placement(request, target, candidates, context):
+def _proposal_row(rows, target_id):
+    if (not isinstance(rows, list) or len(rows) != 1 or not isinstance(rows[0], dict)
+            or rows[0].get("id") != target_id):
+        raise ValueError("Expected exactly one proposal for the target.")
+    return rows[0]
+
+
+def _sourced_proposal_check(target_id, expected):
+    def check(rows):
+        raw = _proposal_row(rows, target_id)
+        submitted = raw.get("comparisons")
+        if not isinstance(submitted, list):
+            raise ValueError("Expected a list of candidate comparisons.")
+        ids = Counter(row["id"] for row in submitted if isinstance(row, dict)
+                      and isinstance(row.get("id"), str))
+        valid = []
+        for row in submitted:
+            ident = row.get("id") if isinstance(row, dict) else None
+            if not isinstance(ident, str) or ident not in expected or ids[ident] != 1:
+                continue
+            try:
+                checked_relations([row], {ident})
+            except (KeyError, ValueError, TypeError):
+                continue
+            valid.append(row)
+        cleaned = {**raw, "comparisons": valid}
+        comparisons, parent = checked_proposal([cleaned], expected, allow_missing=True)
+        missing = expected.difference(comparisons)
+        if missing:
+            if not comparisons:
+                raise ValueError("Expected candidate comparisons.")
+            # A foreign/duplicated ID never stands in for a missing judgment.
+            raise _OmittedComparisons(cleaned, missing)
+        if len(valid) != len(submitted):
+            raise ValueError("Unexpected additional comparisons.")
+        return comparisons, parent
+
+    return check
+
+
+def _proposal_omission_repair(target, batch, expected):
+    def repair(error, payload, check):
+        if not isinstance(error, _OmittedComparisons):
+            return payload, check
+        missing = [candidate for candidate in batch if candidate["id"] in error.missing_ids]
+
+        def complete(rows):
+            repaired = _proposal_row(rows, target["id"])
+            _, new_parent = checked_proposal(rows, error.missing_ids)
+            if new_parent is not None:
+                raise ValueError("Comparison repair must keep new_parent null.")
+            combined = {
+                **error.proposal,
+                "comparisons": [*error.proposal["comparisons"], *repaired["comparisons"]],
+            }
+            return checked_proposal([combined], expected)
+
+        return {
+            **payload, "items": [{**target, "candidates": missing}],
+            "format_retry": ("Return one comparison per ID in required_candidate_ids. Copy IDs verbatim "
+                             "from this request only. Set new_parent to null."),
+            "required_candidate_ids": [candidate["id"] for candidate in missing],
+        }, complete
+
+    return repair
+
+
+def propose_placement(request, target, candidates, context, *, repair_missing=False):
     sharded = len(candidates) > PLACEMENT_BATCH_SIZE
     prompt = SHARDED_PROPOSE if sharded else PROPOSE
 
     def compare(batch):
+        expected = {item["id"] for item in batch}
+        check = _sourced_proposal_check(target["id"], expected) if repair_missing else (
+            lambda rows: checked_proposal(rows, expected)
+        )
         return request_checked(
             request, "incremental_propose", prompt,
-            {"items": [{**target, "candidates": batch}], **context},
-            lambda rows: checked_proposal(rows, {item["id"] for item in batch}),
+            {"items": [{**target, "candidates": batch}], **context}, check,
+            repair=_proposal_omission_repair(target, batch, expected) if repair_missing else None,
         )
 
     results = placement_batches(list(candidates.values()), compare)
@@ -321,7 +403,10 @@ def place_one(dag, concept, *, request, go_lookup=None, entity_lookup=None):
                   if row["kind"] == concept["kind"] and row["origin"] != ROOT_KIND}
     graph = [{"child_id": c, "parent_id": p} for c, p in sorted(dag.edges) if c in candidates]
     context = {"type_root": describe(root), "current_edges": graph}
-    proposal, new_parent = propose_placement(request, target, candidates, context)
+    proposal, new_parent = propose_placement(
+        request, target, candidates, context,
+        repair_missing=concept.get("origin") == "kg_enrichment" and bool(concept.get("definition_evidence")),
+    )
     generated = candidate_parent(new_parent, target, candidates.values())
     uncertain = uncertain_candidates(target, candidates, proposal)
     review_pairs = []

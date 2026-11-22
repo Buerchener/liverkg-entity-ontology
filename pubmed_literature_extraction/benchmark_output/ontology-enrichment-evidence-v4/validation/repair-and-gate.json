@@ -1,0 +1,35 @@
+{
+  "proposal": {
+    "name": "Cortisol synthesis and secretion",
+    "standard_ids": [
+      "KEGG_PATHWAY:hsa04927"
+    ],
+    "v3_reason": "incremental_propose: invalid result after repair",
+    "fix": "逐项核对目标 ID、候选 ID、布尔方向、新父类字段及理由。保留有唯一请求 ID 的有效判断，丢弃未请求、重复、格式非法的行；只补问未验证的候选。每个分片最多一次补问。补答仍有错就保留待审，完整原始响应保存在调用日志中。"
+  },
+  "identity": {
+    "name": "cholestasis",
+    "type": "Disease",
+    "finding": "原始 KG 只有项目 ID 和 Disease 类型，未提供物种。已保存 MONDO 标准 ID 经既有归一候选与来源定义核实。两个模型的初筛都未找到精确竞争身份。实际犹豫的候选为免疫介导肝病总类，提及的原发性胆汁性胆管炎可以表现为胆汁淤积，临床共现不证明同一概念或上下位。",
+    "change": "有外部已绑定标准 ID、可追溯原文及双方定义时，至多复核两条非精确候选。逐一引原文与两侧定义，高置信确认身份不同才能进入既有层级审核。明确同名冲突、引用无效及非高置信仍待审。无直接映射或层级写入。",
+    "authority": {
+      "database": "MONDO",
+      "record_id": "MONDO:0001751",
+      "url": "https://www.ebi.ac.uk/ols4/api/v2/ontologies/mondo/classes/http%253A%252F%252Fpurl.obolibrary.org%252Fobo%252FMONDO_0001751"
+    }
+  },
+  "scale_gate": {
+    "outcome": "pass",
+    "tests": 213,
+    "small_runs": [
+      "after-regression-flash",
+      "after-tyramine-flash",
+      "after-independent-flash"
+    ],
+    "independent_graph_checks": true,
+    "maps_checked": 6,
+    "specific_edges": 5,
+    "formal_edges_local_ids": 4,
+    "decision": "No contradicted specific edges or false identity found in this sample. One original literature endpoint supported separately by its definition and ChEBI ancestry. Proceed on the preselected 105-node graph."
+  }
+}

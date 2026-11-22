@@ -1,0 +1,207 @@
+{
+  "detail_counts": {
+    "authority_endpoints_unavailable": 1,
+    "HPA_label_without_bound_CL_id": 8,
+    "aggregate_assay": 4,
+    "mixture_scope": 1,
+    "cited_expansion_exact_CL_label": 2,
+    "identifier_resolved_definition_field_absent": 2,
+    "external_record_has_text_but_schema_scope_differs": 1,
+    "mention_only": 3,
+    "no_exact_mention": 1
+  },
+  "cases": [
+    {
+      "case_id": "case-c39217e66a30c719",
+      "name": "Guanidine",
+      "kind": "Metabolite",
+      "node_supplied_ids": [
+        "HMDB:HMDB0001842"
+      ],
+      "detail": "authority_endpoints_unavailable",
+      "interpretation": "ChEBI cross-reference discovery returned HTTP 404, and native HMDB returned HTTP 403. Neither response establishes absence of a public definition. The input formula and HMDB accession were present."
+    },
+    {
+      "case_id": "case-c8a44678d263e6ab",
+      "name": "bergmann glia",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "HPA_label_without_bound_CL_id",
+      "interpretation": "HPA uses expression-profile groups. This source node provides no CL accession; this run accepted no exact CL candidate. Manual source review does not equate a profile group to a CL subtype."
+    },
+    {
+      "case_id": "case-5da19130539085ab",
+      "name": "total glyceride",
+      "kind": "Metabolite",
+      "node_supplied_ids": [],
+      "detail": "aggregate_assay",
+      "interpretation": "The study reports total glyceride as a measured outcome. No unique chemical identity is given."
+    },
+    {
+      "case_id": "case-73801dfce81b354b",
+      "name": "endometrial ciliated cells",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "HPA_label_without_bound_CL_id",
+      "interpretation": "HPA uses expression-profile groups. This source node provides no CL accession; this run accepted no exact CL candidate. Manual source review does not equate a profile group to a CL subtype."
+    },
+    {
+      "case_id": "case-7f4c28f0a5e3241d",
+      "name": "PAE",
+      "kind": "Metabolite",
+      "node_supplied_ids": [],
+      "detail": "mixture_scope",
+      "interpretation": "The article identifies a purified anthocyanin-rich extract. It does not identify one constituent as the KG entity."
+    },
+    {
+      "case_id": "case-268bbd5d150e4311",
+      "name": "FBs",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "cited_expansion_exact_CL_label",
+      "interpretation": "The parenthetical plural cell abbreviation is expanded in the cited abstract; the expansion normalizes to the CL preferred name."
+    },
+    {
+      "case_id": "case-886e8721a142d848",
+      "name": "brain excitatory neurons",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "HPA_label_without_bound_CL_id",
+      "interpretation": "HPA uses expression-profile groups. This source node provides no CL accession; this run accepted no exact CL candidate. Manual source review does not equate a profile group to a CL subtype."
+    },
+    {
+      "case_id": "case-c0e3926b0e43a945",
+      "name": "Regulation of actin cytoskeleton",
+      "kind": "Pathway",
+      "node_supplied_ids": [
+        "KEGG_PATHWAY:hsa04810"
+      ],
+      "detail": "identifier_resolved_definition_field_absent",
+      "interpretation": "KEGG returned an identifiable pathway without a DESCRIPTION field; a narrower or related GO process is not evidence of the same pathway."
+    },
+    {
+      "case_id": "case-dfe572917f85e22e",
+      "name": "renal connecting tubule cells",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "HPA_label_without_bound_CL_id",
+      "interpretation": "HPA uses expression-profile groups. This source node provides no CL accession; this run accepted no exact CL candidate. Manual source review does not equate a profile group to a CL subtype."
+    },
+    {
+      "case_id": "case-b7a6cb54403b1e82",
+      "name": "other brain neurons",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "HPA_label_without_bound_CL_id",
+      "interpretation": "HPA uses expression-profile groups. This source node provides no CL accession; this run accepted no exact CL candidate. Manual source review does not equate a profile group to a CL subtype."
+    },
+    {
+      "case_id": "case-aa10df70bfd54b08",
+      "name": "total cholesterol",
+      "kind": "Metabolite",
+      "node_supplied_ids": [],
+      "detail": "aggregate_assay",
+      "interpretation": "The study reports total cholesterol as a measured outcome. The total is not an identifier of a single metabolite."
+    },
+    {
+      "case_id": "case-3158df2b489ea8a0",
+      "name": "TG",
+      "kind": "Metabolite",
+      "node_supplied_ids": [],
+      "detail": "aggregate_assay",
+      "interpretation": "The study reports total glyceride as a measured outcome. No unique chemical identity is given."
+    },
+    {
+      "case_id": "case-1aaf60c2d9543ef4",
+      "name": "Pentose and glucuronate interconversions",
+      "kind": "Pathway",
+      "node_supplied_ids": [
+        "KEGG_PATHWAY:hsa00040"
+      ],
+      "detail": "identifier_resolved_definition_field_absent",
+      "interpretation": "KEGG returned an identifiable pathway without a DESCRIPTION field; a narrower or related GO process is not evidence of the same pathway."
+    },
+    {
+      "case_id": "case-cece56610d51a07b",
+      "name": "pancreatic islet cells",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "HPA_label_without_bound_CL_id",
+      "interpretation": "HPA uses expression-profile groups. This source node provides no CL accession; this run accepted no exact CL candidate. Manual source review does not equate a profile group to a CL subtype."
+    },
+    {
+      "case_id": "case-fe3b25872d524fe6",
+      "name": "Developmental Lineage of Mammary Stem Cells",
+      "kind": "Pathway",
+      "node_supplied_ids": [
+        "Reactome:R-HSA-9938206"
+      ],
+      "detail": "external_record_has_text_but_schema_scope_differs",
+      "interpretation": "The supplied ID resolves to a CellLineagePath with a narrative. The runtime admits the Pathway schema class. Validate the local scope before reusing that lineage definition."
+    },
+    {
+      "case_id": "case-3f96cb947c798e20",
+      "name": "adjuvants",
+      "kind": "Metabolite",
+      "node_supplied_ids": [],
+      "detail": "mention_only",
+      "interpretation": "Adjuvants are listed as a broad group in the abstract; no specific metabolite is identified."
+    },
+    {
+      "case_id": "case-82cb10661c3d6f1a",
+      "name": "PBMCs",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "cited_expansion_exact_CL_label",
+      "interpretation": "The parenthetical plural cell abbreviation is expanded in the cited abstract; the expansion normalizes to the CL preferred name; singular PBMC is also an EXACT synonym."
+    },
+    {
+      "case_id": "case-bc8335e21283fac6",
+      "name": "resistant starch",
+      "kind": "Metabolite",
+      "node_supplied_ids": [],
+      "detail": "mention_only",
+      "interpretation": "The source reports formation of resistant starch. The mention alone does not define or ground the entity."
+    },
+    {
+      "case_id": "case-9e96062686ed11f4",
+      "name": "transitional alveolar cells",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "HPA_label_without_bound_CL_id",
+      "interpretation": "HPA uses expression-profile groups. This source node provides no CL accession; this run accepted no exact CL candidate. Manual source review does not equate a profile group to a CL subtype."
+    },
+    {
+      "case_id": "case-d53f51190cd85829",
+      "name": "adrenal medulla cells",
+      "kind": "CellType",
+      "node_supplied_ids": [],
+      "detail": "HPA_label_without_bound_CL_id",
+      "interpretation": "HPA uses expression-profile groups. This source node provides no CL accession; this run accepted no exact CL candidate. Manual source review does not equate a profile group to a CL subtype."
+    },
+    {
+      "case_id": "case-f227cf937d244f25",
+      "name": "digitolutein",
+      "kind": "Metabolite",
+      "node_supplied_ids": [],
+      "detail": "mention_only",
+      "interpretation": "The abstract lists an ingredient. No definition or verified chemistry accession was obtained for it."
+    },
+    {
+      "case_id": "case-ffb24df57191d9d8",
+      "name": "TC",
+      "kind": "Metabolite",
+      "node_supplied_ids": [],
+      "detail": "aggregate_assay",
+      "interpretation": "The study reports total cholesterol as a measured outcome. The total is not an identifier of a single metabolite."
+    },
+    {
+      "case_id": "case-7b02ed560a27a0a7",
+      "name": "coagulation pathways",
+      "kind": "Pathway",
+      "node_supplied_ids": [],
+      "detail": "no_exact_mention",
+      "interpretation": "Original abstract was available, but exact-label search did not find a mention and no single standard pathway ID was supplied."
+    }
+  ]
+}

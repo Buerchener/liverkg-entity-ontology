@@ -1,0 +1,34 @@
+[
+  {
+    "case_id": "case-871f5311c5342514",
+    "name": "Tyramine",
+    "kind": "Metabolite",
+    "status": "inserted",
+    "decision_stage": "mapped",
+    "retrieved_parent_candidate": true,
+    "verified_specific_parent": false,
+    "published_specific_parent": false,
+    "published_root_only": true,
+    "maps_to": true,
+    "published_parents": [
+      {
+        "id": "type:Metabolite",
+        "name": "Metabolite",
+        "standard_ids": []
+      }
+    ],
+    "identifiers": [
+      "CHEBI:15760",
+      "HMDB:HMDB0000306"
+    ],
+    "definition_source": "ChEBI",
+    "source_field": "definition",
+    "links": [
+      "https://www.ebi.ac.uk/chebi/backend/api/public/compound/15760/",
+      "https://purl.obolibrary.org/obo/CHEBI_15760",
+      "https://hmdb.ca/metabolites/HMDB0000306"
+    ],
+    "primary_reason": "inserted",
+    "original_record_sha256": "d85583aa3bb83454ca17dc0c1a60fa1b0ba44ea894b82eb928dd1d3a649763b7"
+  }
+]
