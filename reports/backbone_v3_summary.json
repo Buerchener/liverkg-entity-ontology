@@ -1226,7 +1226,23 @@
           403
         ],
         "native_proxy_http": 502,
-        "remaining": 0
+        "remaining": 0,
+        "replacement_credential": {
+          "checked_at": "2026-11-28T05:18:10+08:00",
+          "model": "gemini-3.8-flash",
+          "usage_http": 200,
+          "balance": 0,
+          "remaining": 0,
+          "catalog_http": 200,
+          "compatible_generation_http_by_host": {
+            "inferaiapi.com": 403,
+            "api.inferaiapi.com": 403
+          },
+          "native_model_lookup_http": 200,
+          "native_generation_http": 502,
+          "native_generation_upstream_signal": "forbidden",
+          "wsl_sdk_compatible_generation_http": 403
+        }
       }
     }
   },
