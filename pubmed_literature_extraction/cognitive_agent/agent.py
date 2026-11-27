@@ -3409,7 +3409,9 @@ class CognitiveAgent:
         pmid = article.get("pmid", "?")
         n = index + 1
 
+        opened = time.time()
         record = self.process_article(article)
+        record.setdefault("timing", {}).update(article_started_at_s=opened, article_finished_at_s=time.time())
         record["_batch_index"] = index
         if self.config.article_checkpoint_dir:
             checkpoint_dir = Path(self.config.article_checkpoint_dir)

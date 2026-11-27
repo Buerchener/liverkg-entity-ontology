@@ -35,7 +35,8 @@ def main(argv=None):
     run.add_argument("--no-coverage", action="store_true", help="Skip the measurement-phrase check")
     run.add_argument("--no-go-reference", action="store_true", help="Skip GO lookup for unresolved eligible pairs")
     run.add_argument("--no-entity-reference", action="store_true", help="Skip all external ontology and gene lookups")
-    run.add_argument("--v2-data", type=Path, help="v2 data package directory (default: the repository's data/)")
+    run.add_argument("--backbone-data", "--v2-data", dest="v2_data", type=Path,
+                     help="Portable v3 backbone snapshot or a legacy v2 data directory")
     serve = commands.add_parser("serve", help="Open the read-only workbench for completed batches")
     serve.add_argument("--runs-dir", type=Path, default=DEFAULT_RUNS_DIR)
     serve.add_argument("--port", type=int, default=PORT)
@@ -48,6 +49,13 @@ def main(argv=None):
     load.add_argument("--user", default=os.environ.get("NEO4J_USER", "neo4j"))
     load.add_argument("--dry-run", action="store_true", help="Print what would be loaded without connecting")
     load.add_argument("--yes", action="store_true", help="Skip the interactive confirmation")
+    unload = commands.add_parser("unload", help="Remove a literature run from a local v3 database")
+    unload.add_argument("--run-id", required=True)
+    unload.add_argument("--uri", default=os.environ.get("NEO4J_URI", "bolt://localhost:7687"))
+    unload.add_argument("--database", required=True)
+    unload.add_argument("--user", default=os.environ.get("NEO4J_USER", "neo4j"))
+    unload.add_argument("--dry-run", action="store_true", help="Count the rows that would be removed")
+    unload.add_argument("--yes", action="store_true", help="Confirm deletion of the specified run")
     args = parser.parse_args(argv)
 
     if args.command == "setup-extractor":
@@ -79,6 +87,19 @@ def main(argv=None):
                     not type(error).__module__.startswith("neo4j"):
                 raise
             parser.exit(1, f"Load failed: {error}\n")
+        print(json.dumps(summary, ensure_ascii=False))
+        return 0
+
+    if args.command == "unload":
+        from .export.neo4j_v3 import unload_run
+
+        if not args.dry_run and not args.yes:
+            parser.exit(1, "Pass --yes to remove the specified literature run.\n")
+        try:
+            summary = unload_run(args.run_id, uri=args.uri, database=args.database, user=args.user,
+                                 password=os.environ.get("NEO4J_PASSWORD", ""), dry_run=args.dry_run)
+        except (OSError, ValueError, RuntimeError) as error:
+            parser.exit(1, f"Unload failed: {error}\n")
         print(json.dumps(summary, ensure_ascii=False))
         return 0
 

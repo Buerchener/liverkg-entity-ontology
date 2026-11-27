@@ -1,8 +1,14 @@
 import { el, status, articleLink, typeLabel } from "./ui.js";
 
 const GATES = { AUTO: ["AUTO", "good"], REVIEW: ["REVIEW", "warn"], BLOCKED: ["BLOCKED", "bad"] };
-const NOVELTY = { KNOWN_IN_V2: ["Known in v2", "neutral"], NEW: ["New to v2", "good"], UNLINKED: ["Endpoint not linked", "neutral"] };
-const LINKS = { LINKED: ["Linked", "good"], AMBIGUOUS: ["Ambiguous", "warn"], NEW: ["Not in v2", "neutral"] };
+const NOVELTY = {
+  KNOWN_IN_BACKBONE: ["Known in backbone", "neutral"],
+  PAIR_KNOWN_OTHER_RELATION: ["Known pair, different relation", "neutral"],
+  NEW: ["New to backbone", "good"],
+  UNLINKED: ["Endpoint not linked", "neutral"],
+  KNOWN_IN_V2: ["Known in v2", "neutral"],
+};
+const LINKS = { LINKED: ["Linked", "good"], AMBIGUOUS: ["Ambiguous", "warn"], NEW: ["No backbone match", "neutral"] };
 const WRITE = { IMPORT_READY: ["Import-ready", "good"], SEMANTIC_ONLY: ["Semantic only", "neutral"], HUMAN_REVIEW: ["Human review", "warn"], BLOCKED: ["Blocked", "bad"] };
 const REASONS = {
   no_import_ready_evidence: "No import-ready evidence",
@@ -76,8 +82,8 @@ function relationCard(relation, articles, go) {
         status(plural(relation.evidence_count, "evidence item") + " · " + plural(relation.pmids.length, "article")))),
     relation.gate_reasons.length > 0 && el("p", { class: "muted rel-reasons" },
       "Reasons: " + relation.gate_reasons.map(reasonLabel).join("; ")),
-    relation.v2_relations.length > 0 && el("p", { class: "muted" },
-      "Existing v2 relations between the endpoints: " + relation.v2_relations.map(row => row.type + " (" + row.source + ")").join(", ")),
+    (relation.backbone_relations || relation.v2_relations || []).length > 0 && el("p", { class: "muted" },
+      "Backbone relations between the endpoints: " + (relation.backbone_relations || relation.v2_relations).map(row => row.type + " (" + row.source + ")").join(", ")),
     relation.evidence.map(row => evidenceQuote(row, articles)));
 }
 
@@ -86,7 +92,8 @@ function renderRelationList({ mount, data, go, selected }) {
   const articles = new Map(data.articles.map(article => [article.pmid, article]));
   const counts = projection.counts;
   const gate = select("Gate", [["", "All"], ["AUTO", "AUTO"], ["REVIEW", "REVIEW"], ["BLOCKED", "BLOCKED"]], "");
-  const novelty = select("Compared with v2", [["", "All"], ["NEW", "New to v2"], ["KNOWN_IN_V2", "Known in v2"], ["UNLINKED", "Endpoint not linked"]], "");
+  const novelty = select("Backbone novelty", [["", "All"],
+    ...Object.entries(NOVELTY).map(([key, [label]]) => [key, label])], "");
   const query = search("Concept name or predicate");
   const list = el("div", { class: "rel-list" });
   const focus = selected && data.conceptLinks.links.find(row => row.concept_id === selected);
@@ -129,7 +136,7 @@ function renderRelationList({ mount, data, go, selected }) {
 function renderLinkTable({ mount, data, go, selected }) {
   const links = data.conceptLinks;
   const counts = links.counts;
-  const filter = select("Link status", [["", "All"], ["LINKED", "Linked"], ["AMBIGUOUS", "Ambiguous"], ["NEW", "Not in v2"]], "");
+  const filter = select("Link status", [["", "All"], ["LINKED", "Linked"], ["AMBIGUOUS", "Ambiguous"], ["NEW", "No backbone match"]], "");
   const query = search("Concept name");
   const body = el("tbody");
   const relationCount = new Map();
@@ -165,11 +172,11 @@ function renderLinkTable({ mount, data, go, selected }) {
   for (const control of [filter, query]) control.addEventListener("input", update);
   mount.append(
     el("p", { class: "rel-summary" },
-      `Linked ${counts.LINKED}, ambiguous ${counts.AMBIGUOUS}, not in v2 ${counts.NEW}. ` +
-      "Linking reads the v2 data package in this repository and never connects to a database."),
+      `Linked ${counts.LINKED}, ambiguous ${counts.AMBIGUOUS}, no backbone match ${counts.NEW}. ` +
+      "Matches come from the offline backbone snapshot used for this batch."),
     el("div", { class: "controls rel-controls" }, filter, query),
     el("div", { class: "document-table-wrap" }, el("table", { class: "data-table" },
-      el("thead", {}, el("tr", {}, ["Concept", "Link status", "v2 node", "Basis", "GO", "Relations"].map(text => el("th", {}, text)))),
+      el("thead", {}, el("tr", {}, ["Concept", "Link status", "Backbone node", "Basis", "GO", "Relations"].map(text => el("th", {}, text)))),
       body)));
   update();
 }

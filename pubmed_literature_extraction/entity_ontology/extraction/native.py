@@ -121,7 +121,14 @@ def extractor_env(runtime, source, config, output, auxiliary_env):
     credential = os.environ[connection["api_key_env"]]
     output.mkdir(exist_ok=True)
     config_path = runtime / "extractor.toml"
-    config_path.write_text("output_dir = " + json.dumps(str(output), ensure_ascii=False) + "\n")
+    extract_options = read_json(config).get("extractor", {})
+    max_workers = extract_options.get("max_workers")
+    config_override = "output_dir = " + json.dumps(str(output), ensure_ascii=False) + "\n"
+    if max_workers is not None:
+        if type(max_workers) is not int or max_workers < 1:
+            raise ValueError("extractor.max_workers must be a positive integer.")
+        config_override += f"\n[profiles.{PROFILE}]\nmax_workers = {max_workers}\n"
+    config_path.write_text(config_override, encoding="utf-8")
     env = {k: v for k, v in os.environ.items() if not k.startswith("NEO4J_")}
     auxiliary = auxiliary_settings(auxiliary_env)
     env.update(auxiliary)

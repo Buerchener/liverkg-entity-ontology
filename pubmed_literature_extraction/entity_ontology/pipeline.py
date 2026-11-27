@@ -19,7 +19,7 @@ from .export.graph import VERSION as EXPORT_VERSION, export_graph
 from .hierarchy.order_entities import order_for_hierarchy
 from .hierarchy.placement import run as place_incrementally
 from .linking.kg_links import (
-    VERSION as LINK_VERSION, V2Index, link_concepts, resolve_v2_data_dir, v2_data_digest,
+    VERSION as LINK_VERSION, backbone_identity, build_index, link_concepts, resolve_backbone_data_dir,
 )
 from .relations.project import VERSION as PROJECTION_VERSION, project_relations, verify_relations
 
@@ -58,7 +58,7 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
     source_hash = hashlib.sha256(content).hexdigest()
     output = Path(runs_dir).resolve() / run_id
     config = Path(config).resolve()
-    v2_dir = resolve_v2_data_dir(v2_data)
+    backbone_dir = resolve_backbone_data_dir(v2_data)
     extractor = extractor_identity()
     output.mkdir(parents=True, exist_ok=True)
     manifest_path = output / "manifest.json"
@@ -72,7 +72,7 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
                 "model_config_sha256": file_hash(config),
                 "normalization_version": "v2",
                 "entity_coverage": COVERAGE_VERSION if entity_coverage else None,
-                "v2_data_sha256": v2_data_digest(v2_dir),
+                **backbone_identity(backbone_dir),
                 "integration_version": f"{LINK_VERSION}/{PROJECTION_VERSION}/{EXPORT_VERSION}"}
     provider, _ = read_settings(config, "audit_edges")
     embedding = read_json(config)["embedding"]
@@ -169,12 +169,12 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
             complete()
 
             start("concept_linking")
-            v2_index = V2Index(v2_dir)
-            links = link_concepts(output, v2_dir, index=v2_index)
+            backbone_index = build_index(backbone_dir)
+            links = link_concepts(output, backbone_dir, index=backbone_index)
             complete()
 
             start("relation_projection")
-            projection = project_relations(output, extraction_path, links, v2_index)
+            projection = project_relations(output, extraction_path, links, backbone_index)
             verify_relations(projection, {concept["id"] for concept in concepts})
             complete()
 
