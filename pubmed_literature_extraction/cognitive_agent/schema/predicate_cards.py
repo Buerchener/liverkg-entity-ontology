@@ -9,11 +9,12 @@ from __future__ import annotations
 
 import re
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
 from .relation_signatures import LITERATURE_CANDIDATE_SIGNATURES
+from .write_contract import METABOLITE_DISEASE, canonical_predicate
 
 
 CARD_MATCHES = frozenset({"EXPLICIT", "TYPE_ONLY", "CONFLICT", "NOT_APPLICABLE"})
@@ -145,6 +146,14 @@ HIGH_PRECISION_PREDICATE_TRIGGERS = {
 }
 
 
+RELATION_CARDS[METABOLITE_DISEASE] = replace(
+    RELATION_CARDS["ASSOCIATED_WITH"],
+    predicate=METABOLITE_DISEASE,
+    description="The text explicitly connects a grounded metabolite to a disease by association, correlation, or a measured disease-related change.",
+    boundary_note="A typed disease association needs an explicit finding about the metabolite and the disease.",
+)
+
+
 def relation_card(predicate: str) -> RelationCard | None:
     return RELATION_CARDS.get(str(predicate or "").upper())
 
@@ -224,7 +233,7 @@ def predicate_support_match(
     promotion.  Callers therefore no longer maintain separate trigger tables
     or endpoint-linking interpretations.
     """
-    card = relation_card(predicate)
+    card = relation_card(canonical_predicate(predicate, subject_type, object_type))
     if card is None:
         return {"match": "NONE", "reason_codes": ["unknown_predicate"]}
     if (str(subject_type), str(object_type)) not in card.allowed_signatures:
@@ -266,7 +275,7 @@ def predicate_support_match(
 
     # A differential expression statement tied to a disease cohort is an
     # explicit gene/protein--disease association, not bare co-occurrence.
-    if card.predicate == "ASSOCIATED_WITH" and endpoints_present:
+    if card.predicate in {"ASSOCIATED_WITH", METABOLITE_DISEASE} and endpoints_present:
         cohort_change = re.search(
             r"\b(?:expression|levels?)\b.{0,180}"
             r"\b(?:increas|decreas|elevat|reduc|higher|lower)\w*\b.{0,160}"
@@ -316,7 +325,7 @@ def match_relation_card(
     endpoints_linked: bool = True,
 ) -> dict[str, Any]:
     """Return a deterministic card match plus auditable reason codes."""
-    card = relation_card(predicate)
+    card = relation_card(canonical_predicate(predicate, subject_type, object_type))
     if card is None:
         return {"match": "NOT_APPLICABLE", "reason_codes": ["unknown_predicate"]}
     if (str(subject_type), str(object_type)) not in card.allowed_signatures:

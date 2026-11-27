@@ -11,8 +11,9 @@ import os
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from cognitive_agent.schema.write_contract import MAIN_KG_WRITE_CONTRACT
+from cognitive_agent.schema.write_contract import V2_MAIN_KG_WRITE_CONTRACT
 
+from .backbone_schema import ROOT_CLASS_ID
 from .export.neo4j_load import BATCH_SIZE, check_target
 from .linking.kg_links import V2_FILES, V2_NODE_KEYS, gene_key, hmdb_key, resolve_v2_data_dir
 
@@ -68,7 +69,17 @@ SUMMARY_QUERIES = {
     ),
 }
 
-type Properties = dict[str, str | int | float]
+
+V3_SUMMARY_QUERIES = {
+    name: query.replace("RETURN", "WHERE n.backbone_version = $version RETURN", 1)
+    if name == "nodes_by_source"
+    else query.replace(" UNWIND", " WHERE n.backbone_version = $version UNWIND", 1)
+    if name == "nodes_by_label"
+    else query.replace("RETURN", "WHERE r.backbone_version = $version RETURN", 1)
+    for name, query in SUMMARY_QUERIES.items()
+}
+
+type Properties = dict[str, str | int | float | bool | list[str] | list[int]]
 type NodeRef = tuple[str, str]
 type Signature = tuple[str, str, str]
 
@@ -90,18 +101,21 @@ class Relationship:
 @dataclass
 class BackbonePlan:
     tables: dict[str, Table]
+    version: str = VERSION
+    node_keys: dict[str, str] = field(default_factory=lambda: V2_NODE_KEYS)
+    relationship_keys: dict[Signature, str] = field(default_factory=lambda: V2_MAIN_KG_WRITE_CONTRACT)
     nodes: dict[NodeRef, Properties] = field(default_factory=dict)
     relationships: dict[tuple[str, str, str], Relationship] = field(default_factory=dict)
     unmapped_string_genes: int = 0
 
     def add_node(self, label: str, properties: Properties) -> None:
-        ref = (label, _required(properties, V2_NODE_KEYS[label]))
+        ref = (label, _required(properties, self.node_keys[label]))
         if self.nodes.setdefault(ref, properties) != properties:
             raise ValueError(f"Conflicting node records for {ref[0]} {ref[1]}.")
 
     def add_relationship(self, signature: Signature, start_id: str, end_id: str, properties: Properties) -> None:
         predicate, start_label, end_label = signature
-        id_property = MAIN_KG_WRITE_CONTRACT[signature]
+        id_property = self.relationship_keys[signature]
         record_id = _required(properties, id_property)
         start, end = (start_label, start_id), (end_label, end_id)
         for label, identifier in (start, end):
@@ -127,7 +141,7 @@ class BackbonePlan:
             )),
         })
         return {
-            "backbone_version": VERSION,
+            "backbone_version": self.version,
             "inputs": {
                 name: {"path": table.path, "sha256": table.sha256, "rows": len(table.rows)}
                 for name, table in sorted(self.tables.items())
@@ -301,13 +315,28 @@ def _require_baseline_database(tx):
             raise ValueError("Use an empty local database or the database already built by this v2 importer.")
 
 
-def _constraints():
-    for label, key in V2_NODE_KEYS.items():
+def _require_target_database(tx, version, snapshot):
+    if version == VERSION:
+        return _require_baseline_database(tx)
+    result = tx.run(
+        "MATCH (n:BackboneClass {class_id: $class_id}) RETURN n.snapshot_id AS id",
+        class_id=ROOT_CLASS_ID,
+    ).single()
+    if result is not None:
+        if result["id"] != snapshot:
+            raise ValueError("Use an empty database to build a different v3 snapshot.")
+        return
+    if tx.run("MATCH (n) RETURN 1 AS found LIMIT 1").single() is not None:
+        raise ValueError("Use an empty local database for the first v3 import.")
+
+
+def _constraints(plan):
+    for label, key in plan.node_keys.items():
         yield (
             f"CREATE CONSTRAINT livertrail_backbone_{label.lower()}_{key} IF NOT EXISTS "
             f"FOR (n:{label}) REQUIRE n.{key} IS UNIQUE"
         )
-    for predicate, key in sorted({(predicate, key) for (predicate, _, _), key in MAIN_KG_WRITE_CONTRACT.items()}):
+    for predicate, key in sorted({(predicate, key) for (predicate, _, _), key in plan.relationship_keys.items()}):
         yield (
             f"CREATE CONSTRAINT livertrail_backbone_{predicate.lower()}_{key} IF NOT EXISTS "
             f"FOR ()-[r:{predicate}]-() REQUIRE r.{key} IS UNIQUE"
@@ -336,16 +365,21 @@ def _merge_rows(tx, query, rows, counters):
         counters["properties_set"] += outcome.properties_set
 
 
-def _write_graph(tx, plan):
-    _require_baseline_database(tx)
+def _write_graph(tx, plan, snapshot):
+    _require_target_database(tx, plan.version, snapshot)
     counters = dict(nodes_created=0, relationships_created=0, properties_set=0)
     node_groups = defaultdict(list)
     for (label, node_id), properties in plan.nodes.items():
+        if snapshot and (label, node_id) == ("BackboneClass", ROOT_CLASS_ID):
+            properties = {**properties, "snapshot_id": snapshot}
         node_groups[label].append({"node_id": node_id, "properties": properties})
     for label, rows in node_groups.items():
+        stage = ""
+        if snapshot and label == "Disease":
+            stage = "FOREACH (_ IN CASE WHEN row.properties.stage_order IS NOT NULL THEN [1] ELSE [] END | SET n:Stage)\n"
         query = (
-            f"UNWIND $rows AS row\nMERGE (n:{label} {{{V2_NODE_KEYS[label]}: row.node_id}})\n"
-            + _update_properties("n")
+            f"UNWIND $rows AS row\nMERGE (n:{label} {{{plan.node_keys[label]}: row.node_id}})\n"
+            + stage + _update_properties("n")
         )
         _merge_rows(tx, query, rows, counters)
 
@@ -358,22 +392,33 @@ def _write_graph(tx, plan):
     for (predicate, key, start, end), rows in edge_groups.items():
         query = (
             "UNWIND $rows AS row\n"
-            f"MATCH (a:{start} {{{V2_NODE_KEYS[start]}: row.start_id}})\n"
-            f"MATCH (b:{end} {{{V2_NODE_KEYS[end]}: row.end_id}})\n"
+            f"MATCH (a:{start} {{{plan.node_keys[start]}: row.start_id}})\n"
+            f"MATCH (b:{end} {{{plan.node_keys[end]}: row.end_id}})\n"
             f"MERGE (a)-[r:{predicate} {{{key}: row.record_id}}]->(b)\n"
             + _update_properties("r")
         )
         _merge_rows(tx, query, rows, counters)
 
+    queries = V3_SUMMARY_QUERIES if snapshot else SUMMARY_QUERIES
     counts = _with_totals({
-        name: {record["kind"]: record["count"] for record in tx.run(query)}
-        for name, query in SUMMARY_QUERIES.items()
+        name: {record["kind"]: record["count"] for record in tx.run(query, version=plan.version)}
+        for name, query in queries.items()
     })
+    if snapshot:
+        counts["node_count"] = tx.run(
+            "MATCH (n) WHERE n.backbone_version = $version RETURN count(n) AS count", version=plan.version,
+        ).single(strict=True)["count"]
     return {**counts, "writes": counters}
 
 
 def apply_v2_plan(plan: BackbonePlan, *, uri: str, database: str | None) -> dict:
+    return apply_plan(plan, uri=uri, database=database)
+
+
+def apply_plan(plan: BackbonePlan, *, uri: str, database: str | None, snapshot=None) -> dict:
     """Apply the validated plan in one data transaction on a direct loopback Bolt connection."""
+    if (plan.version != VERSION) != bool(snapshot):
+        raise ValueError("An exported snapshot ID is required for v3.")
     check_target(uri, database)
     parsed = urlsplit(uri)
     if parsed.scheme != "bolt" or parsed.username is not None or parsed.password is not None or parsed.query:
@@ -389,10 +434,10 @@ def apply_v2_plan(plan: BackbonePlan, *, uri: str, database: str | None) -> dict
     try:
         with GraphDatabase.driver(uri, auth=(user, password), telemetry_disabled=True) as driver:
             with driver.session(database=database.strip()) as session:
-                session.execute_read(_require_baseline_database)
-                for statement in _constraints():
+                session.execute_read(_require_target_database, plan.version, snapshot)
+                for statement in _constraints(plan):
                     session.run(statement).consume()
-                result = session.execute_write(_write_graph, plan)
+                result = session.execute_write(_write_graph, plan, snapshot)
     except (Neo4jError, DriverError) as error:
         code = getattr(error, "code", None) or type(error).__name__
         raise ValueError(f"Local Neo4j import failed ({code}).") from error

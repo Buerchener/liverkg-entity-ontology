@@ -32,6 +32,12 @@ edges express the project stage order and use contextual background.
 The provided v2 counts are comparison values. The import follows the
 available source records and reports the difference.
 
+## Offline v3 backbone
+
+The local v3 build combines the curated v2 TSVs, archived pathway records and
+the original HMDB XML. See the [v3 schema](../docs/backbone_v3_schema.md) for
+the build and restore commands, model, and literature loader.
+
 ## v2 Primary Scripts
 
 | Script | Role | Writes to Neo4j |

@@ -19,7 +19,7 @@
 - 一般 Gene/Protein/Pathway/Tissue/CellType 功能关联
 - HMDB 代谢物上下文，包括 `ASSOCIATED_WITH_METABOLITE`
 
-`ASSOCIATED_WITH` 目前同时承载 Gene-Disease 和 Metabolite-Disease；应结合 `source`、端点类型和 `evidence_class` 解读，暂不直接改写既有关系类型。
+v3 用 `METABOLITE_ASSOCIATED_WITH_DISEASE` 表示 Metabolite → Disease。HMDB 注释归为 `contextual_background`。原文直接支持该关联的文献记录按现有门禁判定为 `direct_disease_evidence`。v2 快照沿用历史关系名。
 
 ## 推断或待审核知识（inferred_or_hypothesis）
 

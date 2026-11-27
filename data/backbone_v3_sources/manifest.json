@@ -1,0 +1,76 @@
+{
+  "files": {
+    "kegg_br08901.json": {
+      "path": "kegg_br08901.json",
+      "url": "https://rest.kegg.jp/get/br:br08901/json",
+      "bytes": 39678,
+      "sha256": "fe0723cc9b7562f0441da0d5220fd07dc7fd0d08a2de13d0d30c03ae1c4f03cd",
+      "version": "KEGG pathway 2026/11/24",
+      "retrieved_on": "2026-11-28"
+    },
+    "kegg_compound_pathways.tsv": {
+      "path": "kegg_compound_pathways.tsv",
+      "url": "https://rest.kegg.jp/link/compound/pathway",
+      "bytes": 495450,
+      "sha256": "bc1625ebab7fd683846ce5ec702036e888aaba53e75e646c9384f95690ba38de",
+      "version": "KEGG pathway 2026/11/24",
+      "retrieved_on": "2026-11-28"
+    },
+    "ReactomePathways.txt": {
+      "path": "ReactomePathways.txt",
+      "url": "https://download.reactome.org/98/ReactomePathways.txt",
+      "bytes": 1596703,
+      "sha256": "b8103a50d625ffb6acd18cddffcce0ceb0fdf36b19392d104c32bb1fcc7e2f9f",
+      "version": "Reactome 98",
+      "retrieved_on": "2026-11-28"
+    },
+    "ReactomePathwaysRelation.txt": {
+      "path": "ReactomePathwaysRelation.txt",
+      "url": "https://download.reactome.org/98/ReactomePathwaysRelation.txt",
+      "bytes": 635604,
+      "sha256": "aa3609ee852442899b400bf4817b36311d820883ecd75259ed77531d93d8f1dc",
+      "version": "Reactome 98",
+      "retrieved_on": "2026-11-28"
+    },
+    "ChEBI2Reactome.txt": {
+      "path": "ChEBI2Reactome.txt",
+      "url": "https://download.reactome.org/98/ChEBI2Reactome.txt",
+      "bytes": 14436966,
+      "sha256": "ad14044cf32b0842ff936ca92378bc0dd6e192fe2046d2e9dbf0f175731b66f3",
+      "version": "Reactome 98",
+      "retrieved_on": "2026-11-28"
+    },
+    "Pathways2GoTerms_human.txt": {
+      "path": "Pathways2GoTerms_human.txt",
+      "url": "https://download.reactome.org/98/Pathways2GoTerms_human.txt",
+      "bytes": 61415,
+      "sha256": "68b307d8b25cd33d9c7df67b312e1b388fb9325d32aa6b8f87db2b2f781ac122",
+      "version": "Reactome 98",
+      "retrieved_on": "2026-11-28"
+    },
+    "kegg_release.txt": {
+      "path": "kegg_release.txt",
+      "url": "https://rest.kegg.jp/info/pathway",
+      "bytes": 219,
+      "sha256": "853d05c693208bea83b5d034791553f8f011da04f0c756693a8cc63fe3444152",
+      "version": "KEGG pathway 2026/11/24",
+      "retrieved_on": "2026-11-28"
+    },
+    "kegg_brite_release.txt": {
+      "path": "kegg_brite_release.txt",
+      "url": "https://rest.kegg.jp/info/brite",
+      "bytes": 192,
+      "sha256": "361ce8eabb4b797a0d3b89caef3fb1beaddeeb334591a509312a832cbbf20c4c",
+      "version": "KEGG pathway 2026/11/24",
+      "retrieved_on": "2026-11-28"
+    }
+  },
+  "hmdb": {
+    "path": "hmdb_metabolites.xml.gz",
+    "version": "HMDB 5.0",
+    "source": "LiverTrail handoff, 2026-11-27",
+    "uncompressed_bytes": 6486862079,
+    "sha256": "2d96289d744577aa12c352979e765e5559f97845e7f6fa2f8a138b1a8d0b6230"
+  },
+  "kegg_brite_document_updated": "2026-11-09"
+}

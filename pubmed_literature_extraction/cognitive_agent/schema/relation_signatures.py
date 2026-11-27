@@ -7,6 +7,8 @@ v1 baseline、v2/v3 Cognitive Agent 和 entity-linking preflight 共用本文件
 ``write_contract.py`` 单独定义。两层绝不能混用。
 """
 
+from .write_contract import METABOLITE_DISEASE
+
 # ── 关系签名 ──
 # key: 关系谓词
 # value: 允许的 (subject Neo4j label, object Neo4j label) 集合
@@ -17,7 +19,6 @@ LITERATURE_CANDIDATE_SIGNATURES: dict[str, set[tuple[str, str]]] = {
         # ── 基因/蛋白/代谢物/通路 → 疾病 (经典分子-疾病关联) ──
         ("Gene", "Disease"),
         ("Protein", "Disease"),
-        ("Metabolite", "Disease"),
         ("Pathway", "Disease"),
         # ── 疾病 → 组织/通路/疾病 (疾病影响范围) ──
         ("Disease", "Tissue"),        # HCC → tumor microenvironment
@@ -43,6 +44,7 @@ LITERATURE_CANDIDATE_SIGNATURES: dict[str, set[tuple[str, str]]] = {
         ("Pathway", "Pathway"),       # pathway cross-talk
         ("Tissue", "Pathway"),        # liver → drug metabolism
     },
+    METABOLITE_DISEASE: {("Metabolite", "Disease")},
     "PROGNOSTIC_IN": {
         ("Gene", "Disease"),
         ("Protein", "Disease"),       # 蛋白质作为预后标志物

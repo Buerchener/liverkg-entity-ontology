@@ -711,6 +711,7 @@ class ExtractionKernel:
             "prognostic_in": "PROGNOSTIC_IN",
             "progresses_to": "PROGRESSES_TO",
             "associated_with_metabolite": "ASSOCIATED_WITH_METABOLITE",
+            "metabolite_associated_with_disease": "METABOLITE_ASSOCIATED_WITH_DISEASE",
         }
 
         for attr_key, pred in rel_map.items():

@@ -253,7 +253,7 @@ def extract(
         manifest = spec.input_manifest
         normalized_path = Path(spec.normalized_input_path)
 
-    profile_args = dict(PROFILES[selected_profile])
+    profile_args = dict(cfg.profiles[selected_profile])
     spec = RunSpec(
         run_id=run_id,
         profile=selected_profile,
@@ -587,20 +587,45 @@ def ontology(ctx: typer.Context) -> None:
 @backbone_app.command("build")
 def backbone_build(
     v2_data: Optional[Path] = typer.Option(None, "--v2-data", help="Directory containing the curated v2 TSVs."),
+    version: str = typer.Option("v2", "--version", help="v2 baseline or v3 expanded backbone."),
+    sources: Optional[Path] = typer.Option(None, "--sources", help="Directory of archived v3 pathway inputs."),
+    from_snapshot: Optional[Path] = typer.Option(None, "--from-snapshot", help="Restore a verified v3 JSONL snapshot."),
+    hmdb_xml: Optional[Path] = typer.Option(None, "--hmdb-xml", help="Verified original HMDB XML gzip file."),
+    output: Optional[Path] = typer.Option(None, "--output", help="Directory for the portable v3 JSONL snapshot."),
     apply: bool = typer.Option(False, "--apply/--dry-run", help="Write to local Neo4j or preview the import."),
     database: Optional[str] = typer.Option(None, "--database", help="Local target database for --apply."),
     uri: str = typer.Option("bolt://127.0.0.1:7687", "--uri", help="Direct loopback Bolt connection."),
     report: Optional[Path] = typer.Option(None, "--report", help="Save the plan and any Cypher counts as JSON."),
 ) -> None:
-    """Validate the curated v2 snapshot and optionally rebuild it in a local database."""
-    from entity_ontology.backbone import apply_v2_plan, build_v2_plan
+    """Rebuild a curated backbone snapshot and optionally write it to local Neo4j."""
+    from entity_ontology.backbone import apply_plan, build_v2_plan
+    from entity_ontology.backbone_snapshot import DEFAULT_V3_DATA, export_snapshot, read_snapshot_plan
+    from entity_ontology.backbone_v3 import DEFAULT_SOURCES, build_v3_plan
     from entity_ontology.storage import atomic_json
 
     try:
-        plan = build_v2_plan(v2_data)
-        result = {"mode": "apply" if apply else "dry-run", **plan.report()}
+        if version not in {"v2", "v3"}:
+            raise ValueError("Choose --version v2 or v3.")
+        details, snapshot = {}, None
+        if version == "v3":
+            if from_snapshot is not None:
+                if any(value is not None for value in (v2_data, sources, hmdb_xml, output)):
+                    raise ValueError("--from-snapshot already supplies all v3 graph inputs.")
+                plan, manifest = read_snapshot_plan(from_snapshot)
+                details["snapshot"] = manifest
+            else:
+                plan, details = build_v3_plan(v2_data, sources=sources or DEFAULT_SOURCES, hmdb_xml=hmdb_xml)
+                if output is not None or apply:
+                    details["snapshot"] = export_snapshot(plan, output or DEFAULT_V3_DATA)
+            if "snapshot" in details:
+                snapshot = details["snapshot"]["snapshot_id"]
+        else:
+            if any(value is not None for value in (sources, hmdb_xml, output, from_snapshot)):
+                raise ValueError("--sources, --hmdb-xml, --output and --from-snapshot apply to --version v3.")
+            plan = build_v2_plan(v2_data)
+        result = {"mode": "apply" if apply else "dry-run", **plan.report(), **details}
         if apply:
-            result["database"] = apply_v2_plan(plan, uri=uri, database=database)
+            result["database"] = apply_plan(plan, uri=uri, database=database, snapshot=snapshot)
         if report is not None:
             atomic_json(report, result)
     except (ValueError, OSError) as error:

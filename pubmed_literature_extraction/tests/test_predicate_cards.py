@@ -5,10 +5,13 @@ from cognitive_agent.schema.predicate_cards import (
     match_relation_card,
 )
 
+from cognitive_agent.schema.relation_signatures import LITERATURE_CANDIDATE_SIGNATURES
+from cognitive_agent.schema.write_contract import METABOLITE_DISEASE
+
 
 class PredicateCardTests(unittest.TestCase):
-    def test_all_eight_predicates_have_complete_cards(self):
-        self.assertEqual(len(RELATION_CARDS), 8)
+    def test_all_predicates_have_complete_cards(self):
+        self.assertEqual(set(RELATION_CARDS), set(LITERATURE_CANDIDATE_SIGNATURES))
         for predicate, card in RELATION_CARDS.items():
             with self.subTest(predicate=predicate):
                 self.assertTrue(card.description)
@@ -20,6 +23,7 @@ class PredicateCardTests(unittest.TestCase):
     def test_explicit_examples_match_their_predicate_cards(self):
         cases = [
             ("ASSOCIATED_WITH", "Gene", "Disease", "TP53 was associated with HCC."),
+            (METABOLITE_DISEASE, "Metabolite", "Disease", "Cholate was associated with cirrhosis."),
             ("ASSOCIATED_WITH_METABOLITE", "Gene", "Metabolite", "GENE1 was associated with lactate."),
             ("INTERACTS_WITH", "Protein", "Protein", "Protein A binds to protein B."),
             ("ENCODES", "Gene", "Protein", "TP53 encodes p53."),
