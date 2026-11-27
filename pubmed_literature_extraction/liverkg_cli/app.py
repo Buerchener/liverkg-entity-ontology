@@ -37,6 +37,8 @@ app.add_typer(runs_app, name="runs")
 app.add_typer(config_app, name="config")
 app.add_typer(cache_app, name="cache")
 app.add_typer(research_app, name="research")
+backbone_app = typer.Typer(help="Build the local LiverTrail backbone.")
+app.add_typer(backbone_app, name="backbone")
 
 
 LANG = "en"
@@ -580,6 +582,31 @@ def ontology(ctx: typer.Context) -> None:
         )
         raise typer.Exit(1)
     raise typer.Exit(ontology_main(list(ctx.args)))
+
+
+@backbone_app.command("build")
+def backbone_build(
+    v2_data: Optional[Path] = typer.Option(None, "--v2-data", help="Directory containing the curated v2 TSVs."),
+    apply: bool = typer.Option(False, "--apply/--dry-run", help="Write to local Neo4j or preview the import."),
+    database: Optional[str] = typer.Option(None, "--database", help="Local target database for --apply."),
+    uri: str = typer.Option("bolt://127.0.0.1:7687", "--uri", help="Direct loopback Bolt connection."),
+    report: Optional[Path] = typer.Option(None, "--report", help="Save the plan and any Cypher counts as JSON."),
+) -> None:
+    """Validate the curated v2 snapshot and optionally rebuild it in a local database."""
+    from entity_ontology.backbone import apply_v2_plan, build_v2_plan
+    from entity_ontology.storage import atomic_json
+
+    try:
+        plan = build_v2_plan(v2_data)
+        result = {"mode": "apply" if apply else "dry-run", **plan.report()}
+        if apply:
+            result["database"] = apply_v2_plan(plan, uri=uri, database=database)
+        if report is not None:
+            atomic_json(report, result)
+    except (ValueError, OSError) as error:
+        typer.echo(f"Backbone build failed: {error}", err=True)
+        raise typer.Exit(1) from error
+    typer.echo(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
 
 
 def main() -> None:
