@@ -6,7 +6,7 @@ import re
 
 
 def read_articles(content):
-    articles = [json.loads(line) for line in content.decode("utf-8").splitlines() if line.strip()]
+    articles = [json.loads(line) for line in content.decode("utf-8-sig").split("\n") if line.strip()]
     if not articles:
         raise ValueError("The input must contain at least one title and abstract.")
     pmids = []

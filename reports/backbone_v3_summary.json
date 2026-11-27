@@ -1131,7 +1131,7 @@
   },
   "literature": {
     "status": "engineering_verified",
-    "benchmark_status": "model_preflight_required",
+    "benchmark_status": "blocked_langextract_generation",
     "selection": {
       "source_corpus_sha256": "b4f17b3e8e473db1c4348b4ac985787f28181aacca6f087446ab42a2dbd32b21",
       "pilot_input_sha256": "1e4c8b5e0af0ec2637f42882e77a9555b29850c524589bcf6ce00ea9d5fd3063",
@@ -1165,9 +1165,81 @@
       "selection": "Five distinct abstracts from the handoff set of 500, one targeted title match for each of the five stages. The pilot favors human study language and excludes review titles. This is a stratified dry run for engineering checks."
     },
     "requested_roles": {
-      "main": "DeepSeek",
-      "langextract": "Gemini",
-      "embedding": "Qwen"
+      "main": "deepseek-v4.1-flash",
+      "langextract": "gemini-3.8-flash",
+      "embedding": "qwen3.7-text-embedding"
+    },
+    "corpus": {
+      "zip_sha256": "dfb32084e425dae14f4de96151f0f46b06c154387fb96ccf99a0b5d8d31e1065",
+      "articles_sha256": "e83f821f16568adbfed9210cd4580f0679029cc1b1f01f375965094dcf84d1e5",
+      "original": 500,
+      "additional": 1464,
+      "total": 1964,
+      "content_kept": true
+    },
+    "full_run_started": false,
+    "real_articles_processed": 0,
+    "stubbed_pipeline_stages_passed": 9,
+    "provider_probes": {
+      "deepseek_inferai": {
+        "usage_http": 200,
+        "catalog_http": 200,
+        "subscription_expires_at": "2026-11-29T04:52:30.179262+08:00",
+        "concurrent_json_completions": [
+          {
+            "http": 200,
+            "valid_json": true,
+            "prompt_tokens": 175,
+            "completion_tokens": 20,
+            "total_tokens": 195,
+            "elapsed_s": 3.62
+          },
+          {
+            "http": 200,
+            "valid_json": true,
+            "prompt_tokens": 50,
+            "completion_tokens": 7,
+            "total_tokens": 57,
+            "elapsed_s": 1.42
+          }
+        ]
+      },
+      "deepseek_model_studio": {
+        "catalog_http": 200,
+        "completion_http": 200,
+        "prompt_tokens": 8,
+        "completion_tokens": 2
+      },
+      "qwen_model_studio": {
+        "embedding_http": 200,
+        "dimensions": [
+          1024,
+          1024
+        ],
+        "requests_in_probe": 1,
+        "total_tokens": 42
+      },
+      "gemini_inferai": {
+        "catalog_http": 200,
+        "openai_generation_http": [
+          403,
+          403
+        ],
+        "native_proxy_http": 502,
+        "remaining": 0
+      }
+    }
+  },
+  "three_model_offline_regression": {
+    "ontology": {
+      "total": 53,
+      "passed": 53
+    },
+    "extraction": {
+      "total": 446,
+      "passed": 430,
+      "skipped": 3,
+      "known_missing_biored": 13
     }
   }
 }

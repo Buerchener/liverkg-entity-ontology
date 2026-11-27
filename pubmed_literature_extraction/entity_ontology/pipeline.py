@@ -14,7 +14,7 @@ from .concepts.normalization import resolve
 from .concepts.retrieve_pairs import DEFAULT_KNN_K
 from .extraction.coverage import VERSION as COVERAGE_VERSION, recover as recover_coverage
 from .extraction.mentions import build, conceptualization_input, read_articles
-from .extraction.native import extract_articles, extractor_identity
+from .extraction.native import extract_articles, extractor_identity, extractor_settings
 from .export.graph import VERSION as EXPORT_VERSION, export_graph
 from .hierarchy.order_entities import order_for_hierarchy
 from .hierarchy.placement import run as place_incrementally
@@ -74,9 +74,16 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
                 "entity_coverage": COVERAGE_VERSION if entity_coverage else None,
                 **backbone_identity(backbone_dir),
                 "integration_version": f"{LINK_VERSION}/{PROJECTION_VERSION}/{EXPORT_VERSION}"}
-    provider, _ = read_settings(config, "audit_edges")
-    embedding = read_json(config)["embedding"]
-    environment_endpoints = [endpoint(connection) for connection in (provider, embedding)
+    provider, main_settings = read_settings(config, "audit_edges")
+    options = read_json(config)
+    embedding = options["embedding"]
+    role_connections = [provider, embedding]
+    if options.get("extractor", {}).get("provider"):
+        extraction_provider, extraction_parameters = extractor_settings(config)
+        role_connections.append(extraction_provider)
+        identity["model_roles"] = {"main": main_settings["model"], "langextract": extraction_parameters["model"],
+                                   "embedding": embedding["model"]}
+    environment_endpoints = [endpoint(connection) for connection in role_connections
                              if not connection.get("base_url")]
     if environment_endpoints:
         identity["environment_endpoints_sha256"] = digest(environment_endpoints)
@@ -136,7 +143,7 @@ def run_batch(articles_path, run_id, *, config, runs_dir=DEFAULT_RUNS_DIR, title
                 raise ValueError("Unexpected extraction mode or article count.")
             if any(row["phases"]["extraction"].get("error") for row in extraction["records"]):
                 raise ValueError("Some abstracts reported an extraction error.")
-            manifest["extraction_model"] = report.get("model") or session.request_settings()[1]["model"]
+            manifest["extraction_model"] = report.get("model") or extractor_settings(config)[1]["model"]
             coverage_path = None
             if entity_coverage:
                 complete()

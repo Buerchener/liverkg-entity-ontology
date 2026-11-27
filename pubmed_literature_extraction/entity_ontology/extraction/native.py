@@ -114,11 +114,29 @@ def require_openai_compatible(base_url):
         )
 
 
+def extractor_settings(config):
+    options = read_json(config).get("extractor", {})
+    if "provider" not in options and "model" not in options:
+        return read_settings(config, "audit_edges")
+    connection = options.get("provider", {})
+    model = options.get("model")
+    if connection.get("kind") != "openai_compatible":
+        raise ValueError("Configure an OpenAI-compatible LangExtract provider.")
+    if any(field in connection for field in ("api_key", "authorization", "headers", "password")):
+        raise ValueError("Set the LangExtract credential through api_key_env.")
+    if not isinstance(model, str) or not model.strip():
+        raise ValueError("Set the LangExtract model ID.")
+    return dict(connection), {"model": model}
+
+
 def extractor_env(runtime, source, config, output, auxiliary_env):
-    connection, settings = read_settings(config, "audit_edges")
-    live_provider(connection, settings)
-    require_openai_compatible(connection["base_url"])
-    credential = os.environ[connection["api_key_env"]]
+    main_connection, main_settings = read_settings(config, "audit_edges")
+    extraction_connection, extraction_settings = extractor_settings(config)
+    live_provider(main_connection, main_settings)
+    live_provider(extraction_connection, extraction_settings)
+    require_openai_compatible(extraction_connection["base_url"])
+    main_credential = os.environ[main_connection["api_key_env"]]
+    extraction_credential = os.environ[extraction_connection["api_key_env"]]
     output.mkdir(exist_ok=True)
     config_path = runtime / "extractor.toml"
     extract_options = read_json(config).get("extractor", {})
@@ -133,9 +151,9 @@ def extractor_env(runtime, source, config, output, auxiliary_env):
     auxiliary = auxiliary_settings(auxiliary_env)
     env.update(auxiliary)
     env.update(
-        GEMINI_MODEL=settings["model"], GEMINI_API_BASE=connection["base_url"],
-        GEMINI_API_KEY=credential, AUX_CRITIC_MODEL=settings["model"],
-        ALIYUN_MAAS_API_BASE=connection["base_url"], ALIYUN_MAAS_API_KEY=credential,
+        GEMINI_MODEL=extraction_settings["model"], GEMINI_API_BASE=extraction_connection["base_url"],
+        GEMINI_API_KEY=extraction_credential, AUX_CRITIC_MODEL=main_settings["model"],
+        ALIYUN_MAAS_API_BASE=main_connection["base_url"], ALIYUN_MAAS_API_KEY=main_credential,
         NEO4J_PASSWORD="", NEO4J_URI="bolt://localhost:7687", NEO4J_RAG_ENABLED="false",
         LIVERKG_CONFIG=str(config_path), LIVERKG_RUNS_DIR=str(runtime / "runs"),
         LIVERKG_CACHE_DIR=str(runtime / "cache"),
@@ -148,8 +166,8 @@ def extractor_env(runtime, source, config, output, auxiliary_env):
         ENTITY_RECOVERY_MODE="off", PAIRWISE_JUDGE_MODE="off",
         PYTHONUNBUFFERED="1", PYTHONDONTWRITEBYTECODE="1", PYTHONPATH=str(source),
     )
-    if auxiliary_mode(auxiliary) == "single_model":
-        env.update(single_model_env(connection["base_url"], credential, settings["model"]))
+    if extract_options.get("provider") or auxiliary_mode(auxiliary) == "single_model":
+        env.update(single_model_env(main_connection["base_url"], main_credential, main_settings["model"]))
     return env
 
 
@@ -199,7 +217,7 @@ def extract_articles(articles, output_dir, *, config=None, repo=None, python=Non
     runtime = output_dir / "extractor_runtime"
     runtime.mkdir(parents=True, exist_ok=True)
     final = output_dir / "agent_results.json"
-    _, settings = read_settings(config, "audit_edges")
+    _, settings = extractor_settings(config)
     model = settings["model"]
     manifest = {
         "article_sha256": hashlib.sha256(content).hexdigest(),
@@ -208,6 +226,9 @@ def extract_articles(articles, output_dir, *, config=None, repo=None, python=Non
         "auxiliary_models": auxiliary_mode(auxiliary_settings(auxiliary_env)),
         "model": model, "profile": PROFILE, "pmids": pmids,
     }
+    if read_json(config).get("extractor", {}).get("provider"):
+        _, main_settings = read_settings(config, "audit_edges")
+        manifest.update(auxiliary_models="main_provider", main_model=main_settings["model"])
 
     with run_lock(runtime):
         snapshot = runtime / "input_manifest.json"

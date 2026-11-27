@@ -107,3 +107,9 @@ liverkg ontology unload --run-id BATCH --uri bolt://127.0.0.1:17687 --database n
 ~~~
 
 撤回按 run_id 删除批次的文献节点和边。多批次引用同一 PMID 时，Article 由各自的 IN_RUN 关系维持，最后一个引用撤回时清理孤立 Article。
+
+## 三路模型配置
+
+主模型处理 B 的复核和 C 的概念归并、层级判定。LangExtract 从单独的生成端点取得抽取结果。向量检索使用独立的 Qwen 端点。每个角色从自己的环境变量读取 URL 和密钥，批次清单记录模型角色和输入快照。 [三模型配置模板](../pubmed_literature_extraction/entity_ontology/config.three-model.example.json)
+
+用 --backbone-data 指定已入库的 v3 快照。按任务用同一个 run ID 续跑，文献抽取检查点和模型结果在本地保留。配置项 extractor.max_workers、llm.workers 和 embedding.workers 分别控制抽取、并行文本请求和向量请求。试点后可依据实际限流和耗时设置全量批次的并发。

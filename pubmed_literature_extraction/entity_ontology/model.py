@@ -225,5 +225,8 @@ class ModelSession:
             (stage, prompt, {"items": items[i : i + size], **context})
             for i in range(0, len(items), size)
         ]
-        with ThreadPoolExecutor(max_workers=3) as pool:
+        workers = read_json(self.config).get("llm", {}).get("workers", 3)
+        if type(workers) is not int or workers < 1:
+            raise ValueError("llm.workers must be a positive integer.")
+        with ThreadPoolExecutor(max_workers=min(workers, max(1, len(tasks)))) as pool:
             return [row for group in pool.map(self.req, tasks) for row in group]
