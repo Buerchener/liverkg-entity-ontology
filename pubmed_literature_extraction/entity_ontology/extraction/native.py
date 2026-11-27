@@ -141,6 +141,9 @@ def extractor_env(runtime, source, config, output, auxiliary_env):
     config_path = runtime / "extractor.toml"
     extract_options = read_json(config).get("extractor", {})
     max_workers = extract_options.get("max_workers")
+    fence_output = extract_options.get("fence_output", True)
+    if type(fence_output) is not bool:
+        raise ValueError("extractor.fence_output must be a boolean.")
     config_override = "output_dir = " + json.dumps(str(output), ensure_ascii=False) + "\n"
     if max_workers is not None:
         if type(max_workers) is not int or max_workers < 1:
@@ -160,6 +163,7 @@ def extractor_env(runtime, source, config, output, auxiliary_env):
         EXTRACTION_CACHE_PATH=str(runtime / "cache/extraction.sqlite"),
         PRIMARY_LLM_MAX_OUTPUT_TOKENS="8192", PRIMARY_LLM_REQUEST_TIMEOUT_S="100",
         PRIMARY_LLM_MAX_RETRIES="2", AUX_MODEL_MAX_RETRIES="1",
+        PRIMARY_LLM_FENCE_OUTPUT=str(fence_output).lower(),
         SCHEMA_PROFILE="", RULE_BUNDLE="", CONFORMAL_CALIBRATION="",
         # Roles whose defaults point at another provider stay off unless the
         # shell environment would otherwise switch them on.

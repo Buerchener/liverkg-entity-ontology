@@ -9,6 +9,33 @@ from unittest.mock import patch
 
 from cognitive_agent.extraction_cache import LightweightExtractionCache
 from cognitive_agent.extraction_kernel import ExtractionKernel, RawExtraction
+from cognitive_agent.timeout_openai_provider import LiverKGTimeoutOpenAIModel
+from langextract import data
+from langextract.core.types import ScoredOutput
+from langextract.providers.openai import OpenAILanguageModel
+
+
+class OpenAIResponseFormatTests(unittest.TestCase):
+    def test_provider_unwraps_complete_json_without_a_closing_fence(self):
+        provider = object.__new__(LiverKGTimeoutOpenAIModel)
+        provider.format_type = data.FormatType.JSON
+        body = '{"extractions":[{"Gene":"TP53"}]}'
+        fence = chr(96) * 3 + "json\n"
+        incomplete = fence + '{"extractions":['
+        outputs = (
+            (fence + body, body),
+            (fence + body + "\n" + chr(96) * 3, body),
+            (incomplete, incomplete),
+        )
+        for raw, expected in outputs:
+            with self.subTest(raw=raw):
+                with patch.object(
+                    OpenAILanguageModel, "_process_single_prompt",
+                    return_value=ScoredOutput(score=1.0, output=raw),
+                ):
+                    result = provider._process_single_prompt("extract", {})
+                self.assertEqual(result.output, expected)
+                self.assertEqual(result.score, 1.0)
 
 
 class LightweightExtractionCacheTests(unittest.TestCase):
@@ -205,6 +232,20 @@ class ExtractionKernelCacheTests(unittest.TestCase):
                 prompt="prompt", retry_on_empty=False,
             )
         self.assertIs(remote.call_args.kwargs["fence_output"], True)
+
+    def test_raw_json_mode_changes_prompt_and_surfaces_parse_errors(self):
+        args = {"text": "text", "examples": [], "prompt": "prompt", "retry_on_empty": False}
+        fenced = self.make_kernel()
+        with patch.dict("os.environ", {"PRIMARY_LLM_FENCE_OUTPUT": "false"}):
+            raw = self.make_kernel()
+        self.assertNotEqual(fenced._cache_key(**args), raw._cache_key(**args))
+        with patch(
+            "cognitive_agent.extraction_kernel.lx.extract",
+            return_value=[SimpleNamespace(extractions=[])],
+        ) as remote:
+            raw._extract_uncached(document_id="raw", **args)
+        self.assertIs(remote.call_args.kwargs["fence_output"], False)
+        self.assertEqual(remote.call_args.kwargs["resolver_params"], {"suppress_parse_errors": False})
 
     def test_timeout_has_a_separate_small_retry_budget(self):
         kernel = self.make_kernel()
