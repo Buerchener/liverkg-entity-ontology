@@ -20,7 +20,7 @@ from cognitive_agent.schema.relation_signatures import LITERATURE_CANDIDATE_SIGN
 
 from ..linking.kg_links import V2_NODE_KEYS
 from ..storage import read_json, read_jsonl
-from .graph import GRAPH_FILES, VERSION as EXPORT_VERSION
+from .graph import GRAPH_FILES, VERSION as EXPORT_VERSION, verify_graph
 
 LOCAL_HOSTS = {"localhost", "127.0.0.1", "::1"}
 PROTECTED_DATABASES = {"liver-kg-core-v02", "system"}
@@ -57,6 +57,7 @@ def load_plan(run_dir):
         if hashlib.sha256(path.read_bytes()).hexdigest() != manifest["files"][name]["sha256"]:
             raise ValueError(f"graph/{name}.jsonl does not match the export manifest.")
         rows[name] = read_jsonl(path)
+    verify_graph(rows)
     relations = [row for row in rows["relations"] if row["gate"] == "AUTO"]
     if any(row["predicate"] not in PREDICATES for row in relations):
         raise ValueError("The export contains a relation type outside the LiverKG predicates.")
@@ -68,6 +69,15 @@ def load_plan(run_dir):
     plan["run_id"] = manifest["run_id"]
     plan["counts"] = {name: len(plan[name]) for name in GRAPH_FILES}
     plan["counts"]["review_relations_not_loaded"] = len(rows["relations"]) - len(relations)
+    if (manifest.get("backbone") or {}).get("version") == "v3":
+        from .neo4j_v3 import validate_v3_plan
+
+        plan["backbone"] = manifest["backbone"]
+        graph_digest = hashlib.sha256()
+        for name, meta in sorted(manifest["files"].items()):
+            graph_digest.update(name.encode() + b"\0" + bytes.fromhex(meta["sha256"]))
+        plan["graph_id"] = graph_digest.hexdigest()
+        validate_v3_plan(plan)
     return plan
 
 
@@ -124,6 +134,11 @@ def load_run(run_dir, *, uri, database, user, password, dry_run=False, driver_fa
     plan = load_plan(run_dir)
     summary = {"run_id": plan["run_id"], "uri": uri, "database": database,
                "dry_run": dry_run, "counts": plan["counts"]}
+    if plan.get("backbone"):
+        from .neo4j_v3 import direct_target, load_v3
+
+        direct_target(uri, database)
+        summary["backbone"] = plan["backbone"]
     if dry_run:
         return summary
     if not password:
@@ -134,6 +149,9 @@ def load_run(run_dir, *, uri, database, user, password, dry_run=False, driver_fa
         driver_factory = GraphDatabase.driver
     with driver_factory(uri, auth=(user, password)) as driver:
         with driver.session(database=database) as session:
+            if plan.get("backbone"):
+                summary["loaded"] = load_v3(session, plan)
+                return summary
             for statement in CONSTRAINTS:
                 session.run(statement).consume()
             for _, query, rows in statements(plan):

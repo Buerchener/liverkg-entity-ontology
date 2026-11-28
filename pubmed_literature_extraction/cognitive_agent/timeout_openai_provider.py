@@ -2,10 +2,34 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
+import json
+import re
+
 import httpx
+from langextract import data
 from langextract.providers import router
 from langextract.providers.openai import OpenAILanguageModel
 from openai import OpenAI
+
+
+def _unwrap_complete_json(output: str) -> str:
+    """Accept JSON behind a Markdown opening fence when the whole body parses."""
+    if not isinstance(output, str):
+        return output
+    text = output.strip()
+    opening = re.match(r"(?i)\A([\x60]{3}|~{3})(?:json)?[ \t]*\r?\n", text)
+    if opening is None:
+        return output
+    fence = opening.group(1)
+    body = text[opening.end():].strip()
+    if body.endswith(fence):
+        body = body[:-len(fence)].rstrip()
+    try:
+        content = json.loads(body)
+    except json.JSONDecodeError:
+        return output
+    return body if isinstance(content, (dict, list)) else output
 
 
 @router.register(r"^liverkg_timeout_openai$", priority=100)
@@ -40,6 +64,12 @@ class LiverKGTimeoutOpenAIModel(OpenAILanguageModel):
             timeout=timeout,
             http_client=self._http_client,
         )
+
+    def _process_single_prompt(self, prompt, config):
+        result = super()._process_single_prompt(prompt, config)
+        if self.format_type == data.FormatType.JSON:
+            return replace(result, output=_unwrap_complete_json(result.output))
+        return result
 
     def close(self) -> None:
         self._client.close()

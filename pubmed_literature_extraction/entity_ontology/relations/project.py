@@ -16,6 +16,7 @@ import hashlib
 
 from cognitive_agent.extraction_quality import normalize_surface
 from cognitive_agent.schema.relation_signatures import LITERATURE_CANDIDATE_SIGNATURES
+from cognitive_agent.schema.write_contract import canonical_predicate, is_main_kg_write_signature
 
 from ..storage import atomic_json, read_json
 
@@ -100,7 +101,8 @@ def concept_gate(relation, concepts, placed, decisions):
         endpoint_types = {row[f"{side}_type"] for row in evidence}
         if endpoint_types != {concept["kind"]}:
             reasons.append(f"{side}_type_mismatch")
-    signatures = LITERATURE_CANDIDATE_SIGNATURES.get(predicate, set())
+    typed_predicate = canonical_predicate(predicate, *kinds)
+    signatures = LITERATURE_CANDIDATE_SIGNATURES.get(typed_predicate, set())
     if tuple(kinds) not in signatures:
         reasons.append("signature_mismatch")
     if any(is_counter_evidence(row) for row in evidence):
@@ -117,13 +119,17 @@ def novelty(relation, links, index):
     right = links.get(relation["object_concept_id"]) or {}
     if left.get("status") != "LINKED" or right.get("status") != "LINKED" or index is None:
         return "UNLINKED", []
-    found = index.relations_between(
-        f"{left['target']['label']}:{left['target']['id']}",
-        f"{right['target']['label']}:{right['target']['id']}",
-    )
-    v2 = [{"type": kind, "source": source} for kind, source in found]
-    same = any(kind == relation["predicate"] for kind, _ in found)
-    return ("KNOWN_IN_V2" if same else "NEW"), v2
+    a, b = left["target"], right["target"]
+    start, end = f"{a['label']}:{a['id']}", f"{b['label']}:{b['id']}"
+    found = index.relations_between(start, end)
+    relations = [{"type": kind, "source": source} for kind, source in found]
+    predicate = canonical_predicate(relation["predicate"], a["label"], b["label"])
+    if getattr(index, "backbone_version", "v2") == "v3":
+        if index.has_relation(start, end, predicate):
+            return "KNOWN_IN_BACKBONE", relations
+        return ("PAIR_KNOWN_OTHER_RELATION" if found else "NEW"), relations
+    same = any(canonical_predicate(kind, a["label"], b["label"]) == predicate for kind, _ in found)
+    return ("KNOWN_IN_V2" if same else "NEW"), relations
 
 
 def project_relations(output, extraction_path, links, index=None):
@@ -137,6 +143,7 @@ def project_relations(output, extraction_path, links, index=None):
     decisions = {row["concept_id"]: row for row in placement["decisions"]}
     link_by_concept = {row["concept_id"]: row for row in links["links"]}
     resolver = EndpointResolver(inventory, concepts.values())
+    use_v3 = getattr(index, "backbone_version", "v2") == "v3"
 
     # The built-in LiverKG predicates are all directed, so the extractor's
     # subject/object order is kept as is.
@@ -156,9 +163,12 @@ def project_relations(output, extraction_path, links, index=None):
                 unresolved.append({**row, "reasons": reasons})
                 continue
             left, right = subject["concept_id"], obj["concept_id"]
-            key = f"{left}|{row['predicate']}|{right}"
+            predicate = row["predicate"]
+            if use_v3:
+                predicate = canonical_predicate(predicate, row["subject_type"], row["object_type"])
+            key = f"{left}|{predicate}|{right}"
             group = grouped.setdefault(key, {
-                "relation_key": key, "subject_concept_id": left, "predicate": row["predicate"],
+                "relation_key": key, "subject_concept_id": left, "predicate": predicate,
                 "object_concept_id": right, "evidence": [],
             })
             group["evidence"].append(row)
@@ -167,8 +177,19 @@ def project_relations(output, extraction_path, links, index=None):
     for key in sorted(grouped):
         relation = grouped[key]
         gate, reasons = concept_gate(relation, concepts, placed, decisions)
-        state, v2 = novelty(relation, link_by_concept, index)
+        state, matches = novelty(relation, link_by_concept, index)
         subject, obj = concepts[relation["subject_concept_id"]], concepts[relation["object_concept_id"]]
+        if use_v3 and gate == "AUTO" and not is_main_kg_write_signature(relation["predicate"], subject["kind"], obj["kind"]):
+            gate = "REVIEW"
+            reasons.append("unsupported_main_kg_signature")
+        subject_link = link_by_concept.get(subject["id"]) or {}
+        object_link = link_by_concept.get(obj["id"]) or {}
+        left_stage, right_stage = ((link.get("target") or {}).get("stage_order") for link in (subject_link, object_link))
+        stages = sorted({stage for stage in (left_stage, right_stage) if stage is not None})
+        backbone_fields = {"v2_relations": matches}
+        if use_v3:
+            backbone_fields = {"backbone_relations": matches, "stage_order": right_stage or left_stage,
+                               "stage_orders": stages}
         relations.append({
             **relation,
             "subject_name": subject["name"], "subject_kind": subject["kind"],
@@ -179,7 +200,7 @@ def project_relations(output, extraction_path, links, index=None):
             "write_status_counts": dict(Counter(row["write_status"] for row in relation["evidence"])),
             "subject_link": (link_by_concept.get(relation["subject_concept_id"]) or {}).get("status"),
             "object_link": (link_by_concept.get(relation["object_concept_id"]) or {}).get("status"),
-            "novelty": state, "v2_relations": v2,
+            "novelty": state, **backbone_fields,
         })
 
     projected = sum(row["evidence_count"] for row in relations)

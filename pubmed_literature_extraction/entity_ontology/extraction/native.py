@@ -114,35 +114,64 @@ def require_openai_compatible(base_url):
         )
 
 
+def extractor_settings(config):
+    options = read_json(config).get("extractor", {})
+    if "provider" not in options and "model" not in options:
+        return read_settings(config, "audit_edges")
+    connection = options.get("provider", {})
+    model = options.get("model")
+    if connection.get("kind") != "openai_compatible":
+        raise ValueError("Configure an OpenAI-compatible LangExtract provider.")
+    if any(field in connection for field in ("api_key", "authorization", "headers", "password")):
+        raise ValueError("Set the LangExtract credential through api_key_env.")
+    if not isinstance(model, str) or not model.strip():
+        raise ValueError("Set the LangExtract model ID.")
+    return dict(connection), {"model": model}
+
+
 def extractor_env(runtime, source, config, output, auxiliary_env):
-    connection, settings = read_settings(config, "audit_edges")
-    live_provider(connection, settings)
-    require_openai_compatible(connection["base_url"])
-    credential = os.environ[connection["api_key_env"]]
+    main_connection, main_settings = read_settings(config, "audit_edges")
+    extraction_connection, extraction_settings = extractor_settings(config)
+    live_provider(main_connection, main_settings)
+    live_provider(extraction_connection, extraction_settings)
+    require_openai_compatible(extraction_connection["base_url"])
+    main_credential = os.environ[main_connection["api_key_env"]]
+    extraction_credential = os.environ[extraction_connection["api_key_env"]]
     output.mkdir(exist_ok=True)
     config_path = runtime / "extractor.toml"
-    config_path.write_text("output_dir = " + json.dumps(str(output), ensure_ascii=False) + "\n")
+    extract_options = read_json(config).get("extractor", {})
+    max_workers = extract_options.get("max_workers")
+    fence_output = extract_options.get("fence_output", True)
+    if type(fence_output) is not bool:
+        raise ValueError("extractor.fence_output must be a boolean.")
+    config_override = "output_dir = " + json.dumps(str(output), ensure_ascii=False) + "\n"
+    if max_workers is not None:
+        if type(max_workers) is not int or max_workers < 1:
+            raise ValueError("extractor.max_workers must be a positive integer.")
+        config_override += f"\n[profiles.{PROFILE}]\nmax_workers = {max_workers}\n"
+    config_path.write_text(config_override, encoding="utf-8")
     env = {k: v for k, v in os.environ.items() if not k.startswith("NEO4J_")}
     auxiliary = auxiliary_settings(auxiliary_env)
     env.update(auxiliary)
     env.update(
-        GEMINI_MODEL=settings["model"], GEMINI_API_BASE=connection["base_url"],
-        GEMINI_API_KEY=credential, AUX_CRITIC_MODEL=settings["model"],
-        ALIYUN_MAAS_API_BASE=connection["base_url"], ALIYUN_MAAS_API_KEY=credential,
+        GEMINI_MODEL=extraction_settings["model"], GEMINI_API_BASE=extraction_connection["base_url"],
+        GEMINI_API_KEY=extraction_credential, AUX_CRITIC_MODEL=main_settings["model"],
+        ALIYUN_MAAS_API_BASE=main_connection["base_url"], ALIYUN_MAAS_API_KEY=main_credential,
         NEO4J_PASSWORD="", NEO4J_URI="bolt://localhost:7687", NEO4J_RAG_ENABLED="false",
         LIVERKG_CONFIG=str(config_path), LIVERKG_RUNS_DIR=str(runtime / "runs"),
         LIVERKG_CACHE_DIR=str(runtime / "cache"),
         EXTRACTION_CACHE_PATH=str(runtime / "cache/extraction.sqlite"),
         PRIMARY_LLM_MAX_OUTPUT_TOKENS="8192", PRIMARY_LLM_REQUEST_TIMEOUT_S="100",
         PRIMARY_LLM_MAX_RETRIES="2", AUX_MODEL_MAX_RETRIES="1",
+        PRIMARY_LLM_FENCE_OUTPUT=str(fence_output).lower(),
         SCHEMA_PROFILE="", RULE_BUNDLE="", CONFORMAL_CALIBRATION="",
         # Roles whose defaults point at another provider stay off unless the
         # shell environment would otherwise switch them on.
         ENTITY_RECOVERY_MODE="off", PAIRWISE_JUDGE_MODE="off",
         PYTHONUNBUFFERED="1", PYTHONDONTWRITEBYTECODE="1", PYTHONPATH=str(source),
     )
-    if auxiliary_mode(auxiliary) == "single_model":
-        env.update(single_model_env(connection["base_url"], credential, settings["model"]))
+    if extract_options.get("provider") or auxiliary_mode(auxiliary) == "single_model":
+        env.update(single_model_env(main_connection["base_url"], main_credential, main_settings["model"]))
     return env
 
 
@@ -192,7 +221,7 @@ def extract_articles(articles, output_dir, *, config=None, repo=None, python=Non
     runtime = output_dir / "extractor_runtime"
     runtime.mkdir(parents=True, exist_ok=True)
     final = output_dir / "agent_results.json"
-    _, settings = read_settings(config, "audit_edges")
+    _, settings = extractor_settings(config)
     model = settings["model"]
     manifest = {
         "article_sha256": hashlib.sha256(content).hexdigest(),
@@ -201,6 +230,9 @@ def extract_articles(articles, output_dir, *, config=None, repo=None, python=Non
         "auxiliary_models": auxiliary_mode(auxiliary_settings(auxiliary_env)),
         "model": model, "profile": PROFILE, "pmids": pmids,
     }
+    if read_json(config).get("extractor", {}).get("provider"):
+        _, main_settings = read_settings(config, "audit_edges")
+        manifest.update(auxiliary_models="main_provider", main_model=main_settings["model"])
 
     with run_lock(runtime):
         snapshot = runtime / "input_manifest.json"

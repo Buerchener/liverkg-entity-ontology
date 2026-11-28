@@ -35,9 +35,10 @@ def _entity_vectors(rows, directory, config_path):
         base, provider = LOCAL_KIND, LocalCharNgramEmbeddings(cfg)
     else:
         base = endpoint(cfg).rstrip("/")
-        if (not base or base != endpoint(connection).rstrip("/")
-                or cfg["api_key_env"] != connection["api_key_env"]):
-            raise ValueError("Embedding and language models must use the same configured credential and endpoint.")
+        if cfg.get("kind") != "openai_compatible" or not base:
+            raise ValueError("Configure the embedding model with its own OpenAI-compatible endpoint.")
+        if "api_key" in cfg or "headers" in cfg or "authorization" in cfg:
+            raise ValueError("Set embedding credentials through api_key_env.")
         cfg["base_url"] = base
         provider = EmbeddingAPI(cfg)
     model_spec = {key: cfg[key] for key in ("model", "dimensions", "batch_size")}
@@ -51,7 +52,10 @@ def _entity_vectors(rows, directory, config_path):
     embeddings.restore()
     cached = sum(digest([entity_id, text]) in embeddings.vectors for entity_id, text in texts.items())
     if cached < len(texts) and not local:
-        live_provider(connection, parameters)
+        if base == endpoint(connection).rstrip("/") and cfg["api_key_env"] == connection["api_key_env"]:
+            live_provider(connection, parameters)
+        else:
+            live_provider(cfg, {"model": cfg["model"]})
     vectors = embeddings.for_texts(texts)
     return vectors, {
         **model_spec, "returned_model": embeddings.returned_model,

@@ -4,7 +4,7 @@ from __future__ import annotations
 from typing import Any
 
 from .relation_signatures import LITERATURE_CANDIDATE_SIGNATURES
-from .write_contract import is_main_kg_write_signature
+from .write_contract import METABOLITE_DISEASE, canonical_predicate, is_main_kg_write_signature
 
 
 ONTOLOGY_VERSION = "liver-kg-ontology-v1"
@@ -14,7 +14,7 @@ DIRECT_DISEASE_SIGNATURES = {
     (predicate, signature)
     for predicate, signatures in LITERATURE_CANDIDATE_SIGNATURES.items()
     for signature in signatures
-    if "Disease" in signature and predicate in {"ASSOCIATED_WITH", "PROGNOSTIC_IN", "PROGRESSES_TO"}
+    if "Disease" in signature and predicate in {"ASSOCIATED_WITH", METABOLITE_DISEASE, "PROGNOSTIC_IN", "PROGRESSES_TO"}
 }
 
 CONTEXT_RELATIONS = {
@@ -23,6 +23,7 @@ CONTEXT_RELATIONS = {
 
 
 def relation_schema_valid(predicate: str, subject_type: str, object_type: str) -> bool:
+    predicate = canonical_predicate(predicate, subject_type, object_type)
     return (
         (subject_type, object_type)
         in LITERATURE_CANDIDATE_SIGNATURES.get(predicate, set())
@@ -34,6 +35,7 @@ def relation_write_policy(
     subject_type: str = "",
     object_type: str = "",
 ) -> str:
+    predicate = canonical_predicate(predicate, subject_type, object_type)
     if is_main_kg_write_signature(predicate, subject_type, object_type):
         return "write_candidate"
     if relation_schema_valid(predicate, subject_type, object_type):
@@ -57,6 +59,9 @@ def classify_evidence(
     """
     if inferred or uncertain:
         return "inferred_or_hypothesis", "inference_or_uncertain_claim"
+    predicate = canonical_predicate(predicate, subject_type, object_type)
+    if predicate == METABOLITE_DISEASE and str(source or "").casefold() == "hmdb":
+        return "contextual_background", "hmdb_metabolite_disease_annotation"
     if (predicate, (subject_type, object_type)) in DIRECT_DISEASE_SIGNATURES:
         if predicate == "PROGNOSTIC_IN":
             return "direct_disease_evidence", "disease_prognosis_edge"

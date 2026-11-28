@@ -18,12 +18,14 @@ from typing import Any
 from cognitive_agent.abbreviation_detector import AbbreviationDetector
 from cognitive_agent.extraction_quality import locate_contiguous, normalize_surface
 from cognitive_agent.schema.predicate_cards import relation_card
+from cognitive_agent.schema.write_contract import METABOLITE_DISEASE, canonical_predicate
 from cognitive_agent.candidate_lineage import normalize_lineage
 
 
 ATTRIBUTE_PREDICATES = {
     "associated_with": "ASSOCIATED_WITH",
     "associated_with_metabolite": "ASSOCIATED_WITH_METABOLITE",
+    "metabolite_associated_with_disease": METABOLITE_DISEASE,
     "interacts_with": "INTERACTS_WITH",
     "expressed_in": "EXPRESSED_IN",
     "participates_in": "PARTICIPATES_IN",
@@ -246,9 +248,8 @@ EXPRESSION_CHANGES = frozenset({"UP", "DOWN", "NO_CHANGE", "MIXED", "UNKNOWN"})
 ACTIVITY_CHANGES = frozenset({
     "ACTIVATED", "INHIBITED", "NO_CHANGE", "MIXED", "UNKNOWN",
 })
-NON_DIRECTIONAL_PREDICATES = frozenset({
-    "ASSOCIATED_WITH", "ASSOCIATED_WITH_METABOLITE", "INTERACTS_WITH",
-})
+ASSOCIATION_PREDICATES = frozenset({"ASSOCIATED_WITH", "ASSOCIATED_WITH_METABOLITE", METABOLITE_DISEASE})
+NON_DIRECTIONAL_PREDICATES = ASSOCIATION_PREDICATES | {"INTERACTS_WITH"}
 SUBJECT_TO_OBJECT_PREDICATES = frozenset({
     "ENCODES", "PARTICIPATES_IN", "EXPRESSED_IN", "PROGNOSTIC_IN",
     "PROGRESSES_TO",
@@ -282,7 +283,7 @@ def normalize_relation_semantics(relation: dict[str, Any]) -> dict[str, Any]:
     are retained in ``legacy_direction`` and routed to review.
     """
     output = copy.deepcopy(relation)
-    predicate = str(output.get("predicate", "") or "").upper()
+    predicate = canonical_predicate(output.get("predicate", ""), output.get("subject_type", ""), output.get("object_type", ""))
     evidence = str(output.get("evidence", "") or "")
     legacy = str(output.get("legacy_direction", output.get("direction", "unknown")) or "unknown").lower()
     flags = set(output.get("quality_flags", []) or [])
@@ -298,14 +299,14 @@ def normalize_relation_semantics(relation: dict[str, Any]) -> dict[str, Any]:
     expression_change = str(output.get("expression_change", "") or "UNKNOWN").upper()
     activity_change = str(output.get("activity_change", "") or "UNKNOWN").upper()
 
-    if predicate in {"ASSOCIATED_WITH", "ASSOCIATED_WITH_METABOLITE"}:
+    if predicate in ASSOCIATION_PREDICATES:
         if association_sign == "UNKNOWN" and POSITIVE_ASSOCIATION_CUE_RE.search(evidence):
             association_sign = "POSITIVE"
         elif association_sign == "UNKNOWN" and NEGATIVE_ASSOCIATION_CUE_RE.search(evidence):
             association_sign = "NEGATIVE"
 
     if legacy in {"positive", "negative"} and association_sign == "UNKNOWN":
-        if predicate in {"ASSOCIATED_WITH", "ASSOCIATED_WITH_METABOLITE"}:
+        if predicate in ASSOCIATION_PREDICATES:
             association_sign = legacy.upper()
         else:
             flags.update({"legacy_direction_ambiguous", "direction_migration_review"})
@@ -346,7 +347,7 @@ def normalize_relation_semantics(relation: dict[str, Any]) -> dict[str, Any]:
     ):
         flags.update({"relation_direction_mismatch", "manual_review"})
     if (
-        predicate not in {"ASSOCIATED_WITH", "ASSOCIATED_WITH_METABOLITE"}
+        predicate not in ASSOCIATION_PREDICATES
         and association_sign in {"POSITIVE", "NEGATIVE"}
     ):
         flags.update({"association_sign_not_applicable", "direction_migration_review"})

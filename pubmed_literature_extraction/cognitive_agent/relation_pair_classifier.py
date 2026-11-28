@@ -33,6 +33,7 @@ from cognitive_agent.relation_contract import stable_candidate_id
 from cognitive_agent.candidate_lineage import LINEAGE_CONTRACT_VERSION, normalize_lineage
 from cognitive_agent.schema.predicate_cards import PREDICATE_TRIGGERS, predicate_support_match
 from cognitive_agent.schema.relation_signatures import RELATION_SIGNATURES
+from cognitive_agent.schema.write_contract import METABOLITE_DISEASE, canonical_predicate
 
 
 NO_RELATION = "NO_RELATION"
@@ -247,7 +248,7 @@ class DeterministicPairBackend:
             if HEDGE_RE.search(evidence):
                 score -= 0.38
             # The broad label must not win from co-occurrence alone.
-            if predicate == "ASSOCIATED_WITH" and not hits:
+            if predicate in {"ASSOCIATED_WITH", METABOLITE_DISEASE} and not hits:
                 score -= 0.25
             scores[predicate] = round(self._sigmoid(score), 6)
 
@@ -599,7 +600,8 @@ class BioREDPairClassifier:
                 normalize_surface(subject.get("mention", "")), subject_type,
                 normalize_surface(obj.get("mention", "")), object_type,
             )
-            hints.setdefault(key, []).append(relation)
+            predicate = canonical_predicate(relation.get("predicate", ""), subject_type, object_type)
+            hints.setdefault(key, []).append({**relation, "predicate": predicate})
 
         windows = self._pairing_windows(source_text, units, self.config)
         article_flags = article_quality_flags(source_text)

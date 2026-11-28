@@ -16,7 +16,7 @@ const groups = [
     { id: "tree", label: "Hierarchy Placement", detail: "Browse the ontology by entity type or focus on an individual concept.", module: "incremental", method: "renderIncremental" },
   ]],
   ["Literature Graph", [
-    { id: "links", label: "Backbone Linking", detail: "Select a concept to see the v2 backbone node it links to and why.", module: "relations", method: "renderRelations" },
+    { id: "links", label: "Backbone Linking", detail: "Select a concept to see its backbone match and the matching evidence.", module: "relations", method: "renderRelations" },
     { id: "relations", label: "Concept Relations", detail: "Browse verified relations merged onto concepts, with their gate, novelty and source sentences.", module: "relations", method: "renderRelations" },
   ]],
 ];

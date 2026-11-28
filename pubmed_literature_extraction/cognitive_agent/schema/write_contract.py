@@ -1,4 +1,4 @@
-"""Frozen write contract for the liver-kg-core-v02 Neo4j graph.
+"""Typed write contracts for the local LiverTrail backbone.
 
 The literature extractor may understand more relations than the current main
 graph can represent.  This module is the sole authority for automatic Neo4j
@@ -13,11 +13,13 @@ from typing import Any, Mapping
 from .entity_classes import ENTITY_CLASSES
 
 
-MAIN_KG_WRITE_CONTRACT_VERSION = "liver-kg-core-v02-contract-v1"
+MAIN_KG_WRITE_CONTRACT_VERSION = "livertrail-backbone-v3-contract-v1"
+METABOLITE_DISEASE = "METABOLITE_ASSOCIATED_WITH_DISEASE"
+_LEGACY_METABOLITE_DISEASE = ("ASSOCIATED_WITH", "Metabolite", "Disease")
 
 # (predicate, subject Neo4j label, object Neo4j label) -> relation identifier
 # property used by the existing main graph.  This is deliberately closed.
-MAIN_KG_WRITE_CONTRACT: dict[tuple[str, str, str], str] = {
+V2_MAIN_KG_WRITE_CONTRACT: dict[tuple[str, str, str], str] = {
     ("ASSOCIATED_WITH", "Gene", "Disease"): "relation_id",
     ("ASSOCIATED_WITH", "Metabolite", "Disease"): "relationship_id",
     ("PROGNOSTIC_IN", "Gene", "Disease"): "relationship_id",
@@ -29,6 +31,21 @@ MAIN_KG_WRITE_CONTRACT: dict[tuple[str, str, str], str] = {
     ("EXPRESSED_IN", "Gene", "CellType"): "relationship_id",
     ("ASSOCIATED_WITH_METABOLITE", "Gene", "Metabolite"): "relationship_id",
 }
+
+MAIN_KG_WRITE_CONTRACT = {
+    signature: key for signature, key in V2_MAIN_KG_WRITE_CONTRACT.items()
+    if signature != _LEGACY_METABOLITE_DISEASE
+}
+MAIN_KG_WRITE_CONTRACT[(METABOLITE_DISEASE, "Metabolite", "Disease")] = "relationship_id"
+
+
+def canonical_predicate(predicate: str, subject_type: str, object_type: str) -> str:
+    """Read historical typed claims using the current predicate spelling."""
+    name = str(predicate or "").upper()
+    if (name, subject_type, object_type) == _LEGACY_METABOLITE_DISEASE:
+        return METABOLITE_DISEASE
+    return name
+
 
 NEO4J_IMPORTABLE_PREDICATES = frozenset(
     predicate for predicate, _, _ in MAIN_KG_WRITE_CONTRACT
@@ -68,17 +85,17 @@ def write_contract_assessment(
     *,
     standardized_entities: Mapping[tuple[str, str], Any] | None = None,
 ) -> WriteContractAssessment:
-    """Assess a final relation against the frozen main-KG contract.
+    """Assess a final relation against the v3 main-KG contract.
 
     Endpoint grounding remains a factual verifier responsibility.  The adapter
     only checks that a grounded, standardised endpoint can be represented by
     the main graph and that the typed edge has a stable relation ID property.
     """
-    predicate = _value(relation, "predicate").upper()
     subject = _value(relation, "subject")
     obj = _value(relation, "object")
     subject_type = _value(relation, "subject_type")
     object_type = _value(relation, "object_type")
+    predicate = canonical_predicate(_value(relation, "predicate"), subject_type, object_type)
     reasons: list[str] = []
 
     if not subject:

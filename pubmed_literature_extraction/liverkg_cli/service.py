@@ -97,7 +97,7 @@ def agent_command(spec: RunSpec, *, resume: bool = False) -> list[str]:
         "--neo4j-database",
         spec.neo4j_database,
         "--max-workers",
-        str(profile_args.get("max_workers", spec.max_workers)),
+        str(spec.max_workers),
         "--extraction-inner-max-workers",
         str(profile_args.get("extraction_inner_max_workers", spec.extraction_inner_max_workers)),
         "--execution-mode",

@@ -220,7 +220,7 @@ class EntityRecovery:
             f"Entity types allowed by the schema: {type_list}.",
             "The pipeline extracts 8 relation types (ASSOCIATED_WITH, INTERACTS_WITH, "
             "PROGRESSES_TO, PARTICIPATES_IN, EXPRESSED_IN, PROGNOSTIC_IN, "
-            "ASSOCIATED_WITH_METABOLITE, ENCODES) between pairs of these entities.",
+            "ASSOCIATED_WITH_METABOLITE, METABOLITE_ASSOCIATED_WITH_DISEASE, ENCODES) between pairs of these entities.",
             "",
             "Your task has two parts:",
             "1. CRITIQUE: list concrete coverage gaps in the current entity inventory — "

@@ -8,6 +8,8 @@ touches a database; ``neo4j_load`` reads these files.
 
 import hashlib
 
+from cognitive_agent.schema.ontology import classify_evidence
+
 from ..extraction.mentions import read_articles
 from ..storage import atomic_json, atomic_jsonl, read_json
 
@@ -19,7 +21,9 @@ EXPORTED_GATES = ("AUTO", "REVIEW")
 def build_graph(output, run_id):
     placement = read_json(output / "incremental-placement/placement.json")
     concepts = read_json(output / "equivalence.json")["concepts"]
-    links = {row["concept_id"]: row for row in read_json(output / "concept_links.json")["links"]}
+    linking = read_json(output / "concept_links.json")
+    links = {row["concept_id"]: row for row in linking["links"]}
+    use_v3 = (linking.get("backbone") or {}).get("version") == "v3"
     projection = read_json(output / "concept_relations.json")
     inventory = read_json(output / "input_mentions.json")
     articles = read_articles((output / "articles.jsonl").read_bytes())
@@ -44,6 +48,8 @@ def build_graph(output, run_id):
             "kg_node_id": target.get("id"), "kg_name": target.get("name"),
             "go_id": (link.get("external_ids") or {}).get("GO") or node.get("go_id"),
         })
+        if use_v3:
+            concept_rows[-1]["kg_candidate_ids"] = [candidate["id"] for candidate in link.get("candidates", [])]
         if link.get("status") == "LINKED":
             same_as.append({"concept_uid": uid(node["id"]), "label": target["label"],
                             "key": target["key"], "node_id": target["id"], "name": target["name"]})
@@ -64,12 +70,21 @@ def build_graph(output, run_id):
             continue
         relation_uid = uid(relation["relation_key"])
         subject_uid, object_uid = uid(relation["subject_concept_id"]), uid(relation["object_concept_id"])
+        matches = relation.get("backbone_relations", relation.get("v2_relations", []))
+        basis = {"backbone_relations" if use_v3 else "v2_relations":
+                 [f"{row['type']}/{row['source']}" for row in matches]}
+        if use_v3:
+            evidence_class, _ = classify_evidence(
+                relation["predicate"], relation["subject_kind"], relation["object_kind"], source="literature",
+            )
+            basis.update(evidence_class=evidence_class, stage_order=relation.get("stage_order"),
+                         stage_orders=relation.get("stage_orders", []))
         relations.append({
             "uid": relation_uid, "relation_key": relation["relation_key"], "run_id": run_id,
             "subject_uid": subject_uid, "predicate": relation["predicate"], "object_uid": object_uid,
             "gate": relation["gate"], "gate_reasons": relation["gate_reasons"],
             "novelty": relation["novelty"],
-            "v2_relations": [f"{row['type']}/{row['source']}" for row in relation["v2_relations"]],
+            **basis,
             "pmids": relation["pmids"], "evidence_count": relation["evidence_count"],
             "evidence_uids": [uid(row["evidence_id"]) for row in relation["evidence"]],
             "source": "literature",
@@ -122,5 +137,8 @@ def export_graph(output, run_id):
         files[name] = {"rows": len(graph[name]), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
     gates = {gate: sum(row["gate"] == gate for row in graph["relations"]) for gate in EXPORTED_GATES}
     manifest = {"version": VERSION, "run_id": run_id, "files": files, "relation_gates": gates}
+    backbone = (read_json(output / "concept_links.json").get("backbone") or {})
+    if backbone.get("version") == "v3":
+        manifest["backbone"] = backbone
     atomic_json(folder / "manifest.json", manifest)
     return manifest

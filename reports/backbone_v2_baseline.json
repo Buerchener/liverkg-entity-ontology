@@ -1,0 +1,574 @@
+{
+  "mode": "apply",
+  "backbone_version": "v2",
+  "inputs": {
+    "cell_expression": {
+      "path": "hpa_liver_gene_context_v02/gene_hpa_cell_type_expression.tsv",
+      "sha256": "9fd17b0bbfc390abc74c6d2b1ff79248fd1c7c81e955e69a1322a5c34ca04270",
+      "rows": 16947
+    },
+    "cell_types": {
+      "path": "hpa_liver_gene_context_v02/hpa_cell_types.tsv",
+      "sha256": "77376ae30a084d705c7eb1c567f8b398ed081fed8b6009ae383df0552a261278",
+      "rows": 154
+    },
+    "disease_metabolite": {
+      "path": "hmdb_human_liver_genes_v02/hmdb_disease_metabolite_associations.tsv",
+      "sha256": "1c54bc227768b9272ba93ae1578b4499c628404825769f09e97613814751713b",
+      "rows": 43
+    },
+    "diseases": {
+      "path": "disgenet_liver_backbone/curated/diseases.tsv",
+      "sha256": "83e92ff37165d5570dd6d0b17d42131fe365f9c73afc47739ebfcd1e85a65823",
+      "rows": 5
+    },
+    "gene_disease": {
+      "path": "disgenet_liver_backbone/curated/gene_disease_associations.tsv",
+      "sha256": "b452c8c14b16f31bd849fffae4ab6eb0b122c5941827d37d6139c17831365064",
+      "rows": 1036
+    },
+    "gene_metabolite": {
+      "path": "hmdb_human_liver_genes_v02/gene_hmdb_metabolite_associations.tsv",
+      "sha256": "645719be3fe8ac79a7bbca6a6b47320a78709fa2ce91e279e3b53be62ebd2271",
+      "rows": 97
+    },
+    "genes": {
+      "path": "disgenet_liver_backbone/curated/genes.tsv",
+      "sha256": "38570d71d6bf861c8f83ecdb3a4791c2c4fac74cad21aa0dddec884bdecbb818",
+      "rows": 836
+    },
+    "kegg_members": {
+      "path": "kegg_human_liver_genes_v02/gene_kegg_pathway_memberships.tsv",
+      "sha256": "d8ff02dd4c025f07a6630a7b9adb2a50e2e1d97e4cb4119e3900992378743313",
+      "rows": 5310
+    },
+    "kegg_pathways": {
+      "path": "kegg_human_liver_genes_v02/kegg_pathways.tsv",
+      "sha256": "28846600ce989589deccd3da2955c13b8a8304ad8e3316735c396cf06ba5a6f2",
+      "rows": 333
+    },
+    "lihc_prognostic": {
+      "path": "hpa_liver_gene_context_v02/gene_hpa_lihc_prognostic.tsv",
+      "sha256": "554e7935938381a01611b64c06de931eaf0fdb7c0eb0db3e27b1996fed7a6c4a",
+      "rows": 1384
+    },
+    "metabolites": {
+      "path": "hmdb_human_liver_genes_v02/hmdb_metabolites.tsv",
+      "sha256": "9561578735dcef94775cefa30794211396762a1269ea06136c157f26a06339e4",
+      "rows": 36
+    },
+    "reactome_members": {
+      "path": "reactome_human_liver_genes_v02/gene_reactome_pathway_memberships.tsv",
+      "sha256": "c6c641e4e1fdf5469d33d5a5e61cf40dac80e49178506f172f6871861216feaa",
+      "rows": 4637
+    },
+    "reactome_pathways": {
+      "path": "reactome_human_liver_genes_v02/reactome_pathways.tsv",
+      "sha256": "7be0e6f568e9de0e4ed235af2ac33474e270870aac6aa3c169e5ccf9f6d9d6ad",
+      "rows": 1388
+    },
+    "string_interactions": {
+      "path": "string_human_liver_genes_v02/string_interactions.tsv",
+      "sha256": "81e57d43bdce1e7f21b445066fe6f543bed5317bee32c69c6c218e5c2fab3f9a",
+      "rows": 7154
+    },
+    "string_mapping": {
+      "path": "string_human_liver_genes_v02/gene_string_mapping.tsv",
+      "sha256": "f3a9f9efdb69910ae27db3d664ca3afb21ef25c4d071e5708303ab32db36a563",
+      "rows": 836
+    },
+    "tissue_expression": {
+      "path": "hpa_liver_gene_context_v02/gene_hpa_liver_tissue_expression.tsv",
+      "sha256": "d1c07ba66f6c09ad83c3f601e007e5c6b0727147d80b0245e381529e5b9a0831",
+      "rows": 798
+    },
+    "tissues": {
+      "path": "hpa_liver_gene_context_v02/hpa_tissues.tsv",
+      "sha256": "8351f09e2ad540b9e844d888fa6e9d81084dd9a10bf2b12d3acaa44538c7d43a",
+      "rows": 1
+    }
+  },
+  "unmapped_string_genes": 43,
+  "reference": {
+    "nodes_by_label": {
+      "Disease": 5,
+      "Gene": 836,
+      "Protein": 793,
+      "Pathway": 1721,
+      "Tissue": 1,
+      "CellType": 154,
+      "Metabolite": 36
+    },
+    "relationships_by_type": {
+      "ASSOCIATED_WITH": 1079,
+      "PROGRESSES_TO": 4,
+      "ENCODES": 793,
+      "INTERACTS_WITH": 7154,
+      "PARTICIPATES_IN": 9947,
+      "EXPRESSED_IN": 17745,
+      "PROGNOSTIC_IN": 1384,
+      "ASSOCIATED_WITH_METABOLITE": 97
+    },
+    "node_count": 3546,
+    "relationship_count": 38203
+  },
+  "plan": {
+    "node_count": 3546,
+    "relationship_count": 38203,
+    "nodes_by_label": {
+      "CellType": 154,
+      "Disease": 5,
+      "Gene": 836,
+      "Metabolite": 36,
+      "Pathway": 1721,
+      "Protein": 793,
+      "Tissue": 1
+    },
+    "nodes_by_source": {
+      "DisGeNET": 841,
+      "HMDB": 36,
+      "Human Protein Atlas": 155,
+      "KEGG": 333,
+      "Reactome": 1388,
+      "STRING": 793
+    },
+    "relationships_by_type": {
+      "ASSOCIATED_WITH": 1079,
+      "ASSOCIATED_WITH_METABOLITE": 97,
+      "ENCODES": 793,
+      "EXPRESSED_IN": 17745,
+      "INTERACTS_WITH": 7154,
+      "PARTICIPATES_IN": 9947,
+      "PROGNOSTIC_IN": 1384,
+      "PROGRESSES_TO": 4
+    },
+    "relationships_by_source": {
+      "DisGeNET": 1036,
+      "HMDB": 140,
+      "Human Protein Atlas": 19129,
+      "KEGG": 5310,
+      "LiverTrail": 4,
+      "Reactome": 4637,
+      "STRING": 7154,
+      "STRING_mapping": 793
+    },
+    "relationships_by_evidence": {
+      "contextual_background": 35783,
+      "direct_disease_evidence": 2420
+    }
+  },
+  "plan_delta_from_reference": {
+    "nodes_by_label": {
+      "CellType": 0,
+      "Disease": 0,
+      "Gene": 0,
+      "Metabolite": 0,
+      "Pathway": 0,
+      "Protein": 0,
+      "Tissue": 0
+    },
+    "relationships_by_type": {
+      "ASSOCIATED_WITH": 0,
+      "ASSOCIATED_WITH_METABOLITE": 0,
+      "ENCODES": 0,
+      "EXPRESSED_IN": 0,
+      "INTERACTS_WITH": 0,
+      "PARTICIPATES_IN": 0,
+      "PROGNOSTIC_IN": 0,
+      "PROGRESSES_TO": 0
+    }
+  },
+  "database": {
+    "name": "neo4j",
+    "node_count": 3546,
+    "relationship_count": 38203,
+    "nodes_by_label": {
+      "CellType": 154,
+      "Disease": 5,
+      "Gene": 836,
+      "Metabolite": 36,
+      "Pathway": 1721,
+      "Protein": 793,
+      "Tissue": 1
+    },
+    "nodes_by_source": {
+      "DisGeNET": 841,
+      "HMDB": 36,
+      "Human Protein Atlas": 155,
+      "KEGG": 333,
+      "Reactome": 1388,
+      "STRING": 793
+    },
+    "relationships_by_type": {
+      "ASSOCIATED_WITH": 1079,
+      "ASSOCIATED_WITH_METABOLITE": 97,
+      "ENCODES": 793,
+      "EXPRESSED_IN": 17745,
+      "INTERACTS_WITH": 7154,
+      "PARTICIPATES_IN": 9947,
+      "PROGNOSTIC_IN": 1384,
+      "PROGRESSES_TO": 4
+    },
+    "relationships_by_source": {
+      "DisGeNET": 1036,
+      "HMDB": 140,
+      "Human Protein Atlas": 19129,
+      "KEGG": 5310,
+      "LiverTrail": 4,
+      "Reactome": 4637,
+      "STRING": 7154,
+      "STRING_mapping": 793
+    },
+    "relationships_by_evidence": {
+      "contextual_background": 35783,
+      "direct_disease_evidence": 2420
+    },
+    "writes": {
+      "nodes_created": 3546,
+      "relationships_created": 38203,
+      "properties_set": 638466
+    }
+  },
+  "verification": {
+    "neo4j_server": "Neo4j/5.26.34",
+    "repeat_import": {
+      "same_inputs": true,
+      "same_counts": true,
+      "nodes_created": 0,
+      "relationships_created": 0,
+      "properties_set": 0
+    },
+    "offline_tests": {
+      "ontology": {
+        "exit_code": 0,
+        "missing_biored": 0,
+        "count": 48,
+        "errors": [],
+        "failures": [],
+        "skipped": 0,
+        "passed": 48
+      },
+      "extraction": {
+        "exit_code": 1,
+        "missing_biored": 13,
+        "count": 443,
+        "errors": [
+          "test_concept_pair_candidates_do_not_read_dev_relations (test_biored_adapter.BioREDAdapterTests.test_concept_pair_candidates_do_not_read_dev_relations)",
+          "test_dev_counts_and_fixed_partition (test_biored_adapter.BioREDAdapterTests.test_dev_counts_and_fixed_partition)",
+          "test_dual_adjudication_can_correct_signed_label_to_association (test_biored_adapter.BioREDAdapterTests.test_dual_adjudication_can_correct_signed_label_to_association)",
+          "test_dual_label_edit_is_versioned_and_span_grounded (test_biored_adapter.BioREDAdapterTests.test_dual_label_edit_is_versioned_and_span_grounded)",
+          "test_invalid_id_label_and_unknown_novelty_are_audited (test_biored_adapter.BioREDAdapterTests.test_invalid_id_label_and_unknown_novelty_are_audited)",
+          "test_label_disagreement_keeps_original_in_review (test_biored_adapter.BioREDAdapterTests.test_label_disagreement_keeps_original_in_review)",
+          "test_native_cards_cover_reported_mutations_and_treatment_adverse_events (test_biored_adapter.BioREDAdapterTests.test_native_cards_cover_reported_mutations_and_treatment_adverse_events)",
+          "test_native_evidence_pack_repairs_owner_and_multispan_support (test_biored_adapter.BioREDAdapterTests.test_native_evidence_pack_repairs_owner_and_multispan_support)",
+          "test_native_registry_has_all_official_labels (test_biored_adapter.BioREDAdapterTests.test_native_registry_has_all_official_labels)",
+          "test_relation_and_label_confidence_are_independent_gates (test_biored_adapter.BioREDAdapterTests.test_relation_and_label_confidence_are_independent_gates)",
+          "test_train_dominant_type_only_label_survives_shared_model_polarity_bias (test_biored_adapter.BioREDAdapterTests.test_train_dominant_type_only_label_survives_shared_model_polarity_bias)",
+          "test_train_signature_prior_versions_only_non_explicit_label (test_biored_adapter.BioREDAdapterTests.test_train_signature_prior_versions_only_non_explicit_label)",
+          "test_type_only_review_fuses_pair_local_spans_with_full_document_context (test_biored_adapter.BioREDAdapterTests.test_type_only_review_fuses_pair_local_spans_with_full_document_context)"
+        ],
+        "failures": [],
+        "skipped": 3,
+        "passed": 427
+      }
+    },
+    "queries": {
+      "nodes_by_label": "MATCH (n) UNWIND labels(n) AS kind RETURN kind, count(*) AS count ORDER BY kind",
+      "nodes_by_source": "MATCH (n) RETURN n.source AS kind, count(*) AS count ORDER BY kind",
+      "relationships_by_type": "MATCH ()-[r]->() RETURN type(r) AS kind, count(*) AS count ORDER BY kind",
+      "relationships_by_source": "MATCH ()-[r]->() RETURN r.source AS kind, count(*) AS count ORDER BY kind",
+      "relationships_by_evidence": "MATCH ()-[r]->() RETURN r.evidence_class AS kind, count(*) AS count ORDER BY kind",
+      "node_provenance": "MATCH (n) RETURN count(n) AS total,\n        count(CASE WHEN n.source IS NULL OR trim(n.source) = '' OR n.source_version IS NULL\n          OR NOT (n.source_version IN $source_versions) OR n.updated_at IS NULL\n          OR n.backbone_version IS NULL OR n.backbone_version <> 'v2' THEN 1 END) AS incomplete",
+      "relationship_provenance": "MATCH ()-[r]->() RETURN count(r) AS total,\n        count(CASE WHEN r.source IS NULL OR trim(r.source) = '' OR r.source_version IS NULL\n          OR NOT (r.source_version IN $source_versions) OR r.updated_at IS NULL\n          OR r.backbone_version IS NULL OR r.backbone_version <> 'v2' OR r.evidence_class IS NULL\n          OR NOT (r.evidence_class IN ['direct_disease_evidence', 'contextual_background']) THEN 1 END) AS incomplete",
+      "stage_progression": "MATCH (a:Disease)-[r:PROGRESSES_TO]->(b:Disease)\n        RETURN a.name AS start, b.name AS end, a.stage_order AS start_order, b.stage_order AS end_order,\n        r.evidence_class AS evidence_class ORDER BY start_order",
+      "prognostic_cohorts": "MATCH (:Gene)-[r:PROGNOSTIC_IN]->(:Disease)\n        RETURN r.cohort AS cohort, count(r) AS records, count(r.p_value) AS records_with_p_value\n        ORDER BY cohort",
+      "prognostic_gene_disease_pairs": "MATCH (a:Gene)-[:PROGNOSTIC_IN]->(b:Disease)\n        RETURN count(DISTINCT [a.gene_id, b.disease_id]) AS count",
+      "evidence_by_source": "MATCH ()-[r]->() RETURN r.source AS source,\n        r.evidence_class AS evidence_class, count(r) AS records ORDER BY source, evidence_class",
+      "uniqueness_constraints": "SHOW CONSTRAINTS YIELD name, entityType, type, labelsOrTypes, properties\n        WHERE name STARTS WITH 'livertrail_backbone_' RETURN name, entityType, type, labelsOrTypes, properties\n        ORDER BY entityType, name"
+    },
+    "node_provenance": [
+      {
+        "total": 3546,
+        "incomplete": 0
+      }
+    ],
+    "relationship_provenance": [
+      {
+        "total": 38203,
+        "incomplete": 0
+      }
+    ],
+    "stage_progression": [
+      {
+        "start": "NAFLD",
+        "end": "NASH",
+        "start_order": 1,
+        "end_order": 2,
+        "evidence_class": "contextual_background"
+      },
+      {
+        "start": "NASH",
+        "end": "Fibrosis",
+        "start_order": 2,
+        "end_order": 3,
+        "evidence_class": "contextual_background"
+      },
+      {
+        "start": "Fibrosis",
+        "end": "Cirrhosis",
+        "start_order": 3,
+        "end_order": 4,
+        "evidence_class": "contextual_background"
+      },
+      {
+        "start": "Cirrhosis",
+        "end": "HCC",
+        "start_order": 4,
+        "end_order": 5,
+        "evidence_class": "contextual_background"
+      }
+    ],
+    "prognostic_cohorts": [
+      {
+        "cohort": "tcga",
+        "records": 683,
+        "records_with_p_value": 683
+      },
+      {
+        "cohort": "validation",
+        "records": 701,
+        "records_with_p_value": 701
+      }
+    ],
+    "prognostic_gene_disease_pairs": [
+      {
+        "count": 729
+      }
+    ],
+    "evidence_by_source": [
+      {
+        "source": "DisGeNET",
+        "evidence_class": "direct_disease_evidence",
+        "records": 1036
+      },
+      {
+        "source": "HMDB",
+        "evidence_class": "contextual_background",
+        "records": 140
+      },
+      {
+        "source": "Human Protein Atlas",
+        "evidence_class": "contextual_background",
+        "records": 17745
+      },
+      {
+        "source": "Human Protein Atlas",
+        "evidence_class": "direct_disease_evidence",
+        "records": 1384
+      },
+      {
+        "source": "KEGG",
+        "evidence_class": "contextual_background",
+        "records": 5310
+      },
+      {
+        "source": "LiverTrail",
+        "evidence_class": "contextual_background",
+        "records": 4
+      },
+      {
+        "source": "Reactome",
+        "evidence_class": "contextual_background",
+        "records": 4637
+      },
+      {
+        "source": "STRING",
+        "evidence_class": "contextual_background",
+        "records": 7154
+      },
+      {
+        "source": "STRING_mapping",
+        "evidence_class": "contextual_background",
+        "records": 793
+      }
+    ],
+    "uniqueness_constraints": [
+      {
+        "name": "livertrail_backbone_celltype_cell_type_id",
+        "entityType": "NODE",
+        "type": "UNIQUENESS",
+        "labelsOrTypes": [
+          "CellType"
+        ],
+        "properties": [
+          "cell_type_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_disease_disease_id",
+        "entityType": "NODE",
+        "type": "UNIQUENESS",
+        "labelsOrTypes": [
+          "Disease"
+        ],
+        "properties": [
+          "disease_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_gene_gene_id",
+        "entityType": "NODE",
+        "type": "UNIQUENESS",
+        "labelsOrTypes": [
+          "Gene"
+        ],
+        "properties": [
+          "gene_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_metabolite_metabolite_id",
+        "entityType": "NODE",
+        "type": "UNIQUENESS",
+        "labelsOrTypes": [
+          "Metabolite"
+        ],
+        "properties": [
+          "metabolite_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_pathway_pathway_id",
+        "entityType": "NODE",
+        "type": "UNIQUENESS",
+        "labelsOrTypes": [
+          "Pathway"
+        ],
+        "properties": [
+          "pathway_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_protein_protein_id",
+        "entityType": "NODE",
+        "type": "UNIQUENESS",
+        "labelsOrTypes": [
+          "Protein"
+        ],
+        "properties": [
+          "protein_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_tissue_tissue_id",
+        "entityType": "NODE",
+        "type": "UNIQUENESS",
+        "labelsOrTypes": [
+          "Tissue"
+        ],
+        "properties": [
+          "tissue_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_associated_with_metabolite_relationship_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "ASSOCIATED_WITH_METABOLITE"
+        ],
+        "properties": [
+          "relationship_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_associated_with_relation_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "ASSOCIATED_WITH"
+        ],
+        "properties": [
+          "relation_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_associated_with_relationship_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "ASSOCIATED_WITH"
+        ],
+        "properties": [
+          "relationship_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_encodes_relationship_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "ENCODES"
+        ],
+        "properties": [
+          "relationship_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_expressed_in_relationship_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "EXPRESSED_IN"
+        ],
+        "properties": [
+          "relationship_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_interacts_with_interaction_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "INTERACTS_WITH"
+        ],
+        "properties": [
+          "interaction_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_participates_in_relationship_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "PARTICIPATES_IN"
+        ],
+        "properties": [
+          "relationship_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_prognostic_in_relationship_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "PROGNOSTIC_IN"
+        ],
+        "properties": [
+          "relationship_id"
+        ]
+      },
+      {
+        "name": "livertrail_backbone_progresses_to_progression_id",
+        "entityType": "RELATIONSHIP",
+        "type": "RELATIONSHIP_UNIQUENESS",
+        "labelsOrTypes": [
+          "PROGRESSES_TO"
+        ],
+        "properties": [
+          "progression_id"
+        ]
+      }
+    ]
+  }
+}

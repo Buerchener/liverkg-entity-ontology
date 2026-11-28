@@ -3,6 +3,41 @@
 This directory contains import and utility scripts for the liver disease
 knowledge graph. The current active build is `liver-kg-core-v02`.
 
+## Offline v2 baseline
+
+Run the build from a Python environment with LiverKG installed. The command
+reads the curated TSVs under the repository's data directory. The preview is
+the default mode. Use the explicit database name for the local import.
+
+~~~bash
+liverkg backbone build --dry-run
+liverkg backbone build --apply --database neo4j --report /tmp/livertrail-backbone-v2.json
+~~~
+
+Set NEO4J_PASSWORD for the local instance in the process environment.
+NEO4J_USER defaults to neo4j. Use --v2-data to select another copy of the
+frozen TSVs.
+
+The report preserves SHA-256 and row counts for each input table. Source
+versions identify the exact TSV used. The plan checks all edge endpoints
+before writing. The loader uses the shared node keys and typed relation-ID
+contract with Neo4j uniqueness constraints. It applies graph records in one
+transaction and includes the observed database counts and write counters.
+The [baseline verification report](../reports/backbone_v2_baseline.json)
+records the initial import, repeat import, and database checks.
+
+HPA prognosis records retain their cohort, direction and p-value as
+direct disease evidence under the existing evidence policy. The progression
+edges express the project stage order and use contextual background.
+The provided v2 counts are comparison values. The import follows the
+available source records and reports the difference.
+
+## Offline v3 backbone
+
+The local v3 build combines the curated v2 TSVs, archived pathway records and
+the original HMDB XML. See the [v3 schema](../docs/backbone_v3_schema.md) for
+the build and restore commands, model, and literature loader.
+
 ## v2 Primary Scripts
 
 | Script | Role | Writes to Neo4j |

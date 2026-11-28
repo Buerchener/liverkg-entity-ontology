@@ -99,6 +99,7 @@ class ExtractionKernel:
         self.cache = cache or LightweightExtractionCache(mode="off")
         self.inner_max_workers = max(1, int(inner_max_workers))
         self.schema_profile = schema_profile
+        self.fence_output = os.environ.get("PRIMARY_LLM_FENCE_OUTPUT", "true").casefold() != "false"
         self.dataset_prompt = ""
         self.dataset_examples = []
         if schema_profile is not None:
@@ -191,7 +192,7 @@ class ExtractionKernel:
             "ontology_version": ONTOLOGY_VERSION,
             "chunk_content_hash": text_hash,
             "temperature": 0, "schema_constraints": False,
-            "fence_output": True,
+            "fence_output": self.fence_output,
             "extraction_passes": 1,
             "max_char_buffer": self._max_char_buffer(),
             "max_output_tokens": provider_kwargs.get("max_output_tokens"),
@@ -334,11 +335,11 @@ class ExtractionKernel:
                     # Compatible proxies may still wrap otherwise valid JSON
                     # in a single ```json fence.  LangExtract's lenient fence
                     # mode accepts both fenced and raw JSON.
-                    fence_output=True,
+                    fence_output=self.fence_output,
                     show_progress=False,
                     extraction_passes=1,           # 单次提取（稳定性优先）
                     max_char_buffer=self._max_char_buffer(),
-                    # 去掉 resolver_params — fuzzy alignment 会导致 chunk 被丢弃
+                    resolver_params=None if self.fence_output else {"suppress_parse_errors": False},
                 )
 
                 # ── 归一化返回值 ──
@@ -711,6 +712,7 @@ class ExtractionKernel:
             "prognostic_in": "PROGNOSTIC_IN",
             "progresses_to": "PROGRESSES_TO",
             "associated_with_metabolite": "ASSOCIATED_WITH_METABOLITE",
+            "metabolite_associated_with_disease": "METABOLITE_ASSOCIATED_WITH_DISEASE",
         }
 
         for attr_key, pred in rel_map.items():

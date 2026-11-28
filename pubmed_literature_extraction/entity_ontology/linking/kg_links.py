@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 import re
 
+from ..backbone_schema import NODE_KEYS, SNAPSHOT_VERSION
+from ..backbone_snapshot import DEFAULT_V3_DATA, read_snapshot_manifest, read_snapshot_rows
 from ..storage import atomic_json, norm, read_json
 
 VERSION = "kg-links-v1"
@@ -21,11 +23,7 @@ V2_DATA_ENV = "LIVERKG_V2_DATA_DIR"
 
 # Label -> MERGE key in the v2 graph.  Gene IDs carry the NCBIGene: prefix and
 # Protein nodes are keyed by their STRING ID (scripts/import_*.py).
-V2_NODE_KEYS = {
-    "Disease": "disease_id", "Gene": "gene_id", "Protein": "protein_id",
-    "Pathway": "pathway_id", "Metabolite": "metabolite_id",
-    "Tissue": "tissue_id", "CellType": "cell_type_id",
-}
+V2_NODE_KEYS = NODE_KEYS
 
 V2_FILES = {
     "genes": "disgenet_liver_backbone/curated/genes.tsv",
@@ -105,12 +103,14 @@ def node_ref(label, node_id):
 class V2Index:
     """Names, identifiers and relations of the v2 graph, rebuilt from TSV files."""
 
+    backbone_version = "v2"
+
     def __init__(self, data_dir):
         self.data_dir = Path(data_dir)
         self.files = v2_files(self.data_dir)
         self.nodes = {}
         self.names = defaultdict(lambda: defaultdict(set))
-        self.ids = defaultdict(dict)
+        self.ids = defaultdict(lambda: defaultdict(set))
         self.edges = defaultdict(set)
         self.encodes = defaultdict(set)
         self._build()
@@ -125,7 +125,7 @@ class V2Index:
                 self.names[label][key].add(ref)
         for value in (node_id, *ids):
             if value:
-                self.ids[label][value.casefold()] = ref
+                self.ids[label][value.casefold()].add(ref)
         return ref
 
     def _edge(self, left, right, relation, source):
@@ -237,8 +237,8 @@ class V2Index:
         return found
 
     def match_ids(self, label, identifiers):
-        return {self.ids[label][value.casefold()] for value in identifiers
-                if value and value.casefold() in self.ids[label]}
+        return {ref for value in identifiers if value
+                for ref in self.ids[label].get(value.casefold(), ())}
 
     def relations_between(self, left, right):
         """v2 relations between two nodes, treating a gene and its encoded protein as one entity."""
@@ -250,6 +250,105 @@ class V2Index:
                 if a != b:
                     found |= self.edges.get(frozenset((a, b)), set())
         return sorted(found)
+
+
+
+def _xref_keys(label, identifier):
+    value = str(identifier or "").strip().casefold()
+    if not value:
+        return set()
+    prefix, sep, rest = value.partition(":")
+    if label == "Metabolite" and re.fullmatch(r"hmdb\d+", rest if prefix == "hmdb" and sep else value):
+        accession = rest if sep else value
+        return {accession, f"hmdb:{accession}"}
+    if label == "Metabolite" and prefix in {"cpd", "kegg", "kegg.compound"} and re.fullmatch(r"c\d{5}", rest):
+        return {f"kegg.compound:{rest}"}
+    if prefix in {"pubchem", "pubchem.compound"} and rest.isdecimal():
+        return {f"pubchem.compound:{rest}"}
+    if label in {"Gene", "Protein"} and re.fullmatch(r"ens[gp]\d+(?:\.\d+)?", rest if prefix == "ensembl" else value):
+        accession = (rest if prefix == "ensembl" else value).split(".", 1)[0]
+        return {f"ensembl:{accession}"}
+    if label == "Gene" and (value.isdecimal() or prefix in {"ncbigene", "entrez", "entrezgene"} and rest.isdecimal()):
+        return {f"ncbigene:{rest if sep else value}"}
+    if label == "Pathway" and (match := re.fullmatch(r"(?:kegg:|path:)?(?:map|hsa)(\d{5})", value)):
+        return {f"kegg:hsa{match[1]}"}
+    if label == "Pathway" and re.fullmatch(r"r-hsa-\d+", value):
+        return {f"reactome:{value}"}
+    return {value.replace("_", ":", 1)} if re.fullmatch(r"(?:go|mondo|mesh|doid|hp)_\w+", value) else {value}
+
+
+class V3Index(V2Index):
+    """Read a verified v3 snapshot and keep exact IDs, names and directed edges."""
+
+    backbone_version = "v3"
+
+    def _build(self):
+        manifest = read_snapshot_manifest(self.data_dir)
+        self.snapshot_id = manifest["snapshot_id"]
+        self.files = manifest["files"]
+        self.related_names = defaultdict(lambda: defaultdict(set))
+        for record in read_snapshot_rows(self.data_dir, manifest, "nodes.jsonl"):
+            label, identifier = record["label"], record["id"]
+            if label not in V2_NODE_KEYS:
+                continue
+            props = record["properties"]
+            if props[V2_NODE_KEYS[label]] != identifier:
+                raise ValueError(f"Invalid v3 key for {identifier}.")
+            if props.get("pathway_group"):
+                continue
+            ids = {key for value in [identifier, *props.get("xrefs", []), *props.get("go_xrefs", [])]
+                   for key in _xref_keys(label, value)}
+            ref = self._node(label, identifier, props["name"], props.get("aliases", ()), ids)
+            if "stage_order" in props:
+                self.nodes[ref]["stage_order"] = props["stage_order"]
+            for name in props.get("related_aliases", ()):
+                for key in name_keys(name, label):
+                    self.related_names[label][key].add(ref)
+        for record in read_snapshot_rows(self.data_dir, manifest, "relationships.jsonl"):
+            left, right = node_ref(*record["start"]), node_ref(*record["end"])
+            if left in self.nodes and right in self.nodes:
+                self.edges[left, right].add((record["type"], record["properties"]["source"]))
+
+    def match_ids(self, label, identifiers):
+        keys = {key for value in identifiers for key in _xref_keys(label, value)}
+        return super().match_ids(label, keys)
+
+    def match_related(self, label, terms):
+        return {ref for term in terms for key in name_keys(term, label)
+                for ref in self.related_names[label].get(key, ())}
+
+    def relations_between(self, left, right):
+        return sorted(self.edges.get((left, right), set()) | self.edges.get((right, left), set()))
+
+    def has_relation(self, left, right, predicate):
+        candidates = self.relations_between(left, right) if predicate == "INTERACTS_WITH" else self.edges.get((left, right), ())
+        return any(kind == predicate for kind, _ in candidates)
+
+
+def resolve_backbone_data_dir(value=None):
+    configured = value or os.environ.get("LIVERKG_BACKBONE_DATA_DIR") or os.environ.get(V2_DATA_ENV)
+    if configured is None and (DEFAULT_V3_DATA / "manifest.json").is_file():
+        configured = DEFAULT_V3_DATA
+    return resolve_v2_data_dir(configured)
+
+
+def _v3_manifest(data_dir):
+    path = Path(data_dir) / "manifest.json"
+    if path.is_file() and read_json(path).get("version") == SNAPSHOT_VERSION:
+        return read_snapshot_manifest(data_dir)
+    if (Path(data_dir) / "nodes.jsonl").exists() or (Path(data_dir) / "relationships.jsonl").exists():
+        raise ValueError("The v3 backbone files need a matching snapshot manifest.")
+    return None
+
+
+def backbone_identity(data_dir):
+    if manifest := _v3_manifest(data_dir):
+        return {"backbone_snapshot_id": manifest["snapshot_id"]}
+    return {"v2_data_sha256": v2_data_digest(data_dir)}
+
+
+def build_index(data_dir):
+    return V3Index(data_dir) if _v3_manifest(data_dir) else V2Index(data_dir)
 
 
 def concept_identifiers(inventory):
@@ -279,8 +378,15 @@ def link_concept(concept, index, identifiers):
               "normalized_ids": identifiers, "matched_by": [], "target": None, "candidates": []}
     if label not in V2_NODE_KEYS:
         return {**record, "status": "NEW"}
-    by_name = index.match_names(label, [concept["name"], *concept.get("aliases", [])])
+    terms = [concept["name"], *concept.get("aliases", [])]
+    by_name = index.match_names(label, terms)
     by_id = index.match_ids(label, identifiers)
+    if isinstance(index, V3Index):
+        related = index.match_related(label, [concept["name"]])
+        if related and not index.match_names(label, [concept["name"]]):
+            choices = sorted(related | by_id | by_name)
+            return {**record, "status": "AMBIGUOUS", "matched_by": ["related_name"],
+                    "candidates": [index.nodes[ref] for ref in choices[:10]]}
     if by_id and by_name and by_id & by_name:
         candidates, basis = by_id & by_name, ["normalized_id", "name"]
     elif by_id and by_name:
@@ -299,8 +405,8 @@ def link_concept(concept, index, identifiers):
 
 def link_concepts(output, data_dir, *, index=None):
     """Write concept_links.json for every literature concept and generated parent."""
-    data_dir = resolve_v2_data_dir(data_dir)
-    index = index or V2Index(data_dir)
+    data_dir = resolve_backbone_data_dir(data_dir)
+    index = index or build_index(data_dir)
     inventory = read_json(output / "input_mentions.json")
     concepts = read_json(output / "equivalence.json")["concepts"]
     placement = read_json(output / "incremental-placement/placement.json")
@@ -313,6 +419,8 @@ def link_concepts(output, data_dir, *, index=None):
     for concept in concepts:
         identifiers = sorted({value for mention in concept.get("source_mentions", ())
                               for value in by_mention.get(mention, ())})
+        if isinstance(index, V3Index) and concept["id"] in go:
+            identifiers = sorted({*identifiers, go[concept["id"]]})
         link = link_concept(concept, index, identifiers)
         if concept["id"] in go:
             link["external_ids"] = {"GO": go[concept["id"]]}
@@ -321,8 +429,10 @@ def link_concepts(output, data_dir, *, index=None):
               for status in ("LINKED", "AMBIGUOUS", "NEW")}
     result = {
         "version": VERSION,
-        "v2_data": {"sha256": v2_data_digest(data_dir), "files": sorted(index.files)},
+        "backbone": {"version": index.backbone_version, **backbone_identity(data_dir), "files": sorted(index.files)},
         "links": links, "counts": counts,
     }
+    if index.backbone_version == "v2":
+        result["v2_data"] = {"sha256": result["backbone"]["v2_data_sha256"], "files": sorted(index.files)}
     atomic_json(output / "concept_links.json", result)
     return result
